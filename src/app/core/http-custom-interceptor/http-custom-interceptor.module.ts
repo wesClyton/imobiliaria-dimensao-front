@@ -8,7 +8,7 @@ import { HttpCustomInterceptor } from './http-custom-interceptor.service';
       multi: true,
       provide: HTTP_INTERCEPTORS,
       useClass: HttpCustomInterceptor,
-    },
-  ],
+    }
+  ]
 })
 export class HttpCustomInterceptorModule {}

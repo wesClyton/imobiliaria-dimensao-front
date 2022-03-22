@@ -1,46 +1,44 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { StorageService } from '../../../shared/services/storage/storage.service';
 import { AUTH_CONFIG } from '../auth.config';
-import { RoleEnum } from '../enums/role.enum';
+import { Role } from '../enums/role.enum';
 import { Login } from '../models/login.interface';
-import { Token } from '../models/token.interface';
+import { Session } from '../models/session.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private readonly isLoggedBS: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isLogged);
-
   public get isLogged(): boolean {
-    return this.token ? true : false;
+    return this.session ? true : false;
   }
 
   public get isAdmin(): boolean {
-    return this.levelAcess === RoleEnum.ADMIN;
+    return this.levelAcess === Role.Admin;
   }
 
   public get isAutor(): boolean {
-    return this.levelAcess === RoleEnum.AUTOR;
+    return this.levelAcess === Role.Autor;
   }
 
   public get isCorretor(): boolean {
-    return this.levelAcess === RoleEnum.CORRETOR;
+    return this.levelAcess === Role.Corretor;
   }
 
   public get isLeitor(): boolean {
-    return this.levelAcess === RoleEnum.LEITOR;
+    return this.levelAcess === Role.Leitor;
   }
 
-  public get token(): Token {
-    return StorageService.localGetItem(AUTH_CONFIG.keyToken);
+  public get session(): Session {
+    return StorageService.localGetItem(AUTH_CONFIG.keySession);
   }
 
-  private get levelAcess(): RoleEnum {
-    return (this.token)?.usuario.nivel;
+  private get levelAcess(): Role {
+    return (this.session)?.usuario.nivel;
   }
 
   constructor(
@@ -48,19 +46,17 @@ export class AuthService {
     private readonly httpClient: HttpClient
   ) { }
 
-  public login(login: Login): Observable<Token> {
-    return this.httpClient.post<Token>(AUTH_CONFIG.pathApi, login);
+  public login(login: Login): Observable<Session> {
+    return this.httpClient.post<Session>(`${AUTH_CONFIG.pathApi}/autenticar`, login);
   }
 
   public logout(): void {
-    StorageService.localRemoveItem(AUTH_CONFIG.keyToken);
-    this.isLoggedBS.next(false);
+    StorageService.localRemoveItem(AUTH_CONFIG.keySession);
     this.router.navigateByUrl(`${AUTH_CONFIG.pathFront}/login`);
   }
 
-  public setTokenLocalStorage(token: Token): void {
-    StorageService.localSetItem(AUTH_CONFIG.keyToken, JSON.stringify(token));
-    this.isLoggedBS.next(true);
+  public setSessionLocalStorage(session: Session): void {
+    StorageService.localSetItem(AUTH_CONFIG.keySession, JSON.stringify(session));
   }
 
 }

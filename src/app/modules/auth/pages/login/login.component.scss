@@ -1,0 +1,18 @@
+mat-card {
+  width: 100%;
+  max-width: 300px;
+}
+
+::ng-deep .mat-card-header-text {
+  margin: 0 !important;
+}
+
+.logo {
+  width: 100%;
+  max-width: 220px;
+  margin: 0 auto 2rem auto;
+}
+
+button {
+  margin-top: 1rem;
+}

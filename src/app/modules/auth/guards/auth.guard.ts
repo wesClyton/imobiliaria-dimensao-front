@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, CanLoad, Router } from '@angular/router';
-import { NotificationService } from '../../../shared/services/notification/notification.service';
+import { NotificationService } from '../../../core/notification/notification.service';
 import { RedirectToService } from '../../../shared/services/redirect-to/redirect-to.service';
 import { AUTH_CONFIG } from '../auth.config';
 import { AuthService } from '../services/auth.service';
@@ -39,4 +39,5 @@ export class AuthGuard implements CanLoad, CanActivate {
   canActivate(): boolean {
     return this.canAccess;
   }
+
 }

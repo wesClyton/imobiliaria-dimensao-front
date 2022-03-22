@@ -3,7 +3,7 @@
  *
  * @see {@link https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Basico_sobre_HTTP/MIME_types}
  */
-export enum MimeTypesEnum {
+export enum MimeTypes {
   AtomXml = 'application/atom+xml',
   AtomcatXml = 'application/atomcat+xml',
   Bmp = 'image/bmp',

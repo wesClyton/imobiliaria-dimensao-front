@@ -3,7 +3,7 @@
  *
  * @see {@link https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Headers}
  */
-export enum HttpHeadersEnum {
+export enum HttpHeader {
   Accept = 'Accept',
   AcceptCH = 'Accept-CH',
   AcceptCHLifetime = 'Accept-CH-Lifetime',

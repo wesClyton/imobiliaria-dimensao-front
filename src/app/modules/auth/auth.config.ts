@@ -1,7 +1,8 @@
+import { environment } from '../../../environments/environment';
 import { ModuleConfig } from '../../shared/interfaces/module-config.interface';
 
 interface Config extends ModuleConfig {
-  readonly keyToken: string;
+  readonly keySession: string;
 }
 
 const PATH: string = 'autenticacao';
@@ -10,7 +11,7 @@ export const AUTH_CONFIG: Config = {
   nome: 'Autenticação',
   nomePlural: 'Autenticação',
   path: PATH,
-  pathApi: '',
+  pathApi: environment.api,
   pathFront: `/${PATH}`,
-  keyToken: 'jwt-token'
+  keySession: 'app-session'
 };

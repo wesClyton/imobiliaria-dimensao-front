@@ -1,9 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorHandler, Injectable } from '@angular/core';
+import { NotificationService } from '../../../core/notification/notification.service';
 import { AuthService } from '../../../modules/auth/services/auth.service';
-import { HttpStatusCodeEnum } from '../../enums/http-status-code.enum';
+import { HttpStatusCode } from '../../enums/http-status-code.enum';
+import { TypeORMError } from '../../enums/type-orm-error.enum';
 import { Error } from '../../interfaces/error.interface';
-import { NotificationService } from '../notification/notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,12 +18,12 @@ export class ExceptionService implements ErrorHandler {
 
   handleError(response: any): void {
     if (response instanceof HttpErrorResponse) {
-      if (response.status === HttpStatusCodeEnum.NotFound) {
+      if (response.status === HttpStatusCode.NotFound) {
         this.notificationService.error(`#${response.status} - Requisição não encontrada.`);
         return;
       }
 
-      if (response.status === HttpStatusCodeEnum.InternalServerError) {
+      if (response.status === HttpStatusCode.InternalServerError) {
         this.notificationService.error(`#${response.status} - Ocorreu um erro interno no servidor.`);
         return;
       }
@@ -33,9 +34,9 @@ export class ExceptionService implements ErrorHandler {
       }
 
       if (
-        response.status === HttpStatusCodeEnum.Unauthorized ||
+        response.status === HttpStatusCode.Unauthorized ||
         response.statusText === 'Unauthorized' ||
-        response.status === HttpStatusCodeEnum.Forbidden ||
+        response.status === HttpStatusCode.Forbidden ||
         response.statusText === 'Forbidden') {
         this.notificationService.error(`#${response.status} - Seu token expirou, é inválido ou não tem permissão para acessar essa página.`);
         this.authService.logout();
@@ -43,11 +44,15 @@ export class ExceptionService implements ErrorHandler {
       }
 
       if (response.error && response) {
-        this.notificationService.error((response.error as Error).error);
+        (response.error as Array<Error>).forEach(erro => {
+          Object.keys(erro.constraints).forEach(key => {
+            this.notificationService.error(erro.constraints[key as TypeORMError] || `#${response.status} - Ocorreu um erro desconhecido.`);
+          });
+        });
         return;
       }
 
-      this.notificationService.error('O sistema encontra-se indisponível.');
+      this.notificationService.error(`#${response.status} - O sistema encontra-se indisponível.`);
     } else {
       this.notificationService.error(`#${response.status} - O sistema encontra-se indisponível.`);
     }

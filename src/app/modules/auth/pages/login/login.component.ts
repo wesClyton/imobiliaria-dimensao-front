@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { finalize, take } from 'rxjs/operators';
+import { APP_CONFIG } from '../../../../app.config';
 import { LoadingService } from '../../../../core/loading/loading.service';
+import { NotificationService } from '../../../../core/notification/notification.service';
 import { PAINEL_ADMIN_CONFIG } from '../../../../painel-admin/painel-admin.config';
+import { ModuleConfig } from '../../../../shared/interfaces/module-config.interface';
 import { ExceptionService } from '../../../../shared/services/exception/exception.service';
-import { NotificationService } from '../../../../shared/services/notification/notification.service';
 import { RedirectToService } from '../../../../shared/services/redirect-to/redirect-to.service';
 import { FormUtil } from '../../../../shared/utils/form.util';
 import { Login } from '../../models/login.interface';
@@ -13,11 +15,32 @@ import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
 
   public form!: FormGroup;
+
+  private get controlEmail(): AbstractControl | null {
+    return this.form?.get('email');
+  }
+
+  public get controlEmailHasError(): boolean | undefined {
+    return this.controlEmail?.dirty || this.controlEmail?.hasError('required') || this.controlPassword?.hasError('email');
+  }
+
+  private get controlPassword(): AbstractControl | null {
+    return this.form?.get('password');
+  }
+
+  public get controlPasswordHasError(): boolean | undefined {
+    return this.controlPassword?.dirty || this.controlPassword?.hasError('required');
+  }
+
+  public get APP_CONFIG(): ModuleConfig {
+    return APP_CONFIG;
+  }
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -35,8 +58,8 @@ export class LoginComponent implements OnInit {
 
   private createForm(): void {
     this.form = this.formBuilder.group({
-      email: new FormControl(null),
-      password: new FormControl(null)
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      password: new FormControl(null, [Validators.required])
     });
   }
 
@@ -61,9 +84,9 @@ export class LoginComponent implements OnInit {
         finalize(() => this.loadingSercice.hide())
       )
       .subscribe(
-        token => {
-          this.authService.setTokenLocalStorage(token);
-          this.router.navigateByUrl(this.redirectToService.path ? this.redirectToService.path : PAINEL_ADMIN_CONFIG.pathFront);
+        session => {
+          this.authService.setSessionLocalStorage(session);
+          this.router.navigateByUrl(this.redirectToService.path || PAINEL_ADMIN_CONFIG.pathFront);
         },
         error => this.exceptionService.handleError(error)
       );
