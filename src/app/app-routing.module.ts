@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AUTH_CONFIG } from './modules/auth/auth.config';
 import { AuthGuard } from './modules/auth/guards/auth.guard';
 import { PAGES_CONFIG } from './pages/page.config';
-import { PAINEL_ADMIN_CONFIG } from './painel-admin/painel-admin.config';
+import { PANEL_ADMIN_CONFIG } from './panel-admin/panel-admin.config';
 
 const routes: Routes = [
   {
@@ -16,10 +16,10 @@ const routes: Routes = [
     loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule)
   },
   {
-    path: PAINEL_ADMIN_CONFIG.path,
+    path: PANEL_ADMIN_CONFIG.path,
     canLoad: [AuthGuard],
     canActivate: [AuthGuard],
-    loadChildren: () => import('./painel-admin/painel-admin.module').then(m => m.PainelAdminModule)
+    loadChildren: () => import('./panel-admin/panel-admin.module').then(m => m.PainelAdminModule)
   },
   {
     path: PAGES_CONFIG.path,

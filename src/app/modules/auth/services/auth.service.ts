@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { StorageService } from '../../../shared/services/storage/storage.service';
 import { AUTH_CONFIG } from '../auth.config';
 import { Role } from '../enums/role.enum';
@@ -12,6 +13,10 @@ import { Session } from '../models/session.interface';
   providedIn: 'root'
 })
 export class AuthService {
+
+  private readonly currentSession = new BehaviorSubject<Session>(this.session);
+
+  public currentSession$ = this.currentSession.asObservable();
 
   public get isLogged(): boolean {
     return this.session ? true : false;
@@ -47,7 +52,9 @@ export class AuthService {
   ) { }
 
   public login(login: Login): Observable<Session> {
-    return this.httpClient.post<Session>(`${AUTH_CONFIG.pathApi}/autenticar`, login);
+    return this.httpClient.post<Session>(`${AUTH_CONFIG.pathApi}/autenticar`, login).pipe(
+      tap((session) => this.currentSession.next(session))
+    );
   }
 
   public logout(): void {

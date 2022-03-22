@@ -1,0 +1,16 @@
+$heightToolbar: 64px;
+$heightToolbarMobile: 56px;
+
+mat-sidenav-container {
+  height: calc(100% - $heightToolbar);
+}
+
+@media (max-width: 599px) {
+  mat-sidenav-container {
+    height: calc(100% - $heightToolbarMobile);
+  }
+}
+
+main {
+  padding: 1.5rem;
+}

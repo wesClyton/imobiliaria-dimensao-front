@@ -5,7 +5,7 @@ import { finalize, take } from 'rxjs/operators';
 import { APP_CONFIG } from '../../../../app.config';
 import { LoadingService } from '../../../../core/loading/loading.service';
 import { NotificationService } from '../../../../core/notification/notification.service';
-import { PAINEL_ADMIN_CONFIG } from '../../../../painel-admin/painel-admin.config';
+import { PANEL_ADMIN_CONFIG } from '../../../../panel-admin/panel-admin.config';
 import { ModuleConfig } from '../../../../shared/interfaces/module-config.interface';
 import { ExceptionService } from '../../../../shared/services/exception/exception.service';
 import { RedirectToService } from '../../../../shared/services/redirect-to/redirect-to.service';
@@ -86,7 +86,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         session => {
           this.authService.setSessionLocalStorage(session);
-          this.router.navigateByUrl(this.redirectToService.path || PAINEL_ADMIN_CONFIG.pathFront);
+          this.router.navigateByUrl(this.redirectToService.path || PANEL_ADMIN_CONFIG.pathFront);
         },
         error => this.exceptionService.handleError(error)
       );

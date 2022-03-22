@@ -4,7 +4,7 @@ import { NotificationService } from '../../../core/notification/notification.ser
 import { AuthService } from '../../../modules/auth/services/auth.service';
 import { HttpStatusCode } from '../../enums/http-status-code.enum';
 import { TypeORMError } from '../../enums/type-orm-error.enum';
-import { Error } from '../../interfaces/error.interface';
+import { ApiError } from '../../interfaces/api-error.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -44,7 +44,7 @@ export class ExceptionService implements ErrorHandler {
       }
 
       if (response.error && response) {
-        (response.error as Array<Error>).forEach(erro => {
+        (response.error as Array<ApiError>).forEach(erro => {
           Object.keys(erro.constraints).forEach(key => {
             this.notificationService.error(erro.constraints[key as TypeORMError] || `#${response.status} - Ocorreu um erro desconhecido.`);
           });

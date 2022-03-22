@@ -1,0 +1,19 @@
+<mat-list *ngIf="session">
+  <mat-list-item class="item-user">
+    <p class="infos">
+      <mat-icon>account_circle</mat-icon> Olá, {{ session.usuario.nome }}.
+    </p>
+  </mat-list-item>
+
+  <mat-list-item>
+    <button mat-button (click)="goHome()">Início</button>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+
+  <div *ngIf="authService.isAdmin">
+    <mat-list-item>
+      <button mat-button (click)="goUser()">Usuários</button>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+  </div>
+</mat-list>

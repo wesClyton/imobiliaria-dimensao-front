@@ -1,8 +1,8 @@
 import { ModuleConfig } from '../shared/interfaces/module-config.interface';
 
-const PATH: string = 'painel-admin';
+const PATH: string = 'panel-admin';
 
-export const PAINEL_ADMIN_CONFIG: ModuleConfig = {
+export const PANEL_ADMIN_CONFIG: ModuleConfig = {
   nome: 'Painel Admin',
   nomePlural: 'Painel Admin',
   path: PATH,

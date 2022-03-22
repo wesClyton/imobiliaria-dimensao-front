@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { PAINEL_ADMIN_CONFIG } from '../../../painel-admin/painel-admin.config';
+import { PANEL_ADMIN_CONFIG } from '../../../panel-admin/panel-admin.config';
 import { AuthService } from '../services/auth.service';
 
 @Injectable({
@@ -15,7 +15,7 @@ export class LoginGuard implements CanActivate {
 
   canActivate(): boolean {
     if (this.authService.isLogged) {
-      this.router.navigateByUrl(PAINEL_ADMIN_CONFIG.pathFront);
+      this.router.navigateByUrl(PANEL_ADMIN_CONFIG.pathFront);
       return false;
     }
     return true;
