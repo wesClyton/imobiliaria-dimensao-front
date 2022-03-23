@@ -11,6 +11,14 @@ import { ApiError } from '../../interfaces/api-error.interface';
 })
 export class ExceptionService implements ErrorHandler {
 
+  private get messageErrorUnknown(): string {
+    return 'Ocorreu um erro desconhecido.';
+  }
+
+  private get messageSystemUnavailable(): string {
+    return 'O sistema encontra-se indisponível.';
+  }
+
   constructor(
     private readonly notificationService: NotificationService,
     private readonly authService: AuthService
@@ -29,7 +37,7 @@ export class ExceptionService implements ErrorHandler {
       }
 
       if (response.statusText === 'Unknown Error') {
-        this.notificationService.error(`#${response.status} - Ocorreu um erro desconhecido.`);
+        this.notificationService.error(this.messageErrorUnknown);
         return;
       }
 
@@ -46,15 +54,15 @@ export class ExceptionService implements ErrorHandler {
       if (response.error && response) {
         (response.error as Array<ApiError>).forEach(erro => {
           Object.keys(erro.constraints).forEach(key => {
-            this.notificationService.error(erro.constraints[key as TypeORMError] || `#${response.status} - Ocorreu um erro desconhecido.`);
+            this.notificationService.error(erro.constraints[key as TypeORMError] || this.messageErrorUnknown);
           });
         });
         return;
       }
 
-      this.notificationService.error(`#${response.status} - O sistema encontra-se indisponível.`);
+      this.notificationService.error(this.messageSystemUnavailable);
     } else {
-      this.notificationService.error(`#${response.status} - O sistema encontra-se indisponível.`);
+      this.notificationService.error(this.messageSystemUnavailable);
     }
   }
 

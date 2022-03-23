@@ -7,12 +7,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
-import { LoginComponent } from './pages/login/login.component';
+import { AuthLoginComponent } from './pages/login/auth-login.component';
 
 @NgModule({
   declarations: [
     AuthComponent,
-    LoginComponent
+    AuthLoginComponent
   ],
   imports: [
     CommonModule,

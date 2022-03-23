@@ -4,6 +4,7 @@ import { APP_CONFIG } from '../app.config';
 import { Session } from '../modules/auth/models/session.interface';
 import { AuthService } from '../modules/auth/services/auth.service';
 import { ModuleConfig } from '../shared/interfaces/module-config.interface';
+import { PANEL_ADMIN_CONFIG } from './panel-admin.config';
 
 @Component({
   selector: 'app-panel-admin',
@@ -40,6 +41,10 @@ export class PanelAdminComponent {
 
   public onShowMenu(): void {
     this.showMenu = !this.showMenu;
+  }
+
+  public static pathConcat(path: string = ''): string {
+    return `${PANEL_ADMIN_CONFIG.pathFront}${path}`;
   }
 
 }

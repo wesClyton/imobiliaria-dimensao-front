@@ -1,0 +1,33 @@
+<mat-list *ngIf="session" class="menu">
+  <mat-list-item class="infos-user">
+    <span class="infos" (click)="goAccount()">
+      <mat-icon color="warn">account_circle</mat-icon> Olá, {{ session.usuario.nome }}.
+    </span>
+  </mat-list-item>
+
+  <mat-list-item>
+    <button class="menu-item" mat-button (click)="goHome()">
+      <mat-icon matListIcon color="primary">home</mat-icon>
+      Início
+    </button>
+  </mat-list-item>
+
+  <div *ngIf="authService.isAdmin">
+    <mat-divider></mat-divider>
+    <mat-list-item>
+      <button class="menu-item" mat-button (click)="goAnnouncement()">
+        <mat-icon matListIcon color="primary">campaign</mat-icon>
+        Anúncios
+      </button>
+    </mat-list-item>
+  </div>
+
+  <div *ngIf="authService.isAdmin">
+    <mat-divider></mat-divider>
+    <mat-list-item>
+      <button class="menu-item" mat-button (click)="goUsers()">
+        <mat-icon matListIcon color="primary">supervised_user_circle</mat-icon>Usuários
+      </button>
+    </mat-list-item>
+  </div>
+</mat-list>

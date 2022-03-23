@@ -1,6 +1,6 @@
 export interface ModuleConfig {
-  readonly nome: string;
-  readonly nomePlural: string;
+  readonly name: string;
+  readonly namePlural: string;
   readonly path: string;
   readonly pathApi: string;
   readonly pathFront: string;

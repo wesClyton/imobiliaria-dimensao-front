@@ -3,16 +3,16 @@ import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { MenuComponent } from './menu/menu.component';
+import { PanelAdminMenuComponent } from './menu/panel-admin-menu.component';
 
 @NgModule({
-  declarations: [MenuComponent],
+  declarations: [PanelAdminMenuComponent],
   imports: [
     CommonModule,
     MatListModule,
     MatButtonModule,
     MatIconModule
   ],
-  exports: [MenuComponent]
+  exports: [PanelAdminMenuComponent]
 })
 export class PanelAdminComponentModule { }

@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class RedirectToService {
 
-  private readonly pathBS = new BehaviorSubject<string>('/');
+  public readonly pathBS = new BehaviorSubject<string>('/');
 
   public get lastPath(): string {
     return this.pathBS.value;

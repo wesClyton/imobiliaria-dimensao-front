@@ -8,8 +8,8 @@ interface Config extends ModuleConfig {
 const PATH: string = 'autenticacao';
 
 export const AUTH_CONFIG: Config = {
-  nome: 'Autenticação',
-  nomePlural: 'Autenticação',
+  name: 'Autenticação',
+  namePlural: 'Autenticação',
   path: PATH,
   pathApi: environment.api,
   pathFront: `/${PATH}`,

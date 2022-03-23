@@ -43,7 +43,7 @@ export class AuthService {
   }
 
   private get levelAcess(): Role {
-    return (this.session)?.usuario.nivel;
+    return this.session?.usuario.nivel;
   }
 
   constructor(
@@ -53,7 +53,10 @@ export class AuthService {
 
   public login(login: Login): Observable<Session> {
     return this.httpClient.post<Session>(`${AUTH_CONFIG.pathApi}/autenticar`, login).pipe(
-      tap((session) => this.currentSession.next(session))
+      tap(session => {
+        this.setSessionStorage(session);
+        this.currentSession.next(session);
+      })
     );
   }
 
@@ -62,8 +65,8 @@ export class AuthService {
     this.router.navigateByUrl(`${AUTH_CONFIG.pathFront}/login`);
   }
 
-  public setSessionLocalStorage(session: Session): void {
-    StorageService.localSetItem(AUTH_CONFIG.keySession, JSON.stringify(session));
+  private setSessionStorage(session: Session): void {
+    StorageService.localSetItem(AUTH_CONFIG.keySession, session);
   }
 
 }

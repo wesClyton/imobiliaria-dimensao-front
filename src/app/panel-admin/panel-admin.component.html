@@ -4,7 +4,7 @@
       <button mat-icon-button type="button" (click)="onShowMenu()">
         <mat-icon>menu</mat-icon>
       </button>
-      <span>{{ APP_CONFIG.nome }}</span>
+      <span>{{ APP_CONFIG.name }}</span>
     </div>
     <button mat-icon-button type="button" (click)="logout()">
       <mat-icon>logout</mat-icon>
@@ -14,7 +14,7 @@
 
 <mat-sidenav-container>
   <mat-sidenav mode="side" [opened]="showMenu">
-    <app-menu [session]="currentSession"></app-menu>
+    <app-panel-admin-menu [session]="currentSession"></app-panel-admin-menu>
   </mat-sidenav>
   <mat-sidenav-content>
     <main>

@@ -6,14 +6,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { PanelAdminComponentModule } from './components/panel-admin-component.module';
-import { HomeComponent } from './pages/home.component';
+import { PanelAdminHomeComponent } from './pages/home/panel-admin-home.component';
 import { PanelAdminRoutingModule } from './panel-admin-routing.module';
 import { PanelAdminComponent } from './panel-admin.component';
 
 @NgModule({
   declarations: [
     PanelAdminComponent,
-    HomeComponent
+    PanelAdminHomeComponent
   ],
   imports: [
     CommonModule,

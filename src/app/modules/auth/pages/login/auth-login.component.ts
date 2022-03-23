@@ -14,11 +14,11 @@ import { Login } from '../../models/login.interface';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-auth-login',
+  templateUrl: './auth-login.component.html',
+  styleUrls: ['./auth-login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class AuthLoginComponent implements OnInit {
 
   public form!: FormGroup;
 
@@ -73,8 +73,8 @@ export class LoginComponent implements OnInit {
     this.loadingSercice.show();
 
     const login: Login = {
-      email: this.form.get('email')?.value,
-      password: this.form.get('password')?.value,
+      email: this.controlEmail?.value,
+      password: this.controlPassword?.value,
     };
 
     this.authService
@@ -84,10 +84,7 @@ export class LoginComponent implements OnInit {
         finalize(() => this.loadingSercice.hide())
       )
       .subscribe(
-        session => {
-          this.authService.setSessionLocalStorage(session);
-          this.router.navigateByUrl(this.redirectToService.path || PANEL_ADMIN_CONFIG.pathFront);
-        },
+        () => this.router.navigateByUrl(this.redirectToService.path || PANEL_ADMIN_CONFIG.pathFront),
         error => this.exceptionService.handleError(error)
       );
   }

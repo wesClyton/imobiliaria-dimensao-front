@@ -13,7 +13,7 @@ export class StorageService {
 
   public static sessionGetItem(key: string): any {
     const value: any = sessionStorage.getItem(key);
-    return JSON.parse(JSON.parse(value));
+    return JSON.parse(value);
   }
 
   public static sessionRemoveItem(key: string): void {
@@ -30,7 +30,7 @@ export class StorageService {
 
   public static localGetItem(key: string): any {
     const value: any = localStorage.getItem(key);
-    return JSON.parse(JSON.parse(value));
+    return JSON.parse(value);
   }
 
   public static localRemoveItem(key: string): void {
