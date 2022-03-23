@@ -7,6 +7,6 @@ export const BROKER_CONFIG: ModuleConfig = {
   name: 'Corretor',
   namePlural: 'Corretores',
   path: PATH,
-  pathApi: `${environment.api}/corretores`,
+  pathApi: environment.api,
   pathFront: `/${PATH}`
 };

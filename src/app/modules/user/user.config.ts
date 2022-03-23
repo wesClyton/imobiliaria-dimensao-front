@@ -7,6 +7,6 @@ export const USER_CONFIG: ModuleConfig = {
   name: 'Usuário',
   namePlural: 'Usuários',
   path: PATH,
-  pathApi: `${environment.api}/usuarios`,
+  pathApi: environment.api,
   pathFront: `/${PATH}`
 };

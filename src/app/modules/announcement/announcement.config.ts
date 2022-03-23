@@ -7,6 +7,6 @@ export const ANNOUNCEMENT_CONFIG: ModuleConfig = {
   name: 'Anúncio',
   namePlural: 'Anúncios',
   path: PATH,
-  pathApi: `${environment.api}/anuncios`,
+  pathApi: environment.api,
   pathFront: `/${PATH}`
 };
