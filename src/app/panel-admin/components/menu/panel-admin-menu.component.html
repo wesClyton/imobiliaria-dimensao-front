@@ -25,8 +25,49 @@
   <div *ngIf="authService.isAdmin">
     <mat-divider></mat-divider>
     <mat-list-item>
+      <button class="menu-item" mat-button (click)="goBanners()">
+        <mat-icon matListIcon color="primary">image</mat-icon>
+        Banners
+      </button>
+    </mat-list-item>
+  </div>
+
+  <div *ngIf="authService.isAdmin">
+    <mat-divider></mat-divider>
+    <mat-list-item>
+      <button class="menu-item" mat-button (click)="goCities()">
+        <mat-icon matListIcon color="primary">location_on</mat-icon>
+        Cidades
+      </button>
+    </mat-list-item>
+  </div>
+
+  <div *ngIf="authService.isAdmin">
+    <mat-divider></mat-divider>
+    <mat-list-item>
+      <button class="menu-item" mat-button (click)="goBrokers()">
+        <mat-icon matListIcon color="primary">groups</mat-icon>
+        Corretores
+      </button>
+    </mat-list-item>
+  </div>
+
+  <div *ngIf="authService.isAdmin">
+    <mat-divider></mat-divider>
+    <mat-list-item>
+      <button class="menu-item" mat-button (click)="goStates()">
+        <mat-icon matListIcon color="primary">map</mat-icon>
+        Estados
+      </button>
+    </mat-list-item>
+  </div>
+
+  <div *ngIf="authService.isAdmin">
+    <mat-divider></mat-divider>
+    <mat-list-item>
       <button class="menu-item" mat-button (click)="goUsers()">
-        <mat-icon matListIcon color="primary">supervised_user_circle</mat-icon>Usuários
+        <mat-icon matListIcon color="primary">people</mat-icon>
+        Usuários
       </button>
     </mat-list-item>
   </div>
