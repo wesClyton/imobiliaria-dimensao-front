@@ -20,8 +20,32 @@ export class PanelAdminMenuComponent {
   @Input()
   public session!: Session;
 
+  public get showAnnouncement(): boolean {
+    return this.authService.isAdmin;
+  }
+
+  public get showBanners(): boolean {
+    return this.authService.isAdmin;
+  }
+
+  public get showBrokers(): boolean {
+    return this.authService.isAdmin;
+  }
+
+  public get showCities(): boolean {
+    return this.authService.isAdmin;
+  }
+
+  public get showStates(): boolean {
+    return this.authService.isAdmin;
+  }
+
+  public get showUsers(): boolean {
+    return this.authService.isAdmin;
+  }
+
   constructor(
-    public readonly authService: AuthService,
+    private readonly authService: AuthService,
     private readonly router: Router
   ) { }
 

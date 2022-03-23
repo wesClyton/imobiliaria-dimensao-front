@@ -12,7 +12,7 @@
     </button>
   </mat-list-item>
 
-  <div *ngIf="authService.isAdmin">
+  <div *ngIf="showAnnouncement">
     <mat-divider></mat-divider>
     <mat-list-item>
       <button class="menu-item" mat-button (click)="goAnnouncement()">
@@ -22,7 +22,7 @@
     </mat-list-item>
   </div>
 
-  <div *ngIf="authService.isAdmin">
+  <div *ngIf="showBanners">
     <mat-divider></mat-divider>
     <mat-list-item>
       <button class="menu-item" mat-button (click)="goBanners()">
@@ -32,7 +32,7 @@
     </mat-list-item>
   </div>
 
-  <div *ngIf="authService.isAdmin">
+  <div *ngIf="showCities">
     <mat-divider></mat-divider>
     <mat-list-item>
       <button class="menu-item" mat-button (click)="goCities()">
@@ -42,7 +42,7 @@
     </mat-list-item>
   </div>
 
-  <div *ngIf="authService.isAdmin">
+  <div *ngIf="showBrokers">
     <mat-divider></mat-divider>
     <mat-list-item>
       <button class="menu-item" mat-button (click)="goBrokers()">
@@ -52,7 +52,7 @@
     </mat-list-item>
   </div>
 
-  <div *ngIf="authService.isAdmin">
+  <div *ngIf="showStates">
     <mat-divider></mat-divider>
     <mat-list-item>
       <button class="menu-item" mat-button (click)="goStates()">
@@ -62,7 +62,7 @@
     </mat-list-item>
   </div>
 
-  <div *ngIf="authService.isAdmin">
+  <div *ngIf="showUsers">
     <mat-divider></mat-divider>
     <mat-list-item>
       <button class="menu-item" mat-button (click)="goUsers()">
