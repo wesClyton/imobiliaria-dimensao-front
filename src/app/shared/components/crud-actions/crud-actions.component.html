@@ -1,0 +1,17 @@
+<mat-action-list>
+  <button *ngIf="showBack" mat-raised-button color="accent" (click)="clickBack()">
+    Voltar
+  </button>
+
+  <button *ngIf="showNew" mat-fab color="primary" (click)="clickNew()">
+    <mat-icon>add</mat-icon>
+  </button>
+
+  <button *ngIf="showDelete" mat-fab color="warn" (click)="clickDelete()">
+    <mat-icon>delete</mat-icon>
+  </button>
+
+  <button *ngIf="showSave" mat-raised-button color="primary" (click)="clickSave()">
+    Salvar
+  </button>
+</mat-action-list>

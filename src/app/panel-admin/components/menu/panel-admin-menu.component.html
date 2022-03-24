@@ -1,74 +1,43 @@
 <mat-list *ngIf="session" class="menu">
-  <mat-list-item class="infos-user">
-    <span class="infos" (click)="goAccount()">
-      <mat-icon color="warn">account_circle</mat-icon> Olá, {{ session.usuario.nome }}.
-    </span>
-  </mat-list-item>
+  <mat-action-list>
+    <button class="infos" type="menu" mat-list-item (click)="goAccount()">
+      <mat-icon color="warn">account_circle</mat-icon>
+      Olá, {{ session.usuario.nome }}.
+    </button>
 
-  <mat-list-item>
-    <button class="menu-item" mat-button (click)="goHome()">
+    <button type="menu" mat-list-item (click)="goHome()">
       <mat-icon matListIcon color="primary">home</mat-icon>
       Início
     </button>
-  </mat-list-item>
 
-  <div *ngIf="showAnnouncement">
-    <mat-divider></mat-divider>
-    <mat-list-item>
-      <button class="menu-item" mat-button (click)="goAnnouncement()">
-        <mat-icon matListIcon color="primary">campaign</mat-icon>
-        Anúncios
-      </button>
-    </mat-list-item>
-  </div>
+    <button *ngIf="showAnnouncement" type="menu" mat-list-item (click)="goAnnouncement()">
+      <mat-icon matListIcon color="primary">campaign</mat-icon>
+      Anúncios
+    </button>
 
-  <div *ngIf="showBanners">
-    <mat-divider></mat-divider>
-    <mat-list-item>
-      <button class="menu-item" mat-button (click)="goBanners()">
-        <mat-icon matListIcon color="primary">image</mat-icon>
-        Banners
-      </button>
-    </mat-list-item>
-  </div>
+    <button *ngIf="showBanners" type="menu" mat-list-item (click)="goBanners()">
+      <mat-icon matListIcon color="primary">image</mat-icon>
+      Banners
+    </button>
 
-  <div *ngIf="showCities">
-    <mat-divider></mat-divider>
-    <mat-list-item>
-      <button class="menu-item" mat-button (click)="goCities()">
-        <mat-icon matListIcon color="primary">location_on</mat-icon>
-        Cidades
-      </button>
-    </mat-list-item>
-  </div>
+    <button *ngIf="showCities" type="menu" mat-list-item (click)="goCities()">
+      <mat-icon matListIcon color="primary">location_on</mat-icon>
+      Cidades
+    </button>
 
-  <div *ngIf="showBrokers">
-    <mat-divider></mat-divider>
-    <mat-list-item>
-      <button class="menu-item" mat-button (click)="goBrokers()">
-        <mat-icon matListIcon color="primary">groups</mat-icon>
-        Corretores
-      </button>
-    </mat-list-item>
-  </div>
+    <button *ngIf="showBrokers" type="menu" mat-list-item (click)="goBrokers()">
+      <mat-icon matListIcon color="primary">groups</mat-icon>
+      Corretores
+    </button>
 
-  <div *ngIf="showStates">
-    <mat-divider></mat-divider>
-    <mat-list-item>
-      <button class="menu-item" mat-button (click)="goStates()">
-        <mat-icon matListIcon color="primary">map</mat-icon>
-        Estados
-      </button>
-    </mat-list-item>
-  </div>
+    <button *ngIf="showStates" type="menu" mat-list-item (click)="goStates()">
+      <mat-icon matListIcon color="primary">map</mat-icon>
+      Estados
+    </button>
 
-  <div *ngIf="showUsers">
-    <mat-divider></mat-divider>
-    <mat-list-item>
-      <button class="menu-item" mat-button (click)="goUsers()">
-        <mat-icon matListIcon color="primary">people</mat-icon>
-        Usuários
-      </button>
-    </mat-list-item>
-  </div>
+    <button *ngIf="showUsers" type="menu" mat-list-item (click)="goUsers()">
+      <mat-icon matListIcon color="primary">people</mat-icon>
+      Usuários
+    </button>
+  </mat-action-list>
 </mat-list>

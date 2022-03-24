@@ -1,7 +1,7 @@
 import { HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Session } from '../../modules/auth/models/session.interface';
+import { Session } from '../../modules/auth/interfaces/session.interface';
 import { AuthService } from '../../modules/auth/services/auth.service';
 import { HttpHeader } from '../../shared/enums/http-header.enum';
 import { MimeTypes } from '../../shared/enums/mime-types.enum';

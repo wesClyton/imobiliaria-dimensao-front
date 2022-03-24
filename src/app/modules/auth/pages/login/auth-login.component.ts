@@ -10,7 +10,7 @@ import { ModuleConfig } from '../../../../shared/interfaces/module-config.interf
 import { ExceptionService } from '../../../../shared/services/exception/exception.service';
 import { RedirectToService } from '../../../../shared/services/redirect-to/redirect-to.service';
 import { FormUtil } from '../../../../shared/utils/form.util';
-import { Login } from '../../models/login.interface';
+import { Login } from '../../interfaces/login.interface';
 import { AuthService } from '../../services/auth.service';
 
 @Component({

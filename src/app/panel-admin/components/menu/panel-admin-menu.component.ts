@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ANNOUNCEMENT_CONFIG } from '../../../modules/announcement/announcement.config';
-import { Session } from '../../../modules/auth/models/session.interface';
+import { Session } from '../../../modules/auth/interfaces/session.interface';
 import { AuthService } from '../../../modules/auth/services/auth.service';
 import { BANNER_CONFIG } from '../../../modules/banner/banner.config';
 import { BROKER_CONFIG } from '../../../modules/broker/broker.config';

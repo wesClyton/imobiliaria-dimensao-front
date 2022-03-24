@@ -6,8 +6,8 @@ import { tap } from 'rxjs/operators';
 import { StorageService } from '../../../shared/services/storage/storage.service';
 import { AUTH_CONFIG } from '../auth.config';
 import { Role } from '../enums/role.enum';
-import { Login } from '../models/login.interface';
-import { Session } from '../models/session.interface';
+import { Login } from '../interfaces/login.interface';
+import { Session } from '../interfaces/session.interface';
 
 @Injectable({
   providedIn: 'root'

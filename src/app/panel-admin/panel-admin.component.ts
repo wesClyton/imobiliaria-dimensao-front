@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { APP_CONFIG } from '../app.config';
-import { Session } from '../modules/auth/models/session.interface';
+import { Session } from '../modules/auth/interfaces/session.interface';
 import { AuthService } from '../modules/auth/services/auth.service';
 import { ModuleConfig } from '../shared/interfaces/module-config.interface';
 import { PANEL_ADMIN_CONFIG } from './panel-admin.config';
