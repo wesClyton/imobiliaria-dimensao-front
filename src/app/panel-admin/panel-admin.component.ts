@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { APP_CONFIG } from '../app.config';
 import { Session } from '../modules/auth/interfaces/session.interface';
 import { AuthService } from '../modules/auth/services/auth.service';
+import { USER_CONFIG } from '../modules/user/user.config';
 import { ModuleConfig } from '../shared/interfaces/module-config.interface';
 import { PANEL_ADMIN_CONFIG } from './panel-admin.config';
 
@@ -13,7 +15,7 @@ import { PANEL_ADMIN_CONFIG } from './panel-admin.config';
 })
 export class PanelAdminComponent {
 
-  public showMenu = true;
+  public showSideNav = true;
 
   public currentSession!: Session;
 
@@ -24,7 +26,8 @@ export class PanelAdminComponent {
   private readonly subscription = new Subscription();
 
   constructor(
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly router: Router
   ) { }
 
   ngOnInit(): void {
@@ -39,8 +42,12 @@ export class PanelAdminComponent {
     this.authService.logout();
   }
 
-  public onShowMenu(): void {
-    this.showMenu = !this.showMenu;
+  public collapseSideNav(): void {
+    this.showSideNav = !this.showSideNav;
+  }
+
+  public goAccount(): void {
+    this.router.navigateByUrl(PanelAdminComponent.pathConcat(`${USER_CONFIG.pathFront}/account`));
   }
 
   public static pathConcat(path: string = ''): string {

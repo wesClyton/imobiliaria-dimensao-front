@@ -1,19 +1,19 @@
 <mat-toolbar color="primary">
-  <div fxLayout="row" fxFlexFill fxLayoutAlign="center center">
-    <div fxLayout="row" fxFlexFill fxLayoutAlign="start center">
-      <button mat-icon-button type="button" (click)="onShowMenu()">
-        <mat-icon>menu</mat-icon>
-      </button>
-      <span>{{ APP_CONFIG.name }}</span>
-    </div>
-    <button mat-icon-button type="button" (click)="logout()">
-      <mat-icon>logout</mat-icon>
-    </button>
-  </div>
+  <button mat-icon-button type="button" (click)="collapseSideNav()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>{{ APP_CONFIG.name }}</span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button type="button" matTooltip="Minha conta" (click)="goAccount()">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <button mat-icon-button type="button" matTooltip="Sair" (click)="logout()">
+    <mat-icon>logout</mat-icon>
+  </button>
 </mat-toolbar>
 
 <mat-sidenav-container>
-  <mat-sidenav mode="side" [opened]="showMenu">
+  <mat-sidenav mode="side" [opened]="showSideNav">
     <app-panel-admin-menu [session]="currentSession"></app-panel-admin-menu>
   </mat-sidenav>
   <mat-sidenav-content>

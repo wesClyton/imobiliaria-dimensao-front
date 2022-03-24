@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { PanelAdminComponentModule } from './components/panel-admin-component.module';
 import { PanelAdminHomeComponent } from './pages/home/panel-admin-home.component';
 import { PanelAdminRoutingModule } from './panel-admin-routing.module';
@@ -23,7 +23,7 @@ import { PanelAdminComponent } from './panel-admin.component';
     MatSidenavModule,
     MatIconModule,
     MatButtonModule,
-    FlexLayoutModule
+    MatTooltipModule
   ]
 })
 export class PainelAdminModule { }

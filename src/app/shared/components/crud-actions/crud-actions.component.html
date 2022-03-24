@@ -1,17 +1,41 @@
 <mat-action-list>
-  <button *ngIf="showBack" mat-raised-button color="accent" (click)="clickBack()">
-    Voltar
+  <button
+    *ngIf="showBack"
+    mat-fab
+    color="accent"
+    matTooltip="Voltar"
+    [disabled]="disabledBack"
+    (click)="clickBack()">
+    <mat-icon>arrow_back</mat-icon>
   </button>
 
-  <button *ngIf="showNew" mat-fab color="primary" (click)="clickNew()">
+  <button
+    *ngIf="showNew"
+    mat-fab
+    color="primary"
+    matTooltip="Novo"
+    [disabled]="disabledNew"
+    (click)="clickNew()">
     <mat-icon>add</mat-icon>
   </button>
 
-  <button *ngIf="showDelete" mat-fab color="warn" (click)="clickDelete()">
+  <button
+    *ngIf="showDelete"
+    mat-fab
+    color="warn"
+    matTooltip="Deletar"
+    [disabled]="disabledDelete"
+    (click)="clickDelete()">
     <mat-icon>delete</mat-icon>
   </button>
 
-  <button *ngIf="showSave" mat-raised-button color="primary" (click)="clickSave()">
-    Salvar
+  <button
+    *ngIf="showSave"
+    mat-fab
+    color="primary"
+    matTooltip="Salvar"
+    [disabled]="disabledSave"
+    (click)="clickSave()">
+    <mat-icon>save</mat-icon>
   </button>
 </mat-action-list>

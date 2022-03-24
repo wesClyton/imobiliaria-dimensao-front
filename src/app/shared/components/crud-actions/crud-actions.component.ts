@@ -19,6 +19,18 @@ export class CrudActionsComponent {
   @Input()
   showSave = false;
 
+  @Input()
+  disabledBack = false;
+
+  @Input()
+  disabledNew = false;
+
+  @Input()
+  disabledDelete = false;
+
+  @Input()
+  disabledSave = false;
+
   @Output()
   onClickBack = new EventEmitter();
 

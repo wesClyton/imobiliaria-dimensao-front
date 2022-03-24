@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { StateListComponent } from './pages/state-list.component';
+import { StateListComponent } from './pages/list/state-list.component';
+import { StateNewComponent } from './pages/new/state-new.component';
 
 const routes: Routes = [
   {
@@ -9,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'new',
-    component: undefined
+    component: StateNewComponent
   }
 ];
 

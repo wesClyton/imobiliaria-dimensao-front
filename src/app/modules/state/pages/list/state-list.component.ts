@@ -1,8 +1,8 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CrudActionBack } from '../../../shared/components/crud-actions/interfaces/crud-action-back.interface';
-import { CrudActionNew } from '../../../shared/components/crud-actions/interfaces/crud-action-new.interface';
+import { CrudActionBack } from '../../../../shared/components/crud-actions/interfaces/crud-action-back.interface';
+import { CrudActionNew } from '../../../../shared/components/crud-actions/interfaces/crud-action-new.interface';
 
 @Component({
   selector: 'app-state-list',
