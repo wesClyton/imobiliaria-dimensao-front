@@ -1,7 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorHandler, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { NotificationService } from '../../../core/notification/notification.service';
-import { AuthService } from '../../../modules/auth/services/auth.service';
+import { PAGES_CONFIG } from '../../../pages/page.config';
 import { HttpStatusCode } from '../../enums/http-status-code.enum';
 import { TypeORMError } from '../../enums/type-orm-error.enum';
 import { ApiError } from '../../interfaces/api-error.interface';
@@ -21,7 +22,7 @@ export class ExceptionService implements ErrorHandler {
 
   constructor(
     private readonly notificationService: NotificationService,
-    private readonly authService: AuthService
+    private readonly router: Router
   ) { }
 
   handleError(response: any): void {
@@ -32,7 +33,10 @@ export class ExceptionService implements ErrorHandler {
       }
 
       if (response.status === HttpStatusCode.InternalServerError) {
-        this.notificationService.error(`#${response.status} - Ocorreu um erro interno no servidor.`);
+        this.router.navigate(
+          [`${PAGES_CONFIG.pathFront}/erro`],
+          { queryParams: { code: HttpStatusCode.InternalServerError }
+        });
         return;
       }
 
@@ -46,8 +50,10 @@ export class ExceptionService implements ErrorHandler {
         response.statusText === 'Unauthorized' ||
         response.status === HttpStatusCode.Forbidden ||
         response.statusText === 'Forbidden') {
-        this.notificationService.error(`#${response.status} - Seu token expirou, é inválido ou não tem permissão para acessar essa página.`);
-        this.authService.logout();
+        this.router.navigate(
+          [`${PAGES_CONFIG.pathFront}/erro`],
+          { queryParams: { code: HttpStatusCode.Unauthorized }
+        });
         return;
       }
 

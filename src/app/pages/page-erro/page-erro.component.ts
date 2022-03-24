@@ -1,18 +1,76 @@
 import { Location } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { AuthService } from '../../modules/auth/services/auth.service';
+import { HttpStatusCode } from '../../shared/enums/http-status-code.enum';
 
 @Component({
   selector: 'app-page-erro',
   templateUrl: './page-erro.component.html',
   styleUrls: ['./page-erro.component.scss']
 })
-export class PageErroComponent {
+export class PageErroComponent implements OnInit, OnDestroy {
+
+  private statusCode!: HttpStatusCode;
+
+  private get isStatusUnauthorized(): boolean {
+    return this.statusCode === HttpStatusCode.Unauthorized;
+  }
+
+  private get isInternalServerError(): boolean {
+    return this.statusCode === HttpStatusCode.InternalServerError;
+  }
+
+  public get message(): string {
+    let value = 'Página não encontrada!';
+    if (this.isInternalServerError) {
+      value = 'Ocorreu um erro interno no servidor.';
+    }
+    if (this.isStatusUnauthorized) {
+      value = 'Sua sessão expirou ou não tem permissão para acessar essa página!';
+    }
+    return value;
+  }
+
+  public get icon(): string {
+    let value = 'sentiment_dissatisfied';
+    if (this.isInternalServerError) {
+      value = 'dns';
+    }
+    if (this.isStatusUnauthorized) {
+      value = 'block';
+    }
+    return value;
+  }
+
+  private subscription = new Subscription();
 
   constructor(
-    private readonly location: Location
+    private readonly location: Location,
+    private readonly activatedRoute: ActivatedRoute,
+    private readonly authService: AuthService
   ) { }
 
-  public back(): void {
+  ngOnInit(): void {
+    this.subscription.add(
+      this.activatedRoute.queryParams.subscribe(params => {
+        if (params) {
+          this.statusCode = parseInt(params.code, 10);
+        }
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  public goBack(): void {
+    if (this.statusCode !== HttpStatusCode.NotFound) {
+      this.authService.logout();
+      return;
+    }
     this.location.back();
   }
 

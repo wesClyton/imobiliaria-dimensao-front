@@ -7,7 +7,6 @@ import { LoadingService } from '../../../../core/loading/loading.service';
 import { NotificationService } from '../../../../core/notification/notification.service';
 import { PANEL_ADMIN_CONFIG } from '../../../../panel-admin/panel-admin.config';
 import { ModuleConfig } from '../../../../shared/interfaces/module-config.interface';
-import { ExceptionService } from '../../../../shared/services/exception/exception.service';
 import { RedirectToService } from '../../../../shared/services/redirect-to/redirect-to.service';
 import { FormUtil } from '../../../../shared/utils/form.util';
 import { Login } from '../../interfaces/login.interface';
@@ -46,7 +45,6 @@ export class AuthLoginComponent implements OnInit {
     private readonly formBuilder: FormBuilder,
     private readonly notificationService: NotificationService,
     private readonly authService: AuthService,
-    private readonly exceptionService: ExceptionService,
     private readonly router: Router,
     private readonly loadingSercice: LoadingService,
     private readonly redirectToService: RedirectToService
@@ -83,10 +81,7 @@ export class AuthLoginComponent implements OnInit {
         take(1),
         finalize(() => this.loadingSercice.hide())
       )
-      .subscribe(
-        () => this.router.navigateByUrl(this.redirectToService.path || PANEL_ADMIN_CONFIG.pathFront),
-        error => this.exceptionService.handleError(error)
-      );
+      .subscribe(() => this.router.navigateByUrl(this.redirectToService.path || PANEL_ADMIN_CONFIG.pathFront));
   }
 
 }
