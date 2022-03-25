@@ -1,0 +1,31 @@
+import { HttpClient } from '@angular/common/http';
+import { Inject, Injectable } from '@angular/core';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { ExceptionService } from '../../exception/exception.service';
+import { HttpGetAll } from './http-get-all.interface';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class HttpGetAllService<GetAll> implements HttpGetAll<Array<GetAll>> {
+
+  constructor(
+    public readonly httpClient: HttpClient,
+    public readonly exceptionService: ExceptionService,
+    @Inject(String)
+    public readonly endPoint: string
+  ) { }
+
+  public getAll(): Observable<Array<GetAll>> {
+    return this.httpClient
+      .get<Array<GetAll>>(this.endPoint)
+      .pipe(
+        catchError((error) => {
+          this.exceptionService.handleError(error);
+          return throwError(error);
+        })
+      );
+  }
+
+}

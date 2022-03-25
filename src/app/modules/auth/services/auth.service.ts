@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { ExceptionService } from '../../../shared/services/exception/exception.service';
+import { HttpPostService } from '../../../shared/services/http/post/http-post.service';
 import { StorageService } from '../../../shared/services/storage/storage.service';
 import { AUTH_CONFIG } from '../auth.config';
 import { Role } from '../enums/role.enum';
@@ -13,7 +14,7 @@ import { Session } from '../interfaces/session.interface';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService extends HttpPostService<Login, Session> {
 
   private readonly currentSession = new BehaviorSubject<Session>(this.session);
 
@@ -49,19 +50,17 @@ export class AuthService {
 
   constructor(
     private readonly router: Router,
-    private readonly httpClient: HttpClient,
-    private readonly exceptionService: ExceptionService
-  ) { }
+    public readonly httpClient: HttpClient,
+    public readonly exceptionService: ExceptionService
+  ) {
+    super(httpClient, exceptionService, `${AUTH_CONFIG.pathApi}/autenticar`)
+  }
 
   public login(login: Login): Observable<Session> {
-    return this.httpClient.post<Session>(`${AUTH_CONFIG.pathApi}/autenticar`, login).pipe(
+    return super.post(login).pipe(
       tap(session => {
         this.setSessionStorage(session);
         this.currentSession.next(session);
-      }),
-      catchError((error) => {
-        this.exceptionService.handleError(error);
-        return throwError(error);
       })
     );
   }

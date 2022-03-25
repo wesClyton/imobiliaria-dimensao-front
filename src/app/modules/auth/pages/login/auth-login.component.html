@@ -8,9 +8,9 @@
     <mat-card-content>
       <form fxLayout="column" [formGroup]="form" (ngSubmit)="onSubmit()">
         <mat-form-field>
-          <mat-label>Login</mat-label>
-          <input matInput type="email" formControlName="email" placeholder="Informe seu login">
-          <mat-error *ngIf="controlEmailHasError">Informe seu login</mat-error>
+          <mat-label>E-mail</mat-label>
+          <input matInput type="email" formControlName="email" placeholder="Informe seu e-mail">
+          <mat-error *ngIf="controlEmailHasError">Informe um e-mail válido</mat-error>
         </mat-form-field>
 
         <mat-form-field>
