@@ -1,5 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { MatDialogModule } from '@angular/material/dialog';
 import { HttpCustomInterceptorModule } from './http-custom-interceptor/http-custom-interceptor.module';
 import { LoadingModule } from './loading/loading.module';
 import { NotificationModule } from './notification/notification.module';
@@ -9,7 +10,8 @@ import { NotificationModule } from './notification/notification.module';
     HttpClientModule,
     HttpCustomInterceptorModule,
     LoadingModule,
-    NotificationModule
+    NotificationModule,
+    MatDialogModule
   ],
   exports: [LoadingModule]
 })

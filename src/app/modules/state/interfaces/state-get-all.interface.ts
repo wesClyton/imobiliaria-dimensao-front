@@ -2,5 +2,5 @@ import { ApiPagination } from '../../../shared/interfaces/api-pagination.interfa
 import { StateGetById } from './state-get-by-id.interface';
 
 export interface StateGetAll extends ApiPagination {
-  data: Array<StateGetById>;
+  readonly data: Array<StateGetById>;
 }

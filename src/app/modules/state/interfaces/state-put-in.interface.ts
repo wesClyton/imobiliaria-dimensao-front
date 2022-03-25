@@ -1,3 +1,3 @@
 export interface StatePutIn {
-  nome: string;
+  readonly nome: string;
 }

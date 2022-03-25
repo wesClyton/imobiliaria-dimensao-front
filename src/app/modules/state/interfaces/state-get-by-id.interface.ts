@@ -1,5 +1,5 @@
 export interface StateGetById {
-  id: string;
-  nome: string;
-  uf: string;
+  readonly id: string;
+  readonly nome: string;
+  readonly uf: string;
 }

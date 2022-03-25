@@ -1,4 +1,4 @@
 export interface StatePostIn {
-  nome: string;
-  uf: string;
+  readonly nome: string;
+  readonly uf: string;
 }
