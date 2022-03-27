@@ -18,7 +18,7 @@ import { Component } from '@angular/core';
     }
   `]
 })
-export class DialogConfirmationComponent {
+export class AngularMaterialDialogConfirmationComponent {
 
   public static title: string;
 
@@ -29,19 +29,19 @@ export class DialogConfirmationComponent {
   public static confirmButton: string;
 
   public get titleValue(): string {
-    return DialogConfirmationComponent.title;
+    return AngularMaterialDialogConfirmationComponent.title;
   }
 
   public get messageValue(): string {
-    return DialogConfirmationComponent.message;
+    return AngularMaterialDialogConfirmationComponent.message;
   }
 
   public get cancelButtonValue(): string {
-    return DialogConfirmationComponent.cancelButton;
+    return AngularMaterialDialogConfirmationComponent.cancelButton;
   }
 
   public get confirmButtonValue(): string {
-    return DialogConfirmationComponent.confirmButton;
+    return AngularMaterialDialogConfirmationComponent.confirmButton;
   }
 
   constructor() {}

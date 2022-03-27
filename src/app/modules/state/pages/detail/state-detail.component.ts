@@ -3,11 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { NotificationService } from '../../../../core/notification/notification.service';
 import { PanelAdminComponent } from '../../../../panel-admin/panel-admin.component';
-import { CanDeactivateDialog } from '../../../../shared/components/can-deactivate-dialog/can-deactivate-dialog.interface';
+import { AngularMaterialDialogConfirmationService } from '../../../../shared/angular-material/dialog-confirmation/angular-material-dialog-confirmation.service';
 import { CrudActionBack } from '../../../../shared/components/crud-actions/interfaces/crud-action-back.interface';
 import { CrudActionDelete } from '../../../../shared/components/crud-actions/interfaces/crud-action-delete.interface';
 import { CrudActionSave } from '../../../../shared/components/crud-actions/interfaces/crud-action-save.interface';
-import { DialogConfirmationService } from '../../../../shared/components/dialog-confirmation/dialog-confirmation.service';
+import { CanDeactivateDialog } from '../../../../shared/guards/can-deactivate-dialog/can-deactivate-dialog.interface';
 import { UrlUtil } from '../../../../shared/utils/url.util';
 import { StateFormDetailComponent } from '../../components/form-detail/state-form-detail.component';
 import { State } from '../../interfaces/state.interface';
@@ -32,7 +32,7 @@ export class StateDetailComponent implements OnInit, CrudActionSave, CrudActionB
     private readonly activatedRoute: ActivatedRoute,
     private readonly notificationService: NotificationService,
     private readonly stateService: StateService,
-    private readonly dialogConfirmationService: DialogConfirmationService
+    private readonly dialogConfirmationService: AngularMaterialDialogConfirmationService
   ) { }
 
   ngOnInit(): void {

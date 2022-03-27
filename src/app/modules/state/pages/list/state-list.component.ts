@@ -4,12 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { finalize, take } from 'rxjs/operators';
 import { LoadingService } from '../../../../core/loading/loading.service';
 import { NotificationService } from '../../../../core/notification/notification.service';
+import { AngularMaterialDialogConfirmationService } from '../../../../shared/angular-material/dialog-confirmation/angular-material-dialog-confirmation.service';
 import { AngularMaterialTableActions } from '../../../../shared/angular-material/table/interfaces/angular-material-table-actions.interface';
 import { AngularMaterialTableInputs } from '../../../../shared/angular-material/table/interfaces/angular-material-table-inputs.interface';
 import { AngularMaterialTableActionsUtils } from '../../../../shared/angular-material/table/utils/angular-material-table-actions.utils';
 import { CrudActionBack } from '../../../../shared/components/crud-actions/interfaces/crud-action-back.interface';
 import { CrudActionNew } from '../../../../shared/components/crud-actions/interfaces/crud-action-new.interface';
-import { DialogConfirmationService } from '../../../../shared/components/dialog-confirmation/dialog-confirmation.service';
 import { UrlUtil } from '../../../../shared/utils/url.util';
 import { StateGetAll } from '../../interfaces/state-get-all.interface';
 import { State } from '../../interfaces/state.interface';
@@ -48,7 +48,7 @@ export class StateListComponent implements OnInit, AngularMaterialTableInputs<St
     private readonly stateService: StateService,
     private readonly notificationService: NotificationService,
     private readonly loadingService: LoadingService,
-    private readonly dialogConfirmationService: DialogConfirmationService
+    private readonly dialogConfirmationService: AngularMaterialDialogConfirmationService
   ) { }
 
   ngOnInit(): void {

@@ -1,9 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { PanelAdminComponent } from '../../../../panel-admin/panel-admin.component';
-import { CanDeactivateDialog } from '../../../../shared/components/can-deactivate-dialog/can-deactivate-dialog.interface';
 import { CrudActionBack } from '../../../../shared/components/crud-actions/interfaces/crud-action-back.interface';
 import { CrudActionSave } from '../../../../shared/components/crud-actions/interfaces/crud-action-save.interface';
+import { CanDeactivateDialog } from '../../../../shared/guards/can-deactivate-dialog/can-deactivate-dialog.interface';
 import { StateFormNewComponent } from '../../components/form-new/state-form-new.component';
 import { STATE_CONFIG } from '../../state.config';
 

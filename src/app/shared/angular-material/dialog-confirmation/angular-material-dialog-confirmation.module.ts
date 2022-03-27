@@ -2,14 +2,14 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import { CanDeactivateDialogComponent } from './can-deactivate-dialog.component';
+import { AngularMaterialDialogConfirmationComponent } from './angular-material-dialog-confirmation.component';
 
 @NgModule({
-  declarations: [CanDeactivateDialogComponent],
+  declarations: [AngularMaterialDialogConfirmationComponent],
   imports: [
     CommonModule,
     MatButtonModule,
     MatDialogModule
   ]
 })
-export class CanDeactivateDialogModule { }
+export class AngularMaterialDialogConfirmationModule { }

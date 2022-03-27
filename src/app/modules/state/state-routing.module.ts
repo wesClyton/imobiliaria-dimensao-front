@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CanDeactivateGuard } from '../../shared/components/can-deactivate-dialog/can-deactivate-dialog.guard';
+import { CanDeactivateGuard } from '../../shared/guards/can-deactivate-dialog/can-deactivate-dialog.guard';
 import { StateDetailComponent } from './pages/detail/state-detail.component';
 import { StateListComponent } from './pages/list/state-list.component';
 import { StateNewComponent } from './pages/new/state-new.component';

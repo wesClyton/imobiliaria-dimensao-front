@@ -3,10 +3,9 @@ import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
+import { AngularMaterialDialogConfirmationModule } from '../../shared/angular-material/dialog-confirmation/angular-material-dialog-confirmation.module';
 import { AngularMaterialTableModule } from '../../shared/angular-material/table/angular-material-table.module';
-import { CanDeactivateDialogModule } from '../../shared/components/can-deactivate-dialog/can-deactivate-dialog.module';
 import { CrudActionsModule } from '../../shared/components/crud-actions/crud-actions.module';
-import { DialogConfirmationModule } from '../../shared/components/dialog-confirmation/dialog-confirmation.module';
 import { StateFormDetailComponent } from './components/form-detail/state-form-detail.component';
 import { StateFormNewComponent } from './components/form-new/state-form-new.component';
 import { StateDetailComponent } from './pages/detail/state-detail.component';
@@ -30,8 +29,7 @@ import { StateRoutingModule } from './state-routing.module';
     MatSelectModule,
     AngularMaterialTableModule,
     CrudActionsModule,
-    CanDeactivateDialogModule,
-    DialogConfirmationModule
+    AngularMaterialDialogConfirmationModule
   ]
 })
 export class StateModule { }
