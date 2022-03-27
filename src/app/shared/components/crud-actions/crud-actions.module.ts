@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { CrudActionsComponent } from './crud-actions/crud-actions.component';
+import { CrudActionsComponent } from './crud-actions.component';
 
 @NgModule({
   declarations: [CrudActionsComponent],
@@ -17,4 +17,4 @@ import { CrudActionsComponent } from './crud-actions/crud-actions.component';
   ],
   exports: [CrudActionsComponent]
 })
-export class SharedComponentsModule { }
+export class CrudActionsModule { }

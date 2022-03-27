@@ -2,9 +2,13 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
-import { SharedComponentsModule } from '../../shared/components/shared-components.module';
+import { AngularMaterialTableModule } from '../../shared/angular-material/table/angular-material-table.module';
+import { CanDeactivateDialogModule } from '../../shared/components/can-deactivate-dialog/can-deactivate-dialog.module';
+import { CrudActionsModule } from '../../shared/components/crud-actions/crud-actions.module';
+import { StateFormDetailComponent } from './components/form-detail/state-form-detail.component';
+import { StateFormNewComponent } from './components/form-new/state-form-new.component';
+import { StateDetailComponent } from './pages/detail/state-detail.component';
 import { StateListComponent } from './pages/list/state-list.component';
 import { StateNewComponent } from './pages/new/state-new.component';
 import { StateRoutingModule } from './state-routing.module';
@@ -12,7 +16,10 @@ import { StateRoutingModule } from './state-routing.module';
 @NgModule({
   declarations: [
     StateListComponent,
-    StateNewComponent
+    StateNewComponent,
+    StateDetailComponent,
+    StateFormNewComponent,
+    StateFormDetailComponent
   ],
   imports: [
     CommonModule,
@@ -20,8 +27,9 @@ import { StateRoutingModule } from './state-routing.module';
     FlexLayoutModule,
     ReactiveFormsModule,
     MatSelectModule,
-    MatButtonModule,
-    SharedComponentsModule
+    AngularMaterialTableModule,
+    CrudActionsModule,
+    CanDeactivateDialogModule
   ]
 })
 export class StateModule { }

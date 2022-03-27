@@ -1,0 +1,18 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  width: 100%;
+  font-size: 0.75rem;
+}
+
+td, th {
+  width: 25%;
+}
+
+th.mat-column-actions,
+td.mat-column-actions {
+  width: 20px;
+  padding-right: 8px !important;
+}

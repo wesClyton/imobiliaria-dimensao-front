@@ -4,7 +4,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
-import { CanDeactivateModule } from './shared/guards/can-deactivate/can-deactivate.module';
 
 @NgModule({
   declarations: [
@@ -14,8 +13,7 @@ import { CanDeactivateModule } from './shared/guards/can-deactivate/can-deactiva
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    CoreModule,
-    CanDeactivateModule
+    CoreModule
   ],
   bootstrap: [AppComponent]
 })

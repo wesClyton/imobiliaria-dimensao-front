@@ -1,15 +1,6 @@
 <h1>Novo estado</h1>
 
-<form fxLayout="row" [formGroup]="form">
-  <mat-form-field fxFlex="25">
-    <mat-label>Estado</mat-label>
-    <mat-select formControlName="uf">
-      <mat-option *ngFor="let state of states" [value]="state.uf">
-        {{ state.name }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-</form>
+<app-state-form-new></app-state-form-new>
 
 <app-crud-actions
   [showSave]="true"

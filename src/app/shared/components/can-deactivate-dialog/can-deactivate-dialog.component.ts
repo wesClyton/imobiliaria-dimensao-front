@@ -7,11 +7,16 @@ import { Component } from '@angular/core';
     <div mat-dialog-content>
       <p>{{ messageValue }}</p>
     </div>
-    <div mat-dialog-actions align="end">
-      <button mat-button mat-dialog-close>{{ cancelButtonValue }}</button>
-      <button mat-button [mat-dialog-close]="true" cdkFocusInitial>{{ confirmButtonValue }}</button>
+    <div mat-dialog-actions>
+      <button mat-button mat-dialog-close cdkFocusInitial>{{ cancelButtonValue }}</button>
+      <button mat-button [mat-dialog-close]="true" color="primary">{{ confirmButtonValue }}</button>
     </div>
-  `
+  `,
+  styles: [`
+    .mat-dialog-actions {
+      justify-content: end;
+    }
+  `]
 })
 export class CanDeactivateDialogComponent {
 
@@ -40,13 +45,5 @@ export class CanDeactivateDialogComponent {
   }
 
   constructor() { }
-
-  public confirm(): boolean {
-    return true;
-  }
-
-  public cancel(): boolean {
-    return false;
-  }
 
 }

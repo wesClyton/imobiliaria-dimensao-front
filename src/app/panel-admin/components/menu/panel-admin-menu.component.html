@@ -1,41 +1,41 @@
 <mat-list *ngIf="session" class="menu">
   <mat-action-list>
-    <button class="infos" type="menu" mat-list-item (click)="goAccount()">
+    <button class="infos" type="menu" mat-list-item (click)="navigateAccount()">
       <mat-icon color="accent">account_circle</mat-icon>
       Olá, {{ session.usuario.nome }}.
     </button>
 
-    <button type="menu" mat-list-item (click)="goHome()">
+    <button type="menu" mat-list-item (click)="navigateHome()">
       <mat-icon matListIcon color="primary">home</mat-icon>
       Início
     </button>
 
-    <button *ngIf="showAnnouncement" type="menu" mat-list-item (click)="goAnnouncement()">
+    <button *ngIf="showAnnouncement" type="menu" mat-list-item (click)="navigateAnnouncement()">
       <mat-icon matListIcon color="primary">campaign</mat-icon>
       Anúncios
     </button>
 
-    <button *ngIf="showBanners" type="menu" mat-list-item (click)="goBanners()">
+    <button *ngIf="showBanners" type="menu" mat-list-item (click)="navigateBanners()">
       <mat-icon matListIcon color="primary">image</mat-icon>
       Banners
     </button>
 
-    <button *ngIf="showCities" type="menu" mat-list-item (click)="goCities()">
+    <button *ngIf="showCities" type="menu" mat-list-item (click)="navigateCities()">
       <mat-icon matListIcon color="primary">location_on</mat-icon>
       Cidades
     </button>
 
-    <button *ngIf="showBrokers" type="menu" mat-list-item (click)="goBrokers()">
+    <button *ngIf="showBrokers" type="menu" mat-list-item (click)="navigateBrokers()">
       <mat-icon matListIcon color="primary">groups</mat-icon>
       Corretores
     </button>
 
-    <button *ngIf="showStates" type="menu" mat-list-item (click)="goStates()">
+    <button *ngIf="showStates" type="menu" mat-list-item (click)="navigateStates()">
       <mat-icon matListIcon color="primary">map</mat-icon>
       Estados
     </button>
 
-    <button *ngIf="showUsers" type="menu" mat-list-item (click)="goUsers()">
+    <button *ngIf="showUsers" type="menu" mat-list-item (click)="navigateUsers()">
       <mat-icon matListIcon color="primary">people</mat-icon>
       Usuários
     </button>

@@ -1,0 +1,12 @@
+<h1>Editar Estado</h1>
+
+<app-state-form-detail [state]="state"></app-state-form-detail>
+
+<app-crud-actions
+  [showSave]="true"
+  [showBack]="true"
+  [showDelete]="true"
+  (onClickBack)="crudActionBack()"
+  (onClickSave)="crudActionSave()"
+  (onClickDelete)="crudActionDelete()">
+</app-crud-actions>

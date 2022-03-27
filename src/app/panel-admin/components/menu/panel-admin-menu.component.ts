@@ -49,35 +49,35 @@ export class PanelAdminMenuComponent {
     private readonly router: Router
   ) { }
 
-  public goAccount(): void {
+  public navigateAccount(): void {
     this.router.navigateByUrl(PanelAdminComponent.pathConcat(`${USER_CONFIG.pathFront}/account`));
   }
 
-  public goHome(): void {
+  public navigateHome(): void {
     this.router.navigateByUrl(PanelAdminComponent.pathConcat());
   }
 
-  public goAnnouncement(): void {
+  public navigateAnnouncement(): void {
     this.router.navigateByUrl(PanelAdminComponent.pathConcat(ANNOUNCEMENT_CONFIG.pathFront));
   }
 
-  public goBanners(): void {
+  public navigateBanners(): void {
     this.router.navigateByUrl(PanelAdminComponent.pathConcat(BANNER_CONFIG.pathFront));
   }
 
-  public goBrokers(): void {
+  public navigateBrokers(): void {
     this.router.navigateByUrl(PanelAdminComponent.pathConcat(BROKER_CONFIG.pathFront));
   }
 
-  public goCities(): void {
+  public navigateCities(): void {
     this.router.navigateByUrl(PanelAdminComponent.pathConcat(CITY_CONFIG.pathFront));
   }
 
-  public goStates(): void {
+  public navigateStates(): void {
     this.router.navigateByUrl(PanelAdminComponent.pathConcat(STATE_CONFIG.pathFront));
   }
 
-  public goUsers(): void {
+  public navigateUsers(): void {
     this.router.navigateByUrl(PanelAdminComponent.pathConcat(USER_CONFIG.pathFront));
   }
 

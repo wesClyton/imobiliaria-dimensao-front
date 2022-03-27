@@ -6,20 +6,24 @@
     </mat-card-header>
 
     <mat-card-content>
-      <form fxLayout="column" [formGroup]="form" (ngSubmit)="onSubmit()">
-        <mat-form-field>
+      <form
+        fxLayout="column"
+        [formGroup]="form"
+        fxLayoutGap=".5rem"
+        (ngSubmit)="onSubmit()">
+        <mat-form-field fxFlex="100">
           <mat-label>E-mail</mat-label>
           <input matInput type="email" formControlName="email" placeholder="Informe seu e-mail">
           <mat-error *ngIf="controlEmailHasError">Informe um e-mail válido</mat-error>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field fxFlex="100">
           <mat-label>Senha</mat-label>
           <input matInput type="password" formControlName="password" placeholder="Informe sua senha">
           <mat-error *ngIf="controlPasswordHasError">Informe sua senha</mat-error>
         </mat-form-field>
 
-        <button mat-raised-button color="primary" type="submit">Entrar</button>
+        <button fxFlex="100" mat-raised-button color="primary" type="submit">Entrar</button>
       </form>
     </mat-card-content>
 

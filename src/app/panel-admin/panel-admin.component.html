@@ -4,7 +4,7 @@
   </button>
   <span>{{ APP_CONFIG.name }}</span>
   <span class="example-spacer"></span>
-  <button mat-icon-button type="button" matTooltip="Minha conta" (click)="goAccount()">
+  <button mat-icon-button type="button" matTooltip="Minha conta" (click)="navitateAccount()">
     <mat-icon>account_circle</mat-icon>
   </button>
   <button mat-icon-button type="button" matTooltip="Sair" (click)="logout()">
@@ -17,7 +17,7 @@
     <app-panel-admin-menu [session]="currentSession"></app-panel-admin-menu>
   </mat-sidenav>
   <mat-sidenav-content>
-    <main>
+    <main class="panel-content">
       <router-outlet></router-outlet>
     </main>
   </mat-sidenav-content>

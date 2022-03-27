@@ -26,4 +26,4 @@ import { PanelAdminComponent } from './panel-admin.component';
     MatTooltipModule
   ]
 })
-export class PainelAdminModule { }
+export class PanelAdminModule { }

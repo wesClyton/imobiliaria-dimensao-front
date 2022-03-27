@@ -12,4 +12,4 @@ import { CanDeactivateDialogComponent } from './can-deactivate-dialog.component'
     MatDialogModule
   ]
 })
-export class CanDeactivateModule { }
+export class CanDeactivateDialogModule { }

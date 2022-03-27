@@ -30,7 +30,7 @@ export class CanDeactivateGuard implements CanDeactivate<CanDeactivateDialog>, O
         resolve(true);
       } else {
         CanDeactivateDialogComponent.title = component?.canDeactivateTitle || 'Atenção!';
-        CanDeactivateDialogComponent.message = component.canDeactivateMessage;
+        CanDeactivateDialogComponent.message = component.canDeactivateMessage || 'Realmente deseja sair dessa página?';
         CanDeactivateDialogComponent.cancelButton = component.canDeactivateCancelButton || 'Cancelar';
         CanDeactivateDialogComponent.confirmButton = component.canDeactivateConfirmButton || 'Confirmar';
 

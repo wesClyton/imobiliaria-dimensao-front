@@ -4,11 +4,10 @@ import { Router } from '@angular/router';
 import { finalize, take } from 'rxjs/operators';
 import { APP_CONFIG } from '../../../../app.config';
 import { LoadingService } from '../../../../core/loading/loading.service';
-import { NotificationService } from '../../../../core/notification/notification.service';
 import { PANEL_ADMIN_CONFIG } from '../../../../panel-admin/panel-admin.config';
 import { ModuleConfig } from '../../../../shared/interfaces/module-config.interface';
+import { FormService } from '../../../../shared/services/form/form.service';
 import { RedirectToService } from '../../../../shared/services/redirect-to/redirect-to.service';
-import { FormUtil } from '../../../../shared/utils/form.util';
 import { Login } from '../../interfaces/login.interface';
 import { AuthService } from '../../services/auth.service';
 
@@ -43,11 +42,11 @@ export class AuthLoginComponent implements OnInit {
 
   constructor(
     private readonly formBuilder: FormBuilder,
-    private readonly notificationService: NotificationService,
     private readonly authService: AuthService,
     private readonly router: Router,
     private readonly loadingSercice: LoadingService,
-    private readonly redirectToService: RedirectToService
+    private readonly redirectToService: RedirectToService,
+    private readonly formService: FormService
   ) { }
 
   ngOnInit(): void {
@@ -63,8 +62,7 @@ export class AuthLoginComponent implements OnInit {
 
   public onSubmit(): void {
     if (this.form.invalid) {
-      FormUtil.validade(this.form);
-      this.notificationService.warning('Verifique o formulário.');
+      this.formService.validade(this.form);
       return;
     }
 

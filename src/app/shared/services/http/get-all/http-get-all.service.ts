@@ -8,7 +8,7 @@ import { HttpGetAll } from './http-get-all.interface';
 @Injectable({
   providedIn: 'root'
 })
-export class HttpGetAllService<GetAll> implements HttpGetAll<Array<GetAll>> {
+export class HttpGetAllService<GetAll> implements HttpGetAll<GetAll> {
 
   constructor(
     public readonly httpClient: HttpClient,
@@ -17,9 +17,9 @@ export class HttpGetAllService<GetAll> implements HttpGetAll<Array<GetAll>> {
     public readonly endPoint: string
   ) { }
 
-  public getAll(): Observable<Array<GetAll>> {
+  public getAll(): Observable<GetAll> {
     return this.httpClient
-      .get<Array<GetAll>>(this.endPoint)
+      .get<GetAll>(this.endPoint)
       .pipe(
         catchError((error) => {
           this.exceptionService.handleError(error);

@@ -46,7 +46,7 @@ export class PanelAdminComponent {
     this.showSideNav = !this.showSideNav;
   }
 
-  public goAccount(): void {
+  public navitateAccount(): void {
     this.router.navigateByUrl(PanelAdminComponent.pathConcat(`${USER_CONFIG.pathFront}/account`));
   }
 

@@ -19,7 +19,7 @@ const routes: Routes = [
     path: PANEL_ADMIN_CONFIG.path,
     canLoad: [AuthGuard],
     canActivate: [AuthGuard],
-    loadChildren: () => import('./panel-admin/panel-admin.module').then(m => m.PainelAdminModule)
+    loadChildren: () => import('./panel-admin/panel-admin.module').then(m => m.PanelAdminModule)
   },
   {
     path: PAGES_CONFIG.path,

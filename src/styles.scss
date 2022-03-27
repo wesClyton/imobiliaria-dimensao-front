@@ -9,3 +9,26 @@ body {
   padding: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+/*
+Angular Material
+*/
+@import '~@angular/material/theming';
+
+$primary: mat-palette($mat-indigo, 500);
+$accent: mat-palette($mat-pink, A200, A100, A400);
+$warn: mat-palette($mat-red);
+
+.mat {
+  &-color {
+    &-primary {
+      color: mat-color($primary) !important;
+    }
+    &-accent {
+      color: mat-color($accent) !important;
+    }
+    &-warn {
+      color: mat-color($warn) !important;
+    }
+  }
+}

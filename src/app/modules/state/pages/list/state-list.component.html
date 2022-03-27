@@ -1,5 +1,22 @@
 <h1>Estados</h1>
 
+<app-angular-material-table
+  [tableDataSource]="tableDataSource"
+  [tableDisplayedColumns]="tableDisplayedColumns"
+  [tableActions]="tableActions">
+
+  <ng-container matColumnDef="nome">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
+    <td mat-cell *matCellDef="let row">{{ row.nome }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="uf">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>UF</th>
+    <td mat-cell *matCellDef="let row">{{ row.uf }}</td>
+  </ng-container>
+
+</app-angular-material-table>
+
 <app-crud-actions
   [showNew]="true"
   [showBack]="true"

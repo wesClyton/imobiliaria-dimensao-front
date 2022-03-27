@@ -13,7 +13,7 @@ import { HttpPut } from '../put/http-put.interface';
   providedIn: 'root'
 })
 export class HttpCrudService<PostIn, PostOut, GetAll, GetById, PutIn, PutOut>
-  implements HttpPost<PostIn, PostOut>, HttpGetAll<Array<GetAll>>, HttpGetById<GetById>, HttpPut<PutIn, PutOut>, HttpDelete {
+  implements HttpPost<PostIn, PostOut>, HttpGetAll<GetAll>, HttpGetById<GetById>, HttpPut<PutIn, PutOut>, HttpDelete {
 
   constructor(
     public readonly httpClient: HttpClient,
@@ -35,9 +35,9 @@ export class HttpCrudService<PostIn, PostOut, GetAll, GetById, PutIn, PutOut>
       );
   }
 
-  public getAll(): Observable<Array<GetAll>> {
+  public getAll(): Observable<GetAll> {
     return this.httpClient
-      .get<Array<GetAll>>(this.endPointPlural)
+      .get<GetAll>(this.endPointPlural)
       .pipe(
         catchError((error) => {
           this.exceptionService.handleError(error);
