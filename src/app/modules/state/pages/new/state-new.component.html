@@ -3,8 +3,8 @@
 <app-state-form-new></app-state-form-new>
 
 <app-crud-actions
-  [showSave]="true"
-  [showBack]="true"
-  (onClickBack)="crudActionBack()"
-  (onClickSave)="crudActionSave()">
+  [saveShow]="true"
+  [backShow]="true"
+  (backClicked)="crudActionBack()"
+  (saveClicked)="crudActionSave()">
 </app-crud-actions>

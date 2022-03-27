@@ -9,6 +9,7 @@ import { AngularMaterialTableInputs } from '../../../../shared/angular-material/
 import { AngularMaterialTableActionsUtils } from '../../../../shared/angular-material/table/utils/angular-material-table-actions.utils';
 import { CrudActionBack } from '../../../../shared/components/crud-actions/interfaces/crud-action-back.interface';
 import { CrudActionNew } from '../../../../shared/components/crud-actions/interfaces/crud-action-new.interface';
+import { DialogConfirmationService } from '../../../../shared/components/dialog-confirmation/dialog-confirmation.service';
 import { UrlUtil } from '../../../../shared/utils/url.util';
 import { StateGetAll } from '../../interfaces/state-get-all.interface';
 import { State } from '../../interfaces/state.interface';
@@ -46,7 +47,8 @@ export class StateListComponent implements OnInit, AngularMaterialTableInputs<St
     private readonly activatedRoute: ActivatedRoute,
     private readonly stateService: StateService,
     private readonly notificationService: NotificationService,
-    private readonly loadingService: LoadingService
+    private readonly loadingService: LoadingService,
+    private readonly dialogConfirmationService: DialogConfirmationService
   ) { }
 
   ngOnInit(): void {
@@ -70,7 +72,14 @@ export class StateListComponent implements OnInit, AngularMaterialTableInputs<St
     this.router.navigate(['new'], { relativeTo: this.activatedRoute })
   }
 
-  private delete(state: State): void {
+  private async delete(state: State): Promise<void> {
+    const confirm = await this.dialogConfirmationService?.confirm({
+      message: `Realmente deseja excluir o Estado ${state.nome}?`
+    });
+    if (!confirm) {
+      return;
+    }
+
     this.stateService.delete(state.id).subscribe(() => {
       this.notificationService.success(`Estado ${state.nome} excluído com sucesso!`);
       this.getStates();

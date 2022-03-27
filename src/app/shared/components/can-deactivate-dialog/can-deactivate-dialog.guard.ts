@@ -1,30 +1,24 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CanDeactivate } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { CanDeactivateDialog } from './can-deactivate-dialog.interface';
+import { take } from 'rxjs/operators';
 import { CanDeactivateDialogComponent } from './can-deactivate-dialog.component';
+import { CanDeactivateDialog } from './can-deactivate-dialog.interface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CanDeactivateGuard implements CanDeactivate<CanDeactivateDialog>, OnDestroy {
-
-  private subscription = new Subscription();
+export class CanDeactivateGuard implements CanDeactivate<CanDeactivateDialog> {
 
   constructor(
     private readonly matDialog: MatDialog
   ) {}
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
-
   async canDeactivate(component: CanDeactivateDialog): Promise<boolean> {
     return await this.verify(component);
   }
 
-  verify(component: CanDeactivateDialog): Promise<boolean> {
+  private verify(component: CanDeactivateDialog): Promise<boolean> {
     return new Promise((resolve) => {
       if (component.canDeactivate()) {
         resolve(true);
@@ -36,9 +30,7 @@ export class CanDeactivateGuard implements CanDeactivate<CanDeactivateDialog>, O
 
         let dialog = this.matDialog.open(CanDeactivateDialogComponent);
 
-        this.subscription.add(
-          dialog.afterClosed().subscribe(value => resolve(!value ? false : true))
-        );
+        dialog.afterClosed().pipe(take(1)).subscribe(value => resolve(!value ? false : true))
       }
     });
   }

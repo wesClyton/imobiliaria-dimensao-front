@@ -18,8 +18,8 @@
 </app-angular-material-table>
 
 <app-crud-actions
-  [showNew]="true"
-  [showBack]="true"
-  (onClickBack)="crudActionBack()"
-  (onClickNew)="crudActionNew()">
+  [newShow]="true"
+  [backShow]="true"
+  (backClicked)="crudActionBack()"
+  (newClicked)="crudActionNew()">
 </app-crud-actions>

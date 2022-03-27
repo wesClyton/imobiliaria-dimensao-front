@@ -71,7 +71,8 @@ export class StateFormDetailComponent implements OnInit {
 
     const state: StateUpdate = {
       id: this.state.id,
-      nome: StatesBrUtil.getNameByUf(uf)
+      nome: StatesBrUtil.getNameByUf(uf),
+      uf
     }
 
     this.stateService

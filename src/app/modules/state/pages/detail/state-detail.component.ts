@@ -1,11 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { take } from 'rxjs/operators';
 import { NotificationService } from '../../../../core/notification/notification.service';
 import { PanelAdminComponent } from '../../../../panel-admin/panel-admin.component';
 import { CanDeactivateDialog } from '../../../../shared/components/can-deactivate-dialog/can-deactivate-dialog.interface';
 import { CrudActionBack } from '../../../../shared/components/crud-actions/interfaces/crud-action-back.interface';
 import { CrudActionDelete } from '../../../../shared/components/crud-actions/interfaces/crud-action-delete.interface';
 import { CrudActionSave } from '../../../../shared/components/crud-actions/interfaces/crud-action-save.interface';
+import { DialogConfirmationService } from '../../../../shared/components/dialog-confirmation/dialog-confirmation.service';
 import { UrlUtil } from '../../../../shared/utils/url.util';
 import { StateFormDetailComponent } from '../../components/form-detail/state-form-detail.component';
 import { State } from '../../interfaces/state.interface';
@@ -29,7 +31,8 @@ export class StateDetailComponent implements OnInit, CrudActionSave, CrudActionB
     private readonly router: Router,
     private readonly activatedRoute: ActivatedRoute,
     private readonly notificationService: NotificationService,
-    private readonly stateService: StateService
+    private readonly stateService: StateService,
+    private readonly dialogConfirmationService: DialogConfirmationService
   ) { }
 
   ngOnInit(): void {
@@ -52,9 +55,15 @@ export class StateDetailComponent implements OnInit, CrudActionSave, CrudActionB
     this.router.navigateByUrl(PanelAdminComponent.pathConcat(STATE_CONFIG.pathFront));
   }
 
-  public crudActionDelete(): void {
-    this.stateService.delete(this.state.id).subscribe(() => {
-      this.notificationService.success('Estado excluído com sucesso!');
+  public async crudActionDelete(): Promise<void> {
+    const confirm = await this.dialogConfirmationService?.confirm({
+      message: `Realmente deseja excluir o Estado ${this.state.nome}?`
+    });
+    if (!confirm) {
+      return;
+    }
+    this.stateService.delete(this.state.id).pipe(take(1)).subscribe(() => {
+      this.notificationService.success(`Estado ${this.state.nome} excluído com sucesso!`);
       this.crudActionBack();
     });
   }

@@ -1,4 +1,4 @@
-export interface StateUpdate {
-  readonly id: string;
-  readonly nome: string;
-}
+import { Entity } from '../../../shared/interfaces/entity.interface';
+import { StateCreate } from './state-create.interface';
+
+export interface StateUpdate extends Entity, StateCreate { }
