@@ -6,6 +6,7 @@ export const PANEL_ADMIN_CONFIG: ModuleConfig = {
   name: 'Painel Admin',
   namePlural: 'Painel Admin',
   path: PATH,
-  pathApi: '',
+  pathApiSingle: '',
+  pathApiPlural: '',
   pathFront: `/${PATH}`
 };

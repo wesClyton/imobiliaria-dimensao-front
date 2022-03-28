@@ -1,7 +1,7 @@
 import { ApiCreateUpdateAt } from '../../../shared/interfaces/api-create-update-at.interface';
 
-export interface StateCreateResponse extends ApiCreateUpdateAt {
+export interface CityCreateResponse extends ApiCreateUpdateAt {
   readonly id: string;
   readonly nome: string;
-  readonly uf: string;
+  readonly estadoId: string;
 }

@@ -23,7 +23,7 @@ export class CanDeactivateGuard implements CanDeactivate<CanDeactivateDialog> {
       if (component.canDeactivate()) {
         resolve(true);
       } else {
-        AngularMaterialDialogConfirmationComponent.title = component.title || 'Atenção!';
+        AngularMaterialDialogConfirmationComponent.title = component.title || 'Confirmação!';
         AngularMaterialDialogConfirmationComponent.message = component.message || 'Realmente deseja sair dessa página?';
         AngularMaterialDialogConfirmationComponent.cancelButton = component.cancelButton || 'Cancelar';
         AngularMaterialDialogConfirmationComponent.confirmButton = component.confirmButton || 'Confirmar';

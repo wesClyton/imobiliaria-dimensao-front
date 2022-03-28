@@ -6,6 +6,7 @@ export const PAGES_CONFIG: ModuleConfig = {
   name: 'Page',
   namePlural: 'Pages',
   path: PATH,
-  pathApi: '',
+  pathApiSingle: '',
+  pathApiPlural: '',
   pathFront: `/${PATH}`
 };

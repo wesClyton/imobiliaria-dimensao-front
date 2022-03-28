@@ -22,8 +22,8 @@ export class StateService extends HttpCrudService<StateCreate, StateCreateRespon
     super(
       httpClient,
       exceptionService,
-      `${STATE_CONFIG.pathApi}/estado`,
-      `${STATE_CONFIG.pathApi}/estados`
+      STATE_CONFIG.pathApiSingle,
+      STATE_CONFIG.pathApiPlural
     )
   }
 

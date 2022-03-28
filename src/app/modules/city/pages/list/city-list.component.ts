@@ -11,33 +11,31 @@ import { AngularMaterialTableActionsUtils } from '../../../../shared/angular-mat
 import { CrudActionBack } from '../../../../shared/components/crud-actions/interfaces/crud-action-back.interface';
 import { CrudActionNew } from '../../../../shared/components/crud-actions/interfaces/crud-action-new.interface';
 import { UrlUtil } from '../../../../shared/utils/url.util';
-import { StateGetAll } from '../../interfaces/state-get-all.interface';
-import { State } from '../../interfaces/state.interface';
-import { StateService } from '../../services/state.service';
-
-
+import { CityGetAll } from '../../interfaces/city-get-all.interface';
+import { City } from '../../interfaces/city.interface';
+import { CityService } from '../../services/city.service';
 
 @Component({
-  selector: 'app-state-list',
-  templateUrl: 'state-list.component.html'
+  selector: 'app-city-list',
+  templateUrl: 'city-list.component.html'
 })
-export class StateListComponent implements OnInit, AngularMaterialTableInputs<State>, CrudActionNew, CrudActionBack {
+export class CityListComponent implements OnInit, AngularMaterialTableInputs<City>, CrudActionNew, CrudActionBack {
 
-  private statesGetAll!: StateGetAll;
+  private cityGetAll!: CityGetAll;
 
-  public tableDataSource!: MatTableDataSource<State>;
+  public tableDataSource!: MatTableDataSource<City>;
 
-  public tableDisplayedColumns = ['nome', 'uf'];
+  public tableDisplayedColumns = ['nome', 'estado'];
 
-  public tableActions: AngularMaterialTableActions<State> = {
+  public tableActions: AngularMaterialTableActions<City> = {
     items: [
       {
         ...AngularMaterialTableActionsUtils.detailDefault(),
-        action: state => this.navigateDetail(state)
+        action: city => this.navigateDetail(city)
       },
       {
         ...AngularMaterialTableActionsUtils.deleteDefault(),
-        action: state => this.delete(state)
+        action: city => this.delete(city)
       }
     ]
   };
@@ -47,23 +45,23 @@ export class StateListComponent implements OnInit, AngularMaterialTableInputs<St
   constructor(
     private readonly router: Router,
     private readonly activatedRoute: ActivatedRoute,
-    private readonly stateService: StateService,
+    private readonly cityService: CityService,
     private readonly notificationService: NotificationService,
     private readonly loadingService: LoadingService,
     private readonly angularMaterialDialogConfirmationService: AngularMaterialDialogConfirmationService
   ) { }
 
   ngOnInit(): void {
-    this.statesGetAll = this.activatedRoute.snapshot.data.stateGetAll;
-    this.tableLoadContent(this.statesGetAll);
+    this.cityGetAll = this.activatedRoute.snapshot.data.cityGetAll;
+    this.tableLoadContent(this.cityGetAll);
   }
 
-  private tableLoadContent(states: StateGetAll): void {
-    this.tableDataSource = new MatTableDataSource(states.data);
+  private tableLoadContent(cities: CityGetAll): void {
+    this.tableDataSource = new MatTableDataSource(cities.data);
   }
 
-  public navigateDetail(state: State): void {
-    this.router.navigate([`detail/${state.id}`], { relativeTo: this.activatedRoute })
+  public navigateDetail(city: City): void {
+    this.router.navigate([`detail/${city.id}`], { relativeTo: this.activatedRoute })
   }
 
   public crudActionBack(): void {
@@ -74,29 +72,29 @@ export class StateListComponent implements OnInit, AngularMaterialTableInputs<St
     this.router.navigate(['new'], { relativeTo: this.activatedRoute })
   }
 
-  private async delete(state: State): Promise<void> {
+  private async delete(city: City): Promise<void> {
     const confirmation = await this.angularMaterialDialogConfirmationService?.confirm({
-      message: `Realmente deseja excluir o Estado ${state.nome}?`
+      message: `Realmente deseja excluir a Cidade ${city.nome}?`
     });
     if (!confirmation) {
       return;
     }
 
-    this.stateService.delete(state.id).subscribe(() => {
-      this.notificationService.success(`Estado ${state.nome} excluído com sucesso!`);
-      this.getStates();
+    this.cityService.delete(city.id).subscribe(() => {
+      this.notificationService.success(`Cidade ${city.nome} excluída com sucesso!`);
+      this.getCities();
     });
   }
 
-  private getStates(): void {
+  private getCities(): void {
     this.loadingService.show();
-    this.stateService
+    this.cityService
       .getAll()
       .pipe(
         take(1),
         finalize(() => this.loadingService.hide())
       )
-      .subscribe(states => this.tableLoadContent(states));
+      .subscribe(cities => this.tableLoadContent(cities));
   }
 
 }

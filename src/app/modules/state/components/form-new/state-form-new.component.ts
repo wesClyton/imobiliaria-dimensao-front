@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { finalize, take } from 'rxjs/operators';
 import { LoadingService } from '../../../../core/loading/loading.service';
 import { NotificationService } from '../../../../core/notification/notification.service';
+import { StateBrUtil } from '../../../../shared/utils/state-br.util';
 import { FormService } from '../../../../shared/services/form/form.service';
-import { StatesBrUtil } from '../../../../shared/utils/states-br.util';
 import { UrlUtil } from '../../../../shared/utils/url.util';
 import { StateCreate } from '../../interfaces/state-create.interface';
 import { StateService } from '../../services/state.service';
@@ -26,7 +26,7 @@ export class StateFormNewComponent implements OnInit {
     return this.controlUf?.dirty || this.controlUf?.hasError('required');
   }
 
-  public statesBr = StatesBrUtil.getAll();
+  public statesBr = StateBrUtil.getAll();
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -58,7 +58,7 @@ export class StateFormNewComponent implements OnInit {
     const uf: string = this.form.get('uf')?.value;
 
     const state: StateCreate = {
-      nome: StatesBrUtil.getNameByUf(uf),
+      nome: StateBrUtil.getNameByUf(uf),
       uf
     }
 

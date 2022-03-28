@@ -9,61 +9,61 @@ import { CrudActionDelete } from '../../../../shared/components/crud-actions/int
 import { CrudActionSave } from '../../../../shared/components/crud-actions/interfaces/crud-action-save.interface';
 import { CanDeactivateDialog } from '../../../../shared/guards/can-deactivate-dialog/can-deactivate-dialog.interface';
 import { UrlUtil } from '../../../../shared/utils/url.util';
-import { StateFormDetailComponent } from '../../components/form-detail/state-form-detail.component';
-import { State } from '../../interfaces/state.interface';
-import { StateService } from '../../services/state.service';
-import { STATE_CONFIG } from '../../state.config';
+import { CITY_CONFIG } from '../../city.config';
+import { CityFormDetailComponent } from '../../components/form-detail/city-form-detail.component';
+import { City } from '../../interfaces/city.interface';
+import { CityService } from '../../services/city.service';
 
 @Component({
-  selector: 'app-state-detail',
-  templateUrl: 'state-detail.component.html'
+  selector: 'app-city-detail',
+  templateUrl: 'city-detail.component.html'
 })
-export class StateDetailComponent implements OnInit, CrudActionSave, CrudActionBack, CrudActionDelete, CanDeactivateDialog {
+export class CityDetailComponent implements OnInit, CrudActionSave, CrudActionBack, CrudActionDelete, CanDeactivateDialog {
 
-  @ViewChild(StateFormDetailComponent, { static: false })
-  private stateFormDetailComponent!: StateFormDetailComponent;
+  @ViewChild(CityFormDetailComponent, { static: false })
+  private cityFormDetailComponent!: CityFormDetailComponent;
 
-  public canDeactivateMessage = 'Realmente deseja cancelar a edição do Estado?';
+  public canDeactivateMessage = 'Realmente deseja cancelar a edição da Cidade?';
 
-  public state!: State;
+  public city!: City;
 
   constructor(
     private readonly router: Router,
     private readonly activatedRoute: ActivatedRoute,
     private readonly notificationService: NotificationService,
-    private readonly stateService: StateService,
+    private readonly cityService: CityService,
     private readonly angularMaterialDialogConfirmationService: AngularMaterialDialogConfirmationService
   ) { }
 
   ngOnInit(): void {
-    this.state = this.activatedRoute.snapshot.data.state;
-    if (!this.state) {
+    this.city = this.activatedRoute.snapshot.data.city;
+    if (!this.city) {
       this.router.navigateByUrl(UrlUtil.previusUrlAcessed);
-      this.notificationService.error('Estado não encontrado!');
+      this.notificationService.error('Cidade não encontrada!');
     }
   }
 
   public canDeactivate(): boolean {
-    return !this.stateFormDetailComponent.form.dirty;
+    return !this.cityFormDetailComponent.form.dirty;
   }
 
   public crudActionSave(): void {
-    this.stateFormDetailComponent.submit();
+    this.cityFormDetailComponent.submit();
   }
 
   public crudActionBack(): void {
-    this.router.navigateByUrl(PanelAdminComponent.pathConcat(STATE_CONFIG.pathFront));
+    this.router.navigateByUrl(PanelAdminComponent.pathConcat(CITY_CONFIG.pathFront));
   }
 
   public async crudActionDelete(): Promise<void> {
     const confirmation = await this.angularMaterialDialogConfirmationService?.confirm({
-      message: `Realmente deseja excluir o Estado ${this.state.nome}?`
+      message: `Realmente deseja excluir a Cidade ${this.city.nome}?`
     });
     if (!confirmation) {
       return;
     }
-    this.stateService.delete(this.state.id).pipe(take(1)).subscribe(() => {
-      this.notificationService.success(`Estado ${this.state.nome} excluído com sucesso!`);
+    this.cityService.delete(this.city.id).pipe(take(1)).subscribe(() => {
+      this.notificationService.success(`Cidade ${this.city.nome} excluída com sucesso!`);
       this.crudActionBack();
     });
   }

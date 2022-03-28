@@ -4,6 +4,7 @@ export const APP_CONFIG: ModuleConfig = {
   name: 'Imobiliária Dimensão',
   namePlural: 'Imobiliária Dimensão',
   path: '',
-  pathApi: '',
+  pathApiSingle: '',
+  pathApiPlural: '',
   pathFront: '/'
 };

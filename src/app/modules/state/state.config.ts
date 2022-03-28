@@ -7,6 +7,7 @@ export const STATE_CONFIG: ModuleConfig = {
   name: 'Estado',
   namePlural: 'Estados',
   path: PATH,
-  pathApi: environment.api,
+  pathApiSingle: `${environment.api}/estado`,
+  pathApiPlural: `${environment.api}/estados`,
   pathFront: `/${PATH}`
 };

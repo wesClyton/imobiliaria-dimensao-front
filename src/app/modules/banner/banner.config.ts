@@ -7,6 +7,7 @@ export const BANNER_CONFIG: ModuleConfig = {
   name: 'Banner',
   namePlural: 'Banners',
   path: PATH,
-  pathApi: environment.api,
+  pathApiSingle: `${environment.api}/banner`,
+  pathApiPlural: `${environment.api}/banners`,
   pathFront: `/${PATH}`
 };

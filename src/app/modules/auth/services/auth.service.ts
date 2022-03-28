@@ -53,7 +53,7 @@ export class AuthService extends HttpPostService<Login, Session> {
     public readonly httpClient: HttpClient,
     public readonly exceptionService: ExceptionService
   ) {
-    super(httpClient, exceptionService, `${AUTH_CONFIG.pathApi}/autenticar`)
+    super(httpClient, exceptionService, `${AUTH_CONFIG.pathApiSingle}/autenticar`)
   }
 
   public login(login: Login): Observable<Session> {

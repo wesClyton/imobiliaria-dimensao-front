@@ -5,6 +5,7 @@ import { APP_CONFIG } from '../app.config';
 import { Session } from '../modules/auth/interfaces/session.interface';
 import { AuthService } from '../modules/auth/services/auth.service';
 import { USER_CONFIG } from '../modules/user/user.config';
+import { AngularMaterialDialogConfirmationService } from '../shared/angular-material/dialog-confirmation/angular-material-dialog-confirmation.service';
 import { ModuleConfig } from '../shared/interfaces/module-config.interface';
 import { PANEL_ADMIN_CONFIG } from './panel-admin.config';
 
@@ -27,7 +28,8 @@ export class PanelAdminComponent {
 
   constructor(
     private readonly authService: AuthService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly angularMaterialDialogConfirmationService: AngularMaterialDialogConfirmationService
   ) { }
 
   ngOnInit(): void {
@@ -38,7 +40,13 @@ export class PanelAdminComponent {
     this.subscription.unsubscribe();
   }
 
-  public logout(): void {
+  public async logout(): Promise<void> {
+    const confirmation = await this.angularMaterialDialogConfirmationService.confirm({
+      message: 'Realmente deseja sair?'
+    })
+    if (!confirmation) {
+      return;
+    }
     this.authService.logout();
   }
 

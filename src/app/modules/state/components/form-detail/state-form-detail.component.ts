@@ -5,7 +5,7 @@ import { finalize, take } from 'rxjs/operators';
 import { LoadingService } from '../../../../core/loading/loading.service';
 import { NotificationService } from '../../../../core/notification/notification.service';
 import { FormService } from '../../../../shared/services/form/form.service';
-import { StatesBrUtil } from '../../../../shared/utils/states-br.util';
+import { StateBrUtil } from '../../../../shared/utils/state-br.util';
 import { UrlUtil } from '../../../../shared/utils/url.util';
 import { StateUpdate } from '../../interfaces/state-update.interface';
 import { State } from '../../interfaces/state.interface';
@@ -27,7 +27,7 @@ export class StateFormDetailComponent implements OnInit {
     return this.controlUf?.dirty || this.controlUf?.hasError('required');
   }
 
-  public statesBr = StatesBrUtil.getAll();
+  public statesBr = StateBrUtil.getAll();
 
   @Input()
   public state!: State;
@@ -71,7 +71,7 @@ export class StateFormDetailComponent implements OnInit {
 
     const state: StateUpdate = {
       id: this.state.id,
-      nome: StatesBrUtil.getNameByUf(uf),
+      nome: StateBrUtil.getNameByUf(uf),
       uf
     }
 

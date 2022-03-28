@@ -11,7 +11,8 @@ export const AUTH_CONFIG: Config = {
   name: 'Autenticação',
   namePlural: 'Autenticação',
   path: PATH,
-  pathApi: environment.api,
+  pathApiSingle: environment.api,
+  pathApiPlural: environment.api,
   pathFront: `/${PATH}`,
   keySession: 'app-session'
 };

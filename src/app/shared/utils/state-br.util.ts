@@ -1,14 +1,14 @@
-import { StateBr as StateBrEnum } from '../enums/states-br.enum';
+import { StateBr as StateBrEnum } from '../enums/state-br.enum';
 import { StateBr } from '../interfaces/state-br.interface';
 
-export class StatesBrUtil {
+export class StateBrUtil {
 
   public static getAll(): Array<StateBr> {
     const states = new Array<StateBr>();
 
     Object.keys(StateBrEnum).map(key => {
       states.push({
-        name: StatesBrUtil.getNameByUf(key),
+        name: StateBrUtil.getNameByUf(key),
         uf: key
       });
     });

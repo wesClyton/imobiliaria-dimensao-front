@@ -7,6 +7,7 @@ export const CITY_CONFIG: ModuleConfig = {
   name: 'Cidade',
   namePlural: 'Cidades',
   path: PATH,
-  pathApi: environment.api,
+  pathApiSingle: `${environment.api}/cidade`,
+  pathApiPlural: `${environment.api}/cidades`,
   pathFront: `/${PATH}`
 };

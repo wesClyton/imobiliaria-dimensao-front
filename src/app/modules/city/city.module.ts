@@ -1,13 +1,11 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { CityRoutingModule } from './city-routing.module';
+import { CityPagesModule } from './pages/city-pages.module';
 
 @NgModule({
-  declarations: [],
   imports: [
-    CommonModule,
-    CityRoutingModule
-  ],
-  exports: []
+    CityRoutingModule,
+    CityPagesModule
+  ]
 })
 export class CityModule { }
