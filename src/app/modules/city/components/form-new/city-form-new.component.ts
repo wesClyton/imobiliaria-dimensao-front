@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
 import { LoadingService } from '../../../../core/loading/loading.service';
 import { NotificationService } from '../../../../core/notification/notification.service';
 import { FormService } from '../../../../shared/services/form/form.service';
 import { UrlUtil } from '../../../../shared/utils/url.util';
 import { StateGetAll } from '../../../state/interfaces/state-get-all.interface';
-import { StateService } from '../../../state/services/state.service';
 import { CityCreate } from '../../interfaces/city-create.interface';
 import { CityService } from '../../services/city.service';
 
@@ -44,13 +42,11 @@ export class CityFormNewComponent implements OnInit {
     private readonly loadinService: LoadingService,
     private readonly cityService: CityService,
     private readonly router: Router,
-    private readonly formService: FormService,
-    private readonly stateService: StateService
+    private readonly formService: FormService
   ) { }
 
   ngOnInit(): void {
     this.createForm();
-    this.getStates();
   }
 
   private createForm(): void {
@@ -58,10 +54,6 @@ export class CityFormNewComponent implements OnInit {
       nome: new FormControl(null, [Validators.required]),
       estadoId: new FormControl(null, [Validators.required])
     });
-  }
-
-  private getStates(): void {
-    this.stateService.getAll().pipe(take(1)).subscribe(states => this.states = states);
   }
 
   public submit(): void {

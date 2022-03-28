@@ -47,13 +47,11 @@ export class CityFormDetailComponent implements OnInit {
     private readonly loadinService: LoadingService,
     private readonly cityService: CityService,
     private readonly router: Router,
-    private readonly formService: FormService,
-    private readonly stateService: StateService
+    private readonly formService: FormService
   ) { }
 
   ngOnInit(): void {
     this.createForm();
-    this.getStates();
   }
 
   private createForm(): void {
@@ -65,10 +63,6 @@ export class CityFormDetailComponent implements OnInit {
     if (this.city) {
       this.setValueForm(this.city);
     }
-  }
-
-  private getStates(): void {
-    this.stateService.getAll().pipe(take(1)).subscribe(states => this.states = states);
   }
 
   private setValueForm(city: City): void {

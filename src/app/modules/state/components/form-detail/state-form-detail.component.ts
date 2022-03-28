@@ -4,8 +4,9 @@ import { Router } from '@angular/router';
 import { finalize, take } from 'rxjs/operators';
 import { LoadingService } from '../../../../core/loading/loading.service';
 import { NotificationService } from '../../../../core/notification/notification.service';
+import { StateBr } from '../../../../shared/components/state-br/state-br.interface';
+import { StateBrUtil } from '../../../../shared/components/state-br/state-br.util';
 import { FormService } from '../../../../shared/services/form/form.service';
-import { StateBrUtil } from '../../../../shared/utils/state-br.util';
 import { UrlUtil } from '../../../../shared/utils/url.util';
 import { StateUpdate } from '../../interfaces/state-update.interface';
 import { State } from '../../interfaces/state.interface';
@@ -27,7 +28,7 @@ export class StateFormDetailComponent implements OnInit {
     return this.controlUf?.dirty || this.controlUf?.hasError('required');
   }
 
-  public statesBr = StateBrUtil.getAll();
+  public statesBr!: Array<StateBr>;
 
   @Input()
   public state!: State;

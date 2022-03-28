@@ -3,9 +3,11 @@
     <mat-label>Estado</mat-label>
     <mat-select formControlName="estadoId">
       <mat-option>Selecione</mat-option>
-      <mat-option *ngFor="let state of states?.data" [value]="state.id">
-        {{ state.nome }}
-      </mat-option>
+      <ng-container appStateOptionSelect (statesFinded)="states = $event">
+        <mat-option *ngFor="let state of states?.data" [value]="state.id">
+          {{ state.nome }}
+        </mat-option>
+      </ng-container>
     </mat-select>
     <mat-error *ngIf="controlEstadoIdHasError">Informe o estado</mat-error>
   </mat-form-field>

@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { StateComponentsModule } from '../../state/components/state-components.module';
+import { StateDirectivesModule } from '../../state/directives/state-directives.module';
 import { CityFormDetailComponent } from './form-detail/city-form-detail.component';
 import { CityFormNewComponent } from './form-new/city-form-new.component';
 
@@ -19,7 +20,8 @@ import { CityFormNewComponent } from './form-new/city-form-new.component';
     FlexLayoutModule,
     MatSelectModule,
     MatInputModule,
-    StateComponentsModule
+    StateComponentsModule,
+    StateDirectivesModule
   ],
   exports: [
     CityFormNewComponent,

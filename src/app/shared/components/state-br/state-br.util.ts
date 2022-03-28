@@ -1,5 +1,5 @@
-import { StateBr as StateBrEnum } from '../enums/state-br.enum';
-import { StateBr } from '../interfaces/state-br.interface';
+import { StateBr as StateBrEnum } from './state-br.enum';
+import { StateBr } from './state-br.interface';
 
 export class StateBrUtil {
 
