@@ -2,19 +2,19 @@
   <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50" fxFlex.lg="25" fxFlex.xl="25">
     <mat-label>Nome</mat-label>
     <input matInput type="text" formControlName="nome" placeholder="Informe o nome">
-    <mat-error *ngIf="controlNomeHasError">Informe o nome da cidade</mat-error>
+    <mat-error *ngIf="controlNomeHasError">Informe o nome da característica</mat-error>
   </mat-form-field>
 
   <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50" fxFlex.lg="25" fxFlex.xl="25">
-    <mat-label>Estado</mat-label>
-    <mat-select formControlName="estadoId">
+    <mat-label>Tipo</mat-label>
+    <mat-select formControlName="tipo">
       <mat-option>Selecione</mat-option>
-      <ng-container appStateOptionSelect (statesFinded)="states = $event">
-        <mat-option *ngFor="let state of states?.data" [value]="state.id">
-          {{ state.nome }}
+      <ng-container appCharacteristicTypeOptionSelect (characteristicTypesFinded)="characteristicTypes = $event">
+        <mat-option *ngFor="let characteristicType of characteristicTypes" [value]="characteristicType.value">
+          {{ characteristicType.name }}
         </mat-option>
       </ng-container>
     </mat-select>
-    <mat-error *ngIf="controlEstadoIdHasError">Informe o estado</mat-error>
+    <mat-error *ngIf="controlTipoHasError">Informe o tipo</mat-error>
   </mat-form-field>
 </form>

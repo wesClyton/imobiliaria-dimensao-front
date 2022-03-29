@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ANNOUNCEMENT_CONFIG } from '../modules/announcement/announcement.config';
 import { BANNER_CONFIG } from '../modules/banner/banner.config';
 import { BROKER_CONFIG } from '../modules/broker/broker.config';
-import { CHARACTERISTICS_CONFIG } from '../modules/characteristics/characteristics.config';
+import { CHARACTERISTIC_CONFIG } from '../modules/characteristic/characteristic.config';
 import { CITY_CONFIG } from '../modules/city/city.config';
 import { STATE_CONFIG } from '../modules/state/state.config';
 import { USER_CONFIG } from '../modules/user/user.config';
@@ -33,8 +33,8 @@ const routes: Routes = [
         loadChildren: () => import('../modules/banner/banner.module').then(m => m.BannerModule)
       },
       {
-        path: CHARACTERISTICS_CONFIG.path,
-        loadChildren: () => import('../modules/characteristics/characteristics.module').then(m => m.CharacteristicsModule)
+        path: CHARACTERISTIC_CONFIG.path,
+        loadChildren: () => import('../modules/characteristic/characteristic.module').then(m => m.CharacteristicModule)
       },
       {
         path: BROKER_CONFIG.path,

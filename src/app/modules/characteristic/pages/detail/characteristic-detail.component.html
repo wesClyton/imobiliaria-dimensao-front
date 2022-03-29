@@ -1,0 +1,12 @@
+<h1>Editar Característica</h1>
+
+<app-characteristic-form-detail [characteristic]="characteristic"></app-characteristic-form-detail>
+
+<app-crud-actions
+  [saveShow]="true"
+  [backShow]="true"
+  [deleteShow]="true"
+  (backClicked)="crudActionBack()"
+  (saveClicked)="crudActionSave()"
+  (deleteClicked)="crudActionDelete()">
+</app-crud-actions>

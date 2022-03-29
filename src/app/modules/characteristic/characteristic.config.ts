@@ -3,7 +3,7 @@ import { ModuleConfig } from '../../shared/interfaces/module-config.interface';
 
 const PATH: string = 'characteristics';
 
-export const CHARACTERISTICS_CONFIG: ModuleConfig = {
+export const CHARACTERISTIC_CONFIG: ModuleConfig = {
   name: 'Característica',
   namePlural: 'Características',
   path: PATH,
