@@ -1,5 +1,5 @@
 mat-list.menu {
-  min-width: 120px;
+  width: 200px;
 
   ::ng-deep .mat-button-wrapper {
     display: flex;
@@ -10,6 +10,9 @@ mat-list.menu {
   .infos {
     margin-bottom: 2rem;
 
+    .user-name {
+      font-size: 0.85rem;
+    }
   }
 }
 

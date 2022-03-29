@@ -2,7 +2,7 @@
   <mat-action-list>
     <button class="infos" type="menu" mat-list-item (click)="navigateAccount()">
       <mat-icon color="accent">account_circle</mat-icon>
-      Olá, {{ session.usuario.nome }}.
+      <span class="user-name">Olá, {{ session.usuario.nome }}.</span>
     </button>
 
     <button type="menu" mat-list-item (click)="navigateHome()">

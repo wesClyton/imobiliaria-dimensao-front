@@ -6,6 +6,7 @@ import { tap } from 'rxjs/operators';
 import { ExceptionService } from '../../../shared/services/exception/exception.service';
 import { HttpPostService } from '../../../shared/services/http/post/http-post.service';
 import { StorageService } from '../../../shared/services/storage/storage.service';
+import { UserUpdateResponse } from '../../user/interfaces/user-update-response.interface';
 import { AUTH_CONFIG } from '../auth.config';
 import { Role } from '../enums/role.enum';
 import { Login } from '../interfaces/login.interface';
@@ -58,10 +59,7 @@ export class AuthService extends HttpPostService<Login, Session> {
 
   public login(login: Login): Observable<Session> {
     return super.post(login).pipe(
-      tap(session => {
-        this.setSessionStorage(session);
-        this.currentSession.next(session);
-      })
+      tap(session => this.updateSession(session))
     );
   }
 
@@ -70,8 +68,22 @@ export class AuthService extends HttpPostService<Login, Session> {
     this.router.navigateByUrl(`${AUTH_CONFIG.pathFront}/login`);
   }
 
-  private setSessionStorage(session: Session): void {
+  public updateSessionStorage(user: UserUpdateResponse): void {
+    let session: Session = {
+      token: this.session.token,
+      usuario: {
+        email: user.email,
+        id: user.id,
+        nivel: user.nivel,
+        nome: user.nome
+      }
+    }
+    this.updateSession(session);
+  }
+
+  private updateSession(session: Session): void {
     StorageService.localSetItem(AUTH_CONFIG.keySession, session);
+    this.currentSession.next(session);
   }
 
 }

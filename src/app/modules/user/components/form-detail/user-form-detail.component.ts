@@ -7,6 +7,7 @@ import { NotificationService } from '../../../../core/notification/notification.
 import { FormService } from '../../../../shared/services/form/form.service';
 import { UrlUtil } from '../../../../shared/utils/url.util';
 import { Role } from '../../../auth/interfaces/role.interface';
+import { AuthService } from '../../../auth/services/auth.service';
 import { UserUpdate } from '../../interfaces/user-update.interface';
 import { User } from '../../interfaces/user.interface';
 import { UserService } from '../../services/user.service';
@@ -60,13 +61,21 @@ export class UserFormDetailComponent implements OnInit {
 
   public roles!: Array<Role>;
 
+  @Input()
+  public changeUserStorage = false;
+
+  public get rolesEnabled(): boolean {
+    return this.authService.isAdmin;
+  }
+
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly notificationService: NotificationService,
     private readonly loadinService: LoadingService,
     private readonly userService: UserService,
     private readonly router: Router,
-    private readonly formService: FormService
+    private readonly formService: FormService,
+    private readonly authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -116,6 +125,9 @@ export class UserFormDetailComponent implements OnInit {
       .subscribe(user => {
         this.form.markAsPristine();
         this.notificationService.success(`Usuário ${user.nome} alterado com sucesso!`);
+        if (this.changeUserStorage) {
+          this.authService.updateSessionStorage(user);
+        }
         this.router.navigateByUrl(UrlUtil.previusUrlAcessed);
       });
   }

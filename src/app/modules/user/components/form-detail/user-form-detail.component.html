@@ -22,7 +22,7 @@
   <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
     <mat-form-field fxFlex="100">
       <mat-label>Permissão</mat-label>
-      <mat-select formControlName="nivel">
+      <mat-select formControlName="nivel" [disabled]="!rolesEnabled">
         <mat-option selected>Selecione</mat-option>
         <ng-container appRoleOptionSelect (rolesFinded)="roles = $event">
           <mat-option *ngFor="let role of roles" [value]="role.value">

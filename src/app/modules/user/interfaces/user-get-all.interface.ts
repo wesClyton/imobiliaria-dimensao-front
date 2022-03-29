@@ -2,5 +2,5 @@ import { ApiPagination } from '../../../shared/interfaces/api-pagination.interfa
 import { User } from './user.interface';
 
 export interface UserGetAll extends ApiPagination {
-  data: Array<User>;
+  readonly data: Array<User>;
 }

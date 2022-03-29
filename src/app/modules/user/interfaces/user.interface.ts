@@ -1,9 +1,9 @@
 import { Role } from '../../auth/enums/role.enum';
 
 export interface User {
-  id: string;
-  nome: string;
-  nivel: Role;
-  email: string;
-  ativo: boolean;
+  readonly id: string;
+  readonly nome: string;
+  readonly nivel: Role;
+  readonly email: string;
+  readonly ativo: boolean;
 }

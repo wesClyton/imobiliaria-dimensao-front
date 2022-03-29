@@ -1,9 +1,9 @@
 import { Role } from '../../auth/enums/role.enum';
 
 export interface UserUpdateResponse {
-  id: string;
-  nome: string;
-  email: string;
-  nivel: Role;
-  password: string;
+  readonly id: string;
+  readonly nome: string;
+  readonly email: string;
+  readonly nivel: Role;
+  readonly password: string;
 }
