@@ -16,7 +16,7 @@ export class CharacteristicNewComponent implements CrudActionSave, CrudActionBac
   @ViewChild(CharacteristicFormNewComponent, { static: false })
   private characteristicFormNewComponent!: CharacteristicFormNewComponent;
 
-  public canDeactivateMessage = 'Realmente deseja cancelar o cadastro de Característica?';
+  public canDeactivateMessage = 'Realmente deseja cancelar o cadastro da Característica?';
 
   constructor(
     private readonly router: Router

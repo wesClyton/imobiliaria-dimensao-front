@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrokerRoutingModule } from './broker-routing.module';
+import { BrokerPagesModule } from './pages/broker-pages.module';
 
 @NgModule({
-  declarations: [],
   imports: [
     CommonModule,
-    BrokerRoutingModule
-  ],
-  exports: []
+    BrokerRoutingModule,
+    BrokerPagesModule
+  ]
 })
 export class BrokerModule { }

@@ -4,11 +4,11 @@
     <mat-select formControlName="uf">
       <mat-option>Selecione</mat-option>
       <ng-container appStateBrOptionSelect (statesBrFinded)="statesBr = $event">
-        <mat-option  *ngFor="let state of statesBr" [value]="state.uf">
+        <mat-option *ngFor="let state of statesBr" [value]="state.uf">
           {{ state.name }}
         </mat-option>
       </ng-container>
     </mat-select>
-    <mat-error *ngIf="controlUfHasError">Informe o estado</mat-error>
+    <mat-error *ngIf="controlUfHasError">Informe o Estado</mat-error>
   </mat-form-field>
 </form>

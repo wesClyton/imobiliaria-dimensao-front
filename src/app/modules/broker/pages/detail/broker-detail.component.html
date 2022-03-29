@@ -1,0 +1,12 @@
+<h1>Editar Corretor</h1>
+
+<app-broker-form-detail [broker]="broker"></app-broker-form-detail>
+
+<app-crud-actions
+  [saveShow]="true"
+  [backShow]="true"
+  [deleteShow]="true"
+  (backClicked)="crudActionBack()"
+  (saveClicked)="crudActionSave()"
+  (deleteClicked)="crudActionDelete()">
+</app-crud-actions>

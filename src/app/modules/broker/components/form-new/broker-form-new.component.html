@@ -1,0 +1,95 @@
+<form [formGroup]="form">
+
+  <h3>Foto</h3>
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <!-- <mat-form-field fxFlex="100"> -->
+      INPUT DA FOTO
+    <!-- </mat-form-field> -->
+  </div>
+
+  <br/>
+  <br/>
+
+  <h3>Dados pessoais</h3>
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Nome</mat-label>
+      <input matInput type="text" formControlName="nome" placeholder="Informe um Nome">
+      <mat-error *ngIf="controlNomeHasError">Informe o Nome</mat-error>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>E-mail</mat-label>
+      <input matInput type="email" formControlName="email" placeholder="Informe um E-mail">
+      <mat-error *ngIf="controlEmailHasError">Informe um E-mail válido</mat-error>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Telefone</mat-label>
+      <input matInput type="tel" formControlName="telefone" placeholder="Informe um Telefone">
+      <mat-error *ngIf="controlTelefoneHasError">Informe o Telefone</mat-error>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Whatsapp</mat-label>
+      <input matInput type="tel" formControlName="whatsapp" placeholder="Informe um WhatsApp">
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <mat-form-field fxFlex="100">
+      <mat-label>Biografia</mat-label>
+      <textarea matInput type="text" formControlName="biografia" placeholder="Informe uma Biografia"></textarea>
+    </mat-form-field>
+  </div>
+
+  <br/>
+  <br/>
+
+  <h3>Dados profissionais</h3>
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Creci</mat-label>
+      <input matInput type="text" formControlName="creci" placeholder="Informe um Creci">
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Função</mat-label>
+      <input matInput type="text" formControlName="funcao" placeholder="Informe uma Função">
+    </mat-form-field>
+  </div>
+
+  <br/>
+  <br/>
+
+  <h3>Redes sociais</h3>
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Instagram</mat-label>
+      <input matInput type="text" formControlName="instagram" placeholder="Informe um Instagram">
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Facebook</mat-label>
+      <input matInput type="text" formControlName="facebook" placeholder="Informe um Facebook">
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>LinkedIn</mat-label>
+      <input matInput type="text" formControlName="linkedin" placeholder="Informe um LinkedIn">
+    </mat-form-field>
+  </div>
+
+  <br/>
+  <br/>
+
+  <h3>Dados de acesso</h3>
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Senha</mat-label>
+      <input matInput type="password" formControlName="password" placeholder="Informe uma Senha">
+      <mat-error *ngIf="controlPasswordHasError">Informe a Senha</mat-error>
+    </mat-form-field>
+  </div>
+
+</form>
