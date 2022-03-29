@@ -23,7 +23,7 @@ import { StateService } from '../../services/state.service';
 })
 export class StateListComponent implements OnInit, AngularMaterialTableInputs<State>, CrudActionNew, CrudActionBack {
 
-  private statesGetAll!: StateGetAll;
+  private stateGetAll!: StateGetAll;
 
   public tableDataSource!: MatTableDataSource<State>;
 
@@ -54,8 +54,8 @@ export class StateListComponent implements OnInit, AngularMaterialTableInputs<St
   ) { }
 
   ngOnInit(): void {
-    this.statesGetAll = this.activatedRoute.snapshot.data.stateGetAll;
-    this.tableLoadContent(this.statesGetAll);
+    this.stateGetAll = this.activatedRoute.snapshot.data.stateGetAll;
+    this.tableLoadContent(this.stateGetAll);
   }
 
   private tableLoadContent(states: StateGetAll): void {

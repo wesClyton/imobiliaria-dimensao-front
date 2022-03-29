@@ -10,7 +10,7 @@
         fxLayout="column"
         [formGroup]="form"
         fxLayoutGap=".5rem"
-        (ngSubmit)="onSubmit()">
+        (ngSubmit)="submit()">
         <mat-form-field fxFlex="100">
           <mat-label>E-mail</mat-label>
           <input matInput type="email" formControlName="email" placeholder="Informe seu e-mail">

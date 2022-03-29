@@ -18,6 +18,7 @@ export class FormService {
       const control = form.get(field);
       if (control instanceof FormControl) {
         control.markAsDirty();
+        control.markAsTouched();
       } else if (control instanceof FormGroup) {
         this.validade(control);
       }

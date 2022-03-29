@@ -18,7 +18,7 @@ export class PanelAdminComponent {
 
   public showSideNav = true;
 
-  public currentSession!: Session;
+  public session!: Session;
 
   public get APP_CONFIG(): ModuleConfig {
     return APP_CONFIG;
@@ -33,7 +33,7 @@ export class PanelAdminComponent {
   ) { }
 
   ngOnInit(): void {
-    this.subscription.add(this.authService.currentSession$.subscribe(session => this.currentSession = session));
+    this.subscription.add(this.authService.currentSession$.subscribe(session => this.session = session));
   }
 
   ngOnDestroy(): void {
@@ -55,7 +55,7 @@ export class PanelAdminComponent {
   }
 
   public navitateAccount(): void {
-    this.router.navigateByUrl(PanelAdminComponent.pathConcat(`${USER_CONFIG.pathFront}/account`));
+    this.router.navigateByUrl(PanelAdminComponent.pathConcat(`${USER_CONFIG.pathFront}/account/${this.session.usuario.id}`));
   }
 
   public static pathConcat(path: string = ''): string {

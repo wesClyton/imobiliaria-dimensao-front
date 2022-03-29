@@ -1,0 +1,43 @@
+<form [formGroup]="form">
+
+  <h3>Dados pessoais</h3>
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Nome</mat-label>
+      <input matInput type="text" formControlName="nome" placeholder="Informe seu nome">
+      <mat-error *ngIf="controlNomeHasError">Informe o nome</mat-error>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>E-mail</mat-label>
+      <input matInput type="email" formControlName="email" placeholder="Informe seu e-mail">
+      <mat-error *ngIf="controlNomeHasError">Informe um e-mail válido</mat-error>
+    </mat-form-field>
+  </div>
+
+  <br/>
+  <br/>
+
+  <h3>Dados de acesso</h3>
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Permissão</mat-label>
+      <mat-select formControlName="nivel">
+        <mat-option selected>Selecione</mat-option>
+        <ng-container appRoleOptionSelect (rolesFinded)="roles = $event">
+          <mat-option *ngFor="let role of roles" [value]="role.value">
+            {{ role.name }}
+          </mat-option>
+        </ng-container>
+      </mat-select>
+      <mat-error *ngIf="controlNivelHasError">Informe uma permissão</mat-error>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Senha</mat-label>
+      <input matInput type="password" formControlName="password" placeholder="Informe a senha">
+      <mat-error *ngIf="controlPasswordHasError">Informe uma senha</mat-error>
+    </mat-form-field>
+  </div>
+
+</form>

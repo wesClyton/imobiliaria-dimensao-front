@@ -4,8 +4,8 @@ export class AngularMaterialTableActionsUtils {
 
   public static detailDefault(): AngularMaterialTableActionsItem<any> {
     return {
-      label: 'Editar',
-      icon: 'edit'
+      label: 'Detalhes',
+      icon: 'pageview'
     }
   }
 

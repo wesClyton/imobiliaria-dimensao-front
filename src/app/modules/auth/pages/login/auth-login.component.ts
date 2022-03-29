@@ -60,7 +60,7 @@ export class AuthLoginComponent implements OnInit {
     });
   }
 
-  public onSubmit(): void {
+  public submit(): void {
     if (this.form.invalid) {
       this.formService.validade(this.form);
       return;

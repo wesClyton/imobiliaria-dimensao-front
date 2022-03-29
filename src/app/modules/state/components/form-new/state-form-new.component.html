@@ -3,7 +3,7 @@
     <mat-label>Estado</mat-label>
     <mat-select formControlName="uf">
       <mat-option selected>Selecione</mat-option>
-      <ng-container appStateBr (statesBrFinded)="statesBr = $event">
+      <ng-container appStateBrOptionSelect (statesBrFinded)="statesBr = $event">
         <mat-option  *ngFor="let state of statesBr" [value]="state.uf">
           {{ state.name }}
         </mat-option>

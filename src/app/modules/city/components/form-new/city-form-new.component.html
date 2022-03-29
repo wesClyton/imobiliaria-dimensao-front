@@ -1,5 +1,11 @@
 <form fxLayout="row" fxLayoutGap="2rem" [formGroup]="form">
   <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50" fxFlex.lg="25" fxFlex.xl="25">
+    <mat-label>Nome</mat-label>
+    <input matInput type="text" formControlName="nome" placeholder="Informe o nome">
+    <mat-error *ngIf="controlNomeHasError">Informe o nome da cidade</mat-error>
+  </mat-form-field>
+
+  <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50" fxFlex.lg="25" fxFlex.xl="25">
     <mat-label>Estado</mat-label>
     <mat-select formControlName="estadoId">
       <mat-option>Selecione</mat-option>
@@ -10,11 +16,5 @@
       </ng-container>
     </mat-select>
     <mat-error *ngIf="controlEstadoIdHasError">Informe o estado</mat-error>
-  </mat-form-field>
-
-  <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50" fxFlex.lg="25" fxFlex.xl="25">
-    <mat-label>Nome</mat-label>
-    <input matInput type="text" formControlName="nome" placeholder="Informe o nome">
-    <mat-error *ngIf="controlNomeHasError">Informe o nome da cidade</mat-error>
   </mat-form-field>
 </form>

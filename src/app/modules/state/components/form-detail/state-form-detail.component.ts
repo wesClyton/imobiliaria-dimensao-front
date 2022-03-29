@@ -57,7 +57,7 @@ export class StateFormDetailComponent implements OnInit {
   }
 
   private setValueForm(state: State): void {
-    this.controlUf?.setValue(state.uf);
+    this.form.patchValue(state);
   }
 
   public submit(): void {

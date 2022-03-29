@@ -18,7 +18,6 @@ import { StateNewComponent } from './new/state-new.component';
   imports: [
     CommonModule,
     StateComponentsModule,
-    ReactiveFormsModule,
     CrudActionsModule,
     AngularMaterialTableModule,
     AngularMaterialDialogConfirmationModule

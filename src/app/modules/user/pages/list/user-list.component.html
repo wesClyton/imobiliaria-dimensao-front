@@ -1,0 +1,35 @@
+<h1>Usuários</h1>
+
+<app-angular-material-table
+  [tableDataSource]="tableDataSource"
+  [tableDisplayedColumns]="tableDisplayedColumns"
+  [tableActions]="tableActions">
+
+  <ng-container matColumnDef="nome">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
+    <td mat-cell *matCellDef="let row">{{ row.nome }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>E-mail</th>
+    <td mat-cell *matCellDef="let row">{{ row.email }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="nivel">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Permissão</th>
+    <td mat-cell *matCellDef="let row">{{ row.nivel | role }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="ativo">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+    <td mat-cell *matCellDef="let row">{{ row.ativo | activeInactive }}</td>
+  </ng-container>
+
+</app-angular-material-table>
+
+<app-crud-actions
+  [newShow]="true"
+  [backShow]="true"
+  (backClicked)="crudActionBack()"
+  (newClicked)="crudActionNew()">
+</app-crud-actions>

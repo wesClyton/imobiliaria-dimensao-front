@@ -3,9 +3,9 @@ import { StateBr } from '../../state-br.interface';
 import { StateBrUtil } from '../../state-br.util';
 
 @Directive({
-  selector: '[appStateBr]'
+  selector: '[appStateBrOptionSelect]'
 })
-export class StateBrDirective implements OnInit {
+export class StateBrOptionSelectDirective implements OnInit {
 
   @Output()
   public statesBrFinded = new EventEmitter<Array<StateBr>>();

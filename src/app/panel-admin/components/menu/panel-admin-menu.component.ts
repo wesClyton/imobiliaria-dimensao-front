@@ -50,7 +50,7 @@ export class PanelAdminMenuComponent {
   ) { }
 
   public navigateAccount(): void {
-    this.router.navigateByUrl(PanelAdminComponent.pathConcat(`${USER_CONFIG.pathFront}/account`));
+    this.router.navigateByUrl(PanelAdminComponent.pathConcat(`${USER_CONFIG.pathFront}/account/${this.session.usuario.id}`));
   }
 
   public navigateHome(): void {

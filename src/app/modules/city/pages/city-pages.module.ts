@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import { AngularMaterialDialogConfirmationModule } from '../../../shared/angular-material/dialog-confirmation/angular-material-dialog-confirmation.module';
 import { AngularMaterialTableModule } from '../../../shared/angular-material/table/angular-material-table.module';
 import { CrudActionsModule } from '../../../shared/components/crud-actions/crud-actions.module';
@@ -17,7 +16,6 @@ import { CityNewComponent } from './new/city-new.component';
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule,
     CrudActionsModule,
     CityComponentsModule,
     AngularMaterialTableModule,

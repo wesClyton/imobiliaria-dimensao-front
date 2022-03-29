@@ -1,1 +1,10 @@
-<h1>app-user-account</h1>
+<h1>Minha conta</h1>
+
+<app-user-form-detail [user]="user"></app-user-form-detail>
+
+<app-crud-actions
+  [saveShow]="true"
+  [backShow]="true"
+  (backClicked)="crudActionBack()"
+  (saveClicked)="crudActionSave()">
+</app-crud-actions>
