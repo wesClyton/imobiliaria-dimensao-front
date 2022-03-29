@@ -55,7 +55,7 @@ export class PageErroComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription.add(
       this.activatedRoute.queryParams.subscribe(params => {
-        if (params) {
+        if (params?.code) {
           this.statusCode = parseInt(params.code, 10);
         }
       })
@@ -67,11 +67,11 @@ export class PageErroComponent implements OnInit, OnDestroy {
   }
 
   public goBack(): void {
-    if (this.statusCode !== HttpStatusCode.NotFound) {
-      this.authService.logout();
+    if (this.statusCode === undefined || this.statusCode === HttpStatusCode.NotFound) {
+      this.location.back();
       return;
     }
-    this.location.back();
+    this.authService.logout();
   }
 
 }

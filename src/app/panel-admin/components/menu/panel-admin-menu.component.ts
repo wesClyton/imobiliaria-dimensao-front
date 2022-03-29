@@ -5,6 +5,7 @@ import { Session } from '../../../modules/auth/interfaces/session.interface';
 import { AuthService } from '../../../modules/auth/services/auth.service';
 import { BANNER_CONFIG } from '../../../modules/banner/banner.config';
 import { BROKER_CONFIG } from '../../../modules/broker/broker.config';
+import { CHARACTERISTICS_CONFIG } from '../../../modules/characteristics/characteristics.config';
 import { CITY_CONFIG } from '../../../modules/city/city.config';
 import { STATE_CONFIG } from '../../../modules/state/state.config';
 import { USER_CONFIG } from '../../../modules/user/user.config';
@@ -25,6 +26,10 @@ export class PanelAdminMenuComponent {
   }
 
   public get showBanners(): boolean {
+    return this.authService.isAdmin;
+  }
+
+  public get showCharacteristics(): boolean {
     return this.authService.isAdmin;
   }
 
@@ -63,6 +68,10 @@ export class PanelAdminMenuComponent {
 
   public navigateBanners(): void {
     this.router.navigateByUrl(PanelAdminComponent.pathConcat(BANNER_CONFIG.pathFront));
+  }
+
+  public navigateCharacteristics(): void {
+    this.router.navigateByUrl(PanelAdminComponent.pathConcat(CHARACTERISTICS_CONFIG.pathFront));
   }
 
   public navigateBrokers(): void {

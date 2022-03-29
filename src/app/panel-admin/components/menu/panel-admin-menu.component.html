@@ -20,6 +20,11 @@
       Banners
     </button>
 
+    <button *ngIf="showCharacteristics" type="menu" mat-list-item (click)="navigateCharacteristics()">
+      <mat-icon matListIcon color="primary">checklist</mat-icon>
+      Características
+    </button>
+
     <button *ngIf="showCities" type="menu" mat-list-item (click)="navigateCities()">
       <mat-icon matListIcon color="primary">location_on</mat-icon>
       Cidades
