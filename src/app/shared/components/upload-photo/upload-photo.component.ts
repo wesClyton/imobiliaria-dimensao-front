@@ -20,6 +20,9 @@ export class UpdaloadPhotoComponent implements OnInit {
 
   public listComponentsInput = new Array<number>();
 
+  @Input()
+  public photosUrl!: Array<string>;
+
   constructor() {}
 
   ngOnInit(): void {

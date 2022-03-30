@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { finalize, take } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { LoadingService } from '../../../../core/loading/loading.service';
 import { NotificationService } from '../../../../core/notification/notification.service';
 import { UpdaloadPhotoComponent } from '../../../../shared/components/upload-photo/upload-photo.component';
@@ -141,33 +141,27 @@ export class BrokerFormNewComponent implements OnInit {
 
     this.brokerService
       .post(brokerCreate)
-      .pipe(
-        take(1),
-        finalize(() => this.loadinService.hide())
-      )
+      .pipe(take(1))
       .subscribe(broker => {
         if (fileUpload) {
           this.uploadPhoto(formData, broker);
           return;
         }
         this.messageSuccess(broker);
-      });
+      },
+      () => this.loadinService.hide());
   }
 
   private uploadPhoto(formData: FormData, brokerCreateResponse: BrokerCreateResponse): void {
-    this.loadinService.show();
-
     this.brokerUploadService
       .upload(brokerCreateResponse.id, formData)
-      .pipe(
-        take(1),
-        finalize(() => this.loadinService.hide())
-      )
+      .pipe(take(1))
       .subscribe(() => this.messageSuccess(brokerCreateResponse));
   }
 
   private messageSuccess(broker: BrokerCreateResponse): void {
     this.form.markAsPristine();
+    this.loadinService.hide()
     this.notificationService.success(`Corretor ${broker.nome} cadastrado com sucesso!`);
     this.router.navigateByUrl(UrlUtil.previusUrlAcessed);
   }

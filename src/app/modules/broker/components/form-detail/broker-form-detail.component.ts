@@ -1,18 +1,23 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { finalize, take } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { LoadingService } from '../../../../core/loading/loading.service';
 import { NotificationService } from '../../../../core/notification/notification.service';
+import { UpdaloadPhotoComponent } from '../../../../shared/components/upload-photo/upload-photo.component';
+import { PathImagePipe } from '../../../../shared/pipes/path-image/path-image.pipe';
 import { FormService } from '../../../../shared/services/form/form.service';
 import { UrlUtil } from '../../../../shared/utils/url.util';
+import { BrokerUpdateResponse } from '../../interfaces/broker-update-response.interface';
 import { BrokerUpdate } from '../../interfaces/broker-update.interface';
 import { Broker } from '../../interfaces/broker.interface';
+import { BrokerUploadService } from '../../services/broker-upload.service';
 import { BrokerService } from '../../services/broker.service';
 
 @Component({
   selector: 'app-broker-form-detail',
-  templateUrl: './broker-form-detail.component.html'
+  templateUrl: './broker-form-detail.component.html',
+  providers: [PathImagePipe]
 })
 export class BrokerFormDetailComponent implements OnInit {
 
@@ -77,13 +82,20 @@ export class BrokerFormDetailComponent implements OnInit {
   @Input()
   public broker!: Broker;
 
+  public photosUrl = new Array<string>();
+
+  @ViewChild(UpdaloadPhotoComponent, { static: false })
+  private updaloadPhotoComponent!: UpdaloadPhotoComponent;
+
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly notificationService: NotificationService,
     private readonly loadinService: LoadingService,
     private readonly brokerService: BrokerService,
+    private readonly brokerUploadService: BrokerUploadService,
     private readonly router: Router,
-    private readonly formService: FormService
+    private readonly formService: FormService,
+    private readonly pathImagePipe: PathImagePipe
   ) { }
 
   ngOnInit(): void {
@@ -112,6 +124,10 @@ export class BrokerFormDetailComponent implements OnInit {
 
   private setValueForm(broker: Broker): void {
     this.form.patchValue(broker);
+
+    if (this.broker.foto) {
+      this.photosUrl.push(this.pathImagePipe.transform(this.broker.foto, 'corretores'));
+    }
   }
 
   public submit(): void {
@@ -137,17 +153,38 @@ export class BrokerFormDetailComponent implements OnInit {
       whatsapp: this.controlWhatsApp?.value
     }
 
+    const fileUpload: File = this.updaloadPhotoComponent.filesSelecteds[0];
+    const formData = new FormData();
+    formData.append('foto', fileUpload);
+
     this.brokerService
       .put(broker)
-      .pipe(
-        take(1),
-        finalize(() => this.loadinService.hide())
-      )
+      .pipe(take(1))
       .subscribe(broker => {
-        this.form.markAsPristine();
-        this.notificationService.success(`Corretor ${broker.nome} alterado com sucesso!`);
-        this.router.navigateByUrl(UrlUtil.previusUrlAcessed);
-      });
+        if (fileUpload) {
+          this.uploadPhoto(formData, broker);
+          return;
+        }
+        this.messageSuccess(broker);
+      },
+      () => this.loadinService.hide());
+  }
+
+  private uploadPhoto(formData: FormData, brokerUpdateResponse: BrokerUpdateResponse): void {
+    this.brokerUploadService
+      .upload(brokerUpdateResponse.id, formData)
+      .pipe(take(1))
+      .subscribe(() => {
+        this.messageSuccess(brokerUpdateResponse)
+      },
+      () => this.loadinService.hide());
+  }
+
+  private messageSuccess(broker: BrokerUpdateResponse): void {
+    this.form.markAsPristine();
+    this.loadinService.hide();
+    this.notificationService.success(`Corretor ${broker.nome} alterado com sucesso!`);
+    this.router.navigateByUrl(UrlUtil.previusUrlAcessed);
   }
 
 }

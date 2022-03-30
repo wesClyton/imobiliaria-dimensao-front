@@ -32,6 +32,24 @@
   align-items: center;
 }
 
+.photo-loaded {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+
+  img {
+    width: 100%;
+    max-width: 250px;
+    transition: 0.25s all;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.75;
+    }
+  }
+}
+
 ::ng-deep {
   .ngx-ic-overlay {
     outline: none !important;

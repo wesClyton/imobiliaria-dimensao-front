@@ -1,5 +1,18 @@
 <form [formGroup]="form">
 
+  <h3>Foto</h3>
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <div fxFlex="100">
+      <app-upload-photo
+        [canCropp]="true"
+        [canSelectVariusFiles]="false">
+      </app-upload-photo>
+    </div>
+  </div>
+
+  <br/>
+  <br/>
+
   <h3>Dados pessoais</h3>
   <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
     <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
@@ -80,19 +93,6 @@
       <input matInput type="password" formControlName="password" placeholder="Informe uma Senha">
       <mat-error *ngIf="controlPasswordHasError">Informe a Senha</mat-error>
     </mat-form-field>
-  </div>
-
-  <br/>
-  <br/>
-
-  <h3>Foto</h3>
-  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
-    <div fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
-      <app-upload-photo
-        [canCropp]="true"
-        [canSelectVariusFiles]="false">
-      </app-upload-photo>
-    </div>
   </div>
 
 </form>

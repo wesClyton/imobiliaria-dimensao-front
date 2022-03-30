@@ -3,6 +3,7 @@
   [ratio]="ratio"
   [canCropp]="canCropp"
   [canSelectVariusFiles]="canSelectVariusFiles"
+  [photoUrl]="photosUrl ? photosUrl[0] : ''"
   (deleteClicked)="deleteClicked(0)"
   (fileSelected)="fileSelected($event)">
 </app-upload-photo-item>
@@ -14,6 +15,7 @@
     [canCropp]="canCropp"
     [canSelectVariusFiles]="canSelectVariusFiles"
     [indexFileOfList]="index"
+    [photoUrl]="photosUrl[index]"
     (deleteClicked)="deleteClicked($event)"
     (fileSelected)="fileSelected($event)">
   </app-upload-photo-item>

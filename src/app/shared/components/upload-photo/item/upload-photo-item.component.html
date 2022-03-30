@@ -2,6 +2,10 @@
 
   <input #inputFile type="file" (change)="fileChangeEvent($event)" hidden />
 
+  <div *ngIf="photoUrl" class="photo-loaded">
+    <img [src]="photoUrl" alt="Image" (click)="selectButton()">
+  </div>
+
   <div class="flex-buttons">
     <button
       mat-raised-button

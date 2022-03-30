@@ -29,6 +29,9 @@ export class UploadPhotoItemComponent {
   public croppedImage: any;
 
   public get textButtonPrimary(): string {
+    if (this.photoUrl) {
+      return 'Alterar';
+    }
     return this.loadedImage === undefined ? 'Selecionar' : 'Selecionar outra';
   }
 
@@ -53,6 +56,9 @@ export class UploadPhotoItemComponent {
 
   @Output()
   public deleteClicked = new EventEmitter<number>();
+
+  @Input()
+  public photoUrl!: string;
 
   constructor() {}
 
