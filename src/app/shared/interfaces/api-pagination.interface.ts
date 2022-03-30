@@ -1,7 +1,7 @@
 export interface ApiPagination {
-  count: number;
-  currentPage: number;
-  nextPage: boolean;
-  prevPage: boolean;
-  lastPage: number;
+  readonly count: number;
+  readonly currentPage: number;
+  readonly nextPage: boolean;
+  readonly prevPage: boolean;
+  readonly lastPage: number;
 }

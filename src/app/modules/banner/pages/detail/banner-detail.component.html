@@ -1,0 +1,12 @@
+<h1>Editar Banner</h1>
+
+<app-banner-form-detail [banner]="banner"></app-banner-form-detail>
+
+<app-crud-actions
+  [saveShow]="true"
+  [backShow]="true"
+  [deleteShow]="true"
+  (backClicked)="crudActionBack()"
+  (saveClicked)="crudActionSave()"
+  (deleteClicked)="crudActionDelete()">
+</app-crud-actions>

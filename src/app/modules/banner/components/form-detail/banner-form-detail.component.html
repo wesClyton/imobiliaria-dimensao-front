@@ -1,0 +1,41 @@
+<form [formGroup]="form">
+
+  <h3>Imagem</h3>
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <div fxFlex="100">
+      <app-upload-image
+        [ratio]="16 / 9"
+        [canCropp]="true"
+        [canSelectVariusFiles]="false"
+        [imagesUrl]="imagesUrl">
+      </app-upload-image>
+    </div>
+  </div>
+
+  <br/>
+  <br/>
+
+  <h3>Informações</h3>
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Nome</mat-label>
+      <input matInput type="text" formControlName="nome" placeholder="Informe um Nome">
+      <mat-error *ngIf="controlNomeHasError">Informe o Nome</mat-error>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Link</mat-label>
+      <input matInput type="text" formControlName="link" placeholder="Informe um Link">
+      <mat-error *ngIf="controlLinkHasError">Informe o Link</mat-error>
+    </mat-form-field>
+  </div>
+
+  <br/>
+  <br/>
+
+  <h3>Status</h3>
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <mat-slide-toggle fxFlex formControlName="ativo">{{ controlAtivo?.value | activeInactive }}</mat-slide-toggle>
+  </div>
+
+</form>

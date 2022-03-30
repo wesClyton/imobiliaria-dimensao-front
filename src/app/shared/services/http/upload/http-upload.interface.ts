@@ -1,5 +1,6 @@
 import { Observable } from 'rxjs';
 
 export interface HttpUpload<UploadOut> {
-  upload(id: string, formData: FormData): Observable<UploadOut>;
+  post(formData: FormData): Observable<UploadOut>;
+  update(id: string, formData: FormData): Observable<UploadOut>;
 }

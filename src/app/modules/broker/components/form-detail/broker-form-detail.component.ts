@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { LoadingService } from '../../../../core/loading/loading.service';
 import { NotificationService } from '../../../../core/notification/notification.service';
-import { UpdaloadPhotoComponent } from '../../../../shared/components/upload-photo/upload-photo.component';
+import { UploadImageComponent } from '../../../../shared/components/upload-image/upload-image.component';
 import { PathImagePipe } from '../../../../shared/pipes/path-image/path-image.pipe';
 import { FormService } from '../../../../shared/services/form/form.service';
 import { UrlUtil } from '../../../../shared/utils/url.util';
@@ -82,10 +82,10 @@ export class BrokerFormDetailComponent implements OnInit {
   @Input()
   public broker!: Broker;
 
-  public photosUrl = new Array<string>();
+  public imagesUrl = new Array<string>();
 
-  @ViewChild(UpdaloadPhotoComponent, { static: false })
-  private updaloadPhotoComponent!: UpdaloadPhotoComponent;
+  @ViewChild(UploadImageComponent, { static: false })
+  private updaloadPhotoComponent!: UploadImageComponent;
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -126,7 +126,7 @@ export class BrokerFormDetailComponent implements OnInit {
     this.form.patchValue(broker);
 
     if (this.broker.foto) {
-      this.photosUrl.push(this.pathImagePipe.transform(this.broker.foto, 'corretores'));
+      this.imagesUrl.push(this.pathImagePipe.transform(this.broker.foto, 'corretores'));
     }
   }
 
@@ -172,7 +172,7 @@ export class BrokerFormDetailComponent implements OnInit {
 
   private uploadPhoto(formData: FormData, brokerUpdateResponse: BrokerUpdateResponse): void {
     this.brokerUploadService
-      .upload(brokerUpdateResponse.id, formData)
+      .update(brokerUpdateResponse.id, formData)
       .pipe(take(1))
       .subscribe(() => {
         this.messageSuccess(brokerUpdateResponse)

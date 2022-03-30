@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { LoadingService } from '../../../../core/loading/loading.service';
 import { NotificationService } from '../../../../core/notification/notification.service';
-import { UpdaloadPhotoComponent } from '../../../../shared/components/upload-photo/upload-photo.component';
+import { UploadImageComponent } from '../../../../shared/components/upload-image/upload-image.component';
 import { FormService } from '../../../../shared/services/form/form.service';
 import { UrlUtil } from '../../../../shared/utils/url.util';
 import { BrokerCreateResponse } from '../../interfaces/broker-create-response.interface';
@@ -80,8 +80,8 @@ export class BrokerFormNewComponent implements OnInit {
     return this.controlPassword?.dirty || this.controlPassword?.hasError('required');
   }
 
-  @ViewChild(UpdaloadPhotoComponent, { static: false })
-  private updaloadPhotoComponent!: UpdaloadPhotoComponent;
+  @ViewChild(UploadImageComponent, { static: false })
+  private updaloadPhotoComponent!: UploadImageComponent;
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -154,7 +154,7 @@ export class BrokerFormNewComponent implements OnInit {
 
   private uploadPhoto(formData: FormData, brokerCreateResponse: BrokerCreateResponse): void {
     this.brokerUploadService
-      .upload(brokerCreateResponse.id, formData)
+      .update(brokerCreateResponse.id, formData)
       .pipe(take(1))
       .subscribe(() => this.messageSuccess(brokerCreateResponse));
   }

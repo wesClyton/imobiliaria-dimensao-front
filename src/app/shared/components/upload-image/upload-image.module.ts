@@ -3,13 +3,13 @@ import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ImageCropperModule } from 'ngx-image-cropper';
-import { UploadPhotoItemComponent } from './item/upload-photo-item.component';
-import { UpdaloadPhotoComponent } from './upload-photo.component';
+import { UploadImageItemComponent } from './item/upload-image-item.component';
+import { UploadImageComponent } from './upload-image.component';
 
 @NgModule({
   declarations: [
-    UpdaloadPhotoComponent,
-    UploadPhotoItemComponent
+    UploadImageComponent,
+    UploadImageItemComponent
   ],
   imports: [
     CommonModule,
@@ -17,6 +17,6 @@ import { UpdaloadPhotoComponent } from './upload-photo.component';
     MatButtonModule,
     MatIconModule
   ],
-  exports: [UpdaloadPhotoComponent]
+  exports: [UploadImageComponent]
 })
-export class UpdaloadPhotoModule {}
+export class UploadImageModule {}

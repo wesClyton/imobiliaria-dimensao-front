@@ -1,24 +1,24 @@
-<app-upload-photo-item
+<app-upload-image-item
   *ngIf="!canSelectVariusFiles; else items"
   [ratio]="ratio"
   [canCropp]="canCropp"
   [canSelectVariusFiles]="canSelectVariusFiles"
-  [photoUrl]="photosUrl ? photosUrl[0] : ''"
+  [imageUrl]="imagesUrl ? imagesUrl[0] : ''"
   (deleteClicked)="deleteClicked(0)"
   (fileSelected)="fileSelected($event)">
-</app-upload-photo-item>
+</app-upload-image-item>
 
 <ng-template #items>
-  <app-upload-photo-item
+  <app-upload-image-item
     *ngFor="let item of listComponentsInput; index as index"
     [ratio]="ratio"
     [canCropp]="canCropp"
     [canSelectVariusFiles]="canSelectVariusFiles"
     [indexFileOfList]="index"
-    [photoUrl]="photosUrl[index]"
+    [imageUrl]="imagesUrl[index]"
     (deleteClicked)="deleteClicked($event)"
     (fileSelected)="fileSelected($event)">
-  </app-upload-photo-item>
+  </app-upload-image-item>
 
   <div class="buttons">
     <button mat-icon-button type="button" (click)="fileAdd()">

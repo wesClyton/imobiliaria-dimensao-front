@@ -3,11 +3,11 @@ import { ImageCroppedEvent, LoadedImage } from 'ngx-image-cropper';
 import { FileUtil } from '../../../utils/file.util';
 
 @Component({
-  selector: 'app-upload-photo-item',
-  templateUrl: './upload-photo-item.component.html',
-  styleUrls: ['./upload-photo-item.component.scss']
+  selector: 'app-upload-image-item',
+  templateUrl: './upload-image-item.component.html',
+  styleUrls: ['./upload-image-item.component.scss']
 })
-export class UploadPhotoItemComponent {
+export class UploadImageItemComponent {
 
   @ViewChild('inputFile', { static: false })
   public readonly inputFile!: ElementRef;
@@ -29,7 +29,7 @@ export class UploadPhotoItemComponent {
   public croppedImage: any;
 
   public get textButtonPrimary(): string {
-    if (this.photoUrl) {
+    if (this.imageUrl) {
       return 'Alterar';
     }
     return this.loadedImage === undefined ? 'Selecionar' : 'Selecionar outra';
@@ -58,7 +58,7 @@ export class UploadPhotoItemComponent {
   public deleteClicked = new EventEmitter<number>();
 
   @Input()
-  public photoUrl!: string;
+  public imageUrl!: string;
 
   constructor() {}
 

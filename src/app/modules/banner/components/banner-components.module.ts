@@ -6,13 +6,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { UploadImageModule } from '../../../shared/components/upload-image/upload-image.module';
 import { PipesModule } from '../../../shared/pipes/pipes.module';
-import { BrokerFormDetailComponent } from './form-detail/broker-form-detail.component';
-import { BrokerFormNewComponent } from './form-new/broker-form-new.component';
+import { BannerFormDetailComponent } from './form-detail/banner-form-detail.component';
+import { BannerFormNewComponent } from './form-new/banner-form-new.component';
 
 @NgModule({
   declarations: [
-    BrokerFormNewComponent,
-    BrokerFormDetailComponent
+    BannerFormNewComponent,
+    BannerFormDetailComponent
   ],
   imports: [
     CommonModule,
@@ -24,8 +24,8 @@ import { BrokerFormNewComponent } from './form-new/broker-form-new.component';
     UploadImageModule
   ],
   exports: [
-    BrokerFormNewComponent,
-    BrokerFormDetailComponent
+    BannerFormNewComponent,
+    BannerFormDetailComponent
   ]
 })
-export class BrokerComponentsModule { }
+export class BannerComponentsModule { }

@@ -19,18 +19,32 @@ export class HttpUploadService<UploadOut> implements HttpUpload<UploadOut> {
     public readonly endPoint: string
   ) { }
 
-  public upload(id: string, formData: FormData): Observable<UploadOut> {
-    let headers = new HttpHeaders();
-    headers = headers.append(HttpHeader.ContentType, MimeTypes.FormData);
-
+  public post(formData: FormData): Observable<UploadOut> {
     return this.httpClient
-      .put<UploadOut>(`${this.endPoint}/${id}`, formData, { headers })
+      .post<UploadOut>(this.endPoint, formData, { headers: this.getHeadersFormData() })
       .pipe(
         catchError((error) => {
           this.exceptionService.handleError(error);
           return throwError(error);
         })
       );
+  }
+
+  public update(id: string, formData: FormData): Observable<UploadOut> {
+    return this.httpClient
+      .put<UploadOut>(`${this.endPoint}/${id}`, formData, { headers: this.getHeadersFormData() })
+      .pipe(
+        catchError((error) => {
+          this.exceptionService.handleError(error);
+          return throwError(error);
+        })
+      );
+  }
+
+  private getHeadersFormData(): HttpHeaders {
+    let headers = new HttpHeaders();
+    headers = headers.append(HttpHeader.ContentType, MimeTypes.FormData);
+    return headers;
   }
 
 }

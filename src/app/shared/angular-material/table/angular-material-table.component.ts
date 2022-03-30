@@ -16,7 +16,7 @@ export class AngularMaterialTableComponent<T>
   implements AfterViewInit, AfterContentInit, AngularMaterialTableInputs<T>, AngularMaterialTable<T> {
 
   @Input()
-  public showFilterInputText = true;
+  public showFilterInputText = false;
 
   @Input()
   public tableFilterInputTextPlaceholder = 'Informe o filtro';

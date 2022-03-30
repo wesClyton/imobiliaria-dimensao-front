@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-upload-photo',
-  templateUrl: './upload-photo.component.html',
-  styleUrls: ['./upload-photo.component.scss']
+  selector: 'app-upload-image',
+  templateUrl: './upload-image.component.html',
+  styleUrls: ['./upload-image.component.scss']
 })
-export class UpdaloadPhotoComponent implements OnInit {
+export class UploadImageComponent implements OnInit {
 
   @Input()
   public ratio = 1 / 1;
@@ -21,7 +21,7 @@ export class UpdaloadPhotoComponent implements OnInit {
   public listComponentsInput = new Array<number>();
 
   @Input()
-  public photosUrl!: Array<string>;
+  public imagesUrl!: Array<string>;
 
   constructor() {}
 
