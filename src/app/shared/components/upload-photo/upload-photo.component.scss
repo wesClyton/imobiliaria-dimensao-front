@@ -1,0 +1,10 @@
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  mat-icon {
+    transform: scale(1.5);
+    color: green;
+  }
+}

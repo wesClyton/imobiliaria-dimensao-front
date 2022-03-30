@@ -1,0 +1,52 @@
+<div class="upload-component">
+
+  <input #inputFile type="file" (change)="fileChangeEvent($event)" hidden />
+
+  <div class="flex-buttons">
+    <button
+      mat-raised-button
+      type="button"
+      color="primary"
+      (click)="selectButton()">
+      {{ textButtonPrimary }}
+    </button>
+
+    <button
+      *ngIf="showCancelButton"
+      mat-raised-button
+      type="button"
+      color="accent"
+      (click)="cancelClick()">
+      Cancelar
+    </button>
+
+    <button
+      *ngIf="showDeleteButton"
+      mat-raised-button
+      type="button"
+      color="warn"
+      (click)="deleteButton()">
+      Excluir
+    </button>
+  </div>
+
+  <div class="flex" *ngIf="imageChangedEvent">
+    <div class="cropper">
+      <image-cropper
+        format="jpeg"
+        [disabled]="!canCropp"
+        [imageQuality]="75"
+        [imageChangedEvent]="imageChangedEvent"
+        [maintainAspectRatio]="true"
+        [aspectRatio]="ratio"
+        (imageCropped)="imageCropped($event)"
+        (imageLoaded)="imageLoaded($event)">
+      </image-cropper>
+    </div>
+
+    <div *ngIf="croppedImage" class="cropped">
+      <img [src]="croppedImage" alt="Cropped Image" />
+    </div>
+  </div>
+
+</div>

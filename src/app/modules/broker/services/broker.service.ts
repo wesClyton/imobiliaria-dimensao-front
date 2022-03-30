@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ExceptionService } from '../../../shared/services/exception/exception.service';
 import { HttpCrudService } from '../../../shared/services/http/crud/http-crud.service';
 import { BROKER_CONFIG } from '../broker.config';
@@ -25,6 +26,10 @@ export class BrokerService extends HttpCrudService<BrokerCreate, BrokerCreateRes
       BROKER_CONFIG.pathApiSingle,
       BROKER_CONFIG.pathApiPlural
     )
+  }
+
+  public post(type: BrokerCreate): Observable<BrokerCreateResponse> {
+    throw Error('O cadastro de Corretor é FormData.');
   }
 
 }

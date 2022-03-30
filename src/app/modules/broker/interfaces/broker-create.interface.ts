@@ -10,4 +10,5 @@ export interface BrokerCreate {
   readonly facebook: string;
   readonly linkedin: string;
   readonly password: string;
+  readonly foto: FormData;
 }
