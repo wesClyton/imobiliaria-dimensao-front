@@ -7,7 +7,10 @@ import { NotificationService } from '../../../../core/notification/notification.
 import { UpdaloadPhotoComponent } from '../../../../shared/components/upload-photo/upload-photo.component';
 import { FormService } from '../../../../shared/services/form/form.service';
 import { UrlUtil } from '../../../../shared/utils/url.util';
-import { BrokerCreateService } from '../../services/broker-create.service';
+import { BrokerCreateResponse } from '../../interfaces/broker-create-response.interface';
+import { BrokerCreate } from '../../interfaces/broker-create.interface';
+import { BrokerUploadService } from '../../services/broker-upload.service';
+import { BrokerService } from '../../services/broker.service';
 
 @Component({
   selector: 'app-broker-form-new',
@@ -84,7 +87,8 @@ export class BrokerFormNewComponent implements OnInit {
     private readonly formBuilder: FormBuilder,
     private readonly notificationService: NotificationService,
     private readonly loadinService: LoadingService,
-    private readonly brokerCreateService: BrokerCreateService,
+    private readonly brokerService: BrokerService,
+    private readonly brokerUploadService: BrokerUploadService,
     private readonly router: Router,
     private readonly formService: FormService
   ) { }
@@ -117,33 +121,55 @@ export class BrokerFormNewComponent implements OnInit {
 
     this.loadinService.show();
 
-    const file: File = this.updaloadPhotoComponent.filesSelecteds[0];
+    const brokerCreate: BrokerCreate = {
+      biografia: this.controlBiografia?.value,
+      creci: this.controlCreci?.value,
+      email: this.controlEmail?.value,
+      facebook: this.controlFacebook?.value,
+      funcao: this.controlFuncao?.value,
+      instagram: this.controlInstagram?.value,
+      linkedin: this.controlLinkedin?.value,
+      nome: this.controlNome?.value,
+      password: this.controlPassword?.value,
+      telefone: this.controlTelefone?.value,
+      whatsapp: this.controlWhatsApp?.value
+    }
+
+    const fileUpload: File = this.updaloadPhotoComponent.filesSelecteds[0];
     const formData = new FormData();
+    formData.append('foto', fileUpload);
 
-    formData.append('biografia', this.controlBiografia?.value);
-    formData.append('creci', this.controlCreci?.value);
-    formData.append('email', this.controlEmail?.value);
-    formData.append('facebook', this.controlFacebook?.value);
-    formData.append('funcao', this.controlFuncao?.value);
-    formData.append('instagram', this.controlInstagram?.value);
-    formData.append('linkedin', this.controlLinkedin?.value);
-    formData.append('nome', this.controlNome?.value);
-    formData.append('password', this.controlPassword?.value);
-    formData.append('telefone', this.controlTelefone?.value);
-    formData.append('whatsapp', this.controlWhatsApp?.value);
-    formData.append('foto', file);
-
-    this.brokerCreateService
-      .upload(formData)
+    this.brokerService
+      .post(brokerCreate)
       .pipe(
         take(1),
         finalize(() => this.loadinService.hide())
       )
       .subscribe(broker => {
-        this.form.markAsPristine();
-        this.notificationService.success(`Corretor ${broker.nome} cadastrado com sucesso!`);
-        this.router.navigateByUrl(UrlUtil.previusUrlAcessed);
+        if (fileUpload) {
+          this.uploadPhoto(formData, broker);
+          return;
+        }
+        this.messageSuccess(broker);
       });
+  }
+
+  private uploadPhoto(formData: FormData, brokerCreateResponse: BrokerCreateResponse): void {
+    this.loadinService.show();
+
+    this.brokerUploadService
+      .upload(brokerCreateResponse.id, formData)
+      .pipe(
+        take(1),
+        finalize(() => this.loadinService.hide())
+      )
+      .subscribe(() => this.messageSuccess(brokerCreateResponse));
+  }
+
+  private messageSuccess(broker: BrokerCreateResponse): void {
+    this.form.markAsPristine();
+    this.notificationService.success(`Corretor ${broker.nome} cadastrado com sucesso!`);
+    this.router.navigateByUrl(UrlUtil.previusUrlAcessed);
   }
 
 }

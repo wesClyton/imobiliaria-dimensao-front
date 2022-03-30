@@ -19,12 +19,12 @@ export class HttpUploadService<UploadOut> implements HttpUpload<UploadOut> {
     public readonly endPoint: string
   ) { }
 
-  public upload(formData: FormData): Observable<UploadOut> {
+  public upload(id: string, formData: FormData): Observable<UploadOut> {
     let headers = new HttpHeaders();
     headers = headers.append(HttpHeader.ContentType, MimeTypes.FormData);
 
     return this.httpClient
-      .post<UploadOut>(this.endPoint, formData, { headers })
+      .put<UploadOut>(`${this.endPoint}/${id}`, formData, { headers })
       .pipe(
         catchError((error) => {
           this.exceptionService.handleError(error);

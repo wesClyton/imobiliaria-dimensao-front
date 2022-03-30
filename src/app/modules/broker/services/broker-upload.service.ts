@@ -3,12 +3,12 @@ import { Injectable } from '@angular/core';
 import { ExceptionService } from '../../../shared/services/exception/exception.service';
 import { HttpUploadService } from '../../../shared/services/http/upload/http-upload.service';
 import { BROKER_CONFIG } from '../broker.config';
-import { BrokerCreateResponse } from '../interfaces/broker-create-response.interface';
+import { BrokerUpdateResponse } from '../interfaces/broker-update-response.interface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class BrokerCreateService extends HttpUploadService<BrokerCreateResponse> {
+export class BrokerUploadService extends HttpUploadService<BrokerUpdateResponse> {
 
   constructor(
     public readonly httpClient: HttpClient,
