@@ -3,19 +3,23 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { finalize, take } from 'rxjs/operators';
+import { forkJoin, Observable, Subscription } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 import { LoadingService } from '../../../../core/loading/loading.service';
 import { NotificationService } from '../../../../core/notification/notification.service';
+import { UploadImageComponent } from '../../../../shared/components/upload-image/upload-image.component';
 import { FormService } from '../../../../shared/services/form/form.service';
 import { UrlUtil } from '../../../../shared/utils/url.util';
 import { CharacteristicType } from '../../../characteristic/enums/characteristic-type.enum';
 import { Characteristic } from '../../../characteristic/interfaces/characteristic.interface';
 import { CharacteristicService } from '../../../characteristic/services/characteristic.service';
 import { CityGetAll } from '../../../city/interfaces/city-get-all.interface';
+import { AnnouncementCreateResponse } from '../../interfaces/announcement-create-response.interface';
 import { AnnouncementCreate } from '../../interfaces/announcement-create.interface';
+import { AnnouncementGalleryUploadResponse } from '../../interfaces/announcement-galery-upload.interface';
 import { AnnouncementStateProperty } from '../../interfaces/announcement-state-property.interface';
 import { AnnouncementType } from '../../interfaces/announcement-type.interface';
+import { AnnouncementUploadService } from '../../services/announcement-gallery-upload.service';
 import { AnnouncementService } from '../../services/announcement.service';
 
 @Component({
@@ -196,6 +200,9 @@ export class AnnouncementFormNewComponent implements OnInit, OnDestroy {
   @ViewChild('inputCaracteristicaInstalacoesCondominio', { static: false })
   private inputCaracteristicaInstalacoesCondominio!: ElementRef<HTMLInputElement>;
 
+  @ViewChild(UploadImageComponent, { static: false })
+  private updaloadPhotoComponent!: UploadImageComponent;
+
   public characteristicsImovelSelected = new Array<Characteristic>();
 
   public characteristicsImovelFiltered!: Array<Characteristic>;
@@ -221,7 +228,8 @@ export class AnnouncementFormNewComponent implements OnInit, OnDestroy {
     private readonly announcementService: AnnouncementService,
     private readonly router: Router,
     private readonly formService: FormService,
-    private readonly characteristicService: CharacteristicService
+    private readonly characteristicService: CharacteristicService,
+    private readonly announcementUploadService: AnnouncementUploadService
   ) { }
 
   ngOnInit(): void {
@@ -409,14 +417,35 @@ export class AnnouncementFormNewComponent implements OnInit, OnDestroy {
       .post(announcement)
       .pipe(
         take(1),
-        finalize(() => this.loadingService.hide())
+        map((announcement) => {
+          let uploads = new Array<Observable<AnnouncementGalleryUploadResponse>>();
+          this.updaloadPhotoComponent.filesSelecteds.forEach(file => {
+            const formData = new FormData();
+            formData.append('foto', file);
+            formData.append('galeriaId', announcement.galeriaId);
+            uploads.push(this.announcementUploadService.post(formData));
+          });
+          return { uploads, announcement };
+        })
       )
-      .subscribe((announcement) => {
-        this.form.markAsPristine();
-        this.loadingService.hide()
-        this.notificationService.success(`Anúncio ${announcement.titulo} cadastrado com sucesso!`);
-        this.router.navigateByUrl(UrlUtil.previusUrlAcessed);
+      .subscribe(response => {
+        if (!response.uploads.length) {
+          this.messageSuccess(response.announcement);
+          return;
+        }
+        this.loadingService.show();
+        forkJoin(response.uploads).pipe(take(1)).subscribe(
+          () => this.messageSuccess(response.announcement),
+          () => this.loadingService.hide()
+        );
       });
+  }
+
+  private messageSuccess(announcement: AnnouncementCreateResponse): void {
+    this.loadingService.hide();
+    this.form.markAsPristine();
+    this.notificationService.success(`Anúncio ${announcement.titulo} cadastrado com sucesso!`);
+    this.router.navigateByUrl(UrlUtil.previusUrlAcessed);
   }
 
 }

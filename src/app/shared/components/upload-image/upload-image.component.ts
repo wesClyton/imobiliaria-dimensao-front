@@ -35,7 +35,9 @@ export class UploadImageComponent implements OnInit {
     if (!this.canSelectVariusFiles) {
       this.filesSelecteds = new Array<File>();
     }
-    this.filesSelecteds.push(file);
+    if (!this.filesSelecteds.some(fileItem => fileItem.name === file.name)) {
+      this.filesSelecteds.push(file);
+    }
   }
 
   public fileAdd(): void {

@@ -2,7 +2,7 @@ import { ApiCreateUpdateAt } from '../../../shared/interfaces/api-create-update-
 import { AnnouncementStateProperty } from '../enums/announcement-state-property.enum';
 import { AnnouncementType } from '../enums/announcement-type.enum';
 
-export interface AnnouncementCreate extends ApiCreateUpdateAt {
+export interface AnnouncementCreateResponse extends ApiCreateUpdateAt {
   readonly id: string;
   readonly cidadeId: string;
   readonly codigoAnuncio: string;
