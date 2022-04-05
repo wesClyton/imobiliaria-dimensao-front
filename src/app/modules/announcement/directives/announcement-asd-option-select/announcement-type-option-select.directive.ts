@@ -11,7 +11,7 @@ import { AnnouncementTypeLabel } from '../../utils/announcement-type-label.util'
 export class AnnouncementTypeOptionSelectDirective implements OnInit {
 
   @Output()
-  public announcementTypesFinded = new EventEmitter<Array<AnnouncementType>>();
+  public dataFinded = new EventEmitter<Array<AnnouncementType>>();
 
   constructor(
     private readonly announcementTypePipe: AnnouncementTypePipe
@@ -25,7 +25,7 @@ export class AnnouncementTypeOptionSelectDirective implements OnInit {
         value: key as AnnouncementTypeEnum
       });
     })
-    this.announcementTypesFinded.emit(announcementTypes);
+    this.dataFinded.emit(announcementTypes);
   }
 
 }

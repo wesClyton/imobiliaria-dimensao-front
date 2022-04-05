@@ -9,14 +9,14 @@ import { CityService } from '../../services/city.service';
 export class CityOptionSelectDirective implements OnInit {
 
   @Output()
-  public citiesFinded = new EventEmitter<CityGetAll>();
+  public dataFinded = new EventEmitter<CityGetAll>();
 
   constructor(
     private readonly cityService: CityService
   ) { }
 
   ngOnInit(): void {
-    this.cityService.getAll().pipe(take(1)).subscribe(cities => this.citiesFinded.next(cities));
+    this.cityService.getAll().pipe(take(1)).subscribe(cities => this.dataFinded.next(cities));
   }
 
 }

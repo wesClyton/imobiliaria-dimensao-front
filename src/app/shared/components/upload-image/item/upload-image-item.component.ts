@@ -88,7 +88,6 @@ export class UploadImageItemComponent {
     this.imageChangedEvent = undefined;
     this.loadedImage = undefined;
     this.inputFileNativeElement.value = '';
-    this.deleteClicked.emit(this.indexFileOfList);
   }
 
   public selectButton(): void {
