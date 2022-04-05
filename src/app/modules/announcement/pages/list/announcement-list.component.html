@@ -1,0 +1,45 @@
+<h1>Anúncios</h1>
+
+<app-angular-material-table
+  [tableDataSource]="tableDataSource"
+  [tableDisplayedColumns]="tableDisplayedColumns"
+  [tableActions]="tableActions">
+
+  <ng-container matColumnDef="codigoAnuncio">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Código do anúncio</th>
+    <td mat-cell *matCellDef="let row">{{ row.codigoAnuncio }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="titulo">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Título</th>
+    <td mat-cell *matCellDef="let row">{{ row.titulo }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="tipo">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo</th>
+    <td mat-cell *matCellDef="let row">{{ row.tipo | announcementType }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="expiracaoAnuncio">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Expiração</th>
+    <td mat-cell *matCellDef="let row">{{ row.expiracaoAnuncio | date }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="cidade">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Cidade</th>
+    <td mat-cell *matCellDef="let row">{{ row.cidade | cityState }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="ativo">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+    <td mat-cell *matCellDef="let row">{{ row.ativo | activeInactive }}</td>
+  </ng-container>
+
+</app-angular-material-table>
+
+<app-crud-actions
+  [newShow]="true"
+  [backShow]="true"
+  (backClicked)="crudActionBack()"
+  (newClicked)="crudActionNew()">
+</app-crud-actions>

@@ -21,7 +21,7 @@ export class UploadImageComponent implements OnInit {
   public listComponentsInput = new Array<number>();
 
   @Input()
-  public imagesUrl!: Array<string>;
+  public imagesUrl = new Array<string>();
 
   constructor() {}
 

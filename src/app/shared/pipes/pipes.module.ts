@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { ActiveInactivePipe } from './active-inactive/active-inactive.pipe';
+import { CityStatePipe } from './city-state/city-state.pipe';
 import { PathImagePipe } from './path-image/path-image.pipe';
 import { YesNoPipe } from './yes-no/yes-no.pipe';
 
@@ -7,12 +8,14 @@ import { YesNoPipe } from './yes-no/yes-no.pipe';
   declarations: [
     YesNoPipe,
     ActiveInactivePipe,
-    PathImagePipe
+    PathImagePipe,
+    CityStatePipe
   ],
   exports: [
     YesNoPipe,
     ActiveInactivePipe,
-    PathImagePipe
+    PathImagePipe,
+    CityStatePipe
   ]
 })
 export class PipesModule {}

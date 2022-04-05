@@ -1,0 +1,10 @@
+<h1>Novo Anúncio</h1>
+
+<app-announcement-form-new></app-announcement-form-new>
+
+<app-crud-actions
+  [saveShow]="true"
+  [backShow]="true"
+  (backClicked)="crudActionBack()"
+  (saveClicked)="crudActionSave()">
+</app-crud-actions>

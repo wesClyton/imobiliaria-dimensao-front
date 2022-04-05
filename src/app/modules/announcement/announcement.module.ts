@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { AnnouncementRoutingModule } from './announcement-routing.module';
+import { AnnouncementPagesModule } from './pages/announcement-pages.module';
 
 @NgModule({
-  declarations: [],
   imports: [
     CommonModule,
-    AnnouncementRoutingModule
-  ],
-  exports: []
+    AnnouncementRoutingModule,
+    AnnouncementPagesModule
+  ]
 })
 export class AnnouncementModule { }

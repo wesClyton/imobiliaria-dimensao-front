@@ -220,6 +220,13 @@
   dependencies:
     "tslib" "^2.3.0"
 
+"@angular/material-date-fns-adapter@^13.2.6":
+  "integrity" "sha512-1vQtfe0HVl7iOwKNdCAAPSMeu4bx4PbF0H7YQdqd3e3QjtNb02gBD1A/xOMfB/5nZSzlUtXDlNtcaP0SQJwJhQ=="
+  "resolved" "https://registry.npmjs.org/@angular/material-date-fns-adapter/-/material-date-fns-adapter-13.2.6.tgz"
+  "version" "13.2.6"
+  dependencies:
+    "tslib" "^2.3.0"
+
 "@angular/material@13.2.6":
   "integrity" "sha512-/h5wa/tXE0DMIIEQX+rozFkUWHYUWg1Xf1R2tXUFLslLQ0KRCGyNo225Sv/1wrxXHxfrML787lA9ex4p90Feqw=="
   "resolved" "https://registry.npmjs.org/@angular/material/-/material-13.2.6.tgz"
@@ -2560,6 +2567,11 @@
   "integrity" "sha1-XQKkaFCt8bSjF5RqOSj8y1v9BCU="
   "resolved" "https://registry.npmjs.org/custom-event/-/custom-event-1.0.1.tgz"
   "version" "1.0.1"
+
+"date-fns@^2.23.0":
+  "integrity" "sha512-8d35hViGYx/QH0icHYCeLmsLmMUheMmTyV9Fcm6gvNwdw31yXXH+O85sOBJ+OLnLQMKZowvpKb6FgMIQjcpvQw=="
+  "resolved" "https://registry.npmjs.org/date-fns/-/date-fns-2.28.0.tgz"
+  "version" "2.28.0"
 
 "date-format@^4.0.5":
   "integrity" "sha512-zBhRiN/M0gDxUoM2xRtzTjJzSg0XEi1ofYpF84PfXeS3hN2PsGxmc7jw3DNQtFlimRbMmob5FC3G0cJq6jQQpw=="
