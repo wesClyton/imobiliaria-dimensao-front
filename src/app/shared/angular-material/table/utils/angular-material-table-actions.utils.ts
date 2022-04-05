@@ -18,4 +18,18 @@ export class AngularMaterialTableActionsUtils {
     }
   }
 
+  public static activeDefault(): AngularMaterialTableActionsItem<any> {
+    return {
+      label: 'Ativar',
+      icon: 'check_circle'
+    }
+  }
+
+  public static inactiveDefault(): AngularMaterialTableActionsItem<any> {
+    return {
+      label: 'Inativar',
+      icon: 'block'
+    }
+  }
+
 }

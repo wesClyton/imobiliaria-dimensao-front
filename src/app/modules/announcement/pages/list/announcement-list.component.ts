@@ -12,6 +12,7 @@ import { CrudActionBack } from '../../../../shared/components/crud-actions/inter
 import { CrudActionNew } from '../../../../shared/components/crud-actions/interfaces/crud-action-new.interface';
 import { UrlUtil } from '../../../../shared/utils/url.util';
 import { AnnouncementGetAll } from '../../interfaces/announcement-get-all.interface';
+import { AnnouncementUpdate } from '../../interfaces/announcement-update.interface';
 import { Announcement } from '../../interfaces/announcement.interface';
 import { AnnouncementService } from '../../services/announcement.service';
 
@@ -34,6 +35,14 @@ export class AnnouncementListComponent implements OnInit, AngularMaterialTableIn
         action: announcement => this.navigateDetail(announcement)
       },
       {
+        ...AngularMaterialTableActionsUtils.activeDefault(),
+        action: announcement => this.activate(announcement)
+      },
+      {
+        ...AngularMaterialTableActionsUtils.inactiveDefault(),
+        action: announcement => this.inactivate(announcement)
+      },
+      {
         ...AngularMaterialTableActionsUtils.deleteDefault(),
         action: announcement => this.delete(announcement)
       }
@@ -52,6 +61,24 @@ export class AnnouncementListComponent implements OnInit, AngularMaterialTableIn
   ngOnInit(): void {
     this.announcementGetAll = this.activatedRoute.snapshot.data.announcementGetAll;
     this.tableLoadContent(this.announcementGetAll);
+  }
+
+  private activate(announcement: Announcement): void {
+    const announcementUpdate: AnnouncementUpdate = {
+      id: announcement.id,
+      ativo: true
+    } as AnnouncementUpdate;
+
+    this.announcementService.put(announcementUpdate).pipe(take(1)).subscribe(() => this.getAnnouncements());
+  }
+
+  private inactivate(announcement: Announcement): void {
+    const announcementUpdate: AnnouncementUpdate = {
+      id: announcement.id,
+      ativo: false
+    } as AnnouncementUpdate;
+
+    this.announcementService.put(announcementUpdate).pipe(take(1)).subscribe(() => this.getAnnouncements());
   }
 
   private tableLoadContent(announcements: AnnouncementGetAll): void {
@@ -80,11 +107,11 @@ export class AnnouncementListComponent implements OnInit, AngularMaterialTableIn
 
     this.announcementService.delete(announcement.id).subscribe(() => {
       this.notificationService.success(`Anúncio ${announcement.titulo} excluído com sucesso!`);
-      this.getCharacteristic();
+      this.getAnnouncements();
     });
   }
 
-  private getCharacteristic(): void {
+  private getAnnouncements(): void {
     this.loadingService.show();
     this.announcementService
       .getAll()

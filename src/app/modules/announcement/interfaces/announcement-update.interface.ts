@@ -3,6 +3,7 @@ import { AnnouncementStateProperty } from '../enums/announcement-state-property.
 import { AnnouncementType } from '../enums/announcement-type.enum';
 
 export interface AnnouncementUpdate {
+	readonly id: string;
 	readonly areaConstruida: number;
 	readonly areaTotal: number;
 	readonly ativo: boolean;
