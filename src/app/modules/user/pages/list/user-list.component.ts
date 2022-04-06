@@ -12,6 +12,7 @@ import { CrudActionBack } from '../../../../shared/components/crud-actions/inter
 import { CrudActionNew } from '../../../../shared/components/crud-actions/interfaces/crud-action-new.interface';
 import { UrlUtil } from '../../../../shared/utils/url.util';
 import { UserGetAll } from '../../interfaces/user-get-all.interface';
+import { UserUpdate } from '../../interfaces/user-update.interface';
 import { User } from '../../interfaces/user.interface';
 import { UserService } from '../../services/user.service';
 
@@ -34,6 +35,14 @@ export class UserListComponent implements OnInit, AngularMaterialTableInputs<Use
         action: user => this.navigateDetail(user)
       },
       {
+        ...AngularMaterialTableActionsUtils.activeDefault(),
+        action: user => this.activate(user)
+      },
+      {
+        ...AngularMaterialTableActionsUtils.inactiveDefault(),
+        action: user => this.inactivate(user)
+      },
+      {
         ...AngularMaterialTableActionsUtils.deleteDefault(),
         action: user => this.delete(user)
       }
@@ -52,6 +61,24 @@ export class UserListComponent implements OnInit, AngularMaterialTableInputs<Use
   ngOnInit(): void {
     this.userGetAll = this.activatedRoute.snapshot.data.userGetAll;
     this.tableLoadContent(this.userGetAll);
+  }
+
+  private activate(user: User): void {
+    const userUpdate: UserUpdate = {
+      id: user.id,
+      ativo: true
+    } as UserUpdate;
+
+    this.userService.put(userUpdate).pipe(take(1)).subscribe(() => this.getUsers());
+  }
+
+  private inactivate(user: User): void {
+    const userUpdate: UserUpdate = {
+      id: user.id,
+      ativo: false
+    } as UserUpdate;
+
+    this.userService.put(userUpdate).pipe(take(1)).subscribe(() => this.getUsers());
   }
 
   private tableLoadContent(users: UserGetAll): void {

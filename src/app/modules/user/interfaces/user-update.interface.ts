@@ -5,5 +5,6 @@ export interface UserUpdate {
   readonly nome: string;
   readonly email: string;
   readonly nivel: Role;
+  readonly ativo: boolean;
   readonly password: string | null;
 }

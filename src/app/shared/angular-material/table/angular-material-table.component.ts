@@ -28,7 +28,7 @@ export class AngularMaterialTableComponent<T>
   public tableDisplayedColumns!: Array<string>;
 
   @Input()
-  public tablePageSizeOptions = [5, 10, 25, 100];
+  public tablePageSizeOptions = [10, 15, 25, 50, 100];
 
   @Input()
   public tableMessageNoData = 'Nenhum registro encontrado!';

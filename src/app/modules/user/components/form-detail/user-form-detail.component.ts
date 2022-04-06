@@ -52,6 +52,10 @@ export class UserFormDetailComponent implements OnInit {
     return this.controlPassword?.dirty || this.controlPassword?.hasError('required');
   }
 
+  private get controlAtivo(): AbstractControl | null {
+    return this.form?.get('ativo');
+  }
+
   public get isChangePassword(): boolean {
     return this.form?.get('changePassword')?.value;
   }
@@ -88,7 +92,8 @@ export class UserFormDetailComponent implements OnInit {
       nivel: new FormControl(null, [Validators.required]),
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null),
-      changePassword: new FormControl(false)
+      changePassword: new FormControl(false),
+      ativo: new FormControl(false),
     });
 
     if (this.user) {
@@ -113,7 +118,8 @@ export class UserFormDetailComponent implements OnInit {
       email: this.controlEmail?.value,
       nivel: this.controlNivel?.value,
       nome: this.controlNome?.value,
-      password: this.controlPassword?.value
+      password: this.controlPassword?.value,
+      ativo: this.controlAtivo?.value
     }
 
     this.userService
