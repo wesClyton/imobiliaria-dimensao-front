@@ -1,5 +1,307 @@
 <form [formGroup]="form">
 
+  <h3>Informações</h3>
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <mat-slide-toggle fxFlex formControlName="destaque">Destaque</mat-slide-toggle>
+  </div>
 
+  <br/>
+  <br/>
+
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Código de Anúncio</mat-label>
+      <input matInput type="text" formControlName="codigoAnuncio" placeholder="Informe um Código de Anúncio">
+      <mat-error *ngIf="controlCodigoAnuncioHasError">Informe o Código de Anúncio</mat-error>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Título</mat-label>
+      <input matInput type="text" formControlName="titulo" placeholder="Informe um Título">
+      <mat-error *ngIf="controlTituloHasError">Informe o Título</mat-error>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50" fxFlex.lg="25" fxFlex.xl="25">
+      <mat-label>Tipo</mat-label>
+      <mat-select formControlName="tipo">
+        <mat-option>Selecione</mat-option>
+        <ng-container appAnnouncementTypeOptionSelect (dataFinded)="announcementTypes = $event">
+          <mat-option *ngFor="let type of announcementTypes" [value]="type.value">
+            {{ type.name }}
+          </mat-option>
+        </ng-container>
+      </mat-select>
+      <mat-error *ngIf="controlTipoHasError">Informe o Tipo</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Sobre o imóvel</mat-label>
+      <textarea matInput formControlName="sobre" placeholder="Informe um texto sobre o imóvel"></textarea>
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Valor</mat-label>
+      <input matInput type="number" formControlName="valor" placeholder="Informe um Valor">
+      <mat-error *ngIf="controlValorHasError">Informe o Valor</mat-error>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Valor condomínio</mat-label>
+      <input matInput type="number" formControlName="valorCondominio" placeholder="Informe um Valor de condomínio">
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Área total</mat-label>
+      <input matInput type="number" formControlName="areaTotal" placeholder="Informe uma Área total">
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Área construída</mat-label>
+      <input matInput type="number" formControlName="areaConstruida" placeholder="Informe uma Área construída">
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Dormitórios</mat-label>
+      <mat-select formControlName="dormitorios">
+        <mat-option>Selecione</mat-option>
+        <mat-option [value]="1">1</mat-option>
+        <mat-option [value]="2">2</mat-option>
+        <mat-option [value]="3">3</mat-option>
+      </mat-select>
+      <mat-error *ngIf="controlDormitoriosHasError">Informe a quantidade de Dormitórios</mat-error>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Suítes</mat-label>
+      <mat-select formControlName="suites">
+        <mat-option>Selecione</mat-option>
+        <mat-option [value]="1">1</mat-option>
+        <mat-option [value]="2">2</mat-option>
+        <mat-option [value]="3">3</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Banheiros</mat-label>
+      <mat-select formControlName="banheiros">
+        <mat-option>Selecione</mat-option>
+        <mat-option [value]="1">1</mat-option>
+        <mat-option [value]="2">2</mat-option>
+        <mat-option [value]="3">3</mat-option>
+      </mat-select>
+      <mat-error *ngIf="controlBanheirosHasError">Informe a quantidade de Banheiros</mat-error>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Vagas de Garagens</mat-label>
+      <mat-select formControlName="vagasGaragem">
+        <mat-option>Selecione</mat-option>
+        <mat-option [value]="1">1</mat-option>
+        <mat-option [value]="2">2</mat-option>
+        <mat-option [value]="3">3</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Empreendimento</mat-label>
+      <input matInput type="text" formControlName="empreendimento" placeholder="">
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Estado do Imóvel</mat-label>
+      <mat-select formControlName="estadoImovel">
+        <mat-option>Selecione</mat-option>
+        <ng-container appAnnouncementStatePropertyOptionSelect (dataFinded)="announcementStateProperties = $event">
+          <mat-option *ngFor="let stateProperty of announcementStateProperties" [value]="stateProperty.value">
+            {{ stateProperty.name }}
+          </mat-option>
+        </ng-container>
+      </mat-select>
+      <mat-error *ngIf="controlEstadoImovelHasError">Informe o Estado do Imóvel</mat-error>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Data de Conclusão</mat-label>
+      <input matInput formControlName="dataConclusao" [matDatepicker]="datepickerDataConclusao">
+      <mat-datepicker-toggle matSuffix [for]="datepickerDataConclusao"></mat-datepicker-toggle>
+      <mat-datepicker #datepickerDataConclusao>
+        <mat-datepicker-actions>
+          <button mat-button matDatepickerCancel>Cancelar</button>
+          <button mat-raised-button color="primary" matDatepickerApply>Aplicar</button>
+        </mat-datepicker-actions>
+      </mat-datepicker>
+      <mat-error *ngIf="controlDataConclusaoHasError">Informe da Data de Conclusão</mat-error>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Data de Expiração</mat-label>
+      <input matInput formControlName="expiracaoAnuncio" [matDatepicker]="datepickerDataExpiracao">
+      <mat-datepicker-toggle matSuffix [for]="datepickerDataExpiracao"></mat-datepicker-toggle>
+      <mat-datepicker #datepickerDataExpiracao>
+        <mat-datepicker-actions>
+          <button mat-button matDatepickerCancel>Cancelar</button>
+          <button mat-raised-button color="primary" matDatepickerApply>Aplicar</button>
+        </mat-datepicker-actions>
+      </mat-datepicker>
+      <mat-error *ngIf="controlDataExpiracaoHasError">Informe da Data de Expiração</mat-error>
+    </mat-form-field>
+  </div>
+
+  <br/>
+  <br/>
+
+  <h3>Características</h3>
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Imóvel</mat-label>
+      <mat-chip-list #imovelList>
+        <mat-chip
+          *ngFor="let characteristic of characteristicsImovelSelected"
+          (removed)="removeCharacteristicImovel(characteristic)">
+          {{ characteristic.nome }}
+          <button matChipRemove>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip>
+        <input
+          #inputCaracteristicaImovel
+          placeholder="Informe uma característica"
+          formControlName="caracteristicasImovel"
+          [matAutocomplete]="autoImovel"
+          [matChipInputFor]="imovelList"
+          (matChipInputTokenEnd)="addCharacteristicImovel($event)">
+      </mat-chip-list>
+      <mat-autocomplete
+        #autoImovel="matAutocomplete"
+        (optionSelected)="characteristicImovelSelected($event)">
+        <mat-option *ngFor="let characteristic of characteristicsImovelFiltered" [value]="characteristic">
+          {{ characteristic.nome }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Instalações do Condomínio</mat-label>
+      <mat-chip-list #instalacoesCondominioList>
+        <mat-chip
+          *ngFor="let characteristic of characteristicsInstalacoesCondominioSelected"
+          (removed)="removeCharacteristicInstalacoesCondominio(characteristic)">
+          {{ characteristic.nome }}
+          <button matChipRemove>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip>
+        <input
+          #inputCaracteristicaInstalacoesCondominio
+          placeholder="Informe uma característica"
+          formControlName="caracteristicasInstalacoesCondominio"
+          [matAutocomplete]="autoInstalacoesCondominio"
+          [matChipInputFor]="instalacoesCondominioList"
+          (matChipInputTokenEnd)="addCharacteristicInstalacoesCondominio($event)">
+      </mat-chip-list>
+      <mat-autocomplete
+        #autoInstalacoesCondominio="matAutocomplete"
+        (optionSelected)="characteristicInstalacoesCondominioSelected($event)">
+        <mat-option *ngFor="let characteristic of characteristicsInstalacoesCondominioFiltered" [value]="characteristic">
+          {{ characteristic.nome }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+
+  <br/>
+  <br/>
+
+  <h3>Localização</h3>
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>CEP</mat-label>
+      <input matInput type="text" formControlName="cep" placeholder="Informe um CEP">
+      <mat-error *ngIf="controlCepHasError">Informe o CEP</mat-error>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Cidade</mat-label>
+      <mat-select formControlName="cidadeId">
+        <mat-option>Selecione</mat-option>
+        <ng-container appCityOptionSelect (dataFinded)="cities = $event">
+          <mat-option *ngFor="let city of cities?.data" [value]="city.id">
+            {{ city.nome }}
+          </mat-option>
+        </ng-container>
+      </mat-select>
+      <mat-error *ngIf="controlCidadeHasError">Informe a Cidade</mat-error>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Endereço</mat-label>
+      <input matInput type="text" formControlName="endereco" placeholder="Informe um Endereço">
+      <mat-error *ngIf="controlEnderecoHasError">Informe o Endereço</mat-error>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Bairro</mat-label>
+      <input matInput type="text" formControlName="bairro" placeholder="Informe um Bairro">
+      <mat-error *ngIf="controlBairroHasError">Informe o Bairro</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Latitude</mat-label>
+      <input matInput type="text" formControlName="latitude" placeholder="Informe uma Latitude">
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Longitude</mat-label>
+      <input matInput type="text" formControlName="longitude" placeholder="Informe uma Longitude">
+    </mat-form-field>
+  </div>
+
+  <br/>
+  <br/>
+
+  <h3>URL's</h3>
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>URL para o mapa</mat-label>
+      <input matInput type="text" formControlName="urlMapa" placeholder="Informe uma URL para o mapa">
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>URL para o vídeo</mat-label>
+      <input matInput type="text" formControlName="urlVideo" placeholder="Informe uma URL para o vídeo">
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>URL para o 360</mat-label>
+      <input matInput type="text" formControlName="url360" placeholder="Informe uma URL para o vídeo">
+    </mat-form-field>
+  </div>
+
+  <br/>
+  <br/>
+
+  <h3>Fotos</h3>
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <div fxFlex="100">
+      <app-upload-image
+        [ratio]="16 / 9"
+        [canCropp]="true"
+        [imagesUrl]="imagesUrl"
+        [removeImageFromApi]="true"
+        [canSelectVariusFiles]="true"
+        (deleteEmitter)="deleteImage($event)">
+      </app-upload-image>
+    </div>
+  </div>
 
 </form>

@@ -438,7 +438,8 @@ export class AnnouncementFormNewComponent implements OnInit, OnDestroy {
           () => this.messageSuccess(response.announcement),
           () => this.loadingService.hide()
         );
-      });
+      },
+      (error) => this.loadingService.hide());
   }
 
   private messageSuccess(announcement: AnnouncementCreateResponse): void {

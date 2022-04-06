@@ -4,6 +4,7 @@
   [canCropp]="canCropp"
   [canSelectVariusFiles]="canSelectVariusFiles"
   [imageUrl]="imagesUrl ? imagesUrl[0] : ''"
+  [removeImageFromApi]="removeImageFromApi"
   (deleteClicked)="deleteClicked(0)"
   (fileSelected)="fileSelected($event)">
 </app-upload-image-item>
@@ -16,8 +17,10 @@
     [canSelectVariusFiles]="canSelectVariusFiles"
     [indexFileOfList]="index"
     [imageUrl]="imagesUrl[index]"
+    [removeImageFromApi]="removeImageFromApi"
     (deleteClicked)="deleteClicked($event)"
-    (fileSelected)="fileSelected($event)">
+    (fileSelected)="fileSelected($event)"
+    (deleteEmitter)="deleteEmitterClick(index)">
   </app-upload-image-item>
 
   <div class="buttons">

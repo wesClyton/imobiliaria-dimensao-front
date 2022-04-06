@@ -1,11 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-upload-image',
   templateUrl: './upload-image.component.html',
   styleUrls: ['./upload-image.component.scss']
 })
-export class UploadImageComponent implements OnInit {
+export class UploadImageComponent implements OnChanges {
 
   @Input()
   public ratio = 1 / 1;
@@ -23,12 +23,25 @@ export class UploadImageComponent implements OnInit {
   @Input()
   public imagesUrl = new Array<string>();
 
+  @Output()
+  public deleteEmitter = new EventEmitter();
+
+  @Input()
+  public removeImageFromApi = false;
+
   constructor() {}
 
-  ngOnInit(): void {
-    if (this.canSelectVariusFiles) {
-      this.listComponentsInput.push(0);
+  ngOnChanges(changes: SimpleChanges): void {
+    if (!changes?.imagesUrl) {
+      this.updateListComponentsInput();
     }
+  }
+
+  private updateListComponentsInput(): void {
+    this.listComponentsInput = new Array<number>();
+    this.imagesUrl.forEach((image, index) => {
+      this.listComponentsInput.push(index);
+    });
   }
 
   public fileSelected(file: File): void {
@@ -56,6 +69,10 @@ export class UploadImageComponent implements OnInit {
       }
     });
     return array;
+  }
+
+  public deleteEmitterClick(index: number): void {
+    this.deleteEmitter.emit(index);
   }
 
 }

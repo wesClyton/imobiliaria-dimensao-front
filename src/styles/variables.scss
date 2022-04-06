@@ -1,0 +1,27 @@
+@import '~@angular/material/theming';
+
+/* theme */
+$primary: mat-palette($mat-indigo, 500);
+$accent: mat-palette($mat-pink, A200, A100, A400);
+$warn: mat-palette($mat-red);
+
+/* colors material */
+$red: mat-palette($mat-red, 500);
+$pink: mat-palette($mat-pink, 500);
+$purple: mat-palette($mat-purple, 500);
+$deep-purple: mat-palette($mat-deep-purple, 500);
+$indigo: mat-palette($mat-indigo, 500);
+$blue: mat-palette($mat-blue, 500);
+$light-blue: mat-palette($mat-light-blue, 500);
+$cyan: mat-palette($mat-cyan, 500);
+$teal: mat-palette($mat-teal, 500);
+$green: mat-palette($mat-green, 500);
+$light-green: mat-palette($mat-light-green, 500);
+$lime: mat-palette($mat-lime, 500);
+$yellow: mat-palette($mat-yellow, 500);
+$amber: mat-palette($mat-amber, 500);
+$orange: mat-palette($mat-orange, 500);
+$deep-orange: mat-palette($mat-deep-orange, 500);
+$brown: mat-palette($mat-brown, 500);
+$gray: mat-palette($mat-gray, 500);
+$blue-gray: mat-palette($mat-blue-gray, 500);

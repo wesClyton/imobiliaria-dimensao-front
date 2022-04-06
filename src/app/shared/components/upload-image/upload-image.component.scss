@@ -1,10 +1,17 @@
+@import 'variables';
+
 .buttons {
   display: flex;
   justify-content: center;
   align-items: center;
 
   mat-icon {
-    transform: scale(1.5);
-    color: green;
+    transform: scale(2.5);
+    color: mat-color($green);
+    transition: 0.5s all;
+
+    &:hover {
+      opacity: 0.75;
+    }
   }
 }

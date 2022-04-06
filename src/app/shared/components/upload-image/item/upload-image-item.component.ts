@@ -24,6 +24,9 @@ export class UploadImageItemComponent {
   @Input()
   public indexFileOfList!: number;
 
+  @Input()
+  public removeImageFromApi = false;
+
   public imageChangedEvent: any;
 
   public croppedImage: any;
@@ -35,12 +38,20 @@ export class UploadImageItemComponent {
     return this.loadedImage === undefined ? 'Selecionar' : 'Selecionar outra';
   }
 
+  public get showPrimaryButton(): boolean {
+    return !this.removeImageFromApi;
+  }
+
   public get showCancelButton(): boolean {
     return this.loadedImage !== undefined;
   }
 
   public get showDeleteButton(): boolean {
-    return this.canSelectVariusFiles;
+    return this.canSelectVariusFiles && !this.imageUrl;
+  }
+
+  public get showDeleteEmitter(): boolean {
+    return this.removeImageFromApi;
   }
 
   private get inputFileNativeElement(): HTMLInputElement {
@@ -59,6 +70,9 @@ export class UploadImageItemComponent {
 
   @Input()
   public imageUrl!: string;
+
+  @Output()
+  public deleteEmitter = new EventEmitter();
 
   constructor() {}
 
@@ -96,6 +110,10 @@ export class UploadImageItemComponent {
 
   public deleteButton(): void {
     this.deleteClicked.emit(this.indexFileOfList);
+  }
+
+  public deleteEmitterClick(): void {
+    this.deleteEmitter.emit();
   }
 
 }

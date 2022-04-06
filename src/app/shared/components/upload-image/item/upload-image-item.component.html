@@ -3,11 +3,20 @@
   <input #inputFile type="file" accept="image/jpeg" (change)="fileChangeEvent($event)" hidden />
 
   <div *ngIf="imageUrl" class="photo-loaded">
-    <img [src]="imageUrl" alt="Image" (click)="selectButton()">
+    <button
+      *ngIf="showDeleteEmitter"
+      mat-raised-button
+      type="button"
+      color="warn"
+      (click)="deleteEmitterClick()">
+      Excluir
+    </button>
+    <img [src]="imageUrl" alt="Image">
   </div>
 
   <div class="flex-buttons">
     <button
+      *ngIf="showPrimaryButton"
       mat-raised-button
       type="button"
       color="primary"

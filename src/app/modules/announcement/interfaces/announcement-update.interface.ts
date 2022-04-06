@@ -1,4 +1,3 @@
-import { Characteristic } from '../../characteristic/interfaces/characteristic.interface';
 import { AnnouncementStateProperty } from '../enums/announcement-state-property.enum';
 import { AnnouncementType } from '../enums/announcement-type.enum';
 
@@ -9,7 +8,6 @@ export interface AnnouncementUpdate {
 	readonly ativo: boolean;
 	readonly bairro: string;
 	readonly banheiros: number;
-	readonly caracteristicas: Array<Characteristic>;
 	readonly cep: string;
 	readonly codigoAnuncio: string;
 	readonly dataConclusao: Date;
@@ -28,7 +26,11 @@ export interface AnnouncementUpdate {
 	readonly urlMapa: string;
 	readonly vagasGaragem: number;
 	readonly valor: number;
+	readonly valorCondominio: number;
   readonly cidadeId: string;
   readonly url360: string;
   readonly urlVideo: string;
+  readonly caracteristicas: Array<{
+    readonly id: string;
+  }>;
 }
