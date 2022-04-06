@@ -25,21 +25,21 @@ export class UploadImageItemComponent {
   public indexFileOfList!: number;
 
   @Input()
-  public removeImageFromApi = false;
+  public deleteImageFromApi = false;
 
   public imageChangedEvent: any;
 
   public croppedImage: any;
 
   public get textButtonPrimary(): string {
-    if (this.imageUrl) {
+    if (this.imageUrl && !this.deleteImageFromApi) {
       return 'Alterar';
     }
     return this.loadedImage === undefined ? 'Selecionar' : 'Selecionar outra';
   }
 
   public get showPrimaryButton(): boolean {
-    return !this.removeImageFromApi;
+    return (this.deleteImageFromApi && !this.imageUrl) || !this.deleteImageFromApi;
   }
 
   public get showCancelButton(): boolean {
@@ -50,8 +50,8 @@ export class UploadImageItemComponent {
     return this.canSelectVariusFiles && !this.imageUrl;
   }
 
-  public get showDeleteEmitter(): boolean {
-    return this.removeImageFromApi;
+  public get showDeleteImageEmitter(): boolean {
+    return this.deleteImageFromApi;
   }
 
   private get inputFileNativeElement(): HTMLInputElement {
@@ -72,25 +72,27 @@ export class UploadImageItemComponent {
   public imageUrl!: string;
 
   @Output()
-  public deleteEmitter = new EventEmitter();
+  public deleteImageEmitter = new EventEmitter();
 
   constructor() {}
 
   public fileChangeEvent(event: Event): void {
     this.imageChangedEvent = event;
     this.file = this.imageChangedEvent.target.files[0];
-    this.fileSelected.emit(this.file);
+    if (!this.canCropp) {
+      this.fileSelected.emit(this.file);
+    }
   }
 
-  private setFileCropped(): void {
-    this.file = FileUtil.convertBase64ToFile(this.croppedImage, this.file.name);
+  private setFileCropped(croppedImage: any): void {
+    this.file = FileUtil.convertBase64ToFile(croppedImage, this.file.name);
     this.fileSelected.emit(this.file);
   }
 
   public imageCropped(event: ImageCroppedEvent): void {
     if (this.canCropp) {
       this.croppedImage = event.base64;
-      this.setFileCropped();
+      this.setFileCropped(this.croppedImage);
     }
   }
 
@@ -112,8 +114,8 @@ export class UploadImageItemComponent {
     this.deleteClicked.emit(this.indexFileOfList);
   }
 
-  public deleteEmitterClick(): void {
-    this.deleteEmitter.emit();
+  public deleteImageEmitterClick(): void {
+    this.deleteImageEmitter.emit();
   }
 
 }

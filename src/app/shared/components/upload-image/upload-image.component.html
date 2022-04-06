@@ -4,9 +4,10 @@
   [canCropp]="canCropp"
   [canSelectVariusFiles]="canSelectVariusFiles"
   [imageUrl]="imagesUrl ? imagesUrl[0] : ''"
-  [removeImageFromApi]="removeImageFromApi"
+  [deleteImageFromApi]="deleteImageFromApi"
   (deleteClicked)="deleteClicked(0)"
-  (fileSelected)="fileSelected($event)">
+  (fileSelected)="fileSelected($event)"
+  (deleteImageEmitter)="deleteImageEmitterClick(0)">
 </app-upload-image-item>
 
 <ng-template #items>
@@ -17,10 +18,10 @@
     [canSelectVariusFiles]="canSelectVariusFiles"
     [indexFileOfList]="index"
     [imageUrl]="imagesUrl[index]"
-    [removeImageFromApi]="removeImageFromApi"
+    [deleteImageFromApi]="deleteImageFromApi"
     (deleteClicked)="deleteClicked($event)"
     (fileSelected)="fileSelected($event)"
-    (deleteEmitter)="deleteEmitterClick(index)">
+    (deleteImageEmitter)="deleteImageEmitterClick(index)">
   </app-upload-image-item>
 
   <div class="buttons">

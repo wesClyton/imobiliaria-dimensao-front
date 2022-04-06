@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-upload-image',
   templateUrl: './upload-image.component.html',
   styleUrls: ['./upload-image.component.scss']
 })
-export class UploadImageComponent implements OnChanges {
+export class UploadImageComponent implements OnInit, OnChanges {
 
   @Input()
   public ratio = 1 / 1;
@@ -24,15 +24,19 @@ export class UploadImageComponent implements OnChanges {
   public imagesUrl = new Array<string>();
 
   @Output()
-  public deleteEmitter = new EventEmitter();
+  public deleteImageEmitter = new EventEmitter();
 
   @Input()
-  public removeImageFromApi = false;
+  public deleteImageFromApi = false;
 
   constructor() {}
 
+  ngOnInit(): void {
+    this.updateListComponentsInput();
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
-    if (!changes?.imagesUrl) {
+    if (changes?.imagesUrl) {
       this.updateListComponentsInput();
     }
   }
@@ -47,10 +51,16 @@ export class UploadImageComponent implements OnChanges {
   public fileSelected(file: File): void {
     if (!this.canSelectVariusFiles) {
       this.filesSelecteds = new Array<File>();
-    }
-    if (!this.filesSelecteds.some(fileItem => fileItem.name === file.name)) {
       this.filesSelecteds.push(file);
+      return;
     }
+
+    this.filesSelecteds.forEach((fileItem, index) => {
+      if (fileItem.name === file.name) {
+        this.filesSelecteds.splice(index, 1);
+      }
+    });
+    this.filesSelecteds.push(file);
   }
 
   public fileAdd(): void {
@@ -71,8 +81,8 @@ export class UploadImageComponent implements OnChanges {
     return array;
   }
 
-  public deleteEmitterClick(index: number): void {
-    this.deleteEmitter.emit(index);
+  public deleteImageEmitterClick(index: number): void {
+    this.deleteImageEmitter.emit(index);
   }
 
 }

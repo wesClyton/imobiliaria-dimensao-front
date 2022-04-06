@@ -297,9 +297,9 @@
         [ratio]="16 / 9"
         [canCropp]="true"
         [imagesUrl]="imagesUrl"
-        [removeImageFromApi]="true"
+        [deleteImageFromApi]="true"
         [canSelectVariusFiles]="true"
-        (deleteEmitter)="deleteImage($event)">
+        (deleteImageEmitter)="deleteImage($event)">
       </app-upload-image>
     </div>
   </div>

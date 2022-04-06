@@ -302,7 +302,7 @@ export class AnnouncementFormDetailComponent implements OnInit {
   private setValueForm(announcement: Announcement): void {
     this.form.patchValue(announcement);
     this.imagesUrl = new Array<string>();
-    this.announcement.galeria.fotos.forEach(foto => this.imagesUrl.push(this.pathImagePipe.transform(foto.nome, 'anuncios', announcement.galeria.id)));
+    announcement.galeria.fotos.forEach(foto => this.imagesUrl.push(this.pathImagePipe.transform(foto.nome, 'anuncios', announcement.galeria.id)));
 
     this.characteristicsImovelSelected = announcement.caracteristicas.filter(characteristic => characteristic.tipo === CharacteristicType.Imovel);
     this.characteristicsInstalacoesCondominioSelected = announcement.caracteristicas.filter(characteristic => characteristic.tipo === CharacteristicType.InstalacoesCondominio);
