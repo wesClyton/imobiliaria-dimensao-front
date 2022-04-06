@@ -10,6 +10,7 @@ import { AngularMaterialTableInputs } from '../../../../shared/angular-material/
 import { AngularMaterialTableActionsUtils } from '../../../../shared/angular-material/table/utils/angular-material-table-actions.utils';
 import { CrudActionBack } from '../../../../shared/components/crud-actions/interfaces/crud-action-back.interface';
 import { CrudActionNew } from '../../../../shared/components/crud-actions/interfaces/crud-action-new.interface';
+import { QueryFilterParam } from '../../../../shared/services/http/query-filter/query-filter.interface';
 import { UrlUtil } from '../../../../shared/utils/url.util';
 import { UserGetAll } from '../../interfaces/user-get-all.interface';
 import { UserUpdate } from '../../interfaces/user-update.interface';
@@ -115,8 +116,11 @@ export class UserListComponent implements OnInit, AngularMaterialTableInputs<Use
     });
   }
 
-  private getUsers(): void {
+  public getUsers(queryFilters: Array<QueryFilterParam> = new Array<QueryFilterParam>()): void {
+    this.userService.queryFilterAdd(queryFilters);
+
     this.loadingService.show();
+
     this.userService
       .getAll()
       .pipe(

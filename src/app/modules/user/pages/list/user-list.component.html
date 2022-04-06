@@ -3,7 +3,13 @@
 <app-angular-material-table
   [tableDataSource]="tableDataSource"
   [tableDisplayedColumns]="tableDisplayedColumns"
-  [tableActions]="tableActions">
+  [tableActions]="tableActions"
+  [showAdvancedSearch]="true">
+
+  <app-user-advanced-search
+    advanced-search
+    (queryFilterEmitter)="getUsers($event)">
+  </app-user-advanced-search>
 
   <ng-container matColumnDef="nome">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>

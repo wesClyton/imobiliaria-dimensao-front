@@ -1,0 +1,42 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="ativo">
+        <mat-option value="">Todos</mat-option>
+        <mat-option [value]="true">Ativo</mat-option>
+        <mat-option [value]="false">Inativo</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Nome</mat-label>
+      <input matInput type="text" formControlName="nome" placeholder="Informe um Nome">
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>E-mail</mat-label>
+      <input matInput type="email" formControlName="email" placeholder="Informe seu E-mail">
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Permissão</mat-label>
+      <mat-select formControlName="nivel">
+        <mat-option>Selecione</mat-option>
+        <ng-container appRoleOptionSelect (dataFinded)="roles = $event">
+          <mat-option *ngFor="let role of roles" [value]="role.value">
+            {{ role.name }}
+          </mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <br/>
+
+  <div fxLayoutAlign="center">
+    <button mat-raised-button type="submit" color="primary">Buscar</button>
+  </div>
+
+</form>
