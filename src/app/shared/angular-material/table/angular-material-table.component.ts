@@ -1,4 +1,4 @@
-import { AfterContentInit, AfterViewInit, Component, ContentChildren, Input, QueryList, ViewChild } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, ContentChildren, EventEmitter, Input, Output, QueryList, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatColumnDef, MatTable, MatTableDataSource } from '@angular/material/table';
@@ -16,9 +16,9 @@ export class AngularMaterialTableComponent<T>
   implements AfterViewInit, AfterContentInit, AngularMaterialTableInputs<T>, AngularMaterialTable<T> {
 
   @Input()
-  public showAdvancedSearch = false;
+  public tableShowAdvancedSearch = false;
 
-  public showForm = false;
+  public tableShowForm = false;
 
   @Input()
   public tableFilterInputTextPlaceholder = 'Informe o filtro';
@@ -50,12 +50,18 @@ export class AngularMaterialTableComponent<T>
   @ContentChildren(MatColumnDef)
   public tableColumnDefs!: QueryList<MatColumnDef>;
 
+  @Input()
+  public tableShowActions = true;
+
+  @Output()
+  public tableMenuActionsClicked = new EventEmitter<T>();
+
   constructor() { }
 
   ngAfterViewInit(): void {
     this.tableDataSource.paginator = this.tablePaginator;
     this.tableDataSource.sort = this.tableSort;
-    if (this.tableActions) {
+    if (this.tableShowActions) {
       this.tableDisplayedColumns.push('actions');
     }
   }
@@ -80,7 +86,11 @@ export class AngularMaterialTableComponent<T>
   }
 
   public toggleAdvancedSearch(): void {
-    this.showForm = !this.showForm;
+    this.tableShowForm = !this.tableShowForm;
+  }
+
+  public actionsClick(type: T): void {
+    this.tableMenuActionsClicked.emit(type);
   }
 
 }

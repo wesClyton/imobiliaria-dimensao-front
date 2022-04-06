@@ -5,7 +5,8 @@ export class AngularMaterialTableActionsUtils {
   public static detailDefault(): AngularMaterialTableActionsItem<any> {
     return {
       label: 'Detalhes',
-      icon: 'pageview'
+      icon: 'pageview',
+      visible: true
     }
   }
 
@@ -14,21 +15,24 @@ export class AngularMaterialTableActionsUtils {
       label: 'Excluir',
       labelColor: 'warn',
       icon: 'delete',
-      iconColor: 'warn'
+      iconColor: 'warn',
+      visible: true
     }
   }
 
   public static activeDefault(): AngularMaterialTableActionsItem<any> {
     return {
       label: 'Ativar',
-      icon: 'check_circle'
+      icon: 'check_circle',
+      visible: true
     }
   }
 
   public static inactiveDefault(): AngularMaterialTableActionsItem<any> {
     return {
       label: 'Inativar',
-      icon: 'block'
+      icon: 'block',
+      visible: true
     }
   }
 

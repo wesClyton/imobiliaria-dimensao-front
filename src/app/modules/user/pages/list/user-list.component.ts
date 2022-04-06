@@ -29,26 +29,7 @@ export class UserListComponent implements OnInit, AngularMaterialTableInputs<Use
 
   public tableDisplayedColumns = ['nome', 'email', 'nivel', 'ativo'];
 
-  public tableActions: AngularMaterialTableActions<User> = {
-    items: [
-      {
-        ...AngularMaterialTableActionsUtils.detailDefault(),
-        action: user => this.navigateDetail(user)
-      },
-      {
-        ...AngularMaterialTableActionsUtils.activeDefault(),
-        action: user => this.activate(user)
-      },
-      {
-        ...AngularMaterialTableActionsUtils.inactiveDefault(),
-        action: user => this.inactivate(user)
-      },
-      {
-        ...AngularMaterialTableActionsUtils.deleteDefault(),
-        action: user => this.delete(user)
-      }
-    ]
-  };
+  public tableActions!: AngularMaterialTableActions<User>;
 
   constructor(
     private readonly router: Router,
@@ -64,19 +45,35 @@ export class UserListComponent implements OnInit, AngularMaterialTableInputs<Use
     this.tableLoadContent(this.userGetAll);
   }
 
-  private activate(user: User): void {
-    const userUpdate: UserUpdate = {
-      id: user.id,
-      ativo: true
-    } as UserUpdate;
-
-    this.userService.put(userUpdate).pipe(take(1)).subscribe(() => this.getUsers());
+  public createActions(user: User): void {
+    this.tableActions = {
+      items: [
+        {
+          ...AngularMaterialTableActionsUtils.detailDefault(),
+          action: user => this.navigateDetail(user)
+        },
+        {
+          ...AngularMaterialTableActionsUtils.activeDefault(),
+          action: user => this.updateStatus(user),
+          visible: !user.ativo
+        },
+        {
+          ...AngularMaterialTableActionsUtils.inactiveDefault(),
+          action: user => this.updateStatus(user),
+          visible: user.ativo
+        },
+        {
+          ...AngularMaterialTableActionsUtils.deleteDefault(),
+          action: user => this.delete(user)
+        }
+      ]
+    };
   }
 
-  private inactivate(user: User): void {
+  private updateStatus(user: User): void {
     const userUpdate: UserUpdate = {
       id: user.id,
-      ativo: false
+      ativo: !user.ativo
     } as UserUpdate;
 
     this.userService.put(userUpdate).pipe(take(1)).subscribe(() => this.getUsers());

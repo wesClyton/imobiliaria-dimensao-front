@@ -30,26 +30,7 @@ export class BannerListComponent implements OnInit, AngularMaterialTableInputs<B
 
   public tableDisplayedColumns = ['foto', 'nome', 'link', 'ativo'];
 
-  public tableActions: AngularMaterialTableActions<Banner> = {
-    items: [
-      {
-        ...AngularMaterialTableActionsUtils.detailDefault(),
-        action: banner => this.navigateDetail(banner)
-      },
-      {
-        ...AngularMaterialTableActionsUtils.activeDefault(),
-        action: banner => this.activate(banner)
-      },
-      {
-        ...AngularMaterialTableActionsUtils.inactiveDefault(),
-        action: banner => this.inactivate(banner)
-      },
-      {
-        ...AngularMaterialTableActionsUtils.deleteDefault(),
-        action: banner => this.delete(banner)
-      }
-    ]
-  };
+  public tableActions!: AngularMaterialTableActions<Banner>;
 
   constructor(
     private readonly router: Router,
@@ -65,19 +46,35 @@ export class BannerListComponent implements OnInit, AngularMaterialTableInputs<B
     this.tableLoadContent(this.bannerGetAll);
   }
 
-  private activate(banner: Banner): void {
-    const bannerUpdate: BannerUpdate = {
-      id: banner.id,
-      ativo: true
-    } as BannerUpdate;
-
-    this.bannerService.put(bannerUpdate).pipe(take(1)).subscribe(() => this.getBanners());
+  public createActions(banner: Banner): void {
+    this.tableActions = {
+      items: [
+        {
+          ...AngularMaterialTableActionsUtils.detailDefault(),
+          action: banner => this.navigateDetail(banner)
+        },
+        {
+          ...AngularMaterialTableActionsUtils.activeDefault(),
+          action: banner => this.updateStatus(banner),
+          visible: !banner.ativo
+        },
+        {
+          ...AngularMaterialTableActionsUtils.inactiveDefault(),
+          action: banner => this.updateStatus(banner),
+          visible: banner.ativo
+        },
+        {
+          ...AngularMaterialTableActionsUtils.deleteDefault(),
+          action: banner => this.delete(banner)
+        }
+      ]
+    }
   }
 
-  private inactivate(banner: Banner): void {
+  private updateStatus(banner: Banner): void {
     const bannerUpdate: BannerUpdate = {
       id: banner.id,
-      ativo: false
+      ativo: !banner.ativo
     } as BannerUpdate;
 
     this.bannerService.put(bannerUpdate).pipe(take(1)).subscribe(() => this.getBanners());

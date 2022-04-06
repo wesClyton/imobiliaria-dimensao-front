@@ -30,26 +30,7 @@ export class BrokerListComponent implements OnInit, AngularMaterialTableInputs<B
 
   public tableDisplayedColumns = ['foto', 'nome', 'email', 'telefone', 'whatsapp', 'ativo'];
 
-  public tableActions: AngularMaterialTableActions<Broker> = {
-    items: [
-      {
-        ...AngularMaterialTableActionsUtils.detailDefault(),
-        action: broker => this.navigateDetail(broker)
-      },
-      {
-        ...AngularMaterialTableActionsUtils.activeDefault(),
-        action: broker => this.activate(broker)
-      },
-      {
-        ...AngularMaterialTableActionsUtils.inactiveDefault(),
-        action: broker => this.inactivate(broker)
-      },
-      {
-        ...AngularMaterialTableActionsUtils.deleteDefault(),
-        action: broker => this.delete(broker)
-      }
-    ]
-  };
+  public tableActions!: AngularMaterialTableActions<Broker>;
 
   constructor(
     private readonly router: Router,
@@ -65,10 +46,35 @@ export class BrokerListComponent implements OnInit, AngularMaterialTableInputs<B
     this.tableLoadContent(this.brokerGetAll);
   }
 
-  private activate(broker: Broker): void {
+  public createActions(broker: Broker): void {
+    this.tableActions = {
+      items: [
+        {
+          ...AngularMaterialTableActionsUtils.detailDefault(),
+          action: broker => this.navigateDetail(broker)
+        },
+        {
+          ...AngularMaterialTableActionsUtils.activeDefault(),
+          action: broker => this.updateStatus(broker),
+          visible: !broker.ativo
+        },
+        {
+          ...AngularMaterialTableActionsUtils.inactiveDefault(),
+          action: broker => this.updateStatus(broker),
+          visible: broker.ativo
+        },
+        {
+          ...AngularMaterialTableActionsUtils.deleteDefault(),
+          action: broker => this.delete(broker)
+        }
+      ]
+    }
+  }
+
+  private updateStatus(broker: Broker): void {
     const brokerUpdate: BrokerUpdate = {
       id: broker.id,
-      ativo: true
+      ativo: !broker.ativo
     } as BrokerUpdate;
 
     this.brokerService.put(brokerUpdate).pipe(take(1)).subscribe(() => this.getBrokers());

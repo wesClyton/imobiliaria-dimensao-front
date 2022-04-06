@@ -29,26 +29,7 @@ export class AnnouncementListComponent implements OnInit, AngularMaterialTableIn
 
   public tableDisplayedColumns = ['codigoAnuncio', 'titulo', 'tipo', 'expiracaoAnuncio', 'cidade', 'ativo'];
 
-  public tableActions: AngularMaterialTableActions<Announcement> = {
-    items: [
-      {
-        ...AngularMaterialTableActionsUtils.detailDefault(),
-        action: announcement => this.navigateDetail(announcement)
-      },
-      {
-        ...AngularMaterialTableActionsUtils.activeDefault(),
-        action: announcement => this.activate(announcement)
-      },
-      {
-        ...AngularMaterialTableActionsUtils.inactiveDefault(),
-        action: announcement => this.inactivate(announcement)
-      },
-      {
-        ...AngularMaterialTableActionsUtils.deleteDefault(),
-        action: announcement => this.delete(announcement)
-      }
-    ]
-  };
+  public tableActions!: AngularMaterialTableActions<Announcement>;
 
   constructor(
     private readonly router: Router,
@@ -64,19 +45,35 @@ export class AnnouncementListComponent implements OnInit, AngularMaterialTableIn
     this.tableLoadContent(this.announcementGetAll);
   }
 
-  private activate(announcement: Announcement): void {
-    const announcementUpdate: AnnouncementUpdate = {
-      id: announcement.id,
-      ativo: true
-    } as AnnouncementUpdate;
-
-    this.announcementService.put(announcementUpdate).pipe(take(1)).subscribe(() => this.getAnnouncements());
+  public createActions(announcement: Announcement): void {
+    this.tableActions = {
+      items: [
+        {
+          ...AngularMaterialTableActionsUtils.detailDefault(),
+          action: announcement => this.navigateDetail(announcement)
+        },
+        {
+          ...AngularMaterialTableActionsUtils.activeDefault(),
+          action: announcement => this.updateStatus(announcement),
+          visible: !announcement.ativo
+        },
+        {
+          ...AngularMaterialTableActionsUtils.inactiveDefault(),
+          action: announcement => this.updateStatus(announcement),
+          visible: announcement.ativo
+        },
+        {
+          ...AngularMaterialTableActionsUtils.deleteDefault(),
+          action: announcement => this.delete(announcement)
+        }
+      ]
+    };
   }
 
-  private inactivate(announcement: Announcement): void {
+  private updateStatus(announcement: Announcement): void {
     const announcementUpdate: AnnouncementUpdate = {
       id: announcement.id,
-      ativo: false
+      ativo: !announcement.ativo
     } as AnnouncementUpdate;
 
     this.announcementService.put(announcementUpdate).pipe(take(1)).subscribe(() => this.getAnnouncements());

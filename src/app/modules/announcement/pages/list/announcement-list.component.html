@@ -4,7 +4,8 @@
   [tableDataSource]="tableDataSource"
   [tableDisplayedColumns]="tableDisplayedColumns"
   [tableActions]="tableActions"
-  [showAdvancedSearch]="true">
+  [tableShowAdvancedSearch]="true"
+  (tableMenuActionsClicked)="createActions($event)">
 
   <app-announcement-advanced-search
     advanced-search
