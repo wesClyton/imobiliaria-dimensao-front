@@ -18,6 +18,7 @@ export class CharacteristicGetAllResolver implements Resolve<CharacteristicGetAl
 
   public resolve(): Observable<CharacteristicGetAll> {
     this.loadingService.show();
+    this.characteristicService.queryFilterRemove();
     return this.characteristicService
       .getAll()
       .pipe(

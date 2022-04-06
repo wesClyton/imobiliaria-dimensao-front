@@ -18,6 +18,7 @@ export class BrokerGetAllResolver implements Resolve<BrokerGetAll> {
 
   public resolve(): Observable<BrokerGetAll> {
     this.loadingService.show();
+    this.brokerService.queryFilterRemove();
     return this.brokerService
       .getAll()
       .pipe(

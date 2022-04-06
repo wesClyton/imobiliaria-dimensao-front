@@ -18,6 +18,7 @@ export class BannerGetAllResolver implements Resolve<BannerGetAll>{
 
   public resolve(): Observable<BannerGetAll> {
     this.loadingService.show();
+    this.bannerService.queryFilterRemove();
     return this.bannerService
       .getAll()
       .pipe(

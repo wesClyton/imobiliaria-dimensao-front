@@ -18,6 +18,7 @@ export class UserGetAllResolver implements Resolve<UserGetAll> {
 
   public resolve(): Observable<UserGetAll> {
     this.loadingService.show();
+    this.userService.queryFilterRemove();
     return this.userService
       .getAll()
       .pipe(

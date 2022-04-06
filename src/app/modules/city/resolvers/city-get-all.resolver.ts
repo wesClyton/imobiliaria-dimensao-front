@@ -18,6 +18,7 @@ export class CityGetAllResolver implements Resolve<CityGetAll> {
 
   public resolve(): Observable<CityGetAll> {
     this.loadingService.show();
+    this.cityService.queryFilterRemove();
     return this.cityService
       .getAll()
       .pipe(

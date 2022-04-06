@@ -18,6 +18,7 @@ export class StateGetAllResolver implements Resolve<StateGetAll> {
 
   public resolve(): Observable<StateGetAll> {
     this.loadingService.show();
+    this.stateService.queryFilterRemove();
     return this.stateService
       .getAll()
       .pipe(

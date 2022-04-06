@@ -18,6 +18,7 @@ export class AnnouncementGetAllResolver implements Resolve<AnnouncementGetAll>{
 
   public resolve(): Observable<AnnouncementGetAll> {
     this.loadingService.show();
+    this.announcementService.queryFilterRemove();
     return this.announcementService
       .getAll()
       .pipe(
