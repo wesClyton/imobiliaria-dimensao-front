@@ -10,6 +10,7 @@ import { AngularMaterialTableInputs } from '../../../../shared/angular-material/
 import { AngularMaterialTableActionsUtils } from '../../../../shared/angular-material/table/utils/angular-material-table-actions.utils';
 import { CrudActionBack } from '../../../../shared/components/crud-actions/interfaces/crud-action-back.interface';
 import { CrudActionNew } from '../../../../shared/components/crud-actions/interfaces/crud-action-new.interface';
+import { QueryFilterParam } from '../../../../shared/services/http/query-filter/query-filter.interface';
 import { UrlUtil } from '../../../../shared/utils/url.util';
 import { CharacteristicGetAll } from '../../interfaces/characteristic-get-all.interface';
 import { Characteristic } from '../../interfaces/characteristic.interface';
@@ -80,12 +81,15 @@ export class CharacteristicListComponent implements OnInit, AngularMaterialTable
 
     this.characteristicService.delete(characteristic.id).subscribe(() => {
       this.notificationService.success(`Característica ${characteristic.nome} excluída com sucesso!`);
-      this.getCharacteristic();
+      this.getCharacteristics();
     });
   }
 
-  private getCharacteristic(): void {
+  public getCharacteristics(queryFilters: Array<QueryFilterParam> = new Array<QueryFilterParam>()): void {
+    this.characteristicService.queryFilterAdd(queryFilters);
+
     this.loadingService.show();
+
     this.characteristicService
       .getAll()
       .pipe(
