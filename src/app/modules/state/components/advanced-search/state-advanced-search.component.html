@@ -1,0 +1,28 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Nome</mat-label>
+      <input matInput type="text" formControlName="nome" placeholder="Informe um Nome">
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Estado</mat-label>
+      <mat-select formControlName="uf">
+        <mat-option>Selecione</mat-option>
+        <ng-container appStateBrOptionSelect (dataFinded)="states = $event">
+          <mat-option *ngFor="let state of states" [value]="state.uf">
+            {{ state.name }}
+          </mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <br/>
+
+  <div fxLayoutAlign="center">
+    <button mat-raised-button type="submit" color="primary">Buscar</button>
+  </div>
+
+</form>

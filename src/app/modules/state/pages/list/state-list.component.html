@@ -4,7 +4,13 @@
   [tableDataSource]="tableDataSource"
   [tableDisplayedColumns]="tableDisplayedColumns"
   [tableActions]="tableActions"
-  [tableFilterInputTextPlaceholder]="tableFilterInputTextPlaceholder">
+  [tableFilterInputTextPlaceholder]="tableFilterInputTextPlaceholder"
+  [showAdvancedSearch]="true">
+
+  <app-state-advanced-search
+    advanced-search
+    (queryFilterEmitter)="getStates($event)">
+  </app-state-advanced-search>
 
   <ng-container matColumnDef="nome">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
