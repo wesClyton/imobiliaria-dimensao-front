@@ -14,6 +14,7 @@ import { QueryFilterParam } from '../../../../shared/services/http/query-filter/
 import { UrlUtil } from '../../../../shared/utils/url.util';
 import { Banner } from '../../interfaces/banner-create.interface';
 import { BannerGetAll } from '../../interfaces/banner-get-all.interface';
+import { BannerUpdate } from '../../interfaces/banner-update.interface';
 import { BannerService } from '../../services/banner.service';
 
 @Component({
@@ -36,6 +37,14 @@ export class BannerListComponent implements OnInit, AngularMaterialTableInputs<B
         action: banner => this.navigateDetail(banner)
       },
       {
+        ...AngularMaterialTableActionsUtils.activeDefault(),
+        action: banner => this.activate(banner)
+      },
+      {
+        ...AngularMaterialTableActionsUtils.inactiveDefault(),
+        action: banner => this.inactivate(banner)
+      },
+      {
         ...AngularMaterialTableActionsUtils.deleteDefault(),
         action: banner => this.delete(banner)
       }
@@ -54,6 +63,24 @@ export class BannerListComponent implements OnInit, AngularMaterialTableInputs<B
   ngOnInit(): void {
     this.bannerGetAll = this.activatedRoute.snapshot.data.bannerGetAll;
     this.tableLoadContent(this.bannerGetAll);
+  }
+
+  private activate(banner: Banner): void {
+    const bannerUpdate: BannerUpdate = {
+      id: banner.id,
+      ativo: true
+    } as BannerUpdate;
+
+    this.bannerService.put(bannerUpdate).pipe(take(1)).subscribe(() => this.getBanners());
+  }
+
+  private inactivate(banner: Banner): void {
+    const bannerUpdate: BannerUpdate = {
+      id: banner.id,
+      ativo: false
+    } as BannerUpdate;
+
+    this.bannerService.put(bannerUpdate).pipe(take(1)).subscribe(() => this.getBanners());
   }
 
   private tableLoadContent(banners: BannerGetAll): void {
