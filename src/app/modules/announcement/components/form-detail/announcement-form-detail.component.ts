@@ -158,7 +158,7 @@ export class AnnouncementFormDetailComponent implements OnInit {
     return this.form?.get('areaTotal');
   }
 
-  private get controlDestaque(): AbstractControl | null {
+  public get controlDestaque(): AbstractControl | null {
     return this.form?.get('destaque');
   }
 
@@ -202,7 +202,7 @@ export class AnnouncementFormDetailComponent implements OnInit {
     return this.form?.get('valorCondominio');
   }
 
-  private get controlAtivo(): AbstractControl | null {
+  public get controlAtivo(): AbstractControl | null {
     return this.form?.get('ativo');
   }
 

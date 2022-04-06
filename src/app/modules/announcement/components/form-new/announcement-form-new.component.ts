@@ -150,7 +150,7 @@ export class AnnouncementFormNewComponent implements OnInit, OnDestroy {
     return this.form?.get('areaTotal');
   }
 
-  private get controlDestaque(): AbstractControl | null {
+  public get controlDestaque(): AbstractControl | null {
     return this.form?.get('destaque');
   }
 

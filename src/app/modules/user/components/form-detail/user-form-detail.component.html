@@ -1,7 +1,8 @@
 <form [formGroup]="form">
 
+  <h3>Status</h3>
   <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
-    <mat-slide-toggle fxFlex formControlName="ativo">Ativo</mat-slide-toggle>
+    <mat-slide-toggle fxFlex="10" formControlName="ativo">{{ controlAtivo?.value | activeInactive }}</mat-slide-toggle>
   </div>
 
   <br/>
@@ -41,13 +42,13 @@
     </mat-form-field>
   </div>
 
-  <br />
+  <br/>
 
   <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
     <mat-slide-toggle fxFlex formControlName="changePassword">Alterar senha?</mat-slide-toggle>
   </div>
 
-  <br />
+  <br/>
 
   <div *ngIf="isChangePassword" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
     <mat-form-field fxFlex>

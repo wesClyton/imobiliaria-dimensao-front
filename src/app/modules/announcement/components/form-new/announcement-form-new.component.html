@@ -1,13 +1,18 @@
 <form [formGroup]="form">
 
-  <h3>Informações</h3>
   <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
-    <mat-slide-toggle fxFlex formControlName="destaque">Destaque</mat-slide-toggle>
+    <div fxFlex="10">
+      <h3>Destaque</h3>
+      <mat-slide-toggle formControlName="destaque">
+        {{ controlDestaque?.value | yesNo }}
+      </mat-slide-toggle>
+    </div>
   </div>
 
   <br/>
   <br/>
 
+  <h3>Informações</h3>
   <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
     <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
       <mat-label>Código de Anúncio</mat-label>

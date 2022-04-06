@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { PipesModule } from '../../../shared/pipes/pipes.module';
 import { AuthDirectiveModule } from '../../auth/directives/auth-directive.module';
 import { UserFormDetailComponent } from './form-detail/user-form-detail.component';
 import { UserFormNewComponent } from './form-new/user-form-new.component';
@@ -22,7 +23,8 @@ import { UserFormNewComponent } from './form-new/user-form-new.component';
     MatSelectModule,
     MatInputModule,
     AuthDirectiveModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    PipesModule
   ],
   exports: [
     UserFormDetailComponent,

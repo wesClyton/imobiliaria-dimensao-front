@@ -1,15 +1,15 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { QueryFilter } from '../../services/http/query-filter/query-filter';
 import { QueryFilterParam } from '../../services/http/query-filter/query-filter.interface';
 
 @Component({
-  selector: 'app-advanced-search',
+  selector: 'app-advanced-search-base',
   template: ''
 })
-export class AdvancedSearchComponent {
+export class AdvancedSearchBaseComponent implements OnInit {
 
-  public form = new FormGroup({});
+  public readonly form = new FormGroup({});
 
   public fields = new Array<string>();
 
@@ -18,7 +18,11 @@ export class AdvancedSearchComponent {
 
   constructor() {}
 
-  public createForm(): void {
+  ngOnInit(): void {
+    this.createForm();
+  }
+
+  private createForm(): void {
     this.fields.forEach(field => this.form.addControl(field, new FormControl(null)));
   }
 

@@ -1,5 +1,13 @@
 <form [formGroup]="form">
 
+  <h3>Status</h3>
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <mat-slide-toggle fxFlex="10" formControlName="ativo">{{ controlAtivo?.value | activeInactive }}</mat-slide-toggle>
+  </div>
+
+  <br/>
+  <br/>
+
   <h3>Foto</h3>
   <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
     <div fxFlex="100">
@@ -82,14 +90,6 @@
       <mat-label>LinkedIn</mat-label>
       <input matInput type="text" formControlName="linkedin" placeholder="Informe um LinkedIn">
     </mat-form-field>
-  </div>
-
-  <br/>
-  <br/>
-
-  <h3>Status</h3>
-  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
-    <mat-slide-toggle fxFlex formControlName="ativo">{{ controlAtivo?.value | activeInactive }}</mat-slide-toggle>
   </div>
 
 </form>

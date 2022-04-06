@@ -1,36 +1,15 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { QueryFilter } from '../../../../shared/services/http/query-filter/query-filter';
-import { QueryFilterParam } from '../../../../shared/services/http/query-filter/query-filter.interface';
+import { Component } from '@angular/core';
+import { AdvancedSearchBaseComponent } from '../../../../shared/components/advanced-search-base/advanced-search-base.component';
 
 @Component({
   selector: 'app-banner-advanced-search',
   templateUrl: 'banner-advanced-search.component.html'
 })
-export class BannerAdvancedSearchComponent implements OnInit {
+export class BannerAdvancedSearchComponent extends AdvancedSearchBaseComponent {
 
-  public form!: FormGroup;
-
-  @Output()
-  public queryFilterEmitter = new EventEmitter<Array<QueryFilterParam>>()
-
-  constructor(
-    private readonly formBuilder: FormBuilder
-  ) {}
-
-  ngOnInit(): void {
-    this.createForm();
-  }
-
-  private createForm(): void {
-    this.form = this.formBuilder.group({
-      ativo: new FormControl(null),
-      nome: new FormControl(null)
-    });
-  }
-
-  public submit(): void {
-    this.queryFilterEmitter.emit(QueryFilter.createArrayFromKeyValue(this.form.value));
+  constructor() {
+    super();
+    super.fields = ['ativo', 'nome'];
   }
 
 }

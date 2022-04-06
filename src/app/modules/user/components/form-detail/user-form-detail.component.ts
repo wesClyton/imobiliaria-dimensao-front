@@ -52,7 +52,7 @@ export class UserFormDetailComponent implements OnInit {
     return this.controlPassword?.dirty || this.controlPassword?.hasError('required');
   }
 
-  private get controlAtivo(): AbstractControl | null {
+  public get controlAtivo(): AbstractControl | null {
     return this.form?.get('ativo');
   }
 
