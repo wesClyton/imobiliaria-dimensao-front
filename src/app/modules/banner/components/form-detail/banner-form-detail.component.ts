@@ -89,15 +89,14 @@ export class BannerFormDetailComponent implements OnInit {
     }
 
     const fileUpload: File = this.updaloadPhotoComponent.filesSelecteds[0];
-    if (!fileUpload) {
-      this.notificationService.error('Faça o upload da imagem.');
-      return;
-    }
 
     const formData = new FormData();
-    formData.append('foto', fileUpload);
+    if (fileUpload) {
+      formData.append('foto', fileUpload);
+    }
     formData.append('nome', this.controlNome?.value);
     formData.append('link', this.controlLink?.value);
+    formData.append('ativo', this.controlAtivo?.value);
 
     this.loadinService.show();
 

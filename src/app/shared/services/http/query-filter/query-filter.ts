@@ -9,6 +9,21 @@ export class QueryFilter {
     };
   }
 
+  public static createArrayFromKeyValue(object: { [key: string]: any }): Array<QueryFilterParam> {
+    const queryFilters = new Array<QueryFilterParam>();
+
+    Object.keys(object).forEach(key => {
+      if (object[key] || object[key] === false) {
+        queryFilters.push(this.create({
+          field: key,
+          value: object[key]
+        }));
+      }
+    });
+
+    return queryFilters;
+  }
+
   public static concat(queryFilter: QueryFilterParam | Array<QueryFilterParam>, currentQuery: string): string {
     let newQuery = '';
 

@@ -10,6 +10,7 @@ import { AngularMaterialTableInputs } from '../../../../shared/angular-material/
 import { AngularMaterialTableActionsUtils } from '../../../../shared/angular-material/table/utils/angular-material-table-actions.utils';
 import { CrudActionBack } from '../../../../shared/components/crud-actions/interfaces/crud-action-back.interface';
 import { CrudActionNew } from '../../../../shared/components/crud-actions/interfaces/crud-action-new.interface';
+import { QueryFilterParam } from '../../../../shared/services/http/query-filter/query-filter.interface';
 import { UrlUtil } from '../../../../shared/utils/url.util';
 import { Banner } from '../../interfaces/banner-create.interface';
 import { BannerGetAll } from '../../interfaces/banner-get-all.interface';
@@ -26,7 +27,7 @@ export class BannerListComponent implements OnInit, AngularMaterialTableInputs<B
 
   public tableDataSource!: MatTableDataSource<Banner>;
 
-  public tableDisplayedColumns = ['foto', 'nome', 'link'];
+  public tableDisplayedColumns = ['foto', 'nome', 'link', 'ativo'];
 
   public tableActions: AngularMaterialTableActions<Banner> = {
     items: [
@@ -81,11 +82,11 @@ export class BannerListComponent implements OnInit, AngularMaterialTableInputs<B
 
     this.bannerService.delete(banner.id).subscribe(() => {
       this.notificationService.success(`Banner ${banner.nome} excluído com sucesso!`);
-      this.getCharacteristic();
+      this.getBanners();
     });
   }
 
-  private getCharacteristic(): void {
+  private getBanners(): void {
     this.loadingService.show();
     this.bannerService
       .getAll()
@@ -94,6 +95,11 @@ export class BannerListComponent implements OnInit, AngularMaterialTableInputs<B
         finalize(() => this.loadingService.hide())
       )
       .subscribe(banners => this.tableLoadContent(banners));
+  }
+
+  public queryFilterChanged(queryFilters: Array<QueryFilterParam>): void {
+    this.bannerService.getAllAddQueryFilter(queryFilters);
+    this.getBanners();
   }
 
 }

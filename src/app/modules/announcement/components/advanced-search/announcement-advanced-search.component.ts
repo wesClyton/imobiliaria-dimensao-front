@@ -33,7 +33,7 @@ export class AnnouncementAdvancedSearchComponent implements OnInit {
 
   private createForm(): void {
     this.form = this.formBuilder.group({
-      ativo: new FormControl(true),
+      ativo: new FormControl(null),
       tipo: new FormControl(null),
       cidadeId: new FormControl(null),
       bairro: new FormControl(null),
@@ -55,18 +55,7 @@ export class AnnouncementAdvancedSearchComponent implements OnInit {
   }
 
   public submit(): void {
-    const queryFilters = new Array<QueryFilterParam>();
-
-    Object.keys(this.form.value).forEach(key => {
-      if (this.form.get(key)?.value) {
-        queryFilters.push(QueryFilter.create({
-          field: key,
-          value: this.form.get(key)?.value
-        }));
-      }
-    });
-
-    this.queryFilterEmitter.emit(queryFilters);
+    this.queryFilterEmitter.emit(QueryFilter.createArrayFromKeyValue(this.form.value));
   }
 
 }

@@ -3,7 +3,13 @@
 <app-angular-material-table
   [tableDataSource]="tableDataSource"
   [tableDisplayedColumns]="tableDisplayedColumns"
-  [tableActions]="tableActions">
+  [tableActions]="tableActions"
+  [showAdvancedSearch]="true">
+
+  <app-banner-advanced-search
+    advanced-search
+    (queryFilterEmitter)="queryFilterChanged($event)">
+  </app-banner-advanced-search>
 
   <ng-container matColumnDef="foto">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Foto</th>
@@ -22,6 +28,11 @@
     <td mat-cell *matCellDef="let row">
       <a mat-stroked-button color="accent" [href]="row.link" target="_blank">{{ row.link }}</a>
     </td>
+  </ng-container>
+
+  <ng-container matColumnDef="ativo">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+    <td mat-cell *matCellDef="let row">{{ row.ativo | activeInactive }}</td>
   </ng-container>
 
 </app-angular-material-table>

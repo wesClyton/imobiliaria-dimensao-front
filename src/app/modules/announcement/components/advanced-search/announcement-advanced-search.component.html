@@ -1,13 +1,21 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
 
   <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
-    <mat-slide-toggle fxFlex="10" formControlName="ativo">Ativos</mat-slide-toggle>
     <mat-slide-toggle fxFlex="10" formControlName="destaque">Destaques</mat-slide-toggle>
   </div>
 
   <br/>
 
   <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="ativo">
+        <mat-option value="">Todos</mat-option>
+        <mat-option [value]="true">Ativo</mat-option>
+        <mat-option [value]="false">Inativo</mat-option>
+      </mat-select>
+    </mat-form-field>
+
     <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
       <mat-label>Código de anúncio</mat-label>
       <input matInput type="text" formControlName="codigoAnuncio" placeholder="Informe um Código de anúncio">
