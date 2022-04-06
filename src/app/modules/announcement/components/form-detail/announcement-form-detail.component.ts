@@ -309,15 +309,15 @@ export class AnnouncementFormDetailComponent implements OnInit {
   }
 
   private filterCharacteristicsImovel(value: string): void {
-    this.characteristicService.getAllRemoveQueryFilter();
+    this.characteristicService.queryFilterRemove();
 
     if (typeof value === 'string') {
-      this.characteristicService.getAllAddQueryFilter({
+      this.characteristicService.queryFilterAdd({
         field: 'nome',
         value: value
       });
     }
-    this.characteristicService.getAllAddQueryFilter({
+    this.characteristicService.queryFilterAdd({
       field: 'tipo',
       value: CharacteristicType.Imovel
     });
@@ -355,15 +355,15 @@ export class AnnouncementFormDetailComponent implements OnInit {
   }
 
   private filterCharacteristicsInstalacoesCondominio(value: string): void {
-    this.characteristicService.getAllRemoveQueryFilter();
+    this.characteristicService.queryFilterRemove();
 
     if (typeof value === 'string') {
-      this.characteristicService.getAllAddQueryFilter({
+      this.characteristicService.queryFilterAdd({
         field: 'nome',
         value: value
       });
     }
-    this.characteristicService.getAllAddQueryFilter({
+    this.characteristicService.queryFilterAdd({
       field: 'tipo',
       value: CharacteristicType.InstalacoesCondominio
     });

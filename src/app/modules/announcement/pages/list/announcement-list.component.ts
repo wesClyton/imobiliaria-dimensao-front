@@ -124,7 +124,7 @@ export class AnnouncementListComponent implements OnInit, AngularMaterialTableIn
   }
 
   public queryFilterChanged(queryFilters: Array<QueryFilterParam>): void {
-    this.announcementService.getAllAddQueryFilter(queryFilters);
+    this.announcementService.queryFilterAdd(queryFilters);
     this.getAnnouncements();
   }
 

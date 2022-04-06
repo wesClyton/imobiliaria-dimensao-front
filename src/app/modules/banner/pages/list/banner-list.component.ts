@@ -98,7 +98,7 @@ export class BannerListComponent implements OnInit, AngularMaterialTableInputs<B
   }
 
   public queryFilterChanged(queryFilters: Array<QueryFilterParam>): void {
-    this.bannerService.getAllAddQueryFilter(queryFilters);
+    this.bannerService.queryFilterAdd(queryFilters);
     this.getBanners();
   }
 

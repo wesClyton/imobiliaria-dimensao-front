@@ -17,9 +17,7 @@ import { QueryFilterParam } from '../query-filter/query-filter.interface';
 export class HttpCrudService<PostIn, PostOut, GetAll, GetById, PutIn, PutOut>
   implements HttpPost<PostIn, PostOut>, HttpGetAll<GetAll>, HttpGetById<GetById>, HttpPut<PutIn, PutOut>, HttpDelete {
 
-  private getAllQueryFilter = '';
-
-  private getByIdQueryFilter = '';
+  private queryFilter = '';
 
   constructor(
     public readonly httpClient: HttpClient,
@@ -41,17 +39,17 @@ export class HttpCrudService<PostIn, PostOut, GetAll, GetById, PutIn, PutOut>
       );
   }
 
-  public getAllAddQueryFilter(query: QueryFilterParam | Array<QueryFilterParam>): void {
-    this.getAllQueryFilter = QueryFilter.concat(query, this.getAllQueryFilter);
+  public queryFilterAdd(query: QueryFilterParam | Array<QueryFilterParam>): void {
+    this.queryFilter = QueryFilter.concat(query, this.queryFilter);
   }
 
-  public getAllRemoveQueryFilter(): void {
-    this.getAllQueryFilter = '';
+  public queryFilterRemove(): void {
+    this.queryFilter = '';
   }
 
   public getAll(): Observable<GetAll> {
     return this.httpClient
-      .get<GetAll>(`${this.endPointPlural}${this.getAllQueryFilter}`)
+      .get<GetAll>(`${this.endPointPlural}${this.queryFilter}`)
       .pipe(
         catchError((error) => {
           this.exceptionService.handleError(error);
