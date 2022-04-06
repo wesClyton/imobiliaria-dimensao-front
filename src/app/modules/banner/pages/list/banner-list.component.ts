@@ -86,8 +86,11 @@ export class BannerListComponent implements OnInit, AngularMaterialTableInputs<B
     });
   }
 
-  private getBanners(): void {
+  public getBanners(queryFilters: Array<QueryFilterParam> = new Array<QueryFilterParam>()): void {
+    this.bannerService.queryFilterAdd(queryFilters);
+
     this.loadingService.show();
+
     this.bannerService
       .getAll()
       .pipe(
@@ -95,11 +98,6 @@ export class BannerListComponent implements OnInit, AngularMaterialTableInputs<B
         finalize(() => this.loadingService.hide())
       )
       .subscribe(banners => this.tableLoadContent(banners));
-  }
-
-  public queryFilterChanged(queryFilters: Array<QueryFilterParam>): void {
-    this.bannerService.queryFilterAdd(queryFilters);
-    this.getBanners();
   }
 
 }

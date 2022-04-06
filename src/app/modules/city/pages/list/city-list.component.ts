@@ -10,6 +10,7 @@ import { AngularMaterialTableInputs } from '../../../../shared/angular-material/
 import { AngularMaterialTableActionsUtils } from '../../../../shared/angular-material/table/utils/angular-material-table-actions.utils';
 import { CrudActionBack } from '../../../../shared/components/crud-actions/interfaces/crud-action-back.interface';
 import { CrudActionNew } from '../../../../shared/components/crud-actions/interfaces/crud-action-new.interface';
+import { QueryFilterParam } from '../../../../shared/services/http/query-filter/query-filter.interface';
 import { UrlUtil } from '../../../../shared/utils/url.util';
 import { CityGetAll } from '../../interfaces/city-get-all.interface';
 import { City } from '../../interfaces/city.interface';
@@ -86,8 +87,11 @@ export class CityListComponent implements OnInit, AngularMaterialTableInputs<Cit
     });
   }
 
-  private getCities(): void {
+  public getCities(queryFilters: Array<QueryFilterParam> = new Array<QueryFilterParam>()): void {
+    this.cityService.queryFilterAdd(queryFilters);
+
     this.loadingService.show();
+
     this.cityService
       .getAll()
       .pipe(

@@ -112,8 +112,11 @@ export class AnnouncementListComponent implements OnInit, AngularMaterialTableIn
     });
   }
 
-  private getAnnouncements(): void {
+  public getAnnouncements(queryFilters: Array<QueryFilterParam> = new Array<QueryFilterParam>()): void {
+    this.announcementService.queryFilterAdd(queryFilters);
+
     this.loadingService.show();
+
     this.announcementService
       .getAll()
       .pipe(
@@ -121,11 +124,6 @@ export class AnnouncementListComponent implements OnInit, AngularMaterialTableIn
         finalize(() => this.loadingService.hide())
       )
       .subscribe(announcements => this.tableLoadContent(announcements));
-  }
-
-  public queryFilterChanged(queryFilters: Array<QueryFilterParam>): void {
-    this.announcementService.queryFilterAdd(queryFilters);
-    this.getAnnouncements();
   }
 
 }

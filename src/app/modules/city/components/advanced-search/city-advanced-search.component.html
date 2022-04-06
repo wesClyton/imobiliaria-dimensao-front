@@ -7,11 +7,14 @@
     </mat-form-field>
 
     <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
-      <mat-label>Status</mat-label>
-      <mat-select formControlName="ativo">
-        <mat-option value="">Todos</mat-option>
-        <mat-option [value]="true">Ativo</mat-option>
-        <mat-option [value]="false">Inativo</mat-option>
+      <mat-label>Estado</mat-label>
+      <mat-select formControlName="uf">
+        <mat-option>Selecione</mat-option>
+        <ng-container appStateOptionSelect (dataFinded)="states = $event">
+          <mat-option *ngFor="let state of states?.data" [value]="state.uf">
+            {{ state.nome }}
+          </mat-option>
+        </ng-container>
       </mat-select>
     </mat-form-field>
   </div>
