@@ -10,8 +10,10 @@ import { AngularMaterialTableInputs } from '../../../../shared/angular-material/
 import { AngularMaterialTableActionsUtils } from '../../../../shared/angular-material/table/utils/angular-material-table-actions.utils';
 import { CrudActionBack } from '../../../../shared/components/crud-actions/interfaces/crud-action-back.interface';
 import { CrudActionNew } from '../../../../shared/components/crud-actions/interfaces/crud-action-new.interface';
+import { QueryFilterParam } from '../../../../shared/services/http/query-filter/query-filter.interface';
 import { UrlUtil } from '../../../../shared/utils/url.util';
 import { BrokerGetAll } from '../../interfaces/broker-get-all.interface';
+import { BrokerUpdate } from '../../interfaces/broker-update.interface';
 import { Broker } from '../../interfaces/broker.interface';
 import { BrokerService } from '../../services/broker.service';
 
@@ -35,6 +37,14 @@ export class BrokerListComponent implements OnInit, AngularMaterialTableInputs<B
         action: broker => this.navigateDetail(broker)
       },
       {
+        ...AngularMaterialTableActionsUtils.activeDefault(),
+        action: broker => this.activate(broker)
+      },
+      {
+        ...AngularMaterialTableActionsUtils.inactiveDefault(),
+        action: broker => this.inactivate(broker)
+      },
+      {
         ...AngularMaterialTableActionsUtils.deleteDefault(),
         action: broker => this.delete(broker)
       }
@@ -53,6 +63,24 @@ export class BrokerListComponent implements OnInit, AngularMaterialTableInputs<B
   ngOnInit(): void {
     this.brokerGetAll = this.activatedRoute.snapshot.data.brokerGetAll;
     this.tableLoadContent(this.brokerGetAll);
+  }
+
+  private activate(broker: Broker): void {
+    const brokerUpdate: BrokerUpdate = {
+      id: broker.id,
+      ativo: true
+    } as BrokerUpdate;
+
+    this.brokerService.put(brokerUpdate).pipe(take(1)).subscribe(() => this.getBrokers());
+  }
+
+  private inactivate(broker: Broker): void {
+    const brokerUpdate: BrokerUpdate = {
+      id: broker.id,
+      ativo: false
+    } as BrokerUpdate;
+
+    this.brokerService.put(brokerUpdate).pipe(take(1)).subscribe(() => this.getBrokers());
   }
 
   private tableLoadContent(brokers: BrokerGetAll): void {
@@ -81,12 +109,15 @@ export class BrokerListComponent implements OnInit, AngularMaterialTableInputs<B
 
     this.brokerService.delete(broker.id).subscribe(() => {
       this.notificationService.success(`Corretor ${broker.nome} excluído com sucesso!`);
-      this.getCharacteristic();
+      this.getBrokers();
     });
   }
 
-  private getCharacteristic(): void {
+  public getBrokers(queryFilters: Array<QueryFilterParam> = new Array<QueryFilterParam>()): void {
+    this.brokerService.queryFilterAdd(queryFilters);
+
     this.loadingService.show();
+
     this.brokerService
       .getAll()
       .pipe(

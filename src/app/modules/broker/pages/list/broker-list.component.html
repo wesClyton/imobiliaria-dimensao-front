@@ -3,7 +3,13 @@
 <app-angular-material-table
   [tableDataSource]="tableDataSource"
   [tableDisplayedColumns]="tableDisplayedColumns"
-  [tableActions]="tableActions">
+  [tableActions]="tableActions"
+  [showAdvancedSearch]="true">
+
+  <app-broker-advanced-search
+    advanced-search
+    (queryFilterEmitter)="getBrokers($event)">
+  </app-broker-advanced-search>
 
   <ng-container matColumnDef="foto">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Foto</th>
