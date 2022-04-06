@@ -9,14 +9,14 @@ import { StateService } from '../../services/state.service';
 export class StateOptionSelectDirective implements OnInit {
 
   @Output()
-  public statesFinded = new EventEmitter<StateGetAll>();
+  public dataFinded = new EventEmitter<StateGetAll>();
 
   constructor(
     private readonly stateService: StateService
   ) { }
 
   ngOnInit(): void {
-    this.stateService.getAll().pipe(take(1)).subscribe(states => this.statesFinded.next(states));
+    this.stateService.getAll().pipe(take(1)).subscribe(states => this.dataFinded.next(states));
   }
 
 }

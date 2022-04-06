@@ -24,7 +24,7 @@
       <mat-label>Permissão</mat-label>
       <mat-select formControlName="nivel">
         <mat-option selected>Selecione</mat-option>
-        <ng-container appRoleOptionSelect (rolesFinded)="roles = $event">
+        <ng-container appRoleOptionSelect (dataFinded)="roles = $event">
           <mat-option *ngFor="let role of roles" [value]="role.value">
             {{ role.name }}
           </mat-option>

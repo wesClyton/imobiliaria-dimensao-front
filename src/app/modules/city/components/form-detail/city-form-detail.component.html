@@ -9,7 +9,7 @@
     <mat-label>Estado</mat-label>
     <mat-select formControlName="estadoId">
       <mat-option>Selecione</mat-option>
-      <ng-container appStateOptionSelect (statesFinded)="states = $event">
+      <ng-container appStateOptionSelect (dataFinded)="states = $event">
         <mat-option *ngFor="let state of states?.data" [value]="state.id">
           {{ state.nome }}
         </mat-option>

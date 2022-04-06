@@ -9,7 +9,7 @@
     <mat-label>Tipo</mat-label>
     <mat-select formControlName="tipo">
       <mat-option>Selecione</mat-option>
-      <ng-container appCharacteristicTypeOptionSelect (characteristicTypesFinded)="characteristicTypes = $event">
+      <ng-container appCharacteristicTypeOptionSelect (dataFinded)="characteristicTypes = $event">
         <mat-option *ngFor="let characteristicType of characteristicTypes" [value]="characteristicType.value">
           {{ characteristicType.name }}
         </mat-option>

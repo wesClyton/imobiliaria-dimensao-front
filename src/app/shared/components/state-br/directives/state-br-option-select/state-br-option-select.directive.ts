@@ -8,13 +8,13 @@ import { StateBrUtil } from '../../state-br.util';
 export class StateBrOptionSelectDirective implements OnInit {
 
   @Output()
-  public statesBrFinded = new EventEmitter<Array<StateBr>>();
+  public dataFinded = new EventEmitter<Array<StateBr>>();
 
   constructor(
   ) { }
 
   ngOnInit(): void {
-    this.statesBrFinded.emit(StateBrUtil.getAll());
+    this.dataFinded.emit(StateBrUtil.getAll());
   }
 
 }

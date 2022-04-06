@@ -10,7 +10,7 @@ import { RoleLabel } from '../../utils/role-label.util';
 export class RoleOptionSelectDirective implements OnInit {
 
   @Output()
-  public rolesFinded = new EventEmitter<Array<Role>>();
+  public dataFinded = new EventEmitter<Array<Role>>();
 
   constructor(
     private readonly rolePipe: RolePipe
@@ -24,7 +24,7 @@ export class RoleOptionSelectDirective implements OnInit {
         value: key
       });
     })
-    this.rolesFinded.emit(roles);
+    this.dataFinded.emit(roles);
   }
 
 }

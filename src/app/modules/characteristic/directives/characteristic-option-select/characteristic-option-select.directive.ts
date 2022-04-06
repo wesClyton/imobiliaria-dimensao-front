@@ -9,14 +9,14 @@ import { CharacteristicService } from '../../services/characteristic.service';
 export class CharacteristicOptionSelectDirective implements OnInit {
 
   @Output()
-  public characteristicsFinded = new EventEmitter<CharacteristicGetAll>();
+  public dataFinded = new EventEmitter<CharacteristicGetAll>();
 
   constructor(
     private readonly characteristicService: CharacteristicService
   ) { }
 
   ngOnInit(): void {
-    this.characteristicService.getAll().pipe(take(1)).subscribe(characteristics => this.characteristicsFinded.next(characteristics));
+    this.characteristicService.getAll().pipe(take(1)).subscribe(characteristics => this.dataFinded.next(characteristics));
   }
 
 }
