@@ -16,3 +16,13 @@ td.mat-column-actions {
   width: 20px;
   padding-right: 8px !important;
 }
+
+.advanced-search {
+  margin-bottom: 2rem;
+
+  .buttons {
+    display: flex;
+    justify-content: end;
+    margin-bottom: 1rem;
+  }
+}

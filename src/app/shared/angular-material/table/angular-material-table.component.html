@@ -1,7 +1,19 @@
-<mat-form-field *ngIf="showFilterInputText">
-  <mat-label>Filtrar</mat-label>
-  <input #input matInput (keyup)="tableFilterInputText($event)" [placeholder]="tableFilterInputTextPlaceholder">
-</mat-form-field>
+<div *ngIf="showAdvancedSearch" class="advanced-search">
+  <div class="buttons">
+    <button
+      mat-stroked-button
+      type="button"
+      color="primary"
+      (click)="toggleAdvancedSearch()">
+      <mat-icon color="accent">search</mat-icon>
+      Busca avançada
+    </button>
+  </div>
+
+  <div *ngIf="showForm">
+    <ng-content select="[advanced-search]"></ng-content>
+  </div>
+</div>
 
 <div class="mat-elevation-z1">
   <table mat-table matSort [dataSource]="tableDataSource">

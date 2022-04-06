@@ -15,13 +15,15 @@ import { UploadImageModule } from '../../../shared/components/upload-image/uploa
 import { PipesModule } from '../../../shared/pipes/pipes.module';
 import { CityDirectivesModule } from '../../city/directives/city-directives.module';
 import { AnnouncementDirectivesModule } from '../directives/announcement-directives.module';
+import { AnnouncementAdvancedSearchComponent } from './advanced-search/announcement-advanced-search.component';
 import { AnnouncementFormDetailComponent } from './form-detail/announcement-form-detail.component';
 import { AnnouncementFormNewComponent } from './form-new/announcement-form-new.component';
 
 @NgModule({
   declarations: [
     AnnouncementFormNewComponent,
-    AnnouncementFormDetailComponent
+    AnnouncementFormDetailComponent,
+    AnnouncementAdvancedSearchComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +45,8 @@ import { AnnouncementFormNewComponent } from './form-new/announcement-form-new.c
   ],
   exports: [
     AnnouncementFormNewComponent,
-    AnnouncementFormDetailComponent
+    AnnouncementFormDetailComponent,
+    AnnouncementAdvancedSearchComponent
   ]
 })
 export class AnnouncementComponentsModule { }

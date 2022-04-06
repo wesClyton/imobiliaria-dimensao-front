@@ -10,6 +10,7 @@ import { AngularMaterialTableInputs } from '../../../../shared/angular-material/
 import { AngularMaterialTableActionsUtils } from '../../../../shared/angular-material/table/utils/angular-material-table-actions.utils';
 import { CrudActionBack } from '../../../../shared/components/crud-actions/interfaces/crud-action-back.interface';
 import { CrudActionNew } from '../../../../shared/components/crud-actions/interfaces/crud-action-new.interface';
+import { QueryFilterParam } from '../../../../shared/services/http/query-filter/query-filter.interface';
 import { UrlUtil } from '../../../../shared/utils/url.util';
 import { AnnouncementGetAll } from '../../interfaces/announcement-get-all.interface';
 import { AnnouncementUpdate } from '../../interfaces/announcement-update.interface';
@@ -120,6 +121,11 @@ export class AnnouncementListComponent implements OnInit, AngularMaterialTableIn
         finalize(() => this.loadingService.hide())
       )
       .subscribe(announcements => this.tableLoadContent(announcements));
+  }
+
+  public queryFilterChanged(queryFilters: Array<QueryFilterParam>): void {
+    this.announcementService.getAllAddQueryFilter(queryFilters);
+    this.getAnnouncements();
   }
 
 }

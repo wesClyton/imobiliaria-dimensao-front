@@ -16,7 +16,9 @@ export class AngularMaterialTableComponent<T>
   implements AfterViewInit, AfterContentInit, AngularMaterialTableInputs<T>, AngularMaterialTable<T> {
 
   @Input()
-  public showFilterInputText = false;
+  public showAdvancedSearch = false;
+
+  public showForm = false;
 
   @Input()
   public tableFilterInputTextPlaceholder = 'Informe o filtro';
@@ -75,6 +77,10 @@ export class AngularMaterialTableComponent<T>
     if (actionItem.action) {
       actionItem?.action(type);
     }
+  }
+
+  public toggleAdvancedSearch(): void {
+    this.showForm = !this.showForm;
   }
 
 }

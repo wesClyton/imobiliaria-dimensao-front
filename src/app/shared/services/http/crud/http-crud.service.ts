@@ -41,7 +41,7 @@ export class HttpCrudService<PostIn, PostOut, GetAll, GetById, PutIn, PutOut>
       );
   }
 
-  public getAllAddQueryFilter(query: QueryFilterParam): void {
+  public getAllAddQueryFilter(query: QueryFilterParam | Array<QueryFilterParam>): void {
     this.getAllQueryFilter = QueryFilter.concat(query, this.getAllQueryFilter);
   }
 

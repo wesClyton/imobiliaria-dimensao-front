@@ -1,0 +1,140 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <mat-slide-toggle fxFlex="10" formControlName="ativo">Ativos</mat-slide-toggle>
+    <mat-slide-toggle fxFlex="10" formControlName="destaque">Destaques</mat-slide-toggle>
+  </div>
+
+  <br/>
+
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Código de anúncio</mat-label>
+      <input matInput type="text" formControlName="codigoAnuncio" placeholder="Informe um Código de anúncio">
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Título</mat-label>
+      <input matInput type="text" formControlName="titulo" placeholder="Informe um Título">
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50" fxFlex.lg="25" fxFlex.xl="25">
+      <mat-label>Tipo</mat-label>
+      <mat-select formControlName="tipo">
+        <mat-option>Selecione</mat-option>
+        <ng-container appAnnouncementTypeOptionSelect (dataFinded)="announcementTypes = $event">
+          <mat-option *ngFor="let type of announcementTypes" [value]="type.value">
+            {{ type.name }}
+          </mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Estado do Imóvel</mat-label>
+      <mat-select formControlName="estadoImovel">
+        <mat-option>Selecione</mat-option>
+        <ng-container appAnnouncementStatePropertyOptionSelect (dataFinded)="announcementStateProperties = $event">
+          <mat-option *ngFor="let stateProperty of announcementStateProperties" [value]="stateProperty.value">
+            {{ stateProperty.name }}
+          </mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Cidade</mat-label>
+      <mat-select formControlName="cidadeId">
+        <mat-option>Selecione</mat-option>
+        <ng-container appCityOptionSelect (dataFinded)="cities = $event">
+          <mat-option *ngFor="let city of cities?.data" [value]="city.id">
+            {{ city.nome }}
+          </mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Bairro</mat-label>
+      <input matInput type="text" formControlName="bairro" placeholder="Informe um Bairro">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Expiração De/Até</mat-label>
+      <mat-date-range-input [rangePicker]="picker">
+        <input matStartDate formControlName="expiracaoDe" placeholder="De">
+        <input matEndDate formControlName="expiracaoAte" placeholder="Até">
+      </mat-date-range-input>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Empreendimento</mat-label>
+      <input matInput type="text" formControlName="empreendimento" placeholder="Informe um Empreendimento">
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Valor mímino</mat-label>
+      <input matInput type="text" formControlName="valorMinimo" placeholder="Informe um Valor mínimo">
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Valor máximo</mat-label>
+      <input matInput type="text" formControlName="valorMaximo" placeholder="Informe um Valor máximo">
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Área mínina</mat-label>
+      <input matInput type="text" formControlName="areaMinima" placeholder="Informe uma Área mínina">
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Área máxima</mat-label>
+      <input matInput type="text" formControlName="areaMaxima" placeholder="Informe uma Área máxima">
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Banheiros</mat-label>
+      <mat-select formControlName="banheiros">
+        <mat-option>Selecione</mat-option>
+        <mat-option [value]="1">1</mat-option>
+        <mat-option [value]="2">2</mat-option>
+        <mat-option [value]="3">3</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Dormitórios</mat-label>
+      <mat-select formControlName="dormitorios">
+        <mat-option>Selecione</mat-option>
+        <mat-option [value]="1">1</mat-option>
+        <mat-option [value]="2">2</mat-option>
+        <mat-option [value]="3">3</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Vagas na garagem</mat-label>
+      <mat-select formControlName="vagasGaragem">
+        <mat-option>Selecione</mat-option>
+        <mat-option [value]="1">1</mat-option>
+        <mat-option [value]="2">2</mat-option>
+        <mat-option [value]="3">3</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <br/>
+
+  <div fxLayoutAlign="center">
+    <button mat-raised-button type="submit" color="primary">Buscar</button>
+  </div>
+
+</form>

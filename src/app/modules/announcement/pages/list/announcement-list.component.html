@@ -3,7 +3,13 @@
 <app-angular-material-table
   [tableDataSource]="tableDataSource"
   [tableDisplayedColumns]="tableDisplayedColumns"
-  [tableActions]="tableActions">
+  [tableActions]="tableActions"
+  [showAdvancedSearch]="true">
+
+  <app-announcement-advanced-search
+    advanced-search
+    (queryFilterEmitter)="queryFilterChanged($event)">
+  </app-announcement-advanced-search>
 
   <ng-container matColumnDef="codigoAnuncio">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Código do anúncio</th>
