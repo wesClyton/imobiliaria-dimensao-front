@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { ActiveInactivePipe } from './active-inactive/active-inactive.pipe';
 import { CityStatePipe } from './city-state/city-state.pipe';
 import { PathImagePipe } from './path-image/path-image.pipe';
+import { PhonePipe } from './phone/phone.pipe';
+import { WhatsAppLinkPipe } from './whats-app-link/whats-app-link.pipe';
 import { YesNoPipe } from './yes-no/yes-no.pipe';
 
 @NgModule({
@@ -9,13 +11,17 @@ import { YesNoPipe } from './yes-no/yes-no.pipe';
     YesNoPipe,
     ActiveInactivePipe,
     PathImagePipe,
-    CityStatePipe
+    CityStatePipe,
+    WhatsAppLinkPipe,
+    PhonePipe
   ],
   exports: [
     YesNoPipe,
     ActiveInactivePipe,
     PathImagePipe,
-    CityStatePipe
+    CityStatePipe,
+    WhatsAppLinkPipe,
+    PhonePipe
   ]
 })
 export class PipesModule {}

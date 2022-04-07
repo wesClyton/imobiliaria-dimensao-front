@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { AngularMaterialDialogConfirmationModule } from '../../../shared/angular-material/dialog-confirmation/angular-material-dialog-confirmation.module';
 import { AngularMaterialTableModule } from '../../../shared/angular-material/table/angular-material-table.module';
 import { CrudActionsModule } from '../../../shared/components/crud-actions/crud-actions.module';
@@ -25,7 +27,9 @@ import { UserNewComponent } from './new/user-new.component';
     AngularMaterialTableModule,
     AngularMaterialDialogConfirmationModule,
     PipesModule,
-    AuthPipesModule
+    AuthPipesModule,
+    MatIconModule,
+    MatButtonModule
   ],
   exports: [
     UserAccountComponent,

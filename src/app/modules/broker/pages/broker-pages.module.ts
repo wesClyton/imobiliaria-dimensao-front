@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { AngularMaterialDialogConfirmationModule } from '../../../shared/angular-material/dialog-confirmation/angular-material-dialog-confirmation.module';
 import { AngularMaterialTableModule } from '../../../shared/angular-material/table/angular-material-table.module';
 import { CrudActionsModule } from '../../../shared/components/crud-actions/crud-actions.module';
@@ -21,6 +23,8 @@ import { BrokerNewComponent } from './new/broker-new.component';
     CrudActionsModule,
     AngularMaterialTableModule,
     AngularMaterialDialogConfirmationModule,
+    MatButtonModule,
+    MatIconModule,
     PipesModule
   ],
   exports: [
