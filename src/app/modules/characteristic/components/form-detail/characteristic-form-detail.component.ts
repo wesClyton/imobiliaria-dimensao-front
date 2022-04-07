@@ -28,7 +28,7 @@ export class CharacteristicFormDetailComponent implements OnInit {
   }
 
   private get controlTipo(): AbstractControl | null {
-    return this.form?.get('nome');
+    return this.form?.get('tipo');
   }
 
   public get controlTipoHasError(): boolean | undefined {
