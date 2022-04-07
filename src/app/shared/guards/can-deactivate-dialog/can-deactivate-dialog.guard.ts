@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CanDeactivate } from '@angular/router';
 import { take } from 'rxjs/operators';
-import { AngularMaterialDialogConfirmationComponent } from '../../angular-material/dialog-confirmation/angular-material-dialog-confirmation.component';
+import { DialogConfirmationComponent } from '../../components/dialog-confirmation/dialog-confirmation.component';
 import { CanDeactivateDialog } from './can-deactivate-dialog.interface';
 
 @Injectable({
@@ -23,12 +23,12 @@ export class CanDeactivateGuard implements CanDeactivate<CanDeactivateDialog> {
       if (component.canDeactivate()) {
         resolve(true);
       } else {
-        AngularMaterialDialogConfirmationComponent.title = component.title || 'Confirmação!';
-        AngularMaterialDialogConfirmationComponent.message = component.message || 'Realmente deseja sair dessa página?';
-        AngularMaterialDialogConfirmationComponent.cancelButton = component.cancelButton || 'Cancelar';
-        AngularMaterialDialogConfirmationComponent.confirmButton = component.confirmButton || 'Confirmar';
+        DialogConfirmationComponent.title = component.title || 'Confirmação!';
+        DialogConfirmationComponent.message = component.message || 'Realmente deseja sair dessa página?';
+        DialogConfirmationComponent.cancelButton = component.cancelButton || 'Cancelar';
+        DialogConfirmationComponent.confirmButton = component.confirmButton || 'Confirmar';
 
-        let dialog = this.matDialog.open(AngularMaterialDialogConfirmationComponent);
+        let dialog = this.matDialog.open(DialogConfirmationComponent);
 
         dialog.afterClosed().pipe(take(1)).subscribe(value => resolve(!value ? false : true))
       }

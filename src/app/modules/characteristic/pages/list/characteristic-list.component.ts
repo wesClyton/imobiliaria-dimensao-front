@@ -4,12 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { finalize, take } from 'rxjs/operators';
 import { LoadingService } from '../../../../core/loading/loading.service';
 import { NotificationService } from '../../../../core/notification/notification.service';
-import { AngularMaterialDialogConfirmationService } from '../../../../shared/angular-material/dialog-confirmation/angular-material-dialog-confirmation.service';
-import { AngularMaterialTableActions } from '../../../../shared/angular-material/table/interfaces/angular-material-table-actions.interface';
-import { AngularMaterialTableInputs } from '../../../../shared/angular-material/table/interfaces/angular-material-table-inputs.interface';
-import { AngularMaterialTableActionsUtils } from '../../../../shared/angular-material/table/utils/angular-material-table-actions.utils';
 import { CrudActionBack } from '../../../../shared/components/crud-actions/interfaces/crud-action-back.interface';
 import { CrudActionNew } from '../../../../shared/components/crud-actions/interfaces/crud-action-new.interface';
+import { DialogConfirmationService } from '../../../../shared/components/dialog-confirmation/dialog-confirmation.service';
+import { TableActions } from '../../../../shared/components/table/interfaces/table-actions.interface';
+import { TableInputs } from '../../../../shared/components/table/interfaces/table-inputs.interface';
+import { TableActionsUtils } from '../../../../shared/components/table/utils/table-actions.utils';
 import { QueryFilterParam } from '../../../../shared/services/http/query-filter/query-filter.interface';
 import { UrlUtil } from '../../../../shared/utils/url.util';
 import { CharacteristicGetAll } from '../../interfaces/characteristic-get-all.interface';
@@ -20,7 +20,7 @@ import { CharacteristicService } from '../../services/characteristic.service';
   selector: 'app-characteristic-list',
   templateUrl: 'characteristic-list.component.html'
 })
-export class CharacteristicListComponent implements OnInit, AngularMaterialTableInputs<Characteristic>, CrudActionNew, CrudActionBack {
+export class CharacteristicListComponent implements OnInit, TableInputs<Characteristic>, CrudActionNew, CrudActionBack {
 
   private characteristicGetAll!: CharacteristicGetAll;
 
@@ -28,14 +28,14 @@ export class CharacteristicListComponent implements OnInit, AngularMaterialTable
 
   public tableDisplayedColumns = ['nome', 'tipo'];
 
-  public tableActions: AngularMaterialTableActions<Characteristic> = {
+  public tableActions: TableActions<Characteristic> = {
     items: [
       {
-        ...AngularMaterialTableActionsUtils.detailDefault(),
+        ...TableActionsUtils.detailDefault(),
         action: characteristic => this.navigateDetail(characteristic)
       },
       {
-        ...AngularMaterialTableActionsUtils.deleteDefault(),
+        ...TableActionsUtils.deleteDefault(),
         action: characteristic => this.delete(characteristic)
       }
     ]
@@ -47,7 +47,7 @@ export class CharacteristicListComponent implements OnInit, AngularMaterialTable
     private readonly characteristicService: CharacteristicService,
     private readonly notificationService: NotificationService,
     private readonly loadingService: LoadingService,
-    private readonly angularMaterialDialogConfirmationService: AngularMaterialDialogConfirmationService
+    private readonly angularMaterialDialogConfirmationService: DialogConfirmationService
   ) { }
 
   ngOnInit(): void {

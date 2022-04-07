@@ -1,4 +1,4 @@
-export interface AngularMaterialDialogConfirmation {
+export interface DialogConfirmation {
   readonly title?: string;
   readonly message?: string;
   readonly cancelButton?: string;

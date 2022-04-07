@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatColumnDef, MatTable } from '@angular/material/table';
 
-export interface AngularMaterialTable<T> {
+export interface Table<T> {
   readonly table: MatTable<T>;
   readonly tablePaginator: MatPaginator;
   readonly tableSort: MatSort;

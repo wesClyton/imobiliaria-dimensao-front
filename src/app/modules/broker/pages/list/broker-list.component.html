@@ -1,6 +1,6 @@
 <h1>Corretores</h1>
 
-<app-angular-material-table
+<app-table
   [tableDataSource]="tableDataSource"
   [tableDisplayedColumns]="tableDisplayedColumns"
   [tableActions]="tableActions"
@@ -48,7 +48,7 @@
     <td mat-cell *matCellDef="let row">{{ row.ativo | activeInactive }}</td>
   </ng-container>
 
-</app-angular-material-table>
+</app-table>
 
 <app-crud-actions
   [newShow]="true"

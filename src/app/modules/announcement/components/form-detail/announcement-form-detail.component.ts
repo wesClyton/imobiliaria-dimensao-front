@@ -7,7 +7,7 @@ import { forkJoin, Observable, Subscription } from 'rxjs';
 import { finalize, map, take } from 'rxjs/operators';
 import { LoadingService } from '../../../../core/loading/loading.service';
 import { NotificationService } from '../../../../core/notification/notification.service';
-import { AngularMaterialDialogConfirmationService } from '../../../../shared/angular-material/dialog-confirmation/angular-material-dialog-confirmation.service';
+import { DialogConfirmationService } from '../../../../shared/components/dialog-confirmation/dialog-confirmation.service';
 import { UploadImageComponent } from '../../../../shared/components/upload-image/upload-image.component';
 import { PathImagePipe } from '../../../../shared/pipes/path-image/path-image.pipe';
 import { FormService } from '../../../../shared/services/form/form.service';
@@ -249,7 +249,7 @@ export class AnnouncementFormDetailComponent implements OnInit {
     private readonly announcementUploadService: AnnouncementUploadService,
     private readonly pathImagePipe: PathImagePipe,
     private readonly announcementImageDeleteService: AnnouncementImageDeleteService,
-    private readonly angularMaterialDialogConfirmationService: AngularMaterialDialogConfirmationService,
+    private readonly angularMaterialDialogConfirmationService: DialogConfirmationService,
     private readonly authService: AuthService
   ) { }
 

@@ -1,6 +1,6 @@
 import { ThemePalette } from '@angular/material/core';
 
-export interface AngularMaterialTableActionsItem<T> {
+export interface TableActionsItem<T> {
   readonly action?: (type: T) => void;
   readonly icon?: string;
   readonly iconColor?: ThemePalette;

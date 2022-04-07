@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { AngularMaterialDialogConfirmationModule } from '../../../shared/angular-material/dialog-confirmation/angular-material-dialog-confirmation.module';
-import { AngularMaterialTableModule } from '../../../shared/angular-material/table/angular-material-table.module';
 import { CrudActionsModule } from '../../../shared/components/crud-actions/crud-actions.module';
+import { DialogConfirmationModule } from '../../../shared/components/dialog-confirmation/dialog-confirmation.module';
+import { TableModule } from '../../../shared/components/table/table.module';
 import { PipesModule } from '../../../shared/pipes/pipes.module';
 import { BannerComponentsModule } from '../components/banner-components.module';
 import { BannerDetailComponent } from './detail/banner-detail.component';
@@ -21,8 +21,8 @@ import { BannerNewComponent } from './new/banner-new.component';
     BannerComponentsModule,
     CrudActionsModule,
     MatButtonModule,
-    AngularMaterialTableModule,
-    AngularMaterialDialogConfirmationModule,
+    TableModule,
+    DialogConfirmationModule,
     PipesModule
   ],
   exports: [

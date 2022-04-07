@@ -5,7 +5,7 @@ import { APP_CONFIG } from '../app.config';
 import { Session } from '../modules/auth/interfaces/session.interface';
 import { AuthService } from '../modules/auth/services/auth.service';
 import { USER_CONFIG } from '../modules/user/user.config';
-import { AngularMaterialDialogConfirmationService } from '../shared/angular-material/dialog-confirmation/angular-material-dialog-confirmation.service';
+import { DialogConfirmationService } from '../shared/components/dialog-confirmation/dialog-confirmation.service';
 import { ModuleConfig } from '../shared/interfaces/module-config.interface';
 import { PANEL_ADMIN_CONFIG } from './panel-admin.config';
 
@@ -29,7 +29,7 @@ export class PanelAdminComponent {
   constructor(
     private readonly authService: AuthService,
     private readonly router: Router,
-    private readonly angularMaterialDialogConfirmationService: AngularMaterialDialogConfirmationService
+    private readonly angularMaterialDialogConfirmationService: DialogConfirmationService
   ) { }
 
   ngOnInit(): void {

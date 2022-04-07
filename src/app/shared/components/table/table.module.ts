@@ -7,10 +7,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
-import { AngularMaterialTableComponent } from './angular-material-table.component';
+import { TableComponent } from './table.component';
 
 @NgModule({
-  declarations: [AngularMaterialTableComponent],
+  declarations: [TableComponent],
   imports: [
     CommonModule,
     MatTableModule,
@@ -22,14 +22,14 @@ import { AngularMaterialTableComponent } from './angular-material-table.componen
     MatButtonModule
   ],
   exports: [
-    AngularMaterialTableComponent,
+    TableComponent,
     MatTableModule,
     MatPaginatorModule,
     MatFormFieldModule,
     MatInputModule
   ]
 })
-export class AngularMaterialTableModule {
+export class TableModule {
 
   constructor() { }
 

@@ -4,12 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { finalize, take } from 'rxjs/operators';
 import { LoadingService } from '../../../../core/loading/loading.service';
 import { NotificationService } from '../../../../core/notification/notification.service';
-import { AngularMaterialDialogConfirmationService } from '../../../../shared/angular-material/dialog-confirmation/angular-material-dialog-confirmation.service';
-import { AngularMaterialTableActions } from '../../../../shared/angular-material/table/interfaces/angular-material-table-actions.interface';
-import { AngularMaterialTableInputs } from '../../../../shared/angular-material/table/interfaces/angular-material-table-inputs.interface';
-import { AngularMaterialTableActionsUtils } from '../../../../shared/angular-material/table/utils/angular-material-table-actions.utils';
 import { CrudActionBack } from '../../../../shared/components/crud-actions/interfaces/crud-action-back.interface';
 import { CrudActionNew } from '../../../../shared/components/crud-actions/interfaces/crud-action-new.interface';
+import { DialogConfirmationService } from '../../../../shared/components/dialog-confirmation/dialog-confirmation.service';
+import { TableActions } from '../../../../shared/components/table/interfaces/table-actions.interface';
+import { TableInputs } from '../../../../shared/components/table/interfaces/table-inputs.interface';
+import { TableActionsUtils } from '../../../../shared/components/table/utils/table-actions.utils';
 import { QueryFilterParam } from '../../../../shared/services/http/query-filter/query-filter.interface';
 import { UrlUtil } from '../../../../shared/utils/url.util';
 import { UserGetAll } from '../../interfaces/user-get-all.interface';
@@ -21,7 +21,7 @@ import { UserService } from '../../services/user.service';
   selector: 'app-user-list',
   templateUrl: 'user-list.component.html'
 })
-export class UserListComponent implements OnInit, AngularMaterialTableInputs<User>, CrudActionNew, CrudActionBack {
+export class UserListComponent implements OnInit, TableInputs<User>, CrudActionNew, CrudActionBack {
 
   private userGetAll!: UserGetAll;
 
@@ -29,7 +29,7 @@ export class UserListComponent implements OnInit, AngularMaterialTableInputs<Use
 
   public tableDisplayedColumns = ['nome', 'email', 'nivel', 'ativo'];
 
-  public tableActions!: AngularMaterialTableActions<User>;
+  public tableActions!: TableActions<User>;
 
   constructor(
     private readonly router: Router,
@@ -37,7 +37,7 @@ export class UserListComponent implements OnInit, AngularMaterialTableInputs<Use
     private readonly userService: UserService,
     private readonly notificationService: NotificationService,
     private readonly loadingService: LoadingService,
-    private readonly angularMaterialDialogConfirmationService: AngularMaterialDialogConfirmationService
+    private readonly angularMaterialDialogConfirmationService: DialogConfirmationService
   ) { }
 
   ngOnInit(): void {
@@ -49,21 +49,21 @@ export class UserListComponent implements OnInit, AngularMaterialTableInputs<Use
     this.tableActions = {
       items: [
         {
-          ...AngularMaterialTableActionsUtils.detailDefault(),
+          ...TableActionsUtils.detailDefault(),
           action: user => this.navigateDetail(user)
         },
         {
-          ...AngularMaterialTableActionsUtils.activeDefault(),
+          ...TableActionsUtils.activeDefault(),
           action: user => this.updateStatus(user),
           visible: !user.ativo
         },
         {
-          ...AngularMaterialTableActionsUtils.inactiveDefault(),
+          ...TableActionsUtils.inactiveDefault(),
           action: user => this.updateStatus(user),
           visible: user.ativo
         },
         {
-          ...AngularMaterialTableActionsUtils.deleteDefault(),
+          ...TableActionsUtils.deleteDefault(),
           action: user => this.delete(user)
         }
       ]

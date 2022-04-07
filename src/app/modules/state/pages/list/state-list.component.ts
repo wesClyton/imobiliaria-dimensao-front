@@ -4,12 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { finalize, take } from 'rxjs/operators';
 import { LoadingService } from '../../../../core/loading/loading.service';
 import { NotificationService } from '../../../../core/notification/notification.service';
-import { AngularMaterialDialogConfirmationService } from '../../../../shared/angular-material/dialog-confirmation/angular-material-dialog-confirmation.service';
-import { AngularMaterialTableActions } from '../../../../shared/angular-material/table/interfaces/angular-material-table-actions.interface';
-import { AngularMaterialTableInputs } from '../../../../shared/angular-material/table/interfaces/angular-material-table-inputs.interface';
-import { AngularMaterialTableActionsUtils } from '../../../../shared/angular-material/table/utils/angular-material-table-actions.utils';
 import { CrudActionBack } from '../../../../shared/components/crud-actions/interfaces/crud-action-back.interface';
 import { CrudActionNew } from '../../../../shared/components/crud-actions/interfaces/crud-action-new.interface';
+import { DialogConfirmationService } from '../../../../shared/components/dialog-confirmation/dialog-confirmation.service';
+import { TableActions } from '../../../../shared/components/table/interfaces/table-actions.interface';
+import { TableInputs } from '../../../../shared/components/table/interfaces/table-inputs.interface';
+import { TableActionsUtils } from '../../../../shared/components/table/utils/table-actions.utils';
 import { QueryFilterParam } from '../../../../shared/services/http/query-filter/query-filter.interface';
 import { UrlUtil } from '../../../../shared/utils/url.util';
 import { StateGetAll } from '../../interfaces/state-get-all.interface';
@@ -22,7 +22,7 @@ import { StateService } from '../../services/state.service';
   selector: 'app-state-list',
   templateUrl: 'state-list.component.html'
 })
-export class StateListComponent implements OnInit, AngularMaterialTableInputs<State>, CrudActionNew, CrudActionBack {
+export class StateListComponent implements OnInit, TableInputs<State>, CrudActionNew, CrudActionBack {
 
   private stateGetAll!: StateGetAll;
 
@@ -30,14 +30,14 @@ export class StateListComponent implements OnInit, AngularMaterialTableInputs<St
 
   public tableDisplayedColumns = ['nome', 'uf'];
 
-  public tableActions: AngularMaterialTableActions<State> = {
+  public tableActions: TableActions<State> = {
     items: [
       {
-        ...AngularMaterialTableActionsUtils.detailDefault(),
+        ...TableActionsUtils.detailDefault(),
         action: state => this.navigateDetail(state)
       },
       {
-        ...AngularMaterialTableActionsUtils.deleteDefault(),
+        ...TableActionsUtils.deleteDefault(),
         action: state => this.delete(state)
       }
     ]
@@ -51,7 +51,7 @@ export class StateListComponent implements OnInit, AngularMaterialTableInputs<St
     private readonly stateService: StateService,
     private readonly notificationService: NotificationService,
     private readonly loadingService: LoadingService,
-    private readonly angularMaterialDialogConfirmationService: AngularMaterialDialogConfirmationService
+    private readonly angularMaterialDialogConfirmationService: DialogConfirmationService
   ) { }
 
   ngOnInit(): void {

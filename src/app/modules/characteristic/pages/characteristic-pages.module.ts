@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { AngularMaterialDialogConfirmationModule } from '../../../shared/angular-material/dialog-confirmation/angular-material-dialog-confirmation.module';
-import { AngularMaterialTableModule } from '../../../shared/angular-material/table/angular-material-table.module';
 import { CrudActionsModule } from '../../../shared/components/crud-actions/crud-actions.module';
+import { DialogConfirmationModule } from '../../../shared/components/dialog-confirmation/dialog-confirmation.module';
+import { TableModule } from '../../../shared/components/table/table.module';
 import { CharacteristicComponentsModule } from '../components/characteristic-components.module';
 import { CharacteristicPipesModule } from '../pipes/characteristic-pipes.module';
 import { CharacteristicDetailComponent } from './detail/characteristic-detail.component';
@@ -19,8 +19,8 @@ import { CharacteristicNewComponent } from './new/characteristic-new.component';
     CommonModule,
     CharacteristicComponentsModule,
     CrudActionsModule,
-    AngularMaterialTableModule,
-    AngularMaterialDialogConfirmationModule,
+    TableModule,
+    DialogConfirmationModule,
     CharacteristicPipesModule
   ],
   exports: [

@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { AngularMaterialDialogConfirmationModule } from '../../../shared/angular-material/dialog-confirmation/angular-material-dialog-confirmation.module';
-import { AngularMaterialTableModule } from '../../../shared/angular-material/table/angular-material-table.module';
 import { CrudActionsModule } from '../../../shared/components/crud-actions/crud-actions.module';
+import { DialogConfirmationModule } from '../../../shared/components/dialog-confirmation/dialog-confirmation.module';
+import { TableModule } from '../../../shared/components/table/table.module';
 import { CityComponentsModule } from '../components/city-components.module';
 import { CityDetailComponent } from './detail/city-detail.component';
 import { CityListComponent } from './list/city-list.component';
@@ -18,8 +18,8 @@ import { CityNewComponent } from './new/city-new.component';
     CommonModule,
     CrudActionsModule,
     CityComponentsModule,
-    AngularMaterialTableModule,
-    AngularMaterialDialogConfirmationModule
+    TableModule,
+    DialogConfirmationModule
   ],
   exports: [
     CityNewComponent,

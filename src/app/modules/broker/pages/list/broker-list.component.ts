@@ -4,12 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { finalize, take } from 'rxjs/operators';
 import { LoadingService } from '../../../../core/loading/loading.service';
 import { NotificationService } from '../../../../core/notification/notification.service';
-import { AngularMaterialDialogConfirmationService } from '../../../../shared/angular-material/dialog-confirmation/angular-material-dialog-confirmation.service';
-import { AngularMaterialTableActions } from '../../../../shared/angular-material/table/interfaces/angular-material-table-actions.interface';
-import { AngularMaterialTableInputs } from '../../../../shared/angular-material/table/interfaces/angular-material-table-inputs.interface';
-import { AngularMaterialTableActionsUtils } from '../../../../shared/angular-material/table/utils/angular-material-table-actions.utils';
 import { CrudActionBack } from '../../../../shared/components/crud-actions/interfaces/crud-action-back.interface';
 import { CrudActionNew } from '../../../../shared/components/crud-actions/interfaces/crud-action-new.interface';
+import { DialogConfirmationService } from '../../../../shared/components/dialog-confirmation/dialog-confirmation.service';
+import { TableActions } from '../../../../shared/components/table/interfaces/table-actions.interface';
+import { TableInputs } from '../../../../shared/components/table/interfaces/table-inputs.interface';
+import { TableActionsUtils } from '../../../../shared/components/table/utils/table-actions.utils';
 import { QueryFilterParam } from '../../../../shared/services/http/query-filter/query-filter.interface';
 import { UrlUtil } from '../../../../shared/utils/url.util';
 import { BrokerGetAll } from '../../interfaces/broker-get-all.interface';
@@ -22,7 +22,7 @@ import { BrokerService } from '../../services/broker.service';
   templateUrl: 'broker-list.component.html',
   styleUrls: ['./broker-list.component.scss']
 })
-export class BrokerListComponent implements OnInit, AngularMaterialTableInputs<Broker>, CrudActionNew, CrudActionBack {
+export class BrokerListComponent implements OnInit, TableInputs<Broker>, CrudActionNew, CrudActionBack {
 
   private brokerGetAll!: BrokerGetAll;
 
@@ -30,7 +30,7 @@ export class BrokerListComponent implements OnInit, AngularMaterialTableInputs<B
 
   public tableDisplayedColumns = ['foto', 'nome', 'email', 'telefone', 'whatsapp', 'ativo'];
 
-  public tableActions!: AngularMaterialTableActions<Broker>;
+  public tableActions!: TableActions<Broker>;
 
   constructor(
     private readonly router: Router,
@@ -38,7 +38,7 @@ export class BrokerListComponent implements OnInit, AngularMaterialTableInputs<B
     private readonly brokerService: BrokerService,
     private readonly notificationService: NotificationService,
     private readonly loadingService: LoadingService,
-    private readonly angularMaterialDialogConfirmationService: AngularMaterialDialogConfirmationService
+    private readonly angularMaterialDialogConfirmationService: DialogConfirmationService
   ) { }
 
   ngOnInit(): void {
@@ -50,21 +50,21 @@ export class BrokerListComponent implements OnInit, AngularMaterialTableInputs<B
     this.tableActions = {
       items: [
         {
-          ...AngularMaterialTableActionsUtils.detailDefault(),
+          ...TableActionsUtils.detailDefault(),
           action: broker => this.navigateDetail(broker)
         },
         {
-          ...AngularMaterialTableActionsUtils.activeDefault(),
+          ...TableActionsUtils.activeDefault(),
           action: broker => this.updateStatus(broker),
           visible: !broker.ativo
         },
         {
-          ...AngularMaterialTableActionsUtils.inactiveDefault(),
+          ...TableActionsUtils.inactiveDefault(),
           action: broker => this.updateStatus(broker),
           visible: broker.ativo
         },
         {
-          ...AngularMaterialTableActionsUtils.deleteDefault(),
+          ...TableActionsUtils.deleteDefault(),
           action: broker => this.delete(broker)
         }
       ]

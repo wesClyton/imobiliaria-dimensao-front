@@ -4,12 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { finalize, take } from 'rxjs/operators';
 import { LoadingService } from '../../../../core/loading/loading.service';
 import { NotificationService } from '../../../../core/notification/notification.service';
-import { AngularMaterialDialogConfirmationService } from '../../../../shared/angular-material/dialog-confirmation/angular-material-dialog-confirmation.service';
-import { AngularMaterialTableActions } from '../../../../shared/angular-material/table/interfaces/angular-material-table-actions.interface';
-import { AngularMaterialTableInputs } from '../../../../shared/angular-material/table/interfaces/angular-material-table-inputs.interface';
-import { AngularMaterialTableActionsUtils } from '../../../../shared/angular-material/table/utils/angular-material-table-actions.utils';
 import { CrudActionBack } from '../../../../shared/components/crud-actions/interfaces/crud-action-back.interface';
 import { CrudActionNew } from '../../../../shared/components/crud-actions/interfaces/crud-action-new.interface';
+import { DialogConfirmationService } from '../../../../shared/components/dialog-confirmation/dialog-confirmation.service';
+import { TableActions } from '../../../../shared/components/table/interfaces/table-actions.interface';
+import { TableInputs } from '../../../../shared/components/table/interfaces/table-inputs.interface';
+import { TableActionsUtils } from '../../../../shared/components/table/utils/table-actions.utils';
 import { QueryFilterParam } from '../../../../shared/services/http/query-filter/query-filter.interface';
 import { UrlUtil } from '../../../../shared/utils/url.util';
 import { AuthService } from '../../../auth/services/auth.service';
@@ -22,7 +22,7 @@ import { AnnouncementService } from '../../services/announcement.service';
   selector: 'app-announcement-list',
   templateUrl: 'announcement-list.component.html'
 })
-export class AnnouncementListComponent implements OnInit, AngularMaterialTableInputs<Announcement>, CrudActionNew, CrudActionBack {
+export class AnnouncementListComponent implements OnInit, TableInputs<Announcement>, CrudActionNew, CrudActionBack {
 
   private announcementGetAll!: AnnouncementGetAll;
 
@@ -30,7 +30,7 @@ export class AnnouncementListComponent implements OnInit, AngularMaterialTableIn
 
   public tableDisplayedColumns = ['codigoAnuncio', 'titulo', 'tipo', 'expiracaoAnuncio', 'cidade', 'ativo'];
 
-  public tableActions!: AngularMaterialTableActions<Announcement>;
+  public tableActions!: TableActions<Announcement>;
 
   public get newShow(): boolean {
     return this.authService.isAdmin || this.authService.isAutor;
@@ -42,7 +42,7 @@ export class AnnouncementListComponent implements OnInit, AngularMaterialTableIn
     private readonly announcementService: AnnouncementService,
     private readonly notificationService: NotificationService,
     private readonly loadingService: LoadingService,
-    private readonly angularMaterialDialogConfirmationService: AngularMaterialDialogConfirmationService,
+    private readonly angularMaterialDialogConfirmationService: DialogConfirmationService,
     private readonly authService: AuthService
   ) { }
 
@@ -55,21 +55,21 @@ export class AnnouncementListComponent implements OnInit, AngularMaterialTableIn
     this.tableActions = {
       items: [
         {
-          ...AngularMaterialTableActionsUtils.detailDefault(),
+          ...TableActionsUtils.detailDefault(),
           action: announcement => this.navigateDetail(announcement)
         },
         {
-          ...AngularMaterialTableActionsUtils.activeDefault(),
+          ...TableActionsUtils.activeDefault(),
           action: announcement => this.updateStatus(announcement),
           visible: !announcement.ativo && (this.authService.isAdmin || this.authService.isAutor)
         },
         {
-          ...AngularMaterialTableActionsUtils.inactiveDefault(),
+          ...TableActionsUtils.inactiveDefault(),
           action: announcement => this.updateStatus(announcement),
           visible: announcement.ativo && (this.authService.isAdmin || this.authService.isAutor)
         },
         {
-          ...AngularMaterialTableActionsUtils.deleteDefault(),
+          ...TableActionsUtils.deleteDefault(),
           action: announcement => this.delete(announcement),
           visible: this.authService.isAdmin || this.authService.isAutor
         }

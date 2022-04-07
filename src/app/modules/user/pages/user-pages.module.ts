@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { AngularMaterialDialogConfirmationModule } from '../../../shared/angular-material/dialog-confirmation/angular-material-dialog-confirmation.module';
-import { AngularMaterialTableModule } from '../../../shared/angular-material/table/angular-material-table.module';
 import { CrudActionsModule } from '../../../shared/components/crud-actions/crud-actions.module';
+import { DialogConfirmationModule } from '../../../shared/components/dialog-confirmation/dialog-confirmation.module';
+import { TableModule } from '../../../shared/components/table/table.module';
 import { PipesModule } from '../../../shared/pipes/pipes.module';
 import { AuthPipesModule } from '../../auth/pipes/auth-pipes.module';
 import { UserComponentsModule } from '../components/user-components.module';
@@ -24,8 +24,8 @@ import { UserNewComponent } from './new/user-new.component';
     CommonModule,
     UserComponentsModule,
     CrudActionsModule,
-    AngularMaterialTableModule,
-    AngularMaterialDialogConfirmationModule,
+    TableModule,
+    DialogConfirmationModule,
     PipesModule,
     AuthPipesModule,
     MatIconModule,

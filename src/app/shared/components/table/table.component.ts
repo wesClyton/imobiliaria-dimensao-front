@@ -2,18 +2,18 @@ import { AfterContentInit, AfterViewInit, Component, ContentChildren, EventEmitt
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatColumnDef, MatTable, MatTableDataSource } from '@angular/material/table';
-import { AngularMaterialTableActionsItem } from './interfaces/angular-material-table-actions-item.interface';
-import { AngularMaterialTableActions } from './interfaces/angular-material-table-actions.interface';
-import { AngularMaterialTableInputs } from './interfaces/angular-material-table-inputs.interface';
-import { AngularMaterialTable } from './interfaces/angular-material-table.interface';
+import { TableActionsItem } from './interfaces/table-actions-item.interface';
+import { TableActions } from './interfaces/table-actions.interface';
+import { TableInputs } from './interfaces/table-inputs.interface';
+import { Table } from './interfaces/table.interface';
 
 @Component({
-  selector: 'app-angular-material-table',
-  templateUrl: './angular-material-table.component.html',
-  styleUrls: ['./angular-material-table.component.scss']
+  selector: 'app-table',
+  templateUrl: './table.component.html',
+  styleUrls: ['./table.component.scss']
 })
-export class AngularMaterialTableComponent<T>
-  implements AfterViewInit, AfterContentInit, AngularMaterialTableInputs<T>, AngularMaterialTable<T> {
+export class TableComponent<T>
+  implements AfterViewInit, AfterContentInit, TableInputs<T>, Table<T> {
 
   @Input()
   public tableShowAdvancedSearch = false;
@@ -36,7 +36,7 @@ export class AngularMaterialTableComponent<T>
   public tableMessageNoData = 'Nenhum registro encontrado!';
 
   @Input()
-  public tableActions?: AngularMaterialTableActions<T> | undefined;
+  public tableActions?: TableActions<T> | undefined;
 
   @ViewChild(MatTable, { static: true })
   public table!: MatTable<T>;
@@ -79,7 +79,7 @@ export class AngularMaterialTableComponent<T>
     }
   }
 
-  public clickAction(actionItem: AngularMaterialTableActionsItem<T>, type: T): void {
+  public clickAction(actionItem: TableActionsItem<T>, type: T): void {
     if (actionItem.action) {
       actionItem?.action(type);
     }
