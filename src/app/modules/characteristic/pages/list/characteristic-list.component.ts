@@ -79,10 +79,18 @@ export class CharacteristicListComponent implements OnInit, AngularMaterialTable
       return;
     }
 
-    this.characteristicService.delete(characteristic.id).subscribe(() => {
-      this.notificationService.success(`Característica ${characteristic.nome} excluída com sucesso!`);
-      this.getCharacteristics();
-    });
+    this.loadingService.show();
+
+    this.characteristicService
+      .delete(characteristic.id)
+      .pipe(
+        take(1),
+        finalize(() => this.loadingService.hide())
+      )
+      .subscribe(() => {
+        this.notificationService.success(`Característica ${characteristic.nome} excluída com sucesso!`);
+        this.getCharacteristics();
+      });
   }
 
   public getCharacteristics(queryFilters: Array<QueryFilterParam> = new Array<QueryFilterParam>()): void {

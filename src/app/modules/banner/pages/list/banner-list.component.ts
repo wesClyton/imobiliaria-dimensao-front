@@ -104,10 +104,18 @@ export class BannerListComponent implements OnInit, AngularMaterialTableInputs<B
       return;
     }
 
-    this.bannerService.delete(banner.id).subscribe(() => {
-      this.notificationService.success(`Banner ${banner.nome} excluído com sucesso!`);
-      this.getBanners();
-    });
+    this.loadingService.show();
+
+    this.bannerService
+      .delete(banner.id)
+      .pipe(
+        take(1),
+        finalize(() => this.loadingService.hide())
+      )
+      .subscribe(() => {
+        this.notificationService.success(`Banner ${banner.nome} excluído com sucesso!`);
+        this.getBanners();
+      });
   }
 
   public getBanners(queryFilters: Array<QueryFilterParam> = new Array<QueryFilterParam>()): void {

@@ -4,17 +4,17 @@
 
   <div *ngIf="imageUrl" class="photo-loaded">
     <button
-      *ngIf="showDeleteImageEmitter"
+      *ngIf="showDeleteImageEmitter && !onlyView"
       mat-raised-button
       type="button"
       color="warn"
       (click)="deleteImageEmitterClick()">
       Excluir
     </button>
-    <img [src]="imageUrl" alt="Image">
+    <img [src]="imageUrl" alt="Image" [style.margin-bottom]="!onlyView ? '2rem' : '0'">
   </div>
 
-  <div class="flex-buttons">
+  <div *ngIf="!onlyView" class="flex-buttons">
     <button
       *ngIf="showPrimaryButton"
       mat-raised-button

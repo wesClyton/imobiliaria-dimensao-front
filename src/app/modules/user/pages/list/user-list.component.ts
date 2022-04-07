@@ -107,10 +107,18 @@ export class UserListComponent implements OnInit, AngularMaterialTableInputs<Use
       return;
     }
 
-    this.userService.delete(user.id).subscribe(() => {
-      this.notificationService.success(`Usuário ${user.nome} excluído com sucesso!`);
-      this.getUsers();
-    });
+    this.loadingService.show();
+
+    this.userService
+      .delete(user.id)
+      .pipe(
+        take(1),
+        finalize(() => this.loadingService.hide())
+      )
+      .subscribe(() => {
+        this.notificationService.success(`Usuário ${user.nome} excluído com sucesso!`);
+        this.getUsers();
+      });
   }
 
   public getUsers(queryFilters: Array<QueryFilterParam> = new Array<QueryFilterParam>()): void {

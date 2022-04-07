@@ -1,12 +1,12 @@
 <div *ngIf="tableShowAdvancedSearch" class="advanced-search">
   <div class="buttons">
     <button
-      mat-stroked-button
+      mat-raised-button
       type="button"
-      color="primary"
+      color="accent"
       (click)="toggleAdvancedSearch()">
-      <mat-icon color="accent">search</mat-icon>
-      Busca avançada
+      <mat-icon>{{ tableShowForm ? 'close' : 'search' }}</mat-icon>
+      {{ tableShowForm ? '' : 'Busca avançada' }}
     </button>
   </div>
 

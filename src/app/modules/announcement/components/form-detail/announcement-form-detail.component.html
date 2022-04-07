@@ -174,7 +174,7 @@
   <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
     <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
       <mat-label>Imóvel</mat-label>
-      <mat-chip-list #imovelList>
+      <mat-chip-list #imovelList [disabled]="disableFields">
         <mat-chip
           *ngFor="let characteristic of characteristicsImovelSelected"
           (removed)="removeCharacteristicImovel(characteristic)">
@@ -202,7 +202,7 @@
 
     <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
       <mat-label>Instalações do Condomínio</mat-label>
-      <mat-chip-list #instalacoesCondominioList>
+      <mat-chip-list #instalacoesCondominioList [disabled]="disableFields">
         <mat-chip
           *ngFor="let characteristic of characteristicsInstalacoesCondominioSelected"
           (removed)="removeCharacteristicInstalacoesCondominio(characteristic)">
@@ -311,6 +311,7 @@
         [imagesUrl]="imagesUrl"
         [deleteImageFromApi]="true"
         [canSelectVariusFiles]="true"
+        [onlyView]="disableFields"
         (deleteImageEmitter)="deleteImage($event)">
       </app-upload-image>
     </div>

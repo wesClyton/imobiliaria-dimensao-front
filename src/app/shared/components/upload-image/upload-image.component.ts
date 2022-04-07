@@ -29,6 +29,9 @@ export class UploadImageComponent implements OnInit, OnChanges {
   @Input()
   public deleteImageFromApi = false;
 
+  @Input()
+  public onlyView = false;
+
   constructor() {}
 
   ngOnInit(): void {

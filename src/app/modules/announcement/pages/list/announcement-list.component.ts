@@ -12,6 +12,7 @@ import { CrudActionBack } from '../../../../shared/components/crud-actions/inter
 import { CrudActionNew } from '../../../../shared/components/crud-actions/interfaces/crud-action-new.interface';
 import { QueryFilterParam } from '../../../../shared/services/http/query-filter/query-filter.interface';
 import { UrlUtil } from '../../../../shared/utils/url.util';
+import { AuthService } from '../../../auth/services/auth.service';
 import { AnnouncementGetAll } from '../../interfaces/announcement-get-all.interface';
 import { AnnouncementUpdate } from '../../interfaces/announcement-update.interface';
 import { Announcement } from '../../interfaces/announcement.interface';
@@ -31,13 +32,18 @@ export class AnnouncementListComponent implements OnInit, AngularMaterialTableIn
 
   public tableActions!: AngularMaterialTableActions<Announcement>;
 
+  public get newShow(): boolean {
+    return this.authService.isAdmin || this.authService.isAutor;
+  }
+
   constructor(
     private readonly router: Router,
     private readonly activatedRoute: ActivatedRoute,
     private readonly announcementService: AnnouncementService,
     private readonly notificationService: NotificationService,
     private readonly loadingService: LoadingService,
-    private readonly angularMaterialDialogConfirmationService: AngularMaterialDialogConfirmationService
+    private readonly angularMaterialDialogConfirmationService: AngularMaterialDialogConfirmationService,
+    private readonly authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -55,16 +61,17 @@ export class AnnouncementListComponent implements OnInit, AngularMaterialTableIn
         {
           ...AngularMaterialTableActionsUtils.activeDefault(),
           action: announcement => this.updateStatus(announcement),
-          visible: !announcement.ativo
+          visible: !announcement.ativo && (this.authService.isAdmin || this.authService.isAutor)
         },
         {
           ...AngularMaterialTableActionsUtils.inactiveDefault(),
           action: announcement => this.updateStatus(announcement),
-          visible: announcement.ativo
+          visible: announcement.ativo && (this.authService.isAdmin || this.authService.isAutor)
         },
         {
           ...AngularMaterialTableActionsUtils.deleteDefault(),
-          action: announcement => this.delete(announcement)
+          action: announcement => this.delete(announcement),
+          visible: this.authService.isAdmin || this.authService.isAutor
         }
       ]
     };
@@ -103,10 +110,18 @@ export class AnnouncementListComponent implements OnInit, AngularMaterialTableIn
       return;
     }
 
-    this.announcementService.delete(announcement.id).subscribe(() => {
-      this.notificationService.success(`Anúncio ${announcement.titulo} excluído com sucesso!`);
-      this.getAnnouncements();
-    });
+    this.loadingService.show();
+
+    this.announcementService
+      .delete(announcement.id)
+      .pipe(
+        take(1),
+        finalize(() => this.loadingService.hide())
+      )
+      .subscribe(() => {
+        this.notificationService.success(`Anúncio ${announcement.titulo} excluído com sucesso!`);
+        this.getAnnouncements();
+      });
   }
 
   public getAnnouncements(queryFilters: Array<QueryFilterParam> = new Array<QueryFilterParam>()): void {

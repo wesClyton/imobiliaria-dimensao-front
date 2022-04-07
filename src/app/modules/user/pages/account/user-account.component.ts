@@ -1,16 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationService } from '../../../../core/notification/notification.service';
-import { PanelAdminComponent } from '../../../../panel-admin/panel-admin.component';
-import { AngularMaterialDialogConfirmationService } from '../../../../shared/angular-material/dialog-confirmation/angular-material-dialog-confirmation.service';
 import { CrudActionBack } from '../../../../shared/components/crud-actions/interfaces/crud-action-back.interface';
 import { CrudActionSave } from '../../../../shared/components/crud-actions/interfaces/crud-action-save.interface';
 import { CanDeactivateDialog } from '../../../../shared/guards/can-deactivate-dialog/can-deactivate-dialog.interface';
 import { UrlUtil } from '../../../../shared/utils/url.util';
 import { UserFormDetailComponent } from '../../components/form-detail/user-form-detail.component';
 import { User } from '../../interfaces/user.interface';
-import { UserService } from '../../services/user.service';
-import { USER_CONFIG } from '../../user.config';
 
 @Component({
   selector: 'app-user-account',
@@ -28,9 +24,7 @@ export class UserAccountComponent implements OnInit, CrudActionSave, CrudActionB
   constructor(
     private readonly router: Router,
     private readonly activatedRoute: ActivatedRoute,
-    private readonly notificationService: NotificationService,
-    private readonly userService: UserService,
-    private readonly angularMaterialDialogConfirmationService: AngularMaterialDialogConfirmationService
+    private readonly notificationService: NotificationService
   ) { }
 
   ngOnInit(): void {
@@ -50,7 +44,7 @@ export class UserAccountComponent implements OnInit, CrudActionSave, CrudActionB
   }
 
   public crudActionBack(): void {
-    this.router.navigateByUrl(PanelAdminComponent.pathConcat(USER_CONFIG.pathFront));
+    this.router.navigateByUrl(UrlUtil.previusUrlAcessed);
   }
 
 }

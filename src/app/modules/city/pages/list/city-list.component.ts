@@ -81,10 +81,18 @@ export class CityListComponent implements OnInit, AngularMaterialTableInputs<Cit
       return;
     }
 
-    this.cityService.delete(city.id).subscribe(() => {
-      this.notificationService.success(`Cidade ${city.nome} excluída com sucesso!`);
-      this.getCities();
-    });
+    this.loadingService.show();
+
+    this.cityService
+      .delete(city.id)
+      .pipe(
+        take(1),
+        finalize(() => this.loadingService.hide())
+      )
+      .subscribe(() => {
+        this.notificationService.success(`Cidade ${city.nome} excluída com sucesso!`);
+        this.getCities();
+      });
   }
 
   public getCities(queryFilters: Array<QueryFilterParam> = new Array<QueryFilterParam>()): void {

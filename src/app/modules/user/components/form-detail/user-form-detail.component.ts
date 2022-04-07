@@ -65,11 +65,12 @@ export class UserFormDetailComponent implements OnInit {
 
   public roles!: Array<Role>;
 
-  @Input()
-  public changeUserStorage = false;
+  public get isMyAccount(): boolean {
+    return this.authService.isMyAccount(this.user.id);
+  };
 
-  public get rolesEnabled(): boolean {
-    return this.authService.isAdmin;
+  public get disableFields(): boolean {
+    return this.isMyAccount || (this.isMyAccount && this.authService.isAdmin);
   }
 
   constructor(
@@ -131,7 +132,7 @@ export class UserFormDetailComponent implements OnInit {
       .subscribe(user => {
         this.form.markAsPristine();
         this.notificationService.success(`Usuário ${user.nome} alterado com sucesso!`);
-        if (this.changeUserStorage) {
+        if (this.isMyAccount) {
           this.authService.updateSessionStorage(user);
         }
         this.router.navigateByUrl(UrlUtil.previusUrlAcessed);

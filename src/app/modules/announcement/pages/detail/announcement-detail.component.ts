@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { take } from 'rxjs/operators';
+import { finalize, take } from 'rxjs/operators';
+import { LoadingService } from '../../../../core/loading/loading.service';
 import { NotificationService } from '../../../../core/notification/notification.service';
 import { PanelAdminComponent } from '../../../../panel-admin/panel-admin.component';
 import { AngularMaterialDialogConfirmationService } from '../../../../shared/angular-material/dialog-confirmation/angular-material-dialog-confirmation.service';
@@ -9,6 +10,7 @@ import { CrudActionDelete } from '../../../../shared/components/crud-actions/int
 import { CrudActionSave } from '../../../../shared/components/crud-actions/interfaces/crud-action-save.interface';
 import { CanDeactivateDialog } from '../../../../shared/guards/can-deactivate-dialog/can-deactivate-dialog.interface';
 import { UrlUtil } from '../../../../shared/utils/url.util';
+import { AuthService } from '../../../auth/services/auth.service';
 import { ANNOUNCEMENT_CONFIG } from '../../announcement.config';
 import { AnnouncementFormDetailComponent } from '../../components/form-detail/announcement-form-detail.component';
 import { Announcement } from '../../interfaces/announcement.interface';
@@ -27,12 +29,22 @@ export class AnnouncementDetailComponent implements OnInit, CrudActionSave, Crud
 
   public announcement!: Announcement;
 
+  public get saveShow(): boolean {
+    return this.authService.isAdmin || this.authService.isAutor;
+  }
+
+  public get deleteShow(): boolean {
+    return this.authService.isAdmin || this.authService.isAutor;
+  }
+
   constructor(
     private readonly router: Router,
     private readonly activatedRoute: ActivatedRoute,
     private readonly notificationService: NotificationService,
     private readonly announcementService: AnnouncementService,
-    private readonly angularMaterialDialogConfirmationService: AngularMaterialDialogConfirmationService
+    private readonly angularMaterialDialogConfirmationService: AngularMaterialDialogConfirmationService,
+    private readonly loadingService: LoadingService,
+    private readonly authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -62,10 +74,19 @@ export class AnnouncementDetailComponent implements OnInit, CrudActionSave, Crud
     if (!confirmation) {
       return;
     }
-    this.announcementService.delete(this.announcement.id).pipe(take(1)).subscribe(() => {
-      this.notificationService.success(`Anúncio ${this.announcement.titulo} excluído com sucesso!`);
-      this.crudActionBack();
-    });
+
+    this.loadingService.show();
+
+    this.announcementService
+      .delete(this.announcement.id)
+      .pipe(
+        take(1),
+        finalize(() => this.loadingService.hide())
+      )
+      .subscribe(() => {
+        this.notificationService.success(`Anúncio ${this.announcement.titulo} excluído com sucesso!`);
+        this.crudActionBack();
+      });
   }
 
 }

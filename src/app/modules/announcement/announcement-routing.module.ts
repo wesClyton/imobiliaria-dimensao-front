@@ -35,7 +35,7 @@ const routes: Routes = [
     },
     canActivate: [RoleGuard],
     data: {
-      roles: [Role.Admin, Role.Autor]
+      roles: [Role.Admin, Role.Autor, Role.Leitor]
     } as AllowedRoles,
     component: AnnouncementDetailComponent
   }

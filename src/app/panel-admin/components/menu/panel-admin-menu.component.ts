@@ -22,27 +22,27 @@ export class PanelAdminMenuComponent {
   public session!: Session;
 
   public get showAnnouncement(): boolean {
-    return this.authService.isAdmin;
+    return true;
   }
 
   public get showBanners(): boolean {
-    return this.authService.isAdmin;
+    return true;
   }
 
   public get showCharacteristics(): boolean {
-    return this.authService.isAdmin;
+    return true;
   }
 
   public get showBrokers(): boolean {
-    return this.authService.isAdmin;
+    return true;
   }
 
   public get showCities(): boolean {
-    return this.authService.isAdmin;
+    return true;
   }
 
   public get showStates(): boolean {
-    return this.authService.isAdmin;
+    return true;
   }
 
   public get showUsers(): boolean {

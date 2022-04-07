@@ -1,11 +1,11 @@
-<h1>Editar Anúncio</h1>
+<h1>Detalhes Anúncio</h1>
 
 <app-announcement-form-detail [announcement]="announcement"></app-announcement-form-detail>
 
 <app-crud-actions
-  [saveShow]="true"
+  [saveShow]="saveShow"
   [backShow]="true"
-  [deleteShow]="true"
+  [deleteShow]="deleteShow"
   (backClicked)="crudActionBack()"
   (saveClicked)="crudActionSave()"
   (deleteClicked)="crudActionDelete()">

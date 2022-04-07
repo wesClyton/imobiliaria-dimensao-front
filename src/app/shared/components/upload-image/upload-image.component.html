@@ -5,6 +5,7 @@
   [canSelectVariusFiles]="canSelectVariusFiles"
   [imageUrl]="imagesUrl ? imagesUrl[0] : ''"
   [deleteImageFromApi]="deleteImageFromApi"
+  [onlyView]="onlyView"
   (deleteClicked)="deleteClicked(0)"
   (fileSelected)="fileSelected($event)"
   (deleteImageEmitter)="deleteImageEmitterClick(0)">
@@ -19,12 +20,13 @@
     [indexFileOfList]="index"
     [imageUrl]="imagesUrl[index]"
     [deleteImageFromApi]="deleteImageFromApi"
+    [onlyView]="onlyView"
     (deleteClicked)="deleteClicked($event)"
     (fileSelected)="fileSelected($event)"
     (deleteImageEmitter)="deleteImageEmitterClick(index)">
   </app-upload-image-item>
 
-  <div class="buttons">
+  <div class="buttons" *ngIf="!onlyView">
     <button mat-icon-button type="button" (click)="fileAdd()">
       <mat-icon>add_circle</mat-icon>
     </button>

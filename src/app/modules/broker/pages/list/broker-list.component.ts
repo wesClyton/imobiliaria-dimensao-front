@@ -113,10 +113,17 @@ export class BrokerListComponent implements OnInit, AngularMaterialTableInputs<B
       return;
     }
 
-    this.brokerService.delete(broker.id).subscribe(() => {
-      this.notificationService.success(`Corretor ${broker.nome} excluído com sucesso!`);
-      this.getBrokers();
-    });
+    this.loadingService.show();
+
+    this.brokerService.delete(broker.id)
+      .pipe(
+        take(1),
+        finalize(() => this.loadingService.hide())
+      )
+      .subscribe(() => {
+        this.notificationService.success(`Corretor ${broker.nome} excluído com sucesso!`);
+        this.getBrokers();
+      });
   }
 
   public getBrokers(queryFilters: Array<QueryFilterParam> = new Array<QueryFilterParam>()): void {

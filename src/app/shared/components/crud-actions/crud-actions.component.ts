@@ -8,56 +8,56 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class CrudActionsComponent {
 
   @Input()
-  backShow = false;
+  public backShow = false;
 
   @Input()
-  backDisabled = false;
+  public backDisabled = false;
 
   @Output()
-  backClicked = new EventEmitter();
+  public readonly backClicked = new EventEmitter();
 
   @Input()
-  newShow = false;
+  public newShow = false;
 
   @Input()
-  newDisabled = false;
+  public newDisabled = false;
 
   @Output()
-  newClicked = new EventEmitter();
+  public readonly newClicked = new EventEmitter();
 
   @Input()
-  deleteShow = false;
+  public deleteShow = false;
 
   @Input()
-  deleteDisabled = false;
+  public deleteDisabled = false;
 
   @Output()
-  deleteClicked = new EventEmitter();
+  public readonly deleteClicked = new EventEmitter();
 
   @Input()
-  saveShow = false;
+  public saveShow = false;
 
   @Input()
-  saveDisabled = false;
+  public saveDisabled = false;
 
   @Output()
-  saveClicked = new EventEmitter();
+  public readonly saveClicked = new EventEmitter();
 
   constructor() { }
 
-  clickBack(): void {
+  public clickBack(): void {
     this.backClicked.emit();
   }
 
-  clickNew(): void {
+  public clickNew(): void {
     this.newClicked.emit();
   }
 
-  clickDelete(): void {
+  public clickDelete(): void {
     this.deleteClicked.emit();
   }
 
-  clickSave(): void {
+  public clickSave(): void {
     this.saveClicked.emit();
   }
 

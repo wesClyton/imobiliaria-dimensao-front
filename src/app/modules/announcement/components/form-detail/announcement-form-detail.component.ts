@@ -12,6 +12,7 @@ import { UploadImageComponent } from '../../../../shared/components/upload-image
 import { PathImagePipe } from '../../../../shared/pipes/path-image/path-image.pipe';
 import { FormService } from '../../../../shared/services/form/form.service';
 import { UrlUtil } from '../../../../shared/utils/url.util';
+import { AuthService } from '../../../auth/services/auth.service';
 import { CharacteristicType } from '../../../characteristic/enums/characteristic-type.enum';
 import { Characteristic } from '../../../characteristic/interfaces/characteristic.interface';
 import { CharacteristicService } from '../../../characteristic/services/characteristic.service';
@@ -233,6 +234,10 @@ export class AnnouncementFormDetailComponent implements OnInit {
 
   private subscription = new Subscription();
 
+  public get disableFields(): boolean {
+    return this.authService.isLeitor || this.authService.isCorretor;
+  }
+
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly notificationService: NotificationService,
@@ -244,7 +249,8 @@ export class AnnouncementFormDetailComponent implements OnInit {
     private readonly announcementUploadService: AnnouncementUploadService,
     private readonly pathImagePipe: PathImagePipe,
     private readonly announcementImageDeleteService: AnnouncementImageDeleteService,
-    private readonly angularMaterialDialogConfirmationService: AngularMaterialDialogConfirmationService
+    private readonly angularMaterialDialogConfirmationService: AngularMaterialDialogConfirmationService,
+    private readonly authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -306,6 +312,10 @@ export class AnnouncementFormDetailComponent implements OnInit {
 
     this.characteristicsImovelSelected = announcement.caracteristicas.filter(characteristic => characteristic.tipo === CharacteristicType.Imovel);
     this.characteristicsInstalacoesCondominioSelected = announcement.caracteristicas.filter(characteristic => characteristic.tipo === CharacteristicType.InstalacoesCondominio);
+
+    if (this.disableFields) {
+      this.form.disable();
+    }
   }
 
   private filterCharacteristicsImovel(value: string): void {

@@ -27,6 +27,9 @@ export class UploadImageItemComponent {
   @Input()
   public deleteImageFromApi = false;
 
+  @Input()
+  public onlyView = false;
+
   public imageChangedEvent: any;
 
   public croppedImage: any;

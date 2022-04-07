@@ -86,4 +86,8 @@ export class AuthService extends HttpPostService<Login, Session> {
     this.currentSession.next(session);
   }
 
+  public isMyAccount(userId: string): boolean {
+    return this.session.usuario.id === userId;
+  }
+
 }

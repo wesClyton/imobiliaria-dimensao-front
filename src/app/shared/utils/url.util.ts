@@ -3,7 +3,7 @@ import { StorageService } from '../services/storage/storage.service';
 
 export class UrlUtil {
 
-  public static readonly keyPreviusUrlAcessed = 'previusUrlAcessed';
+  public static readonly keyPreviusUrlAcessed = 'previus-url-acessed';
 
   public static get previusUrlAcessed(): string {
     const previusUrl = StorageService.localGetItem(UrlUtil.keyPreviusUrlAcessed) === window.location.pathname ?

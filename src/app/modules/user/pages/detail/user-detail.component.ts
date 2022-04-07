@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { take } from 'rxjs/operators';
+import { finalize, take } from 'rxjs/operators';
+import { LoadingService } from '../../../../core/loading/loading.service';
 import { NotificationService } from '../../../../core/notification/notification.service';
 import { PanelAdminComponent } from '../../../../panel-admin/panel-admin.component';
 import { AngularMaterialDialogConfirmationService } from '../../../../shared/angular-material/dialog-confirmation/angular-material-dialog-confirmation.service';
@@ -32,7 +33,8 @@ export class UserDetailComponent implements OnInit, CrudActionSave, CrudActionBa
     private readonly activatedRoute: ActivatedRoute,
     private readonly notificationService: NotificationService,
     private readonly userService: UserService,
-    private readonly angularMaterialDialogConfirmationService: AngularMaterialDialogConfirmationService
+    private readonly angularMaterialDialogConfirmationService: AngularMaterialDialogConfirmationService,
+    private readonly loadingService: LoadingService
   ) { }
 
   ngOnInit(): void {
@@ -62,10 +64,19 @@ export class UserDetailComponent implements OnInit, CrudActionSave, CrudActionBa
     if (!confirmation) {
       return;
     }
-    this.userService.delete(this.user.id).pipe(take(1)).subscribe(() => {
-      this.notificationService.success(`Usuário ${this.user.nome} excluído com sucesso!`);
-      this.crudActionBack();
-    });
+
+    this.loadingService.show();
+
+    this.userService
+      .delete(this.user.id)
+      .pipe(
+        take(1),
+        finalize(() => this.loadingService.hide())
+      )
+      .subscribe(() => {
+        this.notificationService.success(`Usuário ${this.user.nome} excluído com sucesso!`);
+        this.crudActionBack();
+      });
   }
 
 }

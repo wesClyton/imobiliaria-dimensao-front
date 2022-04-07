@@ -83,10 +83,18 @@ export class StateListComponent implements OnInit, AngularMaterialTableInputs<St
       return;
     }
 
-    this.stateService.delete(state.id).subscribe(() => {
-      this.notificationService.success(`Estado ${state.nome} excluído com sucesso!`);
-      this.getStates();
-    });
+    this.loadingService.show();
+
+    this.stateService
+      .delete(state.id)
+      .pipe(
+        take(1),
+        finalize(() => this.loadingService.hide())
+      )
+      .subscribe(() => {
+        this.notificationService.success(`Estado ${state.nome} excluído com sucesso!`);
+        this.getStates();
+      });
   }
 
   public getStates(queryFilters: Array<QueryFilterParam> = new Array<QueryFilterParam>()): void {
