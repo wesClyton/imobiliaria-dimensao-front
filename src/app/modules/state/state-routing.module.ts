@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CanDeactivateGuard } from '../../shared/guards/can-deactivate-dialog/can-deactivate-dialog.guard';
+import { Role } from '../auth/enums/role.enum';
+import { RoleGuard } from '../auth/guards/auth-role.guard';
+import { AllowedRoles } from '../auth/interfaces/allowed-role.interface';
 import { StateDetailComponent } from './pages/detail/state-detail.component';
 import { StateListComponent } from './pages/list/state-list.component';
 import { StateNewComponent } from './pages/new/state-new.component';
@@ -18,6 +21,10 @@ const routes: Routes = [
   {
     path: 'new',
     canDeactivate: [CanDeactivateGuard],
+    canActivate: [RoleGuard],
+    data: {
+      roles: [Role.Admin, Role.Autor]
+    } as AllowedRoles,
     component: StateNewComponent
   },
   {
@@ -26,6 +33,10 @@ const routes: Routes = [
     resolve: {
       state: StateGeByIdResolver
     },
+    canActivate: [RoleGuard],
+    data: {
+      roles: [Role.Admin, Role.Autor]
+    } as AllowedRoles,
     component: StateDetailComponent
   }
 ];

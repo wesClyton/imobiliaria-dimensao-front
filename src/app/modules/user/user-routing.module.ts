@@ -17,7 +17,11 @@ const routes: Routes = [
     component: UserListComponent,
     resolve: {
       userGetAll: UserGetAllResolver,
-    }
+    },
+    canActivate: [RoleGuard],
+    data: {
+      roles: [Role.Admin]
+    } as AllowedRoles
   },
   {
     path: 'new',
@@ -34,6 +38,10 @@ const routes: Routes = [
     resolve: {
       user: UserGeByIdResolver
     },
+    canActivate: [RoleGuard],
+    data: {
+      roles: [Role.Admin]
+    } as AllowedRoles,
     component: UserDetailComponent
   },
   {
