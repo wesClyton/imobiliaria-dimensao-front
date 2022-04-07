@@ -2495,6 +2495,11 @@
     "shebang-command" "^2.0.0"
     "which" "^2.0.1"
 
+"crypto-js@^4.1.1":
+  "integrity" "sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw=="
+  "resolved" "https://registry.npmjs.org/crypto-js/-/crypto-js-4.1.1.tgz"
+  "version" "4.1.1"
+
 "css-blank-pseudo@^3.0.2":
   "integrity" "sha512-VS90XWtsHGqoM0t4KpH053c4ehxZ2E6HtGI7x68YFV0pTo/QmkV/YFA+NnlvK8guxZVNWGQhVNJGC39Q8XF4OQ=="
   "resolved" "https://registry.npmjs.org/css-blank-pseudo/-/css-blank-pseudo-3.0.3.tgz"
@@ -2791,6 +2796,13 @@
   "version" "0.1.13"
   dependencies:
     "iconv-lite" "^0.6.2"
+
+"encrypt-storage@^2.2.6":
+  "integrity" "sha512-TuyQP4PfeAZ5Jnn3Eq5EzxjJUpj0tm83kPFAbW1rAOlbN5kS6GylMkdMWAlqwRfd2U8eNZSuFSf8GTh6zI3E1g=="
+  "resolved" "https://registry.npmjs.org/encrypt-storage/-/encrypt-storage-2.2.6.tgz"
+  "version" "2.2.6"
+  dependencies:
+    "crypto-js" "^4.1.1"
 
 "engine.io-parser@~5.0.3":
   "integrity" "sha512-BtQxwF27XUNnSafQLvDi0dQ8s3i6VgzSoQMJacpIcGNrlUdfHSKbgm3jmjCVvQluGzqwujQMPAoMai3oYSTurg=="

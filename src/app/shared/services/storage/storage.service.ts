@@ -1,44 +1,48 @@
 import { Injectable } from '@angular/core';
+import { EncryptStorage } from 'encrypt-storage';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StorageService {
 
+  private readonly encryptLocalStorage = new EncryptStorage(environment.encryptStorageSecret, { storageType: 'localStorage' });
+
+  private readonly encryptSessionStorage = new EncryptStorage(environment.encryptStorageSecret, { storageType: 'sessionStorage' });
+
   constructor() { }
 
   public static sessionSetItem(key: string, object: any): void {
-    sessionStorage.setItem(key, JSON.stringify(object));
+    return new StorageService().encryptSessionStorage.setItem(key, object);
   }
 
   public static sessionGetItem(key: string): any {
-    const value: any = sessionStorage.getItem(key);
-    return JSON.parse(value);
+    return new StorageService().encryptSessionStorage.getItem(key);
   }
 
   public static sessionRemoveItem(key: string): void {
-    sessionStorage.removeItem(key);
+    new StorageService().encryptSessionStorage.removeItem(key);
   }
 
   public static sessionClear(): void {
-    sessionStorage.clear();
+    new StorageService().encryptSessionStorage.clear();
   }
 
   public static localSetItem(key: string, object: any): void {
-    localStorage.setItem(key, JSON.stringify(object));
+    new StorageService().encryptLocalStorage.setItem(key, object);
   }
 
   public static localGetItem(key: string): any {
-    const value: any = localStorage.getItem(key);
-    return JSON.parse(value);
+    return new StorageService().encryptLocalStorage.getItem(key);
   }
 
   public static localRemoveItem(key: string): void {
-    localStorage.removeItem(key);
+    new StorageService().encryptLocalStorage.removeItem(key);
   }
 
   public static localClear(): void {
-    localStorage.clear();
+    new StorageService().encryptLocalStorage.clear();
   }
 
 }

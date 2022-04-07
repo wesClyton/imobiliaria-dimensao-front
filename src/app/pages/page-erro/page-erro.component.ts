@@ -28,7 +28,7 @@ export class PageErroComponent implements OnInit, OnDestroy {
       value = 'Ocorreu um erro interno no servidor.';
     }
     if (this.isStatusUnauthorized) {
-      value = 'Sua sessão expirou ou não tem permissão para acessar essa página!';
+      value = 'Seu acesso expirou ou não tem permissão para acessar essa página!';
     }
     return value;
   }
