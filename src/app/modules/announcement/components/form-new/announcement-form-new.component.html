@@ -169,8 +169,8 @@
       <mat-label>Imóvel</mat-label>
       <mat-chip-list #imovelList>
         <mat-chip
-          *ngFor="let characteristic of characteristicsImovelSelected"
-          (removed)="removeCharacteristicImovel(characteristic)">
+          *ngFor="let characteristic of characteristicsImovel"
+          (removed)="removeCharacteristic(characteristic)">
           {{ characteristic.nome }}
           <button matChipRemove>
             <mat-icon>cancel</mat-icon>
@@ -182,12 +182,12 @@
           formControlName="caracteristicasImovel"
           [matAutocomplete]="autoImovel"
           [matChipInputFor]="imovelList"
-          (matChipInputTokenEnd)="addCharacteristicImovel($event)">
+          (matChipInputTokenEnd)="chipInputClear($event)">
       </mat-chip-list>
       <mat-autocomplete
         #autoImovel="matAutocomplete"
-        (optionSelected)="characteristicImovelSelected($event)">
-        <mat-option *ngFor="let characteristic of characteristicsImovelFiltered" [value]="characteristic">
+        (optionSelected)="characteristicSelected($event)">
+        <mat-option *ngFor="let characteristic of characteristicsFiltered" [value]="characteristic">
           {{ characteristic.nome }}
         </mat-option>
       </mat-autocomplete>
@@ -197,8 +197,8 @@
       <mat-label>Instalações do Condomínio</mat-label>
       <mat-chip-list #instalacoesCondominioList>
         <mat-chip
-          *ngFor="let characteristic of characteristicsInstalacoesCondominioSelected"
-          (removed)="removeCharacteristicInstalacoesCondominio(characteristic)">
+          *ngFor="let characteristic of characteristicsInstalacoesCondominio"
+          (removed)="removeCharacteristic(characteristic)">
           {{ characteristic.nome }}
           <button matChipRemove>
             <mat-icon>cancel</mat-icon>
@@ -210,12 +210,12 @@
           formControlName="caracteristicasInstalacoesCondominio"
           [matAutocomplete]="autoInstalacoesCondominio"
           [matChipInputFor]="instalacoesCondominioList"
-          (matChipInputTokenEnd)="addCharacteristicInstalacoesCondominio($event)">
+          (matChipInputTokenEnd)="chipInputClear($event)">
       </mat-chip-list>
       <mat-autocomplete
         #autoInstalacoesCondominio="matAutocomplete"
-        (optionSelected)="characteristicInstalacoesCondominioSelected($event)">
-        <mat-option *ngFor="let characteristic of characteristicsInstalacoesCondominioFiltered" [value]="characteristic">
+        (optionSelected)="characteristicSelected($event)">
+        <mat-option *ngFor="let characteristic of characteristicsFiltered" [value]="characteristic">
           {{ characteristic.nome }}
         </mat-option>
       </mat-autocomplete>

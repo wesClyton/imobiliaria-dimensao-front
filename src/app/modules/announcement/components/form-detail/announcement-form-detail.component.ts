@@ -4,7 +4,7 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Router } from '@angular/router';
 import { forkJoin, Observable, Subscription } from 'rxjs';
-import { finalize, map, take } from 'rxjs/operators';
+import { debounceTime, finalize, map, take } from 'rxjs/operators';
 import { LoadingService } from '../../../../core/loading/loading.service';
 import { NotificationService } from '../../../../core/notification/notification.service';
 import { DialogConfirmationService } from '../../../../shared/components/dialog-confirmation/dialog-confirmation.service';
@@ -216,13 +216,18 @@ export class AnnouncementFormDetailComponent implements OnInit {
   @ViewChild(UploadImageComponent, { static: false })
   private updaloadPhotoComponent!: UploadImageComponent;
 
-  public characteristicsImovelSelected = new Array<Characteristic>();
+  public characteristicsImovel = new Array<Characteristic>();
 
-  public characteristicsImovelFiltered!: Array<Characteristic>;
+  public characteristicsInstalacoesCondominio = Array<Characteristic>();
 
-  public characteristicsInstalacoesCondominioSelected = Array<Characteristic>();
+  public characteristicsFiltered!: Array<Characteristic>;
 
-  public characteristicsInstalacoesCondominioFiltered!: Array<Characteristic>;
+  private get characteristicSelectedTypes(): { [key in CharacteristicType]: Array<Characteristic> } {
+    return {
+      IMOVEL: this.characteristicsImovel,
+      INSTALACOES_CONDOMINIO: this.characteristicsInstalacoesCondominio
+    }
+  }
 
   public announcementTypes!: Array<AnnouncementType>;
 
@@ -294,10 +299,16 @@ export class AnnouncementFormDetailComponent implements OnInit {
       caracteristicasInstalacoesCondominio: new FormControl(null)
     });
 
-    this.subscription.add(this.controlCaracteristicasImovel?.valueChanges.subscribe(value => this.filterCharacteristicsImovel(value)));
+    this.subscription.add(
+      this.controlCaracteristicasImovel?.valueChanges
+        .pipe(debounceTime(500))
+        .subscribe(value => this.filterCharacteristics(value, CharacteristicType.Imovel))
+    );
 
     this.subscription.add(
-      this.controlCaracteristicasInstalacoesCondominio?.valueChanges.subscribe(value => this.filterCharacteristicsInstalacoesCondominio(value))
+      this.controlCaracteristicasInstalacoesCondominio?.valueChanges
+        .pipe(debounceTime(500))
+        .subscribe(value => this.filterCharacteristics(value, CharacteristicType.InstalacoesCondominio))
     );
 
     if (this.announcement) {
@@ -310,103 +321,62 @@ export class AnnouncementFormDetailComponent implements OnInit {
     this.imagesUrl = new Array<string>();
     announcement.galeria.fotos.forEach(foto => this.imagesUrl.push(this.pathImagePipe.transform(foto.nome, 'anuncios', announcement.galeria.id)));
 
-    this.characteristicsImovelSelected = announcement.caracteristicas.filter(characteristic => characteristic.tipo === CharacteristicType.Imovel);
-    this.characteristicsInstalacoesCondominioSelected = announcement.caracteristicas.filter(characteristic => characteristic.tipo === CharacteristicType.InstalacoesCondominio);
+    this.characteristicsImovel = announcement.caracteristicas.filter(characteristic => characteristic.tipo === CharacteristicType.Imovel);
+    this.characteristicsInstalacoesCondominio = announcement.caracteristicas.filter(characteristic => characteristic.tipo === CharacteristicType.InstalacoesCondominio);
 
     if (this.disableFields) {
       this.form.disable();
     }
   }
 
-  private filterCharacteristicsImovel(value: string): void {
-    this.characteristicService.queryFilterRemove();
-
-    if (typeof value === 'string') {
+  private filterCharacteristics(value: string, type: CharacteristicType): void {
+    if (value && typeof value === 'string') {
       this.characteristicService.queryFilterAdd({
         field: 'nome',
         value: value
       });
+      this.characteristicService.queryFilterAdd({
+        field: 'tipo',
+        value: type
+      });
+
+      this.characteristicService
+        .getAll()
+        .pipe(take(1))
+        .subscribe(characteristics => this.characteristicsFiltered = characteristics.data.filter(characteristic => characteristic.tipo === type));
     }
-    this.characteristicService.queryFilterAdd({
-      field: 'tipo',
-      value: CharacteristicType.Imovel
-    });
-
-    this.characteristicService
-      .getAll()
-      .pipe(take(1))
-      .subscribe(characteristics => this.characteristicsImovelFiltered = characteristics.data);
   }
 
-  public addCharacteristicImovel(event: MatChipInputEvent): void {
-    event.chipInput?.clear();
-    this.resetControlCaracteristicaImovel();
-  }
-
-  public characteristicImovelSelected(event: MatAutocompleteSelectedEvent): void {
-    this.resetControlCaracteristicaImovel();
-    if (this.characteristicsImovelSelected.some(value => value.id === event.option.value.id)) {
-      this.notificationService.information('Característica já informada.');
-      return;
-    }
-    this.characteristicsImovelSelected.push(event.option.value);
-  }
-
-  private resetControlCaracteristicaImovel(): void {
+  private resetControlsCaracteristica(): void {
     this.inputCaracteristicaImovel.nativeElement.value = '';
     this.controlCaracteristicasImovel?.setValue(null);
-  }
 
-  public removeCharacteristicImovel(characteristic: Characteristic): void {
-    const index = this.characteristicsImovelSelected.indexOf(characteristic);
-    if (index >= 0) {
-      this.characteristicsImovelSelected.splice(index, 1);
-    }
-  }
-
-  private filterCharacteristicsInstalacoesCondominio(value: string): void {
-    this.characteristicService.queryFilterRemove();
-
-    if (typeof value === 'string') {
-      this.characteristicService.queryFilterAdd({
-        field: 'nome',
-        value: value
-      });
-    }
-    this.characteristicService.queryFilterAdd({
-      field: 'tipo',
-      value: CharacteristicType.InstalacoesCondominio
-    });
-
-    this.characteristicService
-      .getAll()
-      .pipe(take(1))
-      .subscribe(characteristics => this.characteristicsInstalacoesCondominioFiltered = characteristics.data);
-  }
-
-  public addCharacteristicInstalacoesCondominio(event: MatChipInputEvent): void {
-    event.chipInput?.clear();
-    this.resetControlCaracteristicaInstalacoesCondominio();
-  }
-
-  public characteristicInstalacoesCondominioSelected(event: MatAutocompleteSelectedEvent): void {
-    this.resetControlCaracteristicaInstalacoesCondominio();
-    if (this.characteristicsInstalacoesCondominioSelected.some(value => value.id === event.option.value.id)) {
-      this.notificationService.information('Característica já informada.');
-      return;
-    }
-    this.characteristicsInstalacoesCondominioSelected.push(event.option.value);
-  }
-
-  private resetControlCaracteristicaInstalacoesCondominio(): void {
     this.inputCaracteristicaInstalacoesCondominio.nativeElement.value = '';
     this.controlCaracteristicasInstalacoesCondominio?.setValue(null);
   }
 
-  public removeCharacteristicInstalacoesCondominio(characteristic: Characteristic): void {
-    const index = this.characteristicsInstalacoesCondominioSelected.indexOf(characteristic);
+  public chipInputClear(event: MatChipInputEvent): void {
+    this.characteristicService.queryFilterRemove();
+    this.resetControlsCaracteristica();
+    this.characteristicsFiltered = new Array<Characteristic>();
+    event.chipInput?.clear();
+  }
+
+  public characteristicSelected(event: MatAutocompleteSelectedEvent): void {
+    this.resetControlsCaracteristica();
+
+    const characteristic: Characteristic = event.option.value;
+    if (this.characteristicSelectedTypes[characteristic.tipo].some(value => value.id === characteristic.id)) {
+      this.notificationService.information('Característica já informada.');
+      return;
+    }
+    this.characteristicSelectedTypes[characteristic.tipo].push(characteristic);
+  }
+
+  public removeCharacteristic(characteristic: Characteristic): void {
+    const index = this.characteristicSelectedTypes[characteristic.tipo].indexOf(characteristic);
     if (index >= 0) {
-      this.characteristicsInstalacoesCondominioSelected.splice(index, 1);
+      this.characteristicSelectedTypes[characteristic.tipo].splice(index, 1);
     }
   }
 
@@ -419,8 +389,8 @@ export class AnnouncementFormDetailComponent implements OnInit {
     this.loadingService.show();
 
     const caracteristicas = new Array<{ id: string }>();
-    this.characteristicsImovelSelected.forEach(characteristic => caracteristicas.push({ id: characteristic.id }));
-    this.characteristicsInstalacoesCondominioSelected.forEach(characteristic => caracteristicas.push({ id: characteristic.id }));
+    this.characteristicsImovel.forEach(characteristic => caracteristicas.push({ id: characteristic.id }));
+    this.characteristicsInstalacoesCondominio.forEach(characteristic => caracteristicas.push({ id: characteristic.id }));
 
     const announcement: AnnouncementUpdate = {
       id: this.announcement.id,
