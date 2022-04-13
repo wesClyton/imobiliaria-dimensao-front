@@ -81,7 +81,7 @@ export class BrokerFormNewComponent implements OnInit {
   }
 
   @ViewChild(UploadImageComponent, { static: false })
-  private updaloadPhotoComponent!: UploadImageComponent;
+  private readonly updaloadPhotoComponent!: UploadImageComponent;
 
   constructor(
     private readonly formBuilder: FormBuilder,

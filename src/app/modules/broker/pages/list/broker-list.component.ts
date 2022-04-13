@@ -12,6 +12,7 @@ import { TableInputs } from '../../../../shared/components/table/interfaces/tabl
 import { TableActionsUtils } from '../../../../shared/components/table/utils/table-actions.utils';
 import { QueryFilterParam } from '../../../../shared/services/http/query-filter/query-filter.interface';
 import { UrlUtil } from '../../../../shared/utils/url.util';
+import { AuthService } from '../../../auth/services/auth.service';
 import { BrokerGetAll } from '../../interfaces/broker-get-all.interface';
 import { BrokerUpdate } from '../../interfaces/broker-update.interface';
 import { Broker } from '../../interfaces/broker.interface';
@@ -28,9 +29,11 @@ export class BrokerListComponent implements OnInit, TableInputs<Broker>, CrudAct
 
   public tableDataSource!: MatTableDataSource<Broker>;
 
-  public tableDisplayedColumns = ['foto', 'nome', 'email', 'telefone', 'whatsapp', 'ativo'];
+  public readonly tableDisplayedColumns = ['foto', 'nome', 'email', 'telefone', 'whatsapp', 'ativo'];
 
   public tableActions!: TableActions<Broker>;
+
+  public readonly newShow = this.authService.isAdmin || this.authService.isAutor;
 
   constructor(
     private readonly router: Router,
@@ -38,7 +41,8 @@ export class BrokerListComponent implements OnInit, TableInputs<Broker>, CrudAct
     private readonly brokerService: BrokerService,
     private readonly notificationService: NotificationService,
     private readonly loadingService: LoadingService,
-    private readonly angularMaterialDialogConfirmationService: DialogConfirmationService
+    private readonly angularMaterialDialogConfirmationService: DialogConfirmationService,
+    private readonly authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -56,16 +60,17 @@ export class BrokerListComponent implements OnInit, TableInputs<Broker>, CrudAct
         {
           ...TableActionsUtils.activeDefault(),
           action: broker => this.updateStatus(broker),
-          visible: !broker.ativo
+          visible: !broker.ativo && (this.authService.isAdmin || this.authService.isAutor)
         },
         {
           ...TableActionsUtils.inactiveDefault(),
           action: broker => this.updateStatus(broker),
-          visible: broker.ativo
+          visible: broker.ativo && (this.authService.isAdmin || this.authService.isAutor)
         },
         {
           ...TableActionsUtils.deleteDefault(),
-          action: broker => this.delete(broker)
+          action: broker => this.delete(broker),
+          visible: this.authService.isAdmin || this.authService.isAutor
         }
       ]
     }

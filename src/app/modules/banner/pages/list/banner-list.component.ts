@@ -12,6 +12,7 @@ import { TableInputs } from '../../../../shared/components/table/interfaces/tabl
 import { TableActionsUtils } from '../../../../shared/components/table/utils/table-actions.utils';
 import { QueryFilterParam } from '../../../../shared/services/http/query-filter/query-filter.interface';
 import { UrlUtil } from '../../../../shared/utils/url.util';
+import { AuthService } from '../../../auth/services/auth.service';
 import { Banner } from '../../interfaces/banner-create.interface';
 import { BannerGetAll } from '../../interfaces/banner-get-all.interface';
 import { BannerUpdate } from '../../interfaces/banner-update.interface';
@@ -28,9 +29,13 @@ export class BannerListComponent implements OnInit, TableInputs<Banner>, CrudAct
 
   public tableDataSource!: MatTableDataSource<Banner>;
 
-  public tableDisplayedColumns = ['foto', 'nome', 'link', 'ativo'];
+  public readonly tableDisplayedColumns = ['foto', 'nome', 'link', 'ativo'];
 
   public tableActions!: TableActions<Banner>;
+
+  public readonly tableShowActions = this.authService.isAdmin || this.authService.isAutor;
+
+  public readonly newShow = this.authService.isAdmin || this.authService.isAutor;
 
   constructor(
     private readonly router: Router,
@@ -38,7 +43,8 @@ export class BannerListComponent implements OnInit, TableInputs<Banner>, CrudAct
     private readonly bannerService: BannerService,
     private readonly notificationService: NotificationService,
     private readonly loadingService: LoadingService,
-    private readonly angularMaterialDialogConfirmationService: DialogConfirmationService
+    private readonly angularMaterialDialogConfirmationService: DialogConfirmationService,
+    private readonly authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -55,13 +61,11 @@ export class BannerListComponent implements OnInit, TableInputs<Banner>, CrudAct
         },
         {
           ...TableActionsUtils.activeDefault(),
-          action: banner => this.updateStatus(banner),
-          visible: !banner.ativo
+          action: banner => this.updateStatus(banner)
         },
         {
           ...TableActionsUtils.inactiveDefault(),
-          action: banner => this.updateStatus(banner),
-          visible: banner.ativo
+          action: banner => this.updateStatus(banner)
         },
         {
           ...TableActionsUtils.deleteDefault(),

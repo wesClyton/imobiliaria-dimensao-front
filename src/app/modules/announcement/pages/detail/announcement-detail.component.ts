@@ -23,9 +23,9 @@ import { AnnouncementService } from '../../services/announcement.service';
 export class AnnouncementDetailComponent implements OnInit, CrudActionSave, CrudActionBack, CrudActionDelete, CanDeactivateDialog {
 
   @ViewChild(AnnouncementFormDetailComponent, { static: false })
-  private announcementFormDetailComponent!: AnnouncementFormDetailComponent;
+  private readonly announcementFormDetailComponent!: AnnouncementFormDetailComponent;
 
-  public canDeactivateMessage = 'Realmente deseja cancelar a edição do Anúncio?';
+  public readonly canDeactivateMessage = 'Realmente deseja cancelar a edição do Anúncio?';
 
   public announcement!: Announcement;
 

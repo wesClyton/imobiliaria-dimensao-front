@@ -14,9 +14,9 @@ import { BannerFormNewComponent } from '../../components/form-new/banner-form-ne
 export class BannerNewComponent implements CrudActionSave, CrudActionBack, CanDeactivateDialog {
 
   @ViewChild(BannerFormNewComponent, { static: false })
-  private bannerFormNewComponent!: BannerFormNewComponent;
+  private readonly bannerFormNewComponent!: BannerFormNewComponent;
 
-  public canDeactivateMessage = 'Realmente deseja cancelar o cadastro do Banner?';
+  public readonly canDeactivateMessage = 'Realmente deseja cancelar o cadastro do Banner?';
 
   constructor(
     private readonly router: Router

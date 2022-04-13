@@ -14,9 +14,9 @@ import { CityFormNewComponent } from '../../components/form-new/city-form-new.co
 export class CityNewComponent implements CrudActionSave, CrudActionBack, CanDeactivateDialog {
 
   @ViewChild(CityFormNewComponent, { static: false })
-  private cityFormNewComponent!: CityFormNewComponent;
+  private readonly cityFormNewComponent!: CityFormNewComponent;
 
-  public canDeactivateMessage = 'Realmente deseja cancelar o cadastro da Cidade?';
+  public readonly canDeactivateMessage = 'Realmente deseja cancelar o cadastro da Cidade?';
 
   constructor(
     private readonly router: Router

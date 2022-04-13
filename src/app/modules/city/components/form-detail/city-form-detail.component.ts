@@ -6,8 +6,8 @@ import { LoadingService } from '../../../../core/loading/loading.service';
 import { NotificationService } from '../../../../core/notification/notification.service';
 import { FormService } from '../../../../shared/services/form/form.service';
 import { UrlUtil } from '../../../../shared/utils/url.util';
+import { AuthService } from '../../../auth/services/auth.service';
 import { StateGetAll } from '../../../state/interfaces/state-get-all.interface';
-import { StateService } from '../../../state/services/state.service';
 import { CityUpdate } from '../../interfaces/city-update.interface';
 import { City } from '../../interfaces/city.interface';
 import { CityService } from '../../services/city.service';
@@ -41,13 +41,18 @@ export class CityFormDetailComponent implements OnInit {
   @Input()
   public city!: City;
 
+  private get disableFields(): boolean {
+    return this.authService.isLeitor || this.authService.isCorretor;
+  }
+
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly notificationService: NotificationService,
     private readonly loadinService: LoadingService,
     private readonly cityService: CityService,
     private readonly router: Router,
-    private readonly formService: FormService
+    private readonly formService: FormService,
+    private readonly authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -68,6 +73,10 @@ export class CityFormDetailComponent implements OnInit {
   private setValueForm(city: City): void {
     this.controlNome?.setValue(city.nome);
     this.controlEstadoId?.setValue(city.estado.id);
+
+    if (this.disableFields) {
+      this.form.disable();
+    }
   }
 
   public submit(): void {

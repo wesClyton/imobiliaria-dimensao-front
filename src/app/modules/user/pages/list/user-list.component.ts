@@ -27,7 +27,7 @@ export class UserListComponent implements OnInit, TableInputs<User>, CrudActionN
 
   public tableDataSource!: MatTableDataSource<User>;
 
-  public tableDisplayedColumns = ['nome', 'email', 'nivel', 'ativo'];
+  public readonly tableDisplayedColumns = ['nome', 'email', 'nivel', 'ativo'];
 
   public tableActions!: TableActions<User>;
 

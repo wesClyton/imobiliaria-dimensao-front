@@ -9,7 +9,7 @@ import { StateService } from '../../services/state.service';
 export class StateOptionSelectDirective implements OnInit {
 
   @Output()
-  public dataFinded = new EventEmitter<StateGetAll>();
+  public readonly dataFinded = new EventEmitter<StateGetAll>();
 
   constructor(
     private readonly stateService: StateService

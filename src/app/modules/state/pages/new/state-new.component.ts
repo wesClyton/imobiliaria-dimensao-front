@@ -14,9 +14,9 @@ import { STATE_CONFIG } from '../../state.config';
 export class StateNewComponent implements CrudActionSave, CrudActionBack, CanDeactivateDialog {
 
   @ViewChild(StateFormNewComponent, { static: false })
-  private stateFormNewComponent!: StateFormNewComponent;
+  private readonly stateFormNewComponent!: StateFormNewComponent;
 
-  public canDeactivateMessage = 'Realmente deseja cancelar o cadastro de Estado?';
+  public readonly canDeactivateMessage = 'Realmente deseja cancelar o cadastro de Estado?';
 
   constructor(
     private readonly router: Router

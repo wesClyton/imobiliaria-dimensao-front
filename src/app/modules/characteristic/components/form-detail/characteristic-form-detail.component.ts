@@ -6,6 +6,7 @@ import { LoadingService } from '../../../../core/loading/loading.service';
 import { NotificationService } from '../../../../core/notification/notification.service';
 import { FormService } from '../../../../shared/services/form/form.service';
 import { UrlUtil } from '../../../../shared/utils/url.util';
+import { AuthService } from '../../../auth/services/auth.service';
 import { CharacteristicType } from '../../interfaces/characteristic-type.interface';
 import { CharacteristicUpdate } from '../../interfaces/characteristic-update.interface';
 import { Characteristic } from '../../interfaces/characteristic.interface';
@@ -40,13 +41,18 @@ export class CharacteristicFormDetailComponent implements OnInit {
 
   public characteristicTypes!: Array<CharacteristicType>;
 
+  private get disableFields(): boolean {
+    return this.authService.isLeitor || this.authService.isCorretor;
+  }
+
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly notificationService: NotificationService,
     private readonly loadinService: LoadingService,
     private readonly characteristicService: CharacteristicService,
     private readonly router: Router,
-    private readonly formService: FormService
+    private readonly formService: FormService,
+    private readonly authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -66,6 +72,10 @@ export class CharacteristicFormDetailComponent implements OnInit {
 
   private setValueForm(characteristic: Characteristic): void {
     this.form.patchValue(characteristic);
+
+    if (this.disableFields) {
+      this.form.disable();
+    }
   }
 
   public submit(): void {

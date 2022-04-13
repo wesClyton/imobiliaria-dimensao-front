@@ -8,6 +8,7 @@ import { UploadImageComponent } from '../../../../shared/components/upload-image
 import { PathImagePipe } from '../../../../shared/pipes/path-image/path-image.pipe';
 import { FormService } from '../../../../shared/services/form/form.service';
 import { UrlUtil } from '../../../../shared/utils/url.util';
+import { AuthService } from '../../../auth/services/auth.service';
 import { Banner } from '../../interfaces/banner-create.interface';
 import { BannerUploadService } from '../../services/banner-upload.service';
 
@@ -43,10 +44,14 @@ export class BannerFormDetailComponent implements OnInit {
   @Input()
   public banner!: Banner;
 
-  public imagesUrl = new Array<string>();
+  public readonly imagesUrl = new Array<string>();
 
   @ViewChild(UploadImageComponent, { static: false })
-  private updaloadPhotoComponent!: UploadImageComponent;
+  private readonly updaloadPhotoComponent!: UploadImageComponent;
+
+  public get disableFields(): boolean {
+    return this.authService.isLeitor || this.authService.isCorretor;
+  }
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -55,7 +60,8 @@ export class BannerFormDetailComponent implements OnInit {
     private readonly bannerUploadService: BannerUploadService,
     private readonly router: Router,
     private readonly formService: FormService,
-    private readonly pathImagePipe: PathImagePipe
+    private readonly pathImagePipe: PathImagePipe,
+    private readonly authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -79,6 +85,10 @@ export class BannerFormDetailComponent implements OnInit {
 
     if (this.banner.foto) {
       this.imagesUrl.push(this.pathImagePipe.transform(this.banner.foto, 'banners'));
+    }
+
+    if (this.disableFields) {
+      this.form.disable();
     }
   }
 

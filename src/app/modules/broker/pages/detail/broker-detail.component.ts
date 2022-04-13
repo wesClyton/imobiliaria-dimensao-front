@@ -10,6 +10,7 @@ import { CrudActionSave } from '../../../../shared/components/crud-actions/inter
 import { DialogConfirmationService } from '../../../../shared/components/dialog-confirmation/dialog-confirmation.service';
 import { CanDeactivateDialog } from '../../../../shared/guards/can-deactivate-dialog/can-deactivate-dialog.interface';
 import { UrlUtil } from '../../../../shared/utils/url.util';
+import { AuthService } from '../../../auth/services/auth.service';
 import { BROKER_CONFIG } from '../../broker.config';
 import { BrokerFormDetailComponent } from '../../components/form-detail/broker-form-detail.component';
 import { Broker } from '../../interfaces/broker.interface';
@@ -22,11 +23,19 @@ import { BrokerService } from '../../services/broker.service';
 export class BrokerDetailComponent implements OnInit, CrudActionSave, CrudActionBack, CrudActionDelete, CanDeactivateDialog {
 
   @ViewChild(BrokerFormDetailComponent, { static: false })
-  private brokerFormDetailComponent!: BrokerFormDetailComponent;
+  private readonly brokerFormDetailComponent!: BrokerFormDetailComponent;
 
-  public canDeactivateMessage = 'Realmente deseja cancelar a edição do Corretor?';
+  public readonly canDeactivateMessage = 'Realmente deseja cancelar a edição do Corretor?';
 
   public broker!: Broker;
+
+  public get saveShow(): boolean {
+    return this.authService.isAdmin || this.authService.isAutor;
+  }
+
+  public get deleteShow(): boolean {
+    return this.authService.isAdmin || this.authService.isAutor;
+  }
 
   constructor(
     private readonly router: Router,
@@ -34,7 +43,8 @@ export class BrokerDetailComponent implements OnInit, CrudActionSave, CrudAction
     private readonly notificationService: NotificationService,
     private readonly brokerService: BrokerService,
     private readonly angularMaterialDialogConfirmationService: DialogConfirmationService,
-    private readonly loadingService: LoadingService
+    private readonly loadingService: LoadingService,
+    private readonly authService: AuthService
   ) { }
 
   ngOnInit(): void {

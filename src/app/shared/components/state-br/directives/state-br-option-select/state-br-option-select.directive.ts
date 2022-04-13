@@ -8,7 +8,7 @@ import { StateBrUtil } from '../../state-br.util';
 export class StateBrOptionSelectDirective implements OnInit {
 
   @Output()
-  public dataFinded = new EventEmitter<Array<StateBr>>();
+  public readonly dataFinded = new EventEmitter<Array<StateBr>>();
 
   constructor(
   ) { }

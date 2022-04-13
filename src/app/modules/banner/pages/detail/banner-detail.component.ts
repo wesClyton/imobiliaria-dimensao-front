@@ -22,9 +22,9 @@ import { BannerService } from '../../services/banner.service';
 export class BannerDetailComponent implements OnInit, CrudActionSave, CrudActionBack, CrudActionDelete, CanDeactivateDialog {
 
   @ViewChild(BannerFormDetailComponent, { static: false })
-  private bannerFormDetailComponent!: BannerFormDetailComponent;
+  private readonly bannerFormDetailComponent!: BannerFormDetailComponent;
 
-  public canDeactivateMessage = 'Realmente deseja cancelar a edição do Banner?';
+  public readonly canDeactivateMessage = 'Realmente deseja cancelar a edição do Banner?';
 
   public banner!: Banner;
 

@@ -19,7 +19,7 @@ export class AuthService extends HttpPostService<Login, Session> {
 
   private readonly currentSession = new BehaviorSubject<Session>(this.session);
 
-  public currentSession$ = this.currentSession.asObservable();
+  public readonly currentSession$ = this.currentSession.asObservable();
 
   public get isLogged(): boolean {
     return this.session ? true : false;

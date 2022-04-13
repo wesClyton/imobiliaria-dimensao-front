@@ -22,9 +22,9 @@ import { USER_CONFIG } from '../../user.config';
 export class UserDetailComponent implements OnInit, CrudActionSave, CrudActionBack, CrudActionDelete, CanDeactivateDialog {
 
   @ViewChild(UserFormDetailComponent, { static: false })
-  private userFormDetailComponent!: UserFormDetailComponent;
+  private readonly userFormDetailComponent!: UserFormDetailComponent;
 
-  public canDeactivateMessage = 'Realmente deseja cancelar a edição do Usuário?';
+  public readonly canDeactivateMessage = 'Realmente deseja cancelar a edição do Usuário?';
 
   public user!: User;
 

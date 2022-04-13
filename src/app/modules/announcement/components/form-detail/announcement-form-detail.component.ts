@@ -208,13 +208,13 @@ export class AnnouncementFormDetailComponent implements OnInit {
   }
 
   @ViewChild('inputCaracteristicaImovel', { static: false })
-  private inputCaracteristicaImovel!: ElementRef<HTMLInputElement>;
+  private readonly inputCaracteristicaImovel!: ElementRef<HTMLInputElement>;
 
   @ViewChild('inputCaracteristicaInstalacoesCondominio', { static: false })
-  private inputCaracteristicaInstalacoesCondominio!: ElementRef<HTMLInputElement>;
+  private readonly inputCaracteristicaInstalacoesCondominio!: ElementRef<HTMLInputElement>;
 
   @ViewChild(UploadImageComponent, { static: false })
-  private updaloadPhotoComponent!: UploadImageComponent;
+  private readonly updaloadPhotoComponent!: UploadImageComponent;
 
   public characteristicsImovel = new Array<Characteristic>();
 
@@ -237,7 +237,7 @@ export class AnnouncementFormDetailComponent implements OnInit {
 
   public imagesUrl = new Array<string>();
 
-  private subscription = new Subscription();
+  private readonly subscription = new Subscription();
 
   public get disableFields(): boolean {
     return this.authService.isLeitor || this.authService.isCorretor;

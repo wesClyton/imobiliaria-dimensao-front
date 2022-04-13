@@ -14,9 +14,9 @@ import { AnnouncementFormNewComponent } from '../../components/form-new/announce
 export class AnnouncementNewComponent implements CrudActionSave, CrudActionBack, CanDeactivateDialog {
 
   @ViewChild(AnnouncementFormNewComponent, { static: false })
-  private announcementFormNewComponent!: AnnouncementFormNewComponent;
+  private readonly announcementFormNewComponent!: AnnouncementFormNewComponent;
 
-  public canDeactivateMessage = 'Realmente deseja cancelar o cadastro do Anúncio?';
+  public readonly canDeactivateMessage = 'Realmente deseja cancelar o cadastro do Anúncio?';
 
   constructor(
     private readonly router: Router

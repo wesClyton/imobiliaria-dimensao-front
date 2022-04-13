@@ -14,9 +14,9 @@ import { USER_CONFIG } from '../../user.config';
 export class UserNewComponent implements CrudActionSave, CrudActionBack, CanDeactivateDialog {
 
   @ViewChild(UserFormNewComponent, { static: false })
-  private userFormNewComponent!: UserFormNewComponent;
+  private readonly userFormNewComponent!: UserFormNewComponent;
 
-  public canDeactivateMessage = 'Realmente deseja cancelar o cadastro de Usuário?';
+  public readonly canDeactivateMessage = 'Realmente deseja cancelar o cadastro de Usuário?';
 
   constructor(
     private readonly router: Router

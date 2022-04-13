@@ -11,7 +11,7 @@ import { CharacteristicTypeLabel } from '../../utils/characteristic-label.util';
 export class CharacteristicTypeOptionSelectDirective implements OnInit {
 
   @Output()
-  public dataFinded = new EventEmitter<Array<CharacteristicType>>();
+  public readonly dataFinded = new EventEmitter<Array<CharacteristicType>>();
 
   constructor(
     private readonly characteristicTypePipe: CharacteristicTypePipe

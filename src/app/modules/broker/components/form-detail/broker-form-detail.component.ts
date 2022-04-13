@@ -8,6 +8,7 @@ import { UploadImageComponent } from '../../../../shared/components/upload-image
 import { PathImagePipe } from '../../../../shared/pipes/path-image/path-image.pipe';
 import { FormService } from '../../../../shared/services/form/form.service';
 import { UrlUtil } from '../../../../shared/utils/url.util';
+import { AuthService } from '../../../auth/services/auth.service';
 import { BrokerUpdateResponse } from '../../interfaces/broker-update-response.interface';
 import { BrokerUpdate } from '../../interfaces/broker-update.interface';
 import { Broker } from '../../interfaces/broker.interface';
@@ -82,10 +83,14 @@ export class BrokerFormDetailComponent implements OnInit {
   @Input()
   public broker!: Broker;
 
-  public imagesUrl = new Array<string>();
+  public readonly imagesUrl = new Array<string>();
 
   @ViewChild(UploadImageComponent, { static: false })
-  private updaloadPhotoComponent!: UploadImageComponent;
+  private readonly updaloadPhotoComponent!: UploadImageComponent;
+
+  public get disableFields(): boolean {
+    return this.authService.isLeitor || this.authService.isCorretor;
+  }
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -95,7 +100,8 @@ export class BrokerFormDetailComponent implements OnInit {
     private readonly brokerUploadService: BrokerUploadService,
     private readonly router: Router,
     private readonly formService: FormService,
-    private readonly pathImagePipe: PathImagePipe
+    private readonly pathImagePipe: PathImagePipe,
+    private readonly authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -127,6 +133,10 @@ export class BrokerFormDetailComponent implements OnInit {
 
     if (this.broker.foto) {
       this.imagesUrl.push(this.pathImagePipe.transform(this.broker.foto, 'corretores'));
+    }
+
+    if (this.disableFields) {
+      this.form.disable();
     }
   }
 

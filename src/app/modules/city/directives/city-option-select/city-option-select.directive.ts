@@ -9,7 +9,7 @@ import { CityService } from '../../services/city.service';
 export class CityOptionSelectDirective implements OnInit {
 
   @Output()
-  public dataFinded = new EventEmitter<CityGetAll>();
+  public readonly dataFinded = new EventEmitter<CityGetAll>();
 
   constructor(
     private readonly cityService: CityService

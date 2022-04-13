@@ -9,6 +9,7 @@ import { CrudActionSave } from '../../../../shared/components/crud-actions/inter
 import { DialogConfirmationService } from '../../../../shared/components/dialog-confirmation/dialog-confirmation.service';
 import { CanDeactivateDialog } from '../../../../shared/guards/can-deactivate-dialog/can-deactivate-dialog.interface';
 import { UrlUtil } from '../../../../shared/utils/url.util';
+import { AuthService } from '../../../auth/services/auth.service';
 import { StateFormDetailComponent } from '../../components/form-detail/state-form-detail.component';
 import { State } from '../../interfaces/state.interface';
 import { StateService } from '../../services/state.service';
@@ -21,18 +22,23 @@ import { STATE_CONFIG } from '../../state.config';
 export class StateDetailComponent implements OnInit, CrudActionSave, CrudActionBack, CrudActionDelete, CanDeactivateDialog {
 
   @ViewChild(StateFormDetailComponent, { static: false })
-  private stateFormDetailComponent!: StateFormDetailComponent;
+  private readonly stateFormDetailComponent!: StateFormDetailComponent;
 
-  public canDeactivateMessage = 'Realmente deseja cancelar a edição do Estado?';
+  public readonly canDeactivateMessage = 'Realmente deseja cancelar a edição do Estado?';
 
   public state!: State;
+
+  public readonly saveShow = this.authService.isAdmin || this.authService.isAutor;
+
+  public readonly deleteShow = this.authService.isAdmin || this.authService.isAutor;
 
   constructor(
     private readonly router: Router,
     private readonly activatedRoute: ActivatedRoute,
     private readonly notificationService: NotificationService,
     private readonly stateService: StateService,
-    private readonly angularMaterialDialogConfirmationService: DialogConfirmationService
+    private readonly angularMaterialDialogConfirmationService: DialogConfirmationService,
+    private readonly authService: AuthService
   ) { }
 
   ngOnInit(): void {

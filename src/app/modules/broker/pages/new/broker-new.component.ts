@@ -14,9 +14,9 @@ import { BrokerFormNewComponent } from '../../components/form-new/broker-form-ne
 export class BrokerNewComponent implements CrudActionSave, CrudActionBack, CanDeactivateDialog {
 
   @ViewChild(BrokerFormNewComponent, { static: false })
-  private brokerFormNewComponent!: BrokerFormNewComponent;
+  private readonly brokerFormNewComponent!: BrokerFormNewComponent;
 
-  public canDeactivateMessage = 'Realmente deseja cancelar o cadastro do Corretor?';
+  public readonly canDeactivateMessage = 'Realmente deseja cancelar o cadastro do Corretor?';
 
   constructor(
     private readonly router: Router

@@ -12,6 +12,7 @@ import { TableInputs } from '../../../../shared/components/table/interfaces/tabl
 import { TableActionsUtils } from '../../../../shared/components/table/utils/table-actions.utils';
 import { QueryFilterParam } from '../../../../shared/services/http/query-filter/query-filter.interface';
 import { UrlUtil } from '../../../../shared/utils/url.util';
+import { AuthService } from '../../../auth/services/auth.service';
 import { CityGetAll } from '../../interfaces/city-get-all.interface';
 import { City } from '../../interfaces/city.interface';
 import { CityService } from '../../services/city.service';
@@ -26,9 +27,11 @@ export class CityListComponent implements OnInit, TableInputs<City>, CrudActionN
 
   public tableDataSource!: MatTableDataSource<City>;
 
-  public tableDisplayedColumns = ['nome', 'estado'];
+  public readonly tableDisplayedColumns = ['nome', 'estado'];
 
-  public tableActions: TableActions<City> = {
+  public readonly tableShowActions = this.authService.isAdmin || this.authService.isAutor;
+
+  public readonly tableActions: TableActions<City> = {
     items: [
       {
         ...TableActionsUtils.detailDefault(),
@@ -41,7 +44,9 @@ export class CityListComponent implements OnInit, TableInputs<City>, CrudActionN
     ]
   };
 
-  public tableFilterInputTextPlaceholder = 'Filtre pelo nome';
+  public readonly tableFilterInputTextPlaceholder = 'Filtre pelo nome';
+
+  public readonly newShow = this.authService.isAdmin || this.authService.isAutor;
 
   constructor(
     private readonly router: Router,
@@ -49,7 +54,8 @@ export class CityListComponent implements OnInit, TableInputs<City>, CrudActionN
     private readonly cityService: CityService,
     private readonly notificationService: NotificationService,
     private readonly loadingService: LoadingService,
-    private readonly angularMaterialDialogConfirmationService: DialogConfirmationService
+    private readonly angularMaterialDialogConfirmationService: DialogConfirmationService,
+    private readonly authService: AuthService
   ) { }
 
   ngOnInit(): void {

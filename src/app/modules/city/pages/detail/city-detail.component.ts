@@ -10,6 +10,7 @@ import { CrudActionSave } from '../../../../shared/components/crud-actions/inter
 import { DialogConfirmationService } from '../../../../shared/components/dialog-confirmation/dialog-confirmation.service';
 import { CanDeactivateDialog } from '../../../../shared/guards/can-deactivate-dialog/can-deactivate-dialog.interface';
 import { UrlUtil } from '../../../../shared/utils/url.util';
+import { AuthService } from '../../../auth/services/auth.service';
 import { CITY_CONFIG } from '../../city.config';
 import { CityFormDetailComponent } from '../../components/form-detail/city-form-detail.component';
 import { City } from '../../interfaces/city.interface';
@@ -22,11 +23,15 @@ import { CityService } from '../../services/city.service';
 export class CityDetailComponent implements OnInit, CrudActionSave, CrudActionBack, CrudActionDelete, CanDeactivateDialog {
 
   @ViewChild(CityFormDetailComponent, { static: false })
-  private cityFormDetailComponent!: CityFormDetailComponent;
+  private readonly cityFormDetailComponent!: CityFormDetailComponent;
 
-  public canDeactivateMessage = 'Realmente deseja cancelar a edição da Cidade?';
+  public readonly canDeactivateMessage = 'Realmente deseja cancelar a edição da Cidade?';
 
   public city!: City;
+
+  public readonly saveShow = this.authService.isAdmin || this.authService.isAutor;
+
+  public readonly deleteShow = this.authService.isAdmin || this.authService.isAutor;
 
   constructor(
     private readonly router: Router,
@@ -34,7 +39,8 @@ export class CityDetailComponent implements OnInit, CrudActionSave, CrudActionBa
     private readonly notificationService: NotificationService,
     private readonly cityService: CityService,
     private readonly angularMaterialDialogConfirmationService: DialogConfirmationService,
-    private readonly loadingService: LoadingService
+    private readonly loadingService: LoadingService,
+    private readonly authService: AuthService
   ) { }
 
   ngOnInit(): void {

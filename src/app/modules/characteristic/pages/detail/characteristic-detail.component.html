@@ -3,9 +3,9 @@
 <app-characteristic-form-detail [characteristic]="characteristic"></app-characteristic-form-detail>
 
 <app-crud-actions
-  [saveShow]="true"
+  [saveShow]="saveShow"
   [backShow]="true"
-  [deleteShow]="true"
+  [deleteShow]="deleteShow"
   (backClicked)="crudActionBack()"
   (saveClicked)="crudActionSave()"
   (deleteClicked)="crudActionDelete()">

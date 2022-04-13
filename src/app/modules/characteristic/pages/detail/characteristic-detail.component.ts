@@ -10,6 +10,7 @@ import { CrudActionSave } from '../../../../shared/components/crud-actions/inter
 import { DialogConfirmationService } from '../../../../shared/components/dialog-confirmation/dialog-confirmation.service';
 import { CanDeactivateDialog } from '../../../../shared/guards/can-deactivate-dialog/can-deactivate-dialog.interface';
 import { UrlUtil } from '../../../../shared/utils/url.util';
+import { AuthService } from '../../../auth/services/auth.service';
 import { CHARACTERISTIC_CONFIG } from '../../characteristic.config';
 import { CharacteristicFormDetailComponent } from '../../components/form-detail/characteristic-form-detail.component';
 import { Characteristic } from '../../interfaces/characteristic.interface';
@@ -22,11 +23,15 @@ import { CharacteristicService } from '../../services/characteristic.service';
 export class CharacteristicDetailComponent implements OnInit, CrudActionSave, CrudActionBack, CrudActionDelete, CanDeactivateDialog {
 
   @ViewChild(CharacteristicFormDetailComponent, { static: false })
-  private characteristicFormDetailComponent!: CharacteristicFormDetailComponent;
+  private readonly characteristicFormDetailComponent!: CharacteristicFormDetailComponent;
 
-  public canDeactivateMessage = 'Realmente deseja cancelar a edição da Característica?';
+  public readonly canDeactivateMessage = 'Realmente deseja cancelar a edição da Característica?';
 
   public characteristic!: Characteristic;
+
+  public readonly saveShow = this.authService.isAdmin || this.authService.isAutor;
+
+  public readonly deleteShow = this.authService.isAdmin || this.authService.isAutor;
 
   constructor(
     private readonly router: Router,
@@ -34,7 +39,8 @@ export class CharacteristicDetailComponent implements OnInit, CrudActionSave, Cr
     private readonly notificationService: NotificationService,
     private readonly characteristicService: CharacteristicService,
     private readonly angularMaterialDialogConfirmationService: DialogConfirmationService,
-    private readonly loadingService: LoadingService
+    private readonly loadingService: LoadingService,
+    private readonly authService: AuthService
   ) { }
 
   ngOnInit(): void {

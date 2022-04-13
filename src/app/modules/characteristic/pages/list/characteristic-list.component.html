@@ -4,6 +4,7 @@
   [tableDataSource]="tableDataSource"
   [tableDisplayedColumns]="tableDisplayedColumns"
   [tableActions]="tableActions"
+  [tableShowActions]="tableShowActions"
   [tableShowAdvancedSearch]="true">
 
   <app-characteristic-advanced-search
@@ -24,7 +25,7 @@
 </app-table>
 
 <app-crud-actions
-  [newShow]="true"
+  [newShow]="newShow"
   [backShow]="true"
   (backClicked)="crudActionBack()"
   (newClicked)="crudActionNew()">

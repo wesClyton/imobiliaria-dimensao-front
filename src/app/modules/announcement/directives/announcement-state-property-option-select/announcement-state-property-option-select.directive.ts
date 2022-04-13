@@ -11,7 +11,7 @@ import { AnnouncementStatePropertyLabel } from '../../utils/announcement-state-p
 export class AnnouncementStatePropertyOptionSelectDirective implements OnInit {
 
   @Output()
-  public dataFinded = new EventEmitter<Array<AnnouncementStateProperty>>();
+  public readonly dataFinded = new EventEmitter<Array<AnnouncementStateProperty>>();
 
   constructor(
     private readonly announcementStatePropertyPipe: AnnouncementStatePropertyPipe

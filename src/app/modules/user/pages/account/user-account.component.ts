@@ -15,9 +15,9 @@ import { User } from '../../interfaces/user.interface';
 export class UserAccountComponent implements OnInit, CrudActionSave, CrudActionBack, CanDeactivateDialog {
 
   @ViewChild(UserFormDetailComponent, { static: false })
-  private userFormDetailComponent!: UserFormDetailComponent;
+  private readonly userFormDetailComponent!: UserFormDetailComponent;
 
-  public canDeactivateMessage = 'Realmente deseja cancelar a edição?';
+  public readonly canDeactivateMessage = 'Realmente deseja cancelar a edição?';
 
   public user!: User;
 

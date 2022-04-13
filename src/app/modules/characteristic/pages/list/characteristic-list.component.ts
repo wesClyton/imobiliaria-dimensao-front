@@ -12,6 +12,7 @@ import { TableInputs } from '../../../../shared/components/table/interfaces/tabl
 import { TableActionsUtils } from '../../../../shared/components/table/utils/table-actions.utils';
 import { QueryFilterParam } from '../../../../shared/services/http/query-filter/query-filter.interface';
 import { UrlUtil } from '../../../../shared/utils/url.util';
+import { AuthService } from '../../../auth/services/auth.service';
 import { CharacteristicGetAll } from '../../interfaces/characteristic-get-all.interface';
 import { Characteristic } from '../../interfaces/characteristic.interface';
 import { CharacteristicService } from '../../services/characteristic.service';
@@ -26,9 +27,11 @@ export class CharacteristicListComponent implements OnInit, TableInputs<Characte
 
   public tableDataSource!: MatTableDataSource<Characteristic>;
 
-  public tableDisplayedColumns = ['nome', 'tipo'];
+  public readonly tableDisplayedColumns = ['nome', 'tipo'];
 
-  public tableActions: TableActions<Characteristic> = {
+  public readonly tableShowActions = this.authService.isAdmin || this.authService.isAutor;
+
+  public readonly tableActions: TableActions<Characteristic> = {
     items: [
       {
         ...TableActionsUtils.detailDefault(),
@@ -41,13 +44,16 @@ export class CharacteristicListComponent implements OnInit, TableInputs<Characte
     ]
   };
 
+  public readonly newShow = this.authService.isAdmin || this.authService.isAutor;
+
   constructor(
     private readonly router: Router,
     private readonly activatedRoute: ActivatedRoute,
     private readonly characteristicService: CharacteristicService,
     private readonly notificationService: NotificationService,
     private readonly loadingService: LoadingService,
-    private readonly angularMaterialDialogConfirmationService: DialogConfirmationService
+    private readonly angularMaterialDialogConfirmationService: DialogConfirmationService,
+    private readonly authService: AuthService
   ) { }
 
   ngOnInit(): void {

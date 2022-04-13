@@ -195,13 +195,13 @@ export class AnnouncementFormNewComponent implements OnInit, OnDestroy {
   }
 
   @ViewChild('inputCaracteristicaImovel', { static: false })
-  private inputCaracteristicaImovel!: ElementRef<HTMLInputElement>;
+  private readonly inputCaracteristicaImovel!: ElementRef<HTMLInputElement>;
 
   @ViewChild('inputCaracteristicaInstalacoesCondominio', { static: false })
-  private inputCaracteristicaInstalacoesCondominio!: ElementRef<HTMLInputElement>;
+  private readonly inputCaracteristicaInstalacoesCondominio!: ElementRef<HTMLInputElement>;
 
   @ViewChild(UploadImageComponent, { static: false })
-  private updaloadPhotoComponent!: UploadImageComponent;
+  private readonly updaloadPhotoComponent!: UploadImageComponent;
 
   public characteristicsImovel = new Array<Characteristic>();
 
@@ -224,7 +224,7 @@ export class AnnouncementFormNewComponent implements OnInit, OnDestroy {
 
   public imagesUrl = new Array<string>();
 
-  private subscription = new Subscription();
+  private readonly subscription = new Subscription();
 
   constructor(
     private readonly formBuilder: FormBuilder,

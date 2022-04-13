@@ -14,9 +14,9 @@ import { CharacteristicFormNewComponent } from '../../components/form-new/charac
 export class CharacteristicNewComponent implements CrudActionSave, CrudActionBack, CanDeactivateDialog {
 
   @ViewChild(CharacteristicFormNewComponent, { static: false })
-  private characteristicFormNewComponent!: CharacteristicFormNewComponent;
+  private readonly characteristicFormNewComponent!: CharacteristicFormNewComponent;
 
-  public canDeactivateMessage = 'Realmente deseja cancelar o cadastro da Característica?';
+  public readonly canDeactivateMessage = 'Realmente deseja cancelar o cadastro da Característica?';
 
   constructor(
     private readonly router: Router

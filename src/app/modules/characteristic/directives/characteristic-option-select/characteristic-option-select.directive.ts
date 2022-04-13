@@ -9,7 +9,7 @@ import { CharacteristicService } from '../../services/characteristic.service';
 export class CharacteristicOptionSelectDirective implements OnInit {
 
   @Output()
-  public dataFinded = new EventEmitter<CharacteristicGetAll>();
+  public readonly dataFinded = new EventEmitter<CharacteristicGetAll>();
 
   constructor(
     private readonly characteristicService: CharacteristicService

@@ -10,7 +10,7 @@ import { RoleLabel } from '../../utils/role-label.util';
 export class RoleOptionSelectDirective implements OnInit {
 
   @Output()
-  public dataFinded = new EventEmitter<Array<Role>>();
+  public readonly dataFinded = new EventEmitter<Array<Role>>();
 
   constructor(
     private readonly rolePipe: RolePipe

@@ -8,6 +8,7 @@ import { StateBr } from '../../../../shared/components/state-br/state-br.interfa
 import { StateBrUtil } from '../../../../shared/components/state-br/state-br.util';
 import { FormService } from '../../../../shared/services/form/form.service';
 import { UrlUtil } from '../../../../shared/utils/url.util';
+import { AuthService } from '../../../auth/services/auth.service';
 import { StateUpdate } from '../../interfaces/state-update.interface';
 import { State } from '../../interfaces/state.interface';
 import { StateService } from '../../services/state.service';
@@ -33,13 +34,18 @@ export class StateFormDetailComponent implements OnInit {
   @Input()
   public state!: State;
 
+  private get disableFields(): boolean {
+    return this.authService.isLeitor || this.authService.isCorretor;
+  }
+
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly notificationService: NotificationService,
     private readonly loadinService: LoadingService,
     private readonly stateService: StateService,
     private readonly router: Router,
-    private readonly formService: FormService
+    private readonly formService: FormService,
+    private readonly authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -58,6 +64,10 @@ export class StateFormDetailComponent implements OnInit {
 
   private setValueForm(state: State): void {
     this.form.patchValue(state);
+
+    if (this.disableFields) {
+      this.form.disable();
+    }
   }
 
   public submit(): void {

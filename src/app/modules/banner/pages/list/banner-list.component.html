@@ -5,6 +5,7 @@
   [tableDisplayedColumns]="tableDisplayedColumns"
   [tableActions]="tableActions"
   [tableShowAdvancedSearch]="true"
+  [tableShowActions]="tableShowActions"
   (tableMenuActionsClicked)="createActions($event)">
 
   <app-banner-advanced-search
@@ -39,7 +40,7 @@
 </app-table>
 
 <app-crud-actions
-  [newShow]="true"
+  [newShow]="newShow"
   [backShow]="true"
   (backClicked)="crudActionBack()"
   (newClicked)="crudActionNew()">

@@ -12,11 +12,10 @@ import { TableInputs } from '../../../../shared/components/table/interfaces/tabl
 import { TableActionsUtils } from '../../../../shared/components/table/utils/table-actions.utils';
 import { QueryFilterParam } from '../../../../shared/services/http/query-filter/query-filter.interface';
 import { UrlUtil } from '../../../../shared/utils/url.util';
+import { AuthService } from '../../../auth/services/auth.service';
 import { StateGetAll } from '../../interfaces/state-get-all.interface';
 import { State } from '../../interfaces/state.interface';
 import { StateService } from '../../services/state.service';
-
-
 
 @Component({
   selector: 'app-state-list',
@@ -28,9 +27,9 @@ export class StateListComponent implements OnInit, TableInputs<State>, CrudActio
 
   public tableDataSource!: MatTableDataSource<State>;
 
-  public tableDisplayedColumns = ['nome', 'uf'];
+  public readonly tableDisplayedColumns = ['nome', 'uf'];
 
-  public tableActions: TableActions<State> = {
+  public readonly tableActions: TableActions<State> = {
     items: [
       {
         ...TableActionsUtils.detailDefault(),
@@ -43,7 +42,11 @@ export class StateListComponent implements OnInit, TableInputs<State>, CrudActio
     ]
   };
 
-  public tableFilterInputTextPlaceholder = 'Filtre pelo nome';
+  public readonly tableFilterInputTextPlaceholder = 'Filtre pelo nome';
+
+  public readonly newShow = this.authService.isAdmin || this.authService.isAutor;
+
+  public readonly tableShowActions = this.authService.isAdmin || this.authService.isAutor;
 
   constructor(
     private readonly router: Router,
@@ -51,7 +54,8 @@ export class StateListComponent implements OnInit, TableInputs<State>, CrudActio
     private readonly stateService: StateService,
     private readonly notificationService: NotificationService,
     private readonly loadingService: LoadingService,
-    private readonly angularMaterialDialogConfirmationService: DialogConfirmationService
+    private readonly angularMaterialDialogConfirmationService: DialogConfirmationService,
+    private readonly authService: AuthService
   ) { }
 
   ngOnInit(): void {

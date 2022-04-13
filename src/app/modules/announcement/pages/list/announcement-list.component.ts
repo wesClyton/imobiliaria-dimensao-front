@@ -28,7 +28,7 @@ export class AnnouncementListComponent implements OnInit, TableInputs<Announceme
 
   public tableDataSource!: MatTableDataSource<Announcement>;
 
-  public tableDisplayedColumns = ['codigoAnuncio', 'titulo', 'tipo', 'expiracaoAnuncio', 'cidade', 'ativo'];
+  public readonly tableDisplayedColumns = ['codigoAnuncio', 'titulo', 'tipo', 'expiracaoAnuncio', 'cidade', 'ativo'];
 
   public tableActions!: TableActions<Announcement>;
 
