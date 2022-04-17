@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { UploadImageModule } from '../../../shared/components/upload-image/upload-image.module';
+import { DirectivesModule } from '../../../shared/directives/directives.module';
 import { PipesModule } from '../../../shared/pipes/pipes.module';
 import { BrokerAdvancedSearchComponent } from './advanced-search/broker-advanced-search.component';
 import { BrokerFormDetailComponent } from './form-detail/broker-form-detail.component';
@@ -27,7 +28,8 @@ import { BrokerFormNewComponent } from './form-new/broker-form-new.component';
     MatSlideToggleModule,
     UploadImageModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
+    DirectivesModule
   ],
   exports: [
     BrokerFormNewComponent,

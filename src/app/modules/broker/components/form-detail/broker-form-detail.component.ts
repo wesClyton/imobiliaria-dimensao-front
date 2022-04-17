@@ -5,6 +5,7 @@ import { take } from 'rxjs/operators';
 import { LoadingService } from '../../../../core/loading/loading.service';
 import { NotificationService } from '../../../../core/notification/notification.service';
 import { UploadImageComponent } from '../../../../shared/components/upload-image/upload-image.component';
+import { phoneValidator } from '../../../../shared/form-validators/phone.validator';
 import { PathImagePipe } from '../../../../shared/pipes/path-image/path-image.pipe';
 import { FormService } from '../../../../shared/services/form/form.service';
 import { UrlUtil } from '../../../../shared/utils/url.util';
@@ -46,6 +47,10 @@ export class BrokerFormDetailComponent implements OnInit {
 
   private get controlWhatsApp(): AbstractControl | null {
     return this.form?.get('whatsapp');
+  }
+
+  public get controlWhatsAppHasError(): boolean | undefined {
+    return this.controlWhatsApp?.hasError('phoneInvalid');
   }
 
   private get controlEmail(): AbstractControl | null {
@@ -112,8 +117,8 @@ export class BrokerFormDetailComponent implements OnInit {
     this.form = this.formBuilder.group({
       nome: new FormControl(null, [Validators.required]),
       funcao: new FormControl(null),
-      telefone: new FormControl(null, [Validators.required]),
-      whatsapp: new FormControl(null),
+      telefone: new FormControl(null, [Validators.required, phoneValidator()]),
+      whatsapp: new FormControl(null, [phoneValidator()]),
       email: new FormControl(null, [Validators.required, Validators.email]),
       biografia: new FormControl(null),
       creci: new FormControl(null),

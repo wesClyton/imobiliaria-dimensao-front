@@ -1,20 +1,22 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { MaskApplierService } from 'ngx-mask';
 
 @Pipe({
   name: 'phone'
 })
 export class PhonePipe implements PipeTransform {
 
-  transform(phone: string): string {
-    const ddd = phone.slice(0, 2);
-    const midSection = phone.slice(2, this.isNinthDigit(phone) ? 7 : 6);
-    const lastSection = phone.slice(this.isNinthDigit(phone) ? 7 : 6);
+  constructor(
+    private readonly maskApplierService: MaskApplierService
+  ) {}
 
-    return `(${ddd}) ${midSection}-${lastSection}`;
+  transform(phone: string): string {
+    const mask = this.hasNinthDigit(phone) ? '(00) 0 0000-0000' : '(00) 0000-0000';
+    return this.maskApplierService.applyMask(phone, mask);
   }
 
-  private isNinthDigit(phone: string): boolean {
-    return phone.length === 11;
+  private hasNinthDigit(phone: string): boolean {
+    return phone.length > 10;
   }
 
 }
