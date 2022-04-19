@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { NgxMaskModule } from 'ngx-mask';
 import { ActiveInactivePipe } from './active-inactive/active-inactive.pipe';
+import { CepPipe } from './cep/cep.pipe';
 import { CityStatePipe } from './city-state/city-state.pipe';
 import { PathImagePipe } from './path-image/path-image.pipe';
 import { PhonePipe } from './phone/phone.pipe';
@@ -14,7 +15,8 @@ import { YesNoPipe } from './yes-no/yes-no.pipe';
     PathImagePipe,
     CityStatePipe,
     WhatsAppLinkPipe,
-    PhonePipe
+    PhonePipe,
+    CepPipe
   ],
   imports: [NgxMaskModule.forRoot()],
   exports: [
@@ -23,7 +25,8 @@ import { YesNoPipe } from './yes-no/yes-no.pipe';
     PathImagePipe,
     CityStatePipe,
     WhatsAppLinkPipe,
-    PhonePipe
+    PhonePipe,
+    CepPipe
   ]
 })
 export class PipesModule {}

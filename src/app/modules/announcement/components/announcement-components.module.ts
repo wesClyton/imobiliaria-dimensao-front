@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { UploadImageModule } from '../../../shared/components/upload-image/upload-image.module';
+import { DirectivesModule } from '../../../shared/directives/directives.module';
 import { PipesModule } from '../../../shared/pipes/pipes.module';
 import { CityDirectivesModule } from '../../city/directives/city-directives.module';
 import { AnnouncementDirectivesModule } from '../directives/announcement-directives.module';
@@ -41,7 +42,8 @@ import { AnnouncementFormNewComponent } from './form-new/announcement-form-new.c
     MatChipsModule,
     MatIconModule,
     AnnouncementDirectivesModule,
-    CityDirectivesModule
+    CityDirectivesModule,
+    DirectivesModule
   ],
   exports: [
     AnnouncementFormNewComponent,

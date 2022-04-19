@@ -10,13 +10,13 @@ export class PhonePipe implements PipeTransform {
     private readonly maskApplierService: MaskApplierService
   ) {}
 
-  transform(phone: string): string {
-    const mask = this.hasNinthDigit(phone) ? '(00) 0 0000-0000' : '(00) 0000-0000';
-    return this.maskApplierService.applyMask(phone, mask);
+  transform(value: string): string {
+    const mask = this.hasNinthDigit(value) ? '(00) 0 0000-0000' : '(00) 0000-0000';
+    return this.maskApplierService.applyMask(value, mask);
   }
 
-  private hasNinthDigit(phone: string): boolean {
-    return phone.length > 10;
+  private hasNinthDigit(value: string): boolean {
+    return value.length > 10;
   }
 
 }
