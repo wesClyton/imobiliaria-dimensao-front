@@ -37,6 +37,11 @@
     <td mat-cell *matCellDef="let row">{{ row.cidade | cityState }}</td>
   </ng-container>
 
+  <ng-container matColumnDef="destaque">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Destaque</th>
+    <td mat-cell *matCellDef="let row">{{ row.destaque | yesNo }}</td>
+  </ng-container>
+
   <ng-container matColumnDef="ativo">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
     <td mat-cell *matCellDef="let row">{{ row.ativo | activeInactive }}</td>
