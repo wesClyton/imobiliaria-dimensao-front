@@ -99,10 +99,6 @@ export class AnnouncementFormDetailComponent implements OnInit {
     return this.form?.get('dataConclusao');
   }
 
-  public get controlDataConclusaoHasError(): boolean | undefined {
-    return this.controlDataConclusao?.dirty || this.controlDataConclusao?.hasError('required');
-  }
-
   private get controlDataExpiracao(): AbstractControl | null {
     return this.form?.get('expiracaoAnuncio');
   }
@@ -275,15 +271,15 @@ export class AnnouncementFormDetailComponent implements OnInit {
       titulo: new FormControl(null, [Validators.required]),
       tipo: new FormControl(null, [Validators.required]),
       expiracaoAnuncio: new FormControl(null, [Validators.required]),
-      valor: new FormControl(null, [Validators.required]),
-      valorCondominio: new FormControl(null),
-      areaTotal: new FormControl(null),
-      areaConstruida: new FormControl(null),
+      valor: new FormControl(0, [Validators.required]),
+      valorCondominio: new FormControl(0),
+      areaTotal: new FormControl(0),
+      areaConstruida: new FormControl(0),
       sobre: new FormControl(null),
-      dormitorios: new FormControl(null, [Validators.required]),
-      suites: new FormControl(null),
-      banheiros: new FormControl(null, [Validators.required]),
-      vagasGaragem: new FormControl(null),
+      dormitorios: new FormControl(0, [Validators.required]),
+      suites: new FormControl(0),
+      banheiros: new FormControl(0, [Validators.required]),
+      vagasGaragem: new FormControl(0),
       empreendimento: new FormControl(null),
       cep: new FormControl(null, [Validators.required]),
       endereco: new FormControl(null, [Validators.required]),
@@ -294,7 +290,7 @@ export class AnnouncementFormDetailComponent implements OnInit {
       urlVideo: new FormControl(null),
       url360: new FormControl(null),
       estadoImovel: new FormControl(null, [Validators.required]),
-      dataConclusao: new FormControl(null, [Validators.required]),
+      dataConclusao: new FormControl(null),
       caracteristicasImovel: new FormControl(null),
       caracteristicasInstalacoesCondominio: new FormControl(null)
     });

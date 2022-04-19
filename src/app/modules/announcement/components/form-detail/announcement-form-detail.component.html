@@ -80,44 +80,24 @@
   <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
     <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
       <mat-label>Dormitórios</mat-label>
-      <mat-select formControlName="dormitorios">
-        <mat-option>Selecione</mat-option>
-        <mat-option [value]="1">1</mat-option>
-        <mat-option [value]="2">2</mat-option>
-        <mat-option [value]="3">3</mat-option>
-      </mat-select>
+      <input matInput type="text" formControlName="dormitorios" placeholder="Informe a quantidade de Dormitórios">
       <mat-error *ngIf="controlDormitoriosHasError">Informe a quantidade de Dormitórios</mat-error>
     </mat-form-field>
 
     <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
       <mat-label>Suítes</mat-label>
-      <mat-select formControlName="suites">
-        <mat-option>Selecione</mat-option>
-        <mat-option [value]="1">1</mat-option>
-        <mat-option [value]="2">2</mat-option>
-        <mat-option [value]="3">3</mat-option>
-      </mat-select>
+      <input matInput type="text" formControlName="suites" placeholder="Informe a quantidade de Suítes">
     </mat-form-field>
 
     <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
       <mat-label>Banheiros</mat-label>
-      <mat-select formControlName="banheiros">
-        <mat-option>Selecione</mat-option>
-        <mat-option [value]="1">1</mat-option>
-        <mat-option [value]="2">2</mat-option>
-        <mat-option [value]="3">3</mat-option>
-      </mat-select>
+      <input matInput type="text" formControlName="banheiros" placeholder="Informe a quantidade de Banheiros">
       <mat-error *ngIf="controlBanheirosHasError">Informe a quantidade de Banheiros</mat-error>
     </mat-form-field>
 
     <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
-      <mat-label>Vagas de Garagens</mat-label>
-      <mat-select formControlName="vagasGaragem">
-        <mat-option>Selecione</mat-option>
-        <mat-option [value]="1">1</mat-option>
-        <mat-option [value]="2">2</mat-option>
-        <mat-option [value]="3">3</mat-option>
-      </mat-select>
+      <mat-label>Vagas de Garagem</mat-label>
+      <input matInput type="text" formControlName="vagasGaragem" placeholder="Informe a quantidade de Vagas de Garagem">
     </mat-form-field>
   </div>
 
@@ -150,7 +130,6 @@
           <button mat-raised-button color="primary" matDatepickerApply>Aplicar</button>
         </mat-datepicker-actions>
       </mat-datepicker>
-      <mat-error *ngIf="controlDataConclusaoHasError">Informe da Data de Conclusão</mat-error>
     </mat-form-field>
 
     <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
