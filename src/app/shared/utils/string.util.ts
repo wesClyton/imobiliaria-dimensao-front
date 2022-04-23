@@ -16,4 +16,8 @@ export class StringUtil {
     return this.removeSpecialCharacteres(this.removeWhiteSpaces(value))?.trim();
   }
 
+  public static removeSymbolCurrencyBr(value: string): string {
+    return value.replace('R$', '').trim();
+  }
+
 }

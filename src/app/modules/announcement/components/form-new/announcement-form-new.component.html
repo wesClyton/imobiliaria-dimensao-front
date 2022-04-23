@@ -50,13 +50,13 @@
   <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
     <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
       <mat-label>Valor</mat-label>
-      <input matInput type="text" formControlName="valor" placeholder="Informe um Valor">
+      <input appCurrencyBr matInput type="text" formControlName="valor" placeholder="Informe um Valor">
       <mat-error *ngIf="controlValorHasError">Informe o Valor</mat-error>
     </mat-form-field>
 
     <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
       <mat-label>Valor condomínio</mat-label>
-      <input matInput type="text" formControlName="valorCondominio" placeholder="Informe um Valor de condomínio">
+      <input appCurrencyBr matInput type="text" formControlName="valorCondominio" placeholder="Informe um Valor de condomínio">
     </mat-form-field>
 
     <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">

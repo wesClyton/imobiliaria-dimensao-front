@@ -1,18 +1,19 @@
 import { Directive, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { M2Pipe } from '../../pipes/m2/m2.pipe';
+import { CurrencyBrPipe } from '../../pipes/currency-br/currency-br.pipe';
+import { StringUtil } from '../../utils/string.util';
 
 @Directive({
-  selector: '[appM2]',
-  providers: [M2Pipe]
+  selector: '[appCurrencyBr]',
+  providers: [CurrencyBrPipe]
 })
-export class M2Directive implements OnInit, OnDestroy {
+export class CurrencyBrDirective implements OnInit, OnDestroy {
 
   private subscription = new Subscription();
 
   constructor(
-    private readonly m2Pipe: M2Pipe,
+    private readonly currencyBrPipe: CurrencyBrPipe,
     private readonly ngControl: NgControl,
     private readonly elementRef: ElementRef
   ) {}
@@ -27,7 +28,7 @@ export class M2Directive implements OnInit, OnDestroy {
   }
 
   private setMask(value: string): void {
-    this.ngControl.control?.setValue(this.m2Pipe.transform(value), { emitEvent: false });
+    this.ngControl.control?.setValue(this.currencyBrPipe.transform(StringUtil.removeSymbolCurrencyBr(value)), { emitEvent: false });
   }
 
 }
