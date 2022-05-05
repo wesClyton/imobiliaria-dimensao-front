@@ -1,4 +1,4 @@
-export interface Banner {
+export interface BannerCreate {
   readonly id: string;
   readonly nome: string;
   readonly foto: string;

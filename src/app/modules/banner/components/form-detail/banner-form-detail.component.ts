@@ -9,7 +9,7 @@ import { PathImagePipe } from '../../../../shared/pipes/path-image/path-image.pi
 import { FormService } from '../../../../shared/services/form/form.service';
 import { UrlUtil } from '../../../../shared/utils/url.util';
 import { AuthService } from '../../../auth/services/auth.service';
-import { Banner } from '../../interfaces/banner-create.interface';
+import { BannerCreate } from '../../interfaces/banner-create.interface';
 import { BannerUploadService } from '../../services/banner-upload.service';
 
 @Component({
@@ -42,7 +42,7 @@ export class BannerFormDetailComponent implements OnInit {
   }
 
   @Input()
-  public banner!: Banner;
+  public banner!: BannerCreate;
 
   public readonly imagesUrl = new Array<string>();
 
@@ -80,7 +80,7 @@ export class BannerFormDetailComponent implements OnInit {
     }
   }
 
-  private setValueForm(banner: Banner): void {
+  private setValueForm(banner: BannerCreate): void {
     this.form.patchValue(banner);
 
     if (this.banner.foto) {

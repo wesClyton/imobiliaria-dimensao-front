@@ -11,6 +11,7 @@ import { DialogConfirmationService } from '../../../../shared/components/dialog-
 import { UploadImageComponent } from '../../../../shared/components/upload-image/upload-image.component';
 import { PathImagePipe } from '../../../../shared/pipes/path-image/path-image.pipe';
 import { FormService } from '../../../../shared/services/form/form.service';
+import { StringUtil } from '../../../../shared/utils/string.util';
 import { UrlUtil } from '../../../../shared/utils/url.util';
 import { AuthService } from '../../../auth/services/auth.service';
 import { CharacteristicType } from '../../../characteristic/enums/characteristic-type.enum';
@@ -167,8 +168,16 @@ export class AnnouncementFormDetailComponent implements OnInit {
     return this.form?.get('latitude');
   }
 
+  public get controlLatitudeHasError(): boolean | undefined {
+    return this.controlLatitude?.dirty || this.controlLatitude?.hasError('required');
+  }
+
   private get controlLongitude(): AbstractControl | null {
     return this.form?.get('longitude');
+  }
+
+  public get controlLongitudeHasError(): boolean | undefined {
+    return this.controlLongitude?.dirty || this.controlLongitude?.hasError('required');
   }
 
   private get controlSobre(): AbstractControl | null {
@@ -284,8 +293,8 @@ export class AnnouncementFormDetailComponent implements OnInit {
       cep: new FormControl(null, [Validators.required]),
       endereco: new FormControl(null, [Validators.required]),
       bairro: new FormControl(null, [Validators.required]),
-      longitude: new FormControl(null),
-      latitude: new FormControl(null),
+      longitude: new FormControl(null, [Validators.required]),
+      latitude: new FormControl(null, [Validators.required]),
       urlMapa: new FormControl(null),
       urlVideo: new FormControl(null),
       url360: new FormControl(null),
@@ -391,17 +400,17 @@ export class AnnouncementFormDetailComponent implements OnInit {
     const announcement: AnnouncementUpdate = {
       id: this.announcement.id,
       ativo: this.controlAtivo?.value,
-      areaConstruida: this.controlAreaConstruida?.value,
-      areaTotal: this.controlAreaTotal?.value,
+      areaConstruida: Number(this.controlAreaConstruida?.value),
+      areaTotal: Number(this.controlAreaTotal?.value),
       bairro: this.controlBairro?.value,
-      banheiros: this.controlBanheiros?.value,
+      banheiros: Number(this.controlBanheiros?.value),
       caracteristicas,
       cep: this.controlCep?.value,
       cidadeId: this.controlCidade?.value,
       codigoAnuncio: this.controlCodigoAnuncio?.value,
       dataConclusao: this.controlDataConclusao?.value,
       destaque: this.controlDestaque?.value,
-      dormitorios: this.controlDormitorios?.value,
+      dormitorios: Number(this.controlDormitorios?.value),
       empreendimento: this.controlEmpreendimento?.value,
       endereco: this.controlEndereco?.value,
       estadoImovel: this.controlEstadoImovel?.value,
@@ -409,15 +418,15 @@ export class AnnouncementFormDetailComponent implements OnInit {
       latitude: this.controlLatitude?.value,
       longitude: this.controlLongitude?.value,
       sobre: this.controlSobre?.value,
-      suites: this.controlSuites?.value,
+      suites: Number(this.controlSuites?.value),
       tipo: this.controlTipo?.value,
       titulo: this.controlTitulo?.value,
       url360: this.controlUrl360?.value,
       urlMapa: this.controlUrlMapa?.value,
       urlVideo: this.controlUrlVideo?.value,
-      vagasGaragem: this.controlVagasGaragem?.value,
-      valor: this.controlValor?.value,
-      valorCondominio: this.controlValorCondominio?.value
+      vagasGaragem: Number(this.controlVagasGaragem?.value),
+      valor: Number(StringUtil.removeSymbolCurrencyBr(this.controlValor?.value)),
+      valorCondominio: Number(StringUtil.removeSymbolCurrencyBr(this.controlValorCondominio?.value))
     };
 
     this.announcementService

@@ -13,7 +13,7 @@ import { TableActionsUtils } from '../../../../shared/components/table/utils/tab
 import { QueryFilterParam } from '../../../../shared/services/http/query-filter/query-filter.interface';
 import { UrlUtil } from '../../../../shared/utils/url.util';
 import { AuthService } from '../../../auth/services/auth.service';
-import { Banner } from '../../interfaces/banner-create.interface';
+import { BannerCreate } from '../../interfaces/banner-create.interface';
 import { BannerGetAll } from '../../interfaces/banner-get-all.interface';
 import { BannerUpdate } from '../../interfaces/banner-update.interface';
 import { BannerService } from '../../services/banner.service';
@@ -23,15 +23,15 @@ import { BannerService } from '../../services/banner.service';
   templateUrl: 'banner-list.component.html',
   styleUrls: ['./banner-list.component.scss']
 })
-export class BannerListComponent implements OnInit, TableInputs<Banner>, CrudActionNew, CrudActionBack {
+export class BannerListComponent implements OnInit, TableInputs<BannerCreate>, CrudActionNew, CrudActionBack {
 
   private bannerGetAll!: BannerGetAll;
 
-  public tableDataSource!: MatTableDataSource<Banner>;
+  public tableDataSource!: MatTableDataSource<BannerCreate>;
 
   public readonly tableDisplayedColumns = ['foto', 'nome', 'link', 'ativo'];
 
-  public tableActions!: TableActions<Banner>;
+  public tableActions!: TableActions<BannerCreate>;
 
   public readonly tableShowActions = this.authService.isAdmin || this.authService.isAutor;
 
@@ -52,7 +52,7 @@ export class BannerListComponent implements OnInit, TableInputs<Banner>, CrudAct
     this.tableLoadContent(this.bannerGetAll);
   }
 
-  public createActions(banner: Banner): void {
+  public createActions(banner: BannerCreate): void {
     this.tableActions = {
       items: [
         {
@@ -61,11 +61,13 @@ export class BannerListComponent implements OnInit, TableInputs<Banner>, CrudAct
         },
         {
           ...TableActionsUtils.activeDefault(),
-          action: banner => this.updateStatus(banner)
+          action: banner => this.updateStatus(banner),
+          visible: !banner.ativo
         },
         {
           ...TableActionsUtils.inactiveDefault(),
-          action: banner => this.updateStatus(banner)
+          action: banner => this.updateStatus(banner),
+          visible: banner.ativo
         },
         {
           ...TableActionsUtils.deleteDefault(),
@@ -75,7 +77,7 @@ export class BannerListComponent implements OnInit, TableInputs<Banner>, CrudAct
     }
   }
 
-  private updateStatus(banner: Banner): void {
+  private updateStatus(banner: BannerCreate): void {
     const bannerUpdate: BannerUpdate = {
       id: banner.id,
       ativo: !banner.ativo
@@ -88,7 +90,7 @@ export class BannerListComponent implements OnInit, TableInputs<Banner>, CrudAct
     this.tableDataSource = new MatTableDataSource(banners.data);
   }
 
-  public navigateDetail(banner: Banner): void {
+  public navigateDetail(banner: BannerCreate): void {
     this.router.navigate([`detail/${banner.id}`], { relativeTo: this.activatedRoute })
   }
 
@@ -100,7 +102,7 @@ export class BannerListComponent implements OnInit, TableInputs<Banner>, CrudAct
     this.router.navigate(['new'], { relativeTo: this.activatedRoute })
   }
 
-  private async delete(banner: Banner): Promise<void> {
+  private async delete(banner: BannerCreate): Promise<void> {
     const confirmation = await this.angularMaterialDialogConfirmationService?.confirm({
       message: `Realmente deseja excluir o Banner ${banner.nome}?`
     });

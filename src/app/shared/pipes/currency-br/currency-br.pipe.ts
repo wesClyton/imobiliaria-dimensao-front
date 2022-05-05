@@ -13,7 +13,7 @@ export class CurrencyBrPipe implements PipeTransform {
   transform(value: string): string {
     this.maskApplierService.thousandSeparator = '.';
     const valueFormated = this.maskApplierService.applyMask(value, 'separator.2');
-    return `R$ ${valueFormated === '0' || valueFormated === '' ? '0,00' : valueFormated}`;
+    return `R$ ${valueFormated}`;
   }
 
 }

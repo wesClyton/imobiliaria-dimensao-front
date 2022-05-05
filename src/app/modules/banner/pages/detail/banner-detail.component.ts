@@ -12,7 +12,7 @@ import { CanDeactivateDialog } from '../../../../shared/guards/can-deactivate-di
 import { UrlUtil } from '../../../../shared/utils/url.util';
 import { BANNER_CONFIG } from '../../banner.config';
 import { BannerFormDetailComponent } from '../../components/form-detail/banner-form-detail.component';
-import { Banner } from '../../interfaces/banner-create.interface';
+import { BannerCreate } from '../../interfaces/banner-create.interface';
 import { BannerService } from '../../services/banner.service';
 
 @Component({
@@ -26,7 +26,7 @@ export class BannerDetailComponent implements OnInit, CrudActionSave, CrudAction
 
   public readonly canDeactivateMessage = 'Realmente deseja cancelar a edição do Banner?';
 
-  public banner!: Banner;
+  public banner!: BannerCreate;
 
   constructor(
     private readonly router: Router,

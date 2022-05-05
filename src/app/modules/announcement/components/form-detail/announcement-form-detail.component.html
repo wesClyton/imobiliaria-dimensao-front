@@ -67,12 +67,12 @@
     </mat-form-field>
 
     <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
-      <mat-label>Área total</mat-label>
+      <mat-label>Área total m²</mat-label>
       <input appM2 matInput type="text" formControlName="areaTotal" placeholder="Informe uma Área total">
     </mat-form-field>
 
     <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
-      <mat-label>Área construída</mat-label>
+      <mat-label>Área construída m²</mat-label>
       <input appM2 matInput type="text" formControlName="areaConstruida" placeholder="Informe uma Área construída">
     </mat-form-field>
   </div>
@@ -249,11 +249,13 @@
     <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
       <mat-label>Latitude</mat-label>
       <input matInput type="text" formControlName="latitude" placeholder="Informe uma Latitude">
+      <mat-error *ngIf="controlLatitudeHasError">Informe a Latitude</mat-error>
     </mat-form-field>
 
     <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
       <mat-label>Longitude</mat-label>
       <input matInput type="text" formControlName="longitude" placeholder="Informe uma Longitude">
+      <mat-error *ngIf="controlLongitudeHasError">Informe a Longitude</mat-error>
     </mat-form-field>
   </div>
 
