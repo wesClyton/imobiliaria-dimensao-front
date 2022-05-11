@@ -384,8 +384,8 @@ export class AnnouncementFormNewComponent implements OnInit, OnDestroy {
       urlMapa: this.controlUrlMapa?.value,
       urlVideo: this.controlUrlVideo?.value,
       vagasGaragem: Number(this.controlVagasGaragem?.value),
-      valor: Number(StringUtil.removeSymbolCurrencyBr(this.controlValor?.value)),
-      valorCondominio: Number(StringUtil.removeSymbolCurrencyBr(this.controlValorCondominio?.value))
+      valor: StringUtil.transformCurrencyEUA(this.controlValor?.value),
+      valorCondominio: StringUtil.transformCurrencyEUA(this.controlValorCondominio?.value)
     };
 
     this.announcementService

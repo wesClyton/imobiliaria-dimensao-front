@@ -6,14 +6,16 @@ import { MaskApplierService } from 'ngx-mask';
 })
 export class CurrencyBrPipe implements PipeTransform {
 
+  private showSymbal = false;
+
   constructor(
     private readonly maskApplierService: MaskApplierService
-  ) {}
+  ) { }
 
   transform(value: string): string {
     this.maskApplierService.thousandSeparator = '.';
     const valueFormated = this.maskApplierService.applyMask(value, 'separator.2');
-    return `R$ ${valueFormated}`;
+    return `${this.showSymbal ? 'R$ ' : ''}${valueFormated}`;
   }
 
 }
