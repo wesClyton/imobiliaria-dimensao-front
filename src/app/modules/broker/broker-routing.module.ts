@@ -35,7 +35,7 @@ const routes: Routes = [
     },
     canActivate: [RoleGuard],
     data: {
-      roles: [Role.Admin, Role.Autor, Role.Leitor]
+      roles: [Role.Admin, Role.Autor, Role.Leitor, Role.Corretor]
     } as AllowedRoles,
     component: BrokerDetailComponent
   }

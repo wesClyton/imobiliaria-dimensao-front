@@ -9,7 +9,7 @@ import { PathImagePipe } from '../../../../shared/pipes/path-image/path-image.pi
 import { FormService } from '../../../../shared/services/form/form.service';
 import { UrlUtil } from '../../../../shared/utils/url.util';
 import { AuthService } from '../../../auth/services/auth.service';
-import { BannerCreate } from '../../interfaces/banner-create.interface';
+import { Banner } from '../../interfaces/banner.interface';
 import { BannerUploadService } from '../../services/banner-upload.service';
 
 @Component({
@@ -41,8 +41,16 @@ export class BannerFormDetailComponent implements OnInit {
     return this.form?.get('ativo');
   }
 
+  private get controlDescricao(): AbstractControl | null {
+    return this.form?.get('descricao');
+  }
+
+  public get controlDescricaoHasError(): boolean | undefined {
+    return this.controlDescricao?.dirty || this.controlDescricao?.hasError('required');
+  }
+
   @Input()
-  public banner!: BannerCreate;
+  public banner!: Banner;
 
   public readonly imagesUrl = new Array<string>();
 
@@ -72,6 +80,7 @@ export class BannerFormDetailComponent implements OnInit {
     this.form = this.formBuilder.group({
       nome: new FormControl(null, [Validators.required]),
       link: new FormControl(null, [Validators.required]),
+      descricao: new FormControl(null, [Validators.required]),
       ativo: new FormControl(false)
     });
 
@@ -80,7 +89,7 @@ export class BannerFormDetailComponent implements OnInit {
     }
   }
 
-  private setValueForm(banner: BannerCreate): void {
+  private setValueForm(banner: Banner): void {
     this.form.patchValue(banner);
 
     if (this.banner.foto) {
@@ -106,6 +115,7 @@ export class BannerFormDetailComponent implements OnInit {
     }
     formData.append('nome', this.controlNome?.value);
     formData.append('link', this.controlLink?.value);
+    formData.append('descricao', this.controlDescricao?.value);
     formData.append('ativo', this.controlAtivo?.value);
 
     this.loadinService.show();

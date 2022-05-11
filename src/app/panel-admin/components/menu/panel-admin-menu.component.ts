@@ -26,7 +26,7 @@ export class PanelAdminMenuComponent {
   }
 
   public get showBanners(): boolean {
-    return true;
+    return this.authService.isAdmin;
   }
 
   public get showCharacteristics(): boolean {
@@ -38,11 +38,11 @@ export class PanelAdminMenuComponent {
   }
 
   public get showCities(): boolean {
-    return true;
+    return this.authService.isAdmin;
   }
 
   public get showStates(): boolean {
-    return true;
+    return this.authService.isAdmin;
   }
 
   public get showUsers(): boolean {

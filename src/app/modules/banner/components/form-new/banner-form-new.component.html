@@ -27,6 +27,12 @@
       <input matInput type="text" formControlName="link" placeholder="Informe um Link">
       <mat-error *ngIf="controlLinkHasError">Informe o Link</mat-error>
     </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Descrição</mat-label>
+      <input matInput type="text" formControlName="descricao" placeholder="Informe uma Descrição">
+      <mat-error *ngIf="controlDescricaoHasError">Informe a Descrição</mat-error>
+    </mat-form-field>
   </div>
 
 </form>

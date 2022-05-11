@@ -33,6 +33,14 @@ export class BannerFormNewComponent implements OnInit {
     return this.controlLink?.dirty || this.controlLink?.hasError('required');
   }
 
+  private get controlDescricao(): AbstractControl | null {
+    return this.form?.get('descricao');
+  }
+
+  public get controlDescricaoHasError(): boolean | undefined {
+    return this.controlDescricao?.dirty || this.controlDescricao?.hasError('required');
+  }
+
   @ViewChild(UploadImageComponent, { static: false })
   private readonly updaloadPhotoComponent!: UploadImageComponent;
 
@@ -52,7 +60,8 @@ export class BannerFormNewComponent implements OnInit {
   private createForm(): void {
     this.form = this.formBuilder.group({
       nome: new FormControl(null, [Validators.required]),
-      link: new FormControl(null, [Validators.required])
+      link: new FormControl(null, [Validators.required]),
+      descricao: new FormControl(null, [Validators.required])
     });
   }
 
@@ -72,6 +81,7 @@ export class BannerFormNewComponent implements OnInit {
     formData.append('foto', fileUpload);
     formData.append('link', this.controlLink?.value);
     formData.append('nome', this.controlNome?.value);
+    formData.append('descricao', this.controlDescricao?.value);
 
     this.loadinService.show();
 

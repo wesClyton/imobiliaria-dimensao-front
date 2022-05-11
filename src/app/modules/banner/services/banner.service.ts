@@ -8,11 +8,12 @@ import { BannerCreate } from '../interfaces/banner-create.interface';
 import { BannerGetAll } from '../interfaces/banner-get-all.interface';
 import { BannerUpdateResponse } from '../interfaces/banner-update-response.interface';
 import { BannerUpdate } from '../interfaces/banner-update.interface';
+import { Banner } from '../interfaces/banner.interface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class BannerService extends HttpCrudService<BannerCreate, BannerCreateResponse, BannerGetAll, BannerCreate, BannerUpdate, BannerUpdateResponse> {
+export class BannerService extends HttpCrudService<BannerCreate, BannerCreateResponse, BannerGetAll, Banner, BannerUpdate, BannerUpdateResponse> {
 
   constructor(
     public readonly httpClient: HttpClient,
