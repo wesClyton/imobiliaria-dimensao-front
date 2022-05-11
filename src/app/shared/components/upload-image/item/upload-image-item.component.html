@@ -41,6 +41,15 @@
       (click)="deleteButton()">
       Excluir
     </button>
+
+    <button
+      *ngIf="canFlipCropp"
+      mat-raised-button
+      type="button"
+      color="primary"
+      (click)="flipCropp()">
+      <mat-icon>cameraswitch</mat-icon>
+    </button>
   </div>
 
   <div class="flex" *ngIf="imageChangedEvent">

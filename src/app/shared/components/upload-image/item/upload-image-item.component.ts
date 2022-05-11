@@ -13,7 +13,7 @@ export class UploadImageItemComponent {
   public readonly inputFile!: ElementRef;
 
   @Input()
-  public ratio: any;
+  public ratio!: number;
 
   @Input()
   public canCropp!: boolean;
@@ -29,6 +29,9 @@ export class UploadImageItemComponent {
 
   @Input()
   public onlyView = false;
+
+  @Input()
+  public canFlipCropp = false;
 
   public imageChangedEvent: any;
 
@@ -51,6 +54,10 @@ export class UploadImageItemComponent {
 
   public get showDeleteButton(): boolean {
     return this.canSelectVariusFiles && !this.imageUrl;
+  }
+
+  public get showFlipCropp(): boolean {
+    return this.canFlipCropp && !this.imageUrl;
   }
 
   public get showDeleteImageEmitter(): boolean {
@@ -119,6 +126,14 @@ export class UploadImageItemComponent {
 
   public deleteImageEmitterClick(): void {
     this.deleteImageEmitter.emit();
+  }
+
+  public flipCropp(): void {
+    if (this.ratio.toString().includes('1.777')) {
+      this.ratio = 9 / 16;
+    } else {
+      this.ratio = 16 / 9;
+    }
   }
 
 }

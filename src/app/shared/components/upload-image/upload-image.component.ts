@@ -13,6 +13,9 @@ export class UploadImageComponent implements OnInit, OnChanges {
   @Input()
   public canCropp = true;
 
+  @Input()
+  public canFlipCropp = false;
+
   public filesSelecteds = new Array<File>();
 
   @Input()
