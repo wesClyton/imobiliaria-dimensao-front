@@ -17,7 +17,21 @@ export class StringUtil {
   }
 
   public static transformCurrencyEUA(value: string): number {
+    value = this.removeSymbolCurrencyBr(value);
     return parseFloat(value.replace(/\./g, '').replace(',', '.').trim());
+  }
+
+  public static transformCurrencyBR(value: string): string {
+    value = this.removeSpecialCharacteresAndWhiteSpaces(value);
+    const position = value.length - 2;
+    if (position > 1) {
+      value = value.substring(0, position) + '.' + value.substring(position, value.length);
+    }
+    return value.replace('.', ',').trim();
+  }
+
+  public static removeSymbolCurrencyBr(value: string): string {
+    return value.toString().replace('R$', '').trim();
   }
 
 }

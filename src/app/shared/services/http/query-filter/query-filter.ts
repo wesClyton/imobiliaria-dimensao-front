@@ -1,3 +1,4 @@
+import { StringUtil } from '../../../utils/string.util';
 import { QueryFilterParam } from './query-filter.interface';
 
 export class QueryFilter {
@@ -13,10 +14,16 @@ export class QueryFilter {
     const queryFilters = new Array<QueryFilterParam>();
 
     Object.keys(object).forEach(key => {
-      if (object[key] || object[key] === false) {
+      let value = object[key];
+      if (value && value.startsWith('R$')) {
+        value = StringUtil.removeSymbolCurrencyBr(value);
+        value = StringUtil.transformCurrencyEUA(value);
+      }
+
+      if (value !== NaN && (value || value === false)) {
         queryFilters.push(this.create({
           field: key,
-          value: object[key]
+          value
         }));
       }
     });

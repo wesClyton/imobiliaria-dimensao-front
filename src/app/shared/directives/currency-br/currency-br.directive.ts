@@ -19,6 +19,7 @@ export class CurrencyBrDirective implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.currencyBrPipe.showSymbal = true;
     this.setMask((this.elementRef.nativeElement as HTMLInputElement).value);
     this.subscription.add(this.ngControl.control?.valueChanges.subscribe(value => this.setMask(value)));
   }
@@ -29,7 +30,7 @@ export class CurrencyBrDirective implements OnInit, OnDestroy {
 
   private setMask(value: string): void {
     this.ngControl.control?.setValue(
-      this.currencyBrPipe.transform(value),
+      this.currencyBrPipe.transform(StringUtil.transformCurrencyBR(value)),
       { emitEvent: false }
     );
   }
