@@ -15,7 +15,7 @@ export class QueryFilter {
 
     Object.keys(object).forEach(key => {
       let value = object[key];
-      if (value && value.startsWith('R$')) {
+      if (value && value?.startsWith('R$')) {
         value = StringUtil.removeSymbolCurrencyBr(value);
         value = StringUtil.transformCurrencyEUA(value);
       }
