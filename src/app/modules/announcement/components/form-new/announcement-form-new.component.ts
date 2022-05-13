@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
@@ -27,7 +27,7 @@ import { AnnouncementService } from '../../services/announcement.service';
   selector: 'app-announcement-form-new',
   templateUrl: './announcement-form-new.component.html'
 })
-export class AnnouncementFormNewComponent implements OnInit, OnDestroy {
+export class AnnouncementFormNewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public form!: FormGroup;
 
@@ -246,6 +246,15 @@ export class AnnouncementFormNewComponent implements OnInit, OnDestroy {
     this.createForm();
   }
 
+  ngAfterViewInit(): void {
+    (this.inputCaracteristicaImovel.nativeElement as HTMLInputElement).addEventListener('blur', () => {
+      this.characteristicsFiltered = new Array<Characteristic>();
+    });
+    (this.inputCaracteristicaInstalacoesCondominio.nativeElement as HTMLInputElement).addEventListener('blur', () => {
+      this.characteristicsFiltered = new Array<Characteristic>();
+    });
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
@@ -337,6 +346,7 @@ export class AnnouncementFormNewComponent implements OnInit, OnDestroy {
       return;
     }
     this.characteristicSelectedTypes[characteristic.tipo].push(characteristic);
+    this.characteristicsFiltered = new Array<Characteristic>();
   }
 
   public removeCharacteristic(characteristic: Characteristic): void {
