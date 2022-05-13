@@ -248,10 +248,10 @@ export class AnnouncementFormNewComponent implements OnInit, OnDestroy, AfterVie
 
   ngAfterViewInit(): void {
     (this.inputCaracteristicaImovel.nativeElement as HTMLInputElement).addEventListener('blur', () => {
-      this.characteristicsFiltered = new Array<Characteristic>();
+      setTimeout(() => this.characteristicsFiltered = new Array<Characteristic>(), 100);
     });
     (this.inputCaracteristicaInstalacoesCondominio.nativeElement as HTMLInputElement).addEventListener('blur', () => {
-      this.characteristicsFiltered = new Array<Characteristic>();
+      setTimeout(() => this.characteristicsFiltered = new Array<Characteristic>(), 100);
     });
   }
 
