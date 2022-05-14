@@ -120,7 +120,7 @@ export class BrokerFormNewComponent implements OnInit {
 
   public submit(): void {
     if (this.form.invalid) {
-      this.formService.validade(this.form);
+      this.formService.validate(this.form);
       return;
     }
 
