@@ -35,6 +35,9 @@ export class UploadImageComponent implements OnInit, OnChanges {
   @Input()
   public onlyView = false;
 
+  @Input()
+  public imageQuality = 75;
+
   constructor() {}
 
   ngOnInit(): void {

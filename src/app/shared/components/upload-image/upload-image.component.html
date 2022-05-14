@@ -7,6 +7,7 @@
   [imageUrl]="imagesUrl ? imagesUrl[0] : ''"
   [deleteImageFromApi]="deleteImageFromApi"
   [onlyView]="onlyView"
+  [imageQuality]="imageQuality"
   (deleteClicked)="deleteClicked(0)"
   (fileSelected)="fileSelected($event)"
   (deleteImageEmitter)="deleteImageEmitterClick(0)">
@@ -23,6 +24,7 @@
     [imageUrl]="imagesUrl[index]"
     [deleteImageFromApi]="deleteImageFromApi"
     [onlyView]="onlyView"
+    [imageQuality]="imageQuality"
     (deleteClicked)="deleteClicked($event)"
     (fileSelected)="fileSelected($event)"
     (deleteImageEmitter)="deleteImageEmitterClick(index)">

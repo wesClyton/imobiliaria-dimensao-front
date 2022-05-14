@@ -84,6 +84,9 @@ export class UploadImageItemComponent {
   @Output()
   public deleteImageEmitter = new EventEmitter();
 
+  @Input()
+  public imageQuality = 75;
+
   constructor() {}
 
   public fileChangeEvent(event: Event): void {
