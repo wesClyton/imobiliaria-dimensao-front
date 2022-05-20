@@ -1,0 +1,33 @@
+<h1>Bairros</h1>
+
+<app-table
+  [tableDataSource]="tableDataSource"
+  [tableDisplayedColumns]="tableDisplayedColumns"
+  [tableActions]="tableActions"
+  [tableFilterInputTextPlaceholder]="tableFilterInputTextPlaceholder"
+  [tableShowActions]="tableShowActions"
+  [tableShowAdvancedSearch]="true">
+
+  <app-district-advanced-search
+    advanced-search
+    (queryFilterEmitter)="getDistricts($event)">
+  </app-district-advanced-search>
+
+  <ng-container matColumnDef="nome">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
+    <td mat-cell *matCellDef="let row">{{ row.nome }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="cidade">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Cidade</th>
+    <td mat-cell *matCellDef="let row">{{ row.cidade.nome }}</td>
+  </ng-container>
+
+</app-table>
+
+<app-crud-actions
+  [newShow]="newShow"
+  [backShow]="true"
+  (backClicked)="crudActionBack()"
+  (newClicked)="crudActionNew()">
+</app-crud-actions>

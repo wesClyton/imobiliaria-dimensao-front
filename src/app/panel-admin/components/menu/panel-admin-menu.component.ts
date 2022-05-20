@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { DISTRICT_CONFIG } from 'src/app/modules/district/district.config';
 import { ANNOUNCEMENT_CONFIG } from '../../../modules/announcement/announcement.config';
 import { Session } from '../../../modules/auth/interfaces/session.interface';
 import { AuthService } from '../../../modules/auth/services/auth.service';
@@ -35,6 +36,10 @@ export class PanelAdminMenuComponent {
 
   public get showBrokers(): boolean {
     return true;
+  }
+
+  public get showDistricts(): boolean {
+    return this.authService.isAdmin;
   }
 
   public get showCities(): boolean {
@@ -76,6 +81,10 @@ export class PanelAdminMenuComponent {
 
   public navigateBrokers(): void {
     this.router.navigateByUrl(PanelAdminComponent.pathConcat(BROKER_CONFIG.pathFront));
+  }
+
+  public navigateDistricts(): void {
+    this.router.navigateByUrl(PanelAdminComponent.pathConcat(DISTRICT_CONFIG.pathFront));
   }
 
   public navigateCities(): void {

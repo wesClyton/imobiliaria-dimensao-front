@@ -25,6 +25,11 @@
       Características
     </button>
 
+    <button *ngIf="showDistricts" type="menu" mat-list-item (click)="navigateDistricts()">
+      <mat-icon matListIcon color="primary">location_on</mat-icon>
+      Bairros
+    </button>
+
     <button *ngIf="showCities" type="menu" mat-list-item (click)="navigateCities()">
       <mat-icon matListIcon color="primary">location_on</mat-icon>
       Cidades

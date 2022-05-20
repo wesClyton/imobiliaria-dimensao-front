@@ -1,0 +1,12 @@
+<h1>Detalhes Bairro</h1>
+
+<app-district-form-detail [district]="district"></app-district-form-detail>
+
+<app-crud-actions
+  [saveShow]="saveShow"
+  [backShow]="true"
+  [deleteShow]="deleteShow"
+  (backClicked)="crudActionBack()"
+  (saveClicked)="crudActionSave()"
+  (deleteClicked)="crudActionDelete()">
+</app-crud-actions>
