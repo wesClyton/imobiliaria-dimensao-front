@@ -22,7 +22,6 @@ export interface AnnouncementCreate {
 	readonly endereco: string;
 	readonly longitude: string;
 	readonly latitude: string;
-	readonly urlMapa: string;
   readonly urlVideo: string;
   readonly url360: string;
 	readonly estadoImovel: AnnouncementStateProperty;

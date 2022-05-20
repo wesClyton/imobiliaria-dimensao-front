@@ -185,10 +185,6 @@ export class AnnouncementFormNewComponent implements OnInit, OnDestroy, AfterVie
     return this.form?.get('url360');
   }
 
-  private get controlUrlMapa(): AbstractControl | null {
-    return this.form?.get('urlMapa');
-  }
-
   private get controlUrlVideo(): AbstractControl | null {
     return this.form?.get('urlVideo');
   }
@@ -287,7 +283,6 @@ export class AnnouncementFormNewComponent implements OnInit, OnDestroy, AfterVie
       bairroId: new FormControl(null, [Validators.required]),
       longitude: new FormControl(null, [Validators.required]),
       latitude: new FormControl(null, [Validators.required]),
-      urlMapa: new FormControl(null),
       urlVideo: new FormControl(null),
       url360: new FormControl(null),
       estadoImovel: new FormControl(null, [Validators.required]),
@@ -409,7 +404,6 @@ export class AnnouncementFormNewComponent implements OnInit, OnDestroy, AfterVie
       tipo: this.controlTipo?.value,
       titulo: this.controlTitulo?.value,
       url360: this.controlUrl360?.value,
-      urlMapa: this.controlUrlMapa?.value,
       urlVideo: this.controlUrlVideo?.value,
       vagasGaragem: Number(this.controlVagasGaragem?.value),
       valor: StringUtil.transformCurrencyEUA(this.controlValor?.value),
