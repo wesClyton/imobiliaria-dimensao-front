@@ -6,7 +6,7 @@ export interface AnnouncementUpdate {
 	readonly areaConstruida: number;
 	readonly areaTotal: number;
 	readonly ativo: boolean;
-	readonly bairro: string;
+	readonly bairroId: string;
 	readonly banheiros: number;
 	readonly cep: string;
 	readonly codigoAnuncio: string;
@@ -27,7 +27,6 @@ export interface AnnouncementUpdate {
 	readonly vagasGaragem: number;
 	readonly valor: number;
 	readonly valorCondominio: number;
-  readonly cidadeId: string;
   readonly url360: string;
   readonly urlVideo: string;
   readonly caracteristicas: Array<{

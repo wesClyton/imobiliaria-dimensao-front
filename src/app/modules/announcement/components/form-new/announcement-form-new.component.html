@@ -206,35 +206,42 @@
 
   <h3>Localização</h3>
   <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
-    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="25" fxFlex.lg="25">
       <mat-label>CEP</mat-label>
       <input matInput appCep type="text" formControlName="cep" placeholder="Informe um CEP">
       <mat-error *ngIf="controlCepHasError">Informe o CEP</mat-error>
     </mat-form-field>
+  </div>
 
-    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="25" fxFlex.lg="25">
       <mat-label>Cidade</mat-label>
       <mat-select formControlName="cidadeId">
         <mat-option>Selecione</mat-option>
         <ng-container appCityOptionSelect (dataFinded)="cities = $event">
           <mat-option *ngFor="let city of cities?.data" [value]="city.id">
-            {{ city.nome }}
+            {{ city.estado.uf }}-{{ city.nome }}
           </mat-option>
         </ng-container>
       </mat-select>
       <mat-error *ngIf="controlCidadeHasError">Informe a Cidade</mat-error>
     </mat-form-field>
 
-    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="25" fxFlex.lg="25">
+      <mat-label>Bairro</mat-label>
+      <mat-select formControlName="bairroId" [disabled]="!controlCidade?.value">
+        <mat-option>Selecione</mat-option>
+        <mat-option *ngFor="let district of districts?.data" [value]="district.id">
+          {{ district.nome }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="controlBairroHasError">Informe o Bairro</mat-error>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50" fxFlex.lg="50">
       <mat-label>Endereço</mat-label>
       <input matInput type="text" formControlName="endereco" placeholder="Informe um Endereço">
       <mat-error *ngIf="controlEnderecoHasError">Informe o Endereço</mat-error>
-    </mat-form-field>
-
-    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
-      <mat-label>Bairro</mat-label>
-      <input matInput type="text" formControlName="bairro" placeholder="Informe um Bairro">
-      <mat-error *ngIf="controlBairroHasError">Informe o Bairro</mat-error>
     </mat-form-field>
   </div>
 

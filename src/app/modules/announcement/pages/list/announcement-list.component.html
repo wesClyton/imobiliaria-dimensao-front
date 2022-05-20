@@ -34,7 +34,7 @@
 
   <ng-container matColumnDef="cidade">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Cidade</th>
-    <td mat-cell *matCellDef="let row">{{ row.cidade | cityState }}</td>
+    <td mat-cell *matCellDef="let row">{{ row.bairro.cidade | cityState }}</td>
   </ng-container>
 
   <ng-container matColumnDef="destaque">

@@ -18,6 +18,8 @@ import { CharacteristicType } from '../../../characteristic/enums/characteristic
 import { Characteristic } from '../../../characteristic/interfaces/characteristic.interface';
 import { CharacteristicService } from '../../../characteristic/services/characteristic.service';
 import { CityGetAll } from '../../../city/interfaces/city-get-all.interface';
+import { DistrictGetAll } from '../../../district/interfaces/district-get-all.interface';
+import { DistrictService } from '../../../district/services/district.service';
 import { AnnouncementGalleryUploadResponse } from '../../interfaces/announcement-galery-upload.interface';
 import { AnnouncementStateProperty } from '../../interfaces/announcement-state-property.interface';
 import { AnnouncementType } from '../../interfaces/announcement-type.interface';
@@ -116,7 +118,7 @@ export class AnnouncementFormDetailComponent implements OnInit, OnDestroy, After
     return this.controlCep?.dirty || this.controlCep?.hasError('required');
   }
 
-  private get controlCidade(): AbstractControl | null {
+  public get controlCidade(): AbstractControl | null {
     return this.form?.get('cidadeId');
   }
 
@@ -133,7 +135,7 @@ export class AnnouncementFormDetailComponent implements OnInit, OnDestroy, After
   }
 
   private get controlBairro(): AbstractControl | null {
-    return this.form?.get('bairro');
+    return this.form?.get('bairroId');
   }
 
   public get controlBairroHasError(): boolean | undefined {
@@ -248,6 +250,8 @@ export class AnnouncementFormDetailComponent implements OnInit, OnDestroy, After
     return this.authService.isLeitor || this.authService.isCorretor;
   }
 
+  public districts!: DistrictGetAll;
+
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly notificationService: NotificationService,
@@ -260,7 +264,8 @@ export class AnnouncementFormDetailComponent implements OnInit, OnDestroy, After
     private readonly pathImagePipe: PathImagePipe,
     private readonly announcementImageDeleteService: AnnouncementImageDeleteService,
     private readonly angularMaterialDialogConfirmationService: DialogConfirmationService,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly districtService: DistrictService
   ) { }
 
   ngOnInit(): void {
@@ -301,7 +306,7 @@ export class AnnouncementFormDetailComponent implements OnInit, OnDestroy, After
       empreendimento: new FormControl(null),
       cep: new FormControl(null, [Validators.required]),
       endereco: new FormControl(null, [Validators.required]),
-      bairro: new FormControl(null, [Validators.required]),
+      bairroId: new FormControl(null, [Validators.required]),
       longitude: new FormControl(null, [Validators.required]),
       latitude: new FormControl(null, [Validators.required]),
       urlMapa: new FormControl(null),
@@ -325,13 +330,28 @@ export class AnnouncementFormDetailComponent implements OnInit, OnDestroy, After
         .subscribe(value => this.filterCharacteristics(value, CharacteristicType.InstalacoesCondominio))
     );
 
+    this.subscription.add(this.controlCidade?.valueChanges.subscribe(value => this.getDistricts(value)));
+
     if (this.announcement) {
       this.setValueForm(this.announcement);
     }
   }
 
+  private getDistricts(cityId: string): void {
+    this.districtService.queryFilterRemove();
+    this.districtService.queryFilterAdd({
+      field: 'cidadeId',
+      value: cityId
+    });
+    this.districtService
+      .getAll()
+      .pipe(take(1))
+      .subscribe((districts) => this.districts = districts)
+  }
+
   private setValueForm(announcement: Announcement): void {
     this.form.patchValue(announcement);
+    this.controlCidade?.setValue(announcement.bairro.cidade.id);
     this.imagesUrl = new Array<string>();
     announcement.galeria.fotos.forEach(foto => this.imagesUrl.push(this.pathImagePipe.transform(foto.nome, 'anuncios', announcement.galeria.id)));
 
@@ -412,11 +432,10 @@ export class AnnouncementFormDetailComponent implements OnInit, OnDestroy, After
       ativo: this.controlAtivo?.value,
       areaConstruida: Number(this.controlAreaConstruida?.value),
       areaTotal: Number(this.controlAreaTotal?.value),
-      bairro: this.controlBairro?.value,
+      bairroId: this.controlBairro?.value,
       banheiros: Number(this.controlBanheiros?.value),
       caracteristicas,
       cep: this.controlCep?.value,
-      cidadeId: this.controlCidade?.value,
       codigoAnuncio: this.controlCodigoAnuncio?.value,
       dataConclusao: this.controlDataConclusao?.value,
       destaque: this.controlDestaque?.value,

@@ -1,7 +1,7 @@
 import { environment } from '../../../environments/environment';
 import { ModuleConfig } from '../../shared/interfaces/module-config.interface';
 
-const PATH: string = 'sistricts';
+const PATH: string = 'districts';
 
 export const DISTRICT_CONFIG: ModuleConfig = {
   name: 'Bairro',

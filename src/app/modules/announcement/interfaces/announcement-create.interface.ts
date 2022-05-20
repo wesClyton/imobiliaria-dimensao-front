@@ -2,7 +2,7 @@ import { AnnouncementStateProperty } from '../enums/announcement-state-property.
 import { AnnouncementType } from '../enums/announcement-type.enum';
 
 export interface AnnouncementCreate {
-  readonly cidadeId: string;
+  readonly bairroId: string;
 	readonly codigoAnuncio: string;
 	readonly destaque: boolean;
 	readonly titulo: string;
@@ -20,7 +20,6 @@ export interface AnnouncementCreate {
 	readonly empreendimento: string;
 	readonly cep: string;
 	readonly endereco: string;
-	readonly bairro: string;
 	readonly longitude: string;
 	readonly latitude: string;
 	readonly urlMapa: string;

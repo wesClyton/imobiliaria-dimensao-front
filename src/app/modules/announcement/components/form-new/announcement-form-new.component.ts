@@ -15,6 +15,8 @@ import { CharacteristicType } from '../../../characteristic/enums/characteristic
 import { Characteristic } from '../../../characteristic/interfaces/characteristic.interface';
 import { CharacteristicService } from '../../../characteristic/services/characteristic.service';
 import { CityGetAll } from '../../../city/interfaces/city-get-all.interface';
+import { DistrictGetAll } from '../../../district/interfaces/district-get-all.interface';
+import { DistrictService } from '../../../district/services/district.service';
 import { AnnouncementCreateResponse } from '../../interfaces/announcement-create-response.interface';
 import { AnnouncementCreate } from '../../interfaces/announcement-create.interface';
 import { AnnouncementGalleryUploadResponse } from '../../interfaces/announcement-galery-upload.interface';
@@ -107,7 +109,7 @@ export class AnnouncementFormNewComponent implements OnInit, OnDestroy, AfterVie
     return this.controlCep?.dirty || this.controlCep?.hasError('required');
   }
 
-  private get controlCidade(): AbstractControl | null {
+  public get controlCidade(): AbstractControl | null {
     return this.form?.get('cidadeId');
   }
 
@@ -124,7 +126,7 @@ export class AnnouncementFormNewComponent implements OnInit, OnDestroy, AfterVie
   }
 
   private get controlBairro(): AbstractControl | null {
-    return this.form?.get('bairro');
+    return this.form?.get('bairroId');
   }
 
   public get controlBairroHasError(): boolean | undefined {
@@ -227,6 +229,8 @@ export class AnnouncementFormNewComponent implements OnInit, OnDestroy, AfterVie
 
   public cities!: CityGetAll;
 
+  public districts!: DistrictGetAll;
+
   public imagesUrl = new Array<string>();
 
   private readonly subscription = new Subscription();
@@ -239,7 +243,8 @@ export class AnnouncementFormNewComponent implements OnInit, OnDestroy, AfterVie
     private readonly router: Router,
     private readonly formService: FormService,
     private readonly characteristicService: CharacteristicService,
-    private readonly announcementUploadService: AnnouncementUploadService
+    private readonly announcementUploadService: AnnouncementUploadService,
+    private readonly districtService: DistrictService
   ) { }
 
   ngOnInit(): void {
@@ -279,7 +284,7 @@ export class AnnouncementFormNewComponent implements OnInit, OnDestroy, AfterVie
       empreendimento: new FormControl(null),
       cep: new FormControl(null, [Validators.required]),
       endereco: new FormControl(null, [Validators.required]),
-      bairro: new FormControl(null, [Validators.required]),
+      bairroId: new FormControl(null, [Validators.required]),
       longitude: new FormControl(null, [Validators.required]),
       latitude: new FormControl(null, [Validators.required]),
       urlMapa: new FormControl(null),
@@ -302,6 +307,20 @@ export class AnnouncementFormNewComponent implements OnInit, OnDestroy, AfterVie
         .pipe(debounceTime(500))
         .subscribe(value => this.filterCharacteristics(value, CharacteristicType.InstalacoesCondominio))
     );
+
+    this.subscription.add(this.controlCidade?.valueChanges.subscribe(value => this.getDistricts(value)));
+  }
+
+  private getDistricts(cityId: string): void {
+    this.districtService.queryFilterRemove();
+    this.districtService.queryFilterAdd({
+      field: 'cidadeId',
+      value: cityId
+    });
+    this.districtService
+      .getAll()
+      .pipe(take(1))
+      .subscribe((districts) => this.districts = districts)
   }
 
   private filterCharacteristics(value: string, type: CharacteristicType): void {
@@ -371,11 +390,10 @@ export class AnnouncementFormNewComponent implements OnInit, OnDestroy, AfterVie
     const announcement: AnnouncementCreate = {
       areaConstruida: Number(this.controlAreaConstruida?.value),
       areaTotal: Number(this.controlAreaTotal?.value),
-      bairro: this.controlBairro?.value,
       banheiros: Number(this.controlBanheiros?.value),
       caracteristicas,
       cep: this.controlCep?.value,
-      cidadeId: this.controlCidade?.value,
+      bairroId: this.controlBairro?.value,
       codigoAnuncio: this.controlCodigoAnuncio?.value,
       dataConclusao: this.controlDataConclusao?.value,
       destaque: this.controlDestaque?.value,
