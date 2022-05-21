@@ -54,7 +54,7 @@ export class DistrictListComponent implements OnInit, TableInputs<District>, Cru
     private readonly districtService: DistrictService,
     private readonly notificationService: NotificationService,
     private readonly loadingService: LoadingService,
-    private readonly angularMaterialDialogConfirmationService: DialogConfirmationService,
+    private readonly dialogConfirmationService: DialogConfirmationService,
     private readonly authService: AuthService
   ) { }
 
@@ -68,7 +68,7 @@ export class DistrictListComponent implements OnInit, TableInputs<District>, Cru
   }
 
   public navigateDetail(district: District): void {
-    this.router.navigate([`detail/${district.id}`], { relativeTo: this.activatedRoute })
+    this.router.navigate([`detail/${district.id}`], { relativeTo: this.activatedRoute });
   }
 
   public crudActionBack(): void {
@@ -76,11 +76,11 @@ export class DistrictListComponent implements OnInit, TableInputs<District>, Cru
   }
 
   public crudActionNew(): void {
-    this.router.navigate(['new'], { relativeTo: this.activatedRoute })
+    this.router.navigate(['new'], { relativeTo: this.activatedRoute });
   }
 
   private async delete(district: District): Promise<void> {
-    const confirmation = await this.angularMaterialDialogConfirmationService?.confirm({
+    const confirmation = await this.dialogConfirmationService?.confirm({
       message: `Realmente deseja excluir o Bairro ${district.nome}?`
     });
     if (!confirmation) {
