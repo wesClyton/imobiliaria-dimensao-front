@@ -1,5 +1,5 @@
 import { AfterContentInit, AfterViewInit, Component, ContentChildren, EventEmitter, Input, Output, QueryList, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatColumnDef, MatTable, MatTableDataSource } from '@angular/material/table';
 import { TableActionsItem } from './interfaces/table-actions-item.interface';
@@ -27,6 +27,9 @@ export class TableComponent<T>
   public tableDataSource!: MatTableDataSource<T>;
 
   @Input()
+  public tableDataSourceLength!: number;
+
+  @Input()
   public tableDisplayedColumns!: Array<string>;
 
   @Input()
@@ -41,9 +44,6 @@ export class TableComponent<T>
   @ViewChild(MatTable, { static: true })
   public table!: MatTable<T>;
 
-  @ViewChild(MatPaginator)
-  public tablePaginator!: MatPaginator;
-
   @ViewChild(MatSort)
   public tableSort!: MatSort;
 
@@ -56,10 +56,12 @@ export class TableComponent<T>
   @Output()
   public tableMenuActionsClicked = new EventEmitter<T>();
 
+  @Output()
+  public tableOnChangePaginator = new EventEmitter<PageEvent>();
+
   constructor() { }
 
   ngAfterViewInit(): void {
-    this.tableDataSource.paginator = this.tablePaginator;
     this.tableDataSource.sort = this.tableSort;
     if (this.tableShowActions) {
       this.tableDisplayedColumns.push('actions');
@@ -91,6 +93,10 @@ export class TableComponent<T>
 
   public actionsClick(type: T): void {
     this.tableMenuActionsClicked.emit(type);
+  }
+
+  public changePaginator(event: PageEvent): void {
+    this.tableOnChangePaginator.emit(event);
   }
 
 }

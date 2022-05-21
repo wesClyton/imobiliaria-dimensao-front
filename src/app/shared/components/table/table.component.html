@@ -48,5 +48,9 @@
     </tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="tablePageSizeOptions"></mat-paginator>
+  <mat-paginator
+    [length]="tableDataSourceLength"
+    [pageSizeOptions]="tablePageSizeOptions"
+    (page)="changePaginator($event)">
+  </mat-paginator>
 </div>

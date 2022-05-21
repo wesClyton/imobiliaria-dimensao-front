@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { finalize, take } from 'rxjs/operators';
@@ -23,7 +24,7 @@ import { CharacteristicService } from '../../services/characteristic.service';
 })
 export class CharacteristicListComponent implements OnInit, TableInputs<Characteristic>, CrudActionNew, CrudActionBack {
 
-  private characteristicGetAll!: CharacteristicGetAll;
+  public characteristicGetAll!: CharacteristicGetAll;
 
   public tableDataSource!: MatTableDataSource<Characteristic>;
 
@@ -100,6 +101,7 @@ export class CharacteristicListComponent implements OnInit, TableInputs<Characte
   }
 
   public getCharacteristics(queryFilters: Array<QueryFilterParam> = new Array<QueryFilterParam>()): void {
+    this.characteristicService.queryFilterRemove();
     this.characteristicService.queryFilterAdd(queryFilters);
 
     this.loadingService.show();
@@ -111,6 +113,23 @@ export class CharacteristicListComponent implements OnInit, TableInputs<Characte
         finalize(() => this.loadingService.hide())
       )
       .subscribe(characteristics => this.tableLoadContent(characteristics));
+  }
+
+  public changePaginator(event: PageEvent): void {
+    const queryFilters = new Array<QueryFilterParam>();
+
+    queryFilters.push(
+      {
+        field: 'page',
+        value: event.pageIndex + 1
+      },
+      {
+        field: 'take',
+        value: event.pageSize
+      }
+    );
+
+    this.getCharacteristics(queryFilters);
   }
 
 }
