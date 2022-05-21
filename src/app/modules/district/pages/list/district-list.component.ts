@@ -27,7 +27,7 @@ export class DistrictListComponent implements OnInit, TableInputs<District>, Cru
 
   public tableDataSource!: MatTableDataSource<District>;
 
-  public readonly tableDisplayedColumns = ['nome', 'cidadeId'];
+  public readonly tableDisplayedColumns = ['nome', 'cidade'];
 
   public readonly tableShowActions = this.authService.isAdmin || this.authService.isAutor;
 
