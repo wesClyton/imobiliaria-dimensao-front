@@ -23,7 +23,7 @@ import { DistrictService } from '../../services/district.service';
 })
 export class DistrictListComponent implements OnInit, TableInputs<District>, CrudActionNew, CrudActionBack {
 
-  private districtGetAll!: DistrictGetAll;
+  public districtGetAll!: DistrictGetAll;
 
   public tableDataSource!: MatTableDataSource<District>;
 

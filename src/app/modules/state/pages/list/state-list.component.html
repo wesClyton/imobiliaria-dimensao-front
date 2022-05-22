@@ -6,7 +6,9 @@
   [tableActions]="tableActions"
   [tableFilterInputTextPlaceholder]="tableFilterInputTextPlaceholder"
   [tableShowActions]="tableShowActions"
-  [tableShowAdvancedSearch]="true">
+  [tableShowAdvancedSearch]="true"
+  [tableDataSourceLength]="stateGetAll.count"
+  (tableOnChangePaginator)="getStates($event)">
 
   <app-state-advanced-search
     advanced-search

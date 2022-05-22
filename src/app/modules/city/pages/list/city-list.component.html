@@ -6,7 +6,9 @@
   [tableActions]="tableActions"
   [tableFilterInputTextPlaceholder]="tableFilterInputTextPlaceholder"
   [tableShowActions]="tableShowActions"
-  [tableShowAdvancedSearch]="true">
+  [tableShowAdvancedSearch]="true"
+  [tableDataSourceLength]="cityGetAll.count"
+  (tableOnChangePaginator)="getCities($event)">
 
   <app-city-advanced-search
     advanced-search

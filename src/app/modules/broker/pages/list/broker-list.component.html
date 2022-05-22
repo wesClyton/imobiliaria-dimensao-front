@@ -5,7 +5,9 @@
   [tableDisplayedColumns]="tableDisplayedColumns"
   [tableActions]="tableActions"
   [tableShowAdvancedSearch]="true"
-  (tableMenuActionsClicked)="createActions($event)">
+  (tableMenuActionsClicked)="createActions($event)"
+  [tableDataSourceLength]="brokerGetAll.count"
+  (tableOnChangePaginator)="getBrokers($event)">
 
   <app-broker-advanced-search
     advanced-search

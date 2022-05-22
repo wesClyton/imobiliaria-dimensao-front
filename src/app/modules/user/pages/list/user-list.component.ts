@@ -23,7 +23,7 @@ import { UserService } from '../../services/user.service';
 })
 export class UserListComponent implements OnInit, TableInputs<User>, CrudActionNew, CrudActionBack {
 
-  private userGetAll!: UserGetAll;
+  public userGetAll!: UserGetAll;
 
   public tableDataSource!: MatTableDataSource<User>;
 

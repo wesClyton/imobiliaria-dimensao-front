@@ -25,7 +25,7 @@ import { BannerService } from '../../services/banner.service';
 })
 export class BannerListComponent implements OnInit, TableInputs<Banner>, CrudActionNew, CrudActionBack {
 
-  private bannerGetAll!: BannerGetAll;
+  public bannerGetAll!: BannerGetAll;
 
   public tableDataSource!: MatTableDataSource<Banner>;
 

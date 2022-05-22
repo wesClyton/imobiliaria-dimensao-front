@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class WhatsAppLinkPipe implements PipeTransform {
 
   transform(numberWhatsApp: string): string {
-    return `http://api.whatsapp.com/send?1=pt_BR&phone=${numberWhatsApp}`;
+    return `https://api.whatsapp.com/send?phone=55${numberWhatsApp.replace(/\D/g, '')}`;
   }
 
 }

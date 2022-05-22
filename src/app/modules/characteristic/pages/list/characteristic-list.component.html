@@ -7,7 +7,7 @@
   [tableShowActions]="tableShowActions"
   [tableShowAdvancedSearch]="true"
   [tableDataSourceLength]="characteristicGetAll.count"
-  (tableOnChangePaginator)="changePaginator($event)">
+  (tableOnChangePaginator)="getCharacteristics($event)">
 
   <app-characteristic-advanced-search
     advanced-search

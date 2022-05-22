@@ -50,6 +50,7 @@
 
   <mat-paginator
     [length]="tableDataSourceLength"
+    [showFirstLastButtons]="true"
     [pageSizeOptions]="tablePageSizeOptions"
     (page)="changePaginator($event)">
   </mat-paginator>

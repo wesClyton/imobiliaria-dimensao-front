@@ -5,7 +5,9 @@
   [tableDisplayedColumns]="tableDisplayedColumns"
   [tableActions]="tableActions"
   [tableShowAdvancedSearch]="true"
-  (tableMenuActionsClicked)="createActions($event)">
+  (tableMenuActionsClicked)="createActions($event)"
+  [tableDataSourceLength]="userGetAll.count"
+  (tableOnChangePaginator)="getUsers($event)">
 
   <app-user-advanced-search
     advanced-search

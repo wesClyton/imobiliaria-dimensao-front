@@ -6,7 +6,9 @@
   [tableActions]="tableActions"
   [tableFilterInputTextPlaceholder]="tableFilterInputTextPlaceholder"
   [tableShowActions]="tableShowActions"
-  [tableShowAdvancedSearch]="true">
+  [tableShowAdvancedSearch]="true"
+  [tableDataSourceLength]="districtGetAll.count"
+  (tableOnChangePaginator)="getDistricts($event)">
 
   <app-district-advanced-search
     advanced-search

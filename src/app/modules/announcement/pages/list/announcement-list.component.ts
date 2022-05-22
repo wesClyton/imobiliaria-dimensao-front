@@ -24,7 +24,7 @@ import { AnnouncementService } from '../../services/announcement.service';
 })
 export class AnnouncementListComponent implements OnInit, TableInputs<Announcement>, CrudActionNew, CrudActionBack {
 
-  private announcementGetAll!: AnnouncementGetAll;
+  public announcementGetAll!: AnnouncementGetAll;
 
   public tableDataSource!: MatTableDataSource<Announcement>;
 

@@ -23,7 +23,7 @@ import { StateService } from '../../services/state.service';
 })
 export class StateListComponent implements OnInit, TableInputs<State>, CrudActionNew, CrudActionBack {
 
-  private stateGetAll!: StateGetAll;
+  public stateGetAll!: StateGetAll;
 
   public tableDataSource!: MatTableDataSource<State>;
 

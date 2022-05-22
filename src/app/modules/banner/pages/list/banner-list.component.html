@@ -6,7 +6,9 @@
   [tableActions]="tableActions"
   [tableShowAdvancedSearch]="true"
   [tableShowActions]="tableShowActions"
-  (tableMenuActionsClicked)="createActions($event)">
+  (tableMenuActionsClicked)="createActions($event)"
+  [tableDataSourceLength]="bannerGetAll.count"
+  (tableOnChangePaginator)="getBanners($event)">
 
   <app-banner-advanced-search
     advanced-search

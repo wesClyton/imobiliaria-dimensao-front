@@ -2,6 +2,7 @@ import { AfterContentInit, AfterViewInit, Component, ContentChildren, EventEmitt
 import { PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatColumnDef, MatTable, MatTableDataSource } from '@angular/material/table';
+import { QueryFilterParam } from '../../services/http/query-filter/query-filter.interface';
 import { TableActionsItem } from './interfaces/table-actions-item.interface';
 import { TableActions } from './interfaces/table-actions.interface';
 import { TableInputs } from './interfaces/table-inputs.interface';
@@ -57,7 +58,7 @@ export class TableComponent<T>
   public tableMenuActionsClicked = new EventEmitter<T>();
 
   @Output()
-  public tableOnChangePaginator = new EventEmitter<PageEvent>();
+  public tableOnChangePaginator = new EventEmitter<Array<QueryFilterParam>>();
 
   constructor() { }
 
@@ -96,7 +97,20 @@ export class TableComponent<T>
   }
 
   public changePaginator(event: PageEvent): void {
-    this.tableOnChangePaginator.emit(event);
+    const queryFilters = new Array<QueryFilterParam>();
+
+    queryFilters.push(
+      {
+        field: 'page',
+        value: event.pageIndex + 1
+      },
+      {
+        field: 'take',
+        value: event.pageSize
+      }
+    );
+
+    this.tableOnChangePaginator.emit(queryFilters);
   }
 
 }

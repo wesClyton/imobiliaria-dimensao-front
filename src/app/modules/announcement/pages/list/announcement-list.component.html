@@ -5,7 +5,9 @@
   [tableDisplayedColumns]="tableDisplayedColumns"
   [tableActions]="tableActions"
   [tableShowAdvancedSearch]="true"
-  (tableMenuActionsClicked)="createActions($event)">
+  (tableMenuActionsClicked)="createActions($event)"
+  [tableDataSourceLength]="announcementGetAll.count"
+  (tableOnChangePaginator)="getAnnouncements($event)">
 
   <app-announcement-advanced-search
     advanced-search

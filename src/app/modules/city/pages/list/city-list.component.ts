@@ -23,7 +23,7 @@ import { CityService } from '../../services/city.service';
 })
 export class CityListComponent implements OnInit, TableInputs<City>, CrudActionNew, CrudActionBack {
 
-  private cityGetAll!: CityGetAll;
+  public cityGetAll!: CityGetAll;
 
   public tableDataSource!: MatTableDataSource<City>;
 

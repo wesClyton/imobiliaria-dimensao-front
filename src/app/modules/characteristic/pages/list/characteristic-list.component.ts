@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { finalize, take } from 'rxjs/operators';
@@ -113,23 +112,6 @@ export class CharacteristicListComponent implements OnInit, TableInputs<Characte
         finalize(() => this.loadingService.hide())
       )
       .subscribe(characteristics => this.tableLoadContent(characteristics));
-  }
-
-  public changePaginator(event: PageEvent): void {
-    const queryFilters = new Array<QueryFilterParam>();
-
-    queryFilters.push(
-      {
-        field: 'page',
-        value: event.pageIndex + 1
-      },
-      {
-        field: 'take',
-        value: event.pageSize
-      }
-    );
-
-    this.getCharacteristics(queryFilters);
   }
 
 }

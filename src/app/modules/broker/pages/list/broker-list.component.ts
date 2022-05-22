@@ -25,7 +25,7 @@ import { BrokerService } from '../../services/broker.service';
 })
 export class BrokerListComponent implements OnInit, TableInputs<Broker>, CrudActionNew, CrudActionBack {
 
-  private brokerGetAll!: BrokerGetAll;
+  public brokerGetAll!: BrokerGetAll;
 
   public tableDataSource!: MatTableDataSource<Broker>;
 
