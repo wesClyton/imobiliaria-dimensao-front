@@ -28,18 +28,47 @@ export class CurrencyBrDirective implements OnInit, OnDestroy {
 
   @HostListener('blur', ['$event'])
   private setDigits(event: any): void {
-    let value: string = event.target.value;
+    const value: string = event.target.value;
+    this.setMask(this.formatDigits(value));
+  }
+
+  private setMask(value: string, loadedValue: boolean = false): void {
+    let thousand!: string;
+    let decimal!: string;
+    let formated!: string;
+
+    if (loadedValue) {
+      if (!value.includes('.')) {
+        value = `${value}.00`;
+      }
+      if (value.includes('.')) {
+        decimal = value.substring(value.length - 2, value.length);
+        if (decimal.includes('.')) {
+          value = `${value}0`;
+        }
+      }
+
+      thousand = value.substring(0, value.length - 2);
+      decimal = value.substring(value.length - 2, value.length);
+      formated = thousand ? `${thousand},${decimal}` : '0';
+    }
+
+    this.ngControl.control?.setValue(
+      this.currencyBrPipe.transform(formated ? formated : value, true),
+      { emitEvent: false }
+    );
+  }
+
+  private formatDigits(value: string): string {
     const thousand = value.split(',')[0];
     let digits = value.split(',')[1];
 
     if (digits && digits.length === 2) {
-      this.setMask(value);
-      return;
+      return value;
     }
 
     if (!thousand) {
-      this.setMask('0,00');
-      return;
+      return '0,00';
     }
 
     if (!digits && digits !== '' && thousand) {
@@ -49,24 +78,8 @@ export class CurrencyBrDirective implements OnInit, OnDestroy {
     } else if (digits && digits.length === 1) {
       value = `${value}0`;
     }
-    this.setMask(value);
-  }
 
-  private setMask(value: string, loadedValue: boolean = false): void {
-    let thousand!: string;
-    let decimal!: string;
-    let formated!: string;
-
-    if (loadedValue) {
-      thousand = value.substring(0, value.length - 2);
-      decimal = value.substring(value.length - 2, value.length);
-      formated = thousand ? `${thousand},${decimal}` : '0';
-    }
-
-    this.ngControl.control?.setValue(
-      this.currencyBrPipe.transform(formated ? formated : value),
-      { emitEvent: false }
-    );
+    return value;
   }
 
 }

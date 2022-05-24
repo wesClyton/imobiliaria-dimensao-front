@@ -28,28 +28,8 @@ export class M2Directive implements OnInit, OnDestroy {
 
   @HostListener('blur', ['$event'])
   private setDigits(event: any): void {
-    let value: string = event.target.value;
-    const thousand = value.split(',')[0];
-    let digits = value.split(',')[1];
-
-    if (digits && digits.length === 2) {
-      this.setMask(value);
-      return;
-    }
-
-    if (!thousand) {
-      this.setMask('0,00');
-      return;
-    }
-
-    if (!digits && digits !== '' && thousand) {
-      value = `${value},00`;
-    } else if (digits === '') {
-      value = `${value}00`;
-    } else if (digits && digits.length === 1) {
-      value = `${value}0`;
-    }
-    this.setMask(value);
+    const value: string = event.target.value;
+    this.setMask(this.formatDigits(value));
   }
 
   private setMask(value: string, loadedValue: boolean = false): void {
@@ -58,6 +38,16 @@ export class M2Directive implements OnInit, OnDestroy {
     let formated!: string;
 
     if (loadedValue) {
+      if (!value.includes('.')) {
+        value = `${value}.00`;
+      }
+      if (value.includes('.')) {
+        decimal = value.substring(value.length - 2, value.length);
+        if (decimal.includes('.')) {
+          value = `${value}0`;
+        }
+      }
+
       thousand = value.substring(0, value.length - 2);
       decimal = value.substring(value.length - 2, value.length);
       formated = thousand ? `${thousand},${decimal}` : '0';
@@ -67,6 +57,29 @@ export class M2Directive implements OnInit, OnDestroy {
       this.m2Pipe.transform(formated ? formated : value),
       { emitEvent: false }
     );
+  }
+
+  private formatDigits(value: string): string {
+    const thousand = value.split(',')[0];
+    let digits = value.split(',')[1];
+
+    if (digits && digits.length === 2) {
+      return value;
+    }
+
+    if (!thousand) {
+      return '0,00';
+    }
+
+    if (!digits && digits !== '' && thousand) {
+      value = `${value},00`;
+    } else if (digits === '') {
+      value = `${value}00`;
+    } else if (digits && digits.length === 1) {
+      value = `${value}0`;
+    }
+
+    return value;
   }
 
 }
