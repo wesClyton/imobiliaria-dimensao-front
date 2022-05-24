@@ -16,7 +16,7 @@ export class StringUtil {
     return this.removeSpecialCharacteres(this.removeWhiteSpaces(value))?.trim();
   }
 
-  public static transformCurrencyEUA(value: string): number {
+  public static transformNumber(value: string): number {
     value = this.removeSymbolCurrencyBr(value);
     return parseFloat(value.replace(/\./g, '').replace(',', '.').trim());
   }

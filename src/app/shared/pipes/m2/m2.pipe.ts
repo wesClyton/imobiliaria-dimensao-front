@@ -12,8 +12,9 @@ export class M2Pipe implements PipeTransform {
 
   transform(value: string): string {
     this.maskApplierService.thousandSeparator = '.';
-    const valueFormated = this.maskApplierService.applyMask(value, 'separator.2');
-    return valueFormated;
+    this.maskApplierService.prefix = '';
+    this.maskApplierService.suffix = '';
+    return this.maskApplierService.applyMask(value, 'separator.2');
   }
 
 }

@@ -19,7 +19,7 @@ export class QueryFilter {
       let value = object[key];
       if (value && value?.startsWith('R$')) {
         value = StringUtil.removeSymbolCurrencyBr(value);
-        value = StringUtil.transformCurrencyEUA(value);
+        value = StringUtil.transformNumber(value);
       }
 
       if (value !== NaN && (value || value === false)) {

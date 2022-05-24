@@ -1,4 +1,4 @@
-import { Directive, ElementRef, OnDestroy, OnInit } from '@angular/core';
+import { Directive, ElementRef, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { M2Pipe } from '../../pipes/m2/m2.pipe';
@@ -18,7 +18,7 @@ export class M2Directive implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.setMask((this.elementRef.nativeElement as HTMLInputElement).value);
+    this.setMask((this.elementRef.nativeElement as HTMLInputElement).value, true);
     this.subscription.add(this.ngControl.control?.valueChanges.subscribe(value => this.setMask(value)));
   }
 
@@ -26,8 +26,47 @@ export class M2Directive implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  private setMask(value: string): void {
-    this.ngControl.control?.setValue(this.m2Pipe.transform(value), { emitEvent: false });
+  @HostListener('blur', ['$event'])
+  private setDigits(event: any): void {
+    let value: string = event.target.value;
+    const thousand = value.split(',')[0];
+    let digits = value.split(',')[1];
+
+    if (digits && digits.length === 2) {
+      this.setMask(value);
+      return;
+    }
+
+    if (!thousand) {
+      this.setMask('0,00');
+      return;
+    }
+
+    if (!digits && digits !== '' && thousand) {
+      value = `${value},00`;
+    } else if (digits === '') {
+      value = `${value}00`;
+    } else if (digits && digits.length === 1) {
+      value = `${value}0`;
+    }
+    this.setMask(value);
+  }
+
+  private setMask(value: string, loadedValue: boolean = false): void {
+    let thousand!: string;
+    let decimal!: string;
+    let formated!: string;
+
+    if (loadedValue) {
+      thousand = value.substring(0, value.length - 2);
+      decimal = value.substring(value.length - 2, value.length);
+      formated = thousand ? `${thousand},${decimal}` : '0';
+    }
+
+    this.ngControl.control?.setValue(
+      this.m2Pipe.transform(formated ? formated : value),
+      { emitEvent: false }
+    );
   }
 
 }

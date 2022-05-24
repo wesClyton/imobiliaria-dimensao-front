@@ -383,8 +383,8 @@ export class AnnouncementFormNewComponent implements OnInit, OnDestroy, AfterVie
     this.characteristicsInstalacoesCondominio.forEach(characteristic => caracteristicas.push({ id: characteristic.id }));
 
     const announcement: AnnouncementCreate = {
-      areaConstruida: Number(this.controlAreaConstruida?.value),
-      areaTotal: Number(this.controlAreaTotal?.value),
+      areaConstruida: StringUtil.transformNumber(this.controlAreaConstruida?.value),
+      areaTotal: StringUtil.transformNumber(this.controlAreaTotal?.value),
       banheiros: Number(this.controlBanheiros?.value),
       caracteristicas,
       cep: this.controlCep?.value,
@@ -406,8 +406,8 @@ export class AnnouncementFormNewComponent implements OnInit, OnDestroy, AfterVie
       url360: this.controlUrl360?.value,
       urlVideo: this.controlUrlVideo?.value,
       vagasGaragem: Number(this.controlVagasGaragem?.value),
-      valor: StringUtil.transformCurrencyEUA(this.controlValor?.value),
-      valorCondominio: StringUtil.transformCurrencyEUA(this.controlValorCondominio?.value)
+      valor: StringUtil.transformNumber(this.controlValor?.value),
+      valorCondominio: StringUtil.transformNumber(this.controlValorCondominio?.value)
     };
 
     this.announcementService

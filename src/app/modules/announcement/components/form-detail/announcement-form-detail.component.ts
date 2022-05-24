@@ -430,8 +430,8 @@ export class AnnouncementFormDetailComponent implements OnInit, OnDestroy, After
     const announcement: AnnouncementUpdate = {
       id: this.announcement.id,
       ativo: this.controlAtivo?.value,
-      areaConstruida: Number(this.controlAreaConstruida?.value),
-      areaTotal: Number(this.controlAreaTotal?.value),
+      areaConstruida: StringUtil.transformNumber(this.controlAreaConstruida?.value),
+      areaTotal: StringUtil.transformNumber(this.controlAreaTotal?.value),
       bairroId: this.controlBairro?.value,
       banheiros: Number(this.controlBanheiros?.value),
       caracteristicas,
@@ -454,8 +454,8 @@ export class AnnouncementFormDetailComponent implements OnInit, OnDestroy, After
       urlMapa: this.controlUrlMapa?.value,
       urlVideo: this.controlUrlVideo?.value,
       vagasGaragem: Number(this.controlVagasGaragem?.value),
-      valor: StringUtil.transformCurrencyEUA(this.controlValor?.value),
-      valorCondominio: StringUtil.transformCurrencyEUA(this.controlValorCondominio?.value)
+      valor: StringUtil.transformNumber(this.controlValor?.value),
+      valorCondominio: StringUtil.transformNumber(this.controlValorCondominio?.value)
     };
 
     this.announcementService
