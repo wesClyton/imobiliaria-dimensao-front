@@ -54,7 +54,7 @@ export class M2Directive implements OnInit, OnDestroy {
     }
 
     this.ngControl.control?.setValue(
-      this.m2Pipe.transform(formated ? formated : value),
+      this.m2Pipe.transform(formated ? formated : value, true),
       { emitEvent: false }
     );
   }
