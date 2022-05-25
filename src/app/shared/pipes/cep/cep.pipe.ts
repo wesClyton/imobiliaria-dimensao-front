@@ -11,6 +11,8 @@ export class CepPipe implements PipeTransform {
   ) {}
 
   transform(value: string): string {
+    this.maskApplierService.prefix = '';
+    this.maskApplierService.suffix = '';
     return this.maskApplierService.applyMask(value, '00.000-000');
   }
 
