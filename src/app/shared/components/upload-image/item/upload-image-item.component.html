@@ -2,6 +2,7 @@
 
   <input #inputFile type="file" accept="image/jpeg" (change)="fileChangeEvent($event)" hidden />
 
+  <small class="max-size">Tamanho máximo do arquivo: <strong>1MB</strong></small>
   <div *ngIf="imageUrl" class="photo-loaded">
     <button
       *ngIf="showDeleteImageEmitter && !onlyView"

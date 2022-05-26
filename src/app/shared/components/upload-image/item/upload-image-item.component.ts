@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { ImageCroppedEvent, LoadedImage } from 'ngx-image-cropper';
+import { NotificationService } from '../../../../core/notification/notification.service';
 import { FileUtil } from '../../../utils/file.util';
 
 @Component({
@@ -70,7 +71,7 @@ export class UploadImageItemComponent {
 
   public loadedImage: LoadedImage | undefined;
 
-  public file!: File;
+  public file: File | undefined;
 
   @Output()
   public fileSelected = new EventEmitter<File>();
@@ -87,19 +88,31 @@ export class UploadImageItemComponent {
   @Input()
   public imageQuality = 75;
 
-  constructor() {}
+  constructor(
+    private readonly notificationService: NotificationService
+  ) {}
 
   public fileChangeEvent(event: Event): void {
     this.imageChangedEvent = event;
     this.file = this.imageChangedEvent.target.files[0];
+
+    if (this.file && this.file.size > 1000000) {
+      this.notificationService.error('Tamanho máximo do arquivo deve ser de 1MB.');
+      this.file = undefined;
+      this.imageChangedEvent = undefined;
+      return;
+    }
+
     if (!this.canCropp) {
       this.fileSelected.emit(this.file);
     }
   }
 
   private setFileCropped(croppedImage: any): void {
-    this.file = FileUtil.convertBase64ToFile(croppedImage, this.file.name);
-    this.fileSelected.emit(this.file);
+    if (this.file) {
+      this.file = FileUtil.convertBase64ToFile(croppedImage, this.file.name);
+      this.fileSelected.emit(this.file);
+    }
   }
 
   public imageCropped(event: ImageCroppedEvent): void {
