@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { finalize, take } from 'rxjs/operators';
@@ -17,13 +17,17 @@ import { Banner } from '../../interfaces/banner.interface';
 import { BannerGetAll } from '../../interfaces/banner-get-all.interface';
 import { BannerUpdate } from '../../interfaces/banner-update.interface';
 import { BannerService } from '../../services/banner.service';
+import { MatDialog } from '@angular/material/dialog';
+import { BannerOrderComponent } from '../../components/order/banner-order.component';
+import { BannerOrderService } from '../../services/banner-order.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-banner-list',
   templateUrl: 'banner-list.component.html',
   styleUrls: ['./banner-list.component.scss']
 })
-export class BannerListComponent implements OnInit, TableInputs<Banner>, CrudActionNew, CrudActionBack {
+export class BannerListComponent implements OnInit, OnDestroy, TableInputs<Banner>, CrudActionNew, CrudActionBack {
 
   public bannerGetAll!: BannerGetAll;
 
@@ -37,6 +41,8 @@ export class BannerListComponent implements OnInit, TableInputs<Banner>, CrudAct
 
   public readonly newShow = this.authService.isAdmin || this.authService.isAutor;
 
+  private subscription = new Subscription();
+
   constructor(
     private readonly router: Router,
     private readonly activatedRoute: ActivatedRoute,
@@ -44,12 +50,20 @@ export class BannerListComponent implements OnInit, TableInputs<Banner>, CrudAct
     private readonly notificationService: NotificationService,
     private readonly loadingService: LoadingService,
     private readonly angularMaterialDialogConfirmationService: DialogConfirmationService,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly matDialog: MatDialog,
+    private readonly bannerOrderService: BannerOrderService
   ) { }
 
   ngOnInit(): void {
     this.bannerGetAll = this.activatedRoute.snapshot.data.bannerGetAll;
     this.tableLoadContent(this.bannerGetAll);
+
+    this.subscription.add(this.bannerOrderService.ordenationCompleted$.subscribe(() => this.getBanners()));
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   public createActions(banner: Banner): void {
@@ -136,6 +150,14 @@ export class BannerListComponent implements OnInit, TableInputs<Banner>, CrudAct
         finalize(() => this.loadingService.hide())
       )
       .subscribe(banners => this.tableLoadContent(banners));
+  }
+
+  public orderBanners(): void {
+    this.matDialog.open(BannerOrderComponent, {
+      data: {
+        banners: this.bannerGetAll.data
+      }
+    });
   }
 
 }

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 import { CrudActionsModule } from '../../../shared/components/crud-actions/crud-actions.module';
 import { DialogConfirmationModule } from '../../../shared/components/dialog-confirmation/dialog-confirmation.module';
 import { TableModule } from '../../../shared/components/table/table.module';
@@ -23,7 +24,8 @@ import { BannerNewComponent } from './new/banner-new.component';
     MatButtonModule,
     TableModule,
     DialogConfirmationModule,
-    PipesModule
+    PipesModule,
+    MatDialogModule
   ],
   exports: [
     BannerListComponent,

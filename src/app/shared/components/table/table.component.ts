@@ -16,10 +16,13 @@ import { Table } from './interfaces/table.interface';
 export class TableComponent<T>
   implements AfterViewInit, AfterContentInit, TableInputs<T>, Table<T> {
 
-  @Input()
-  public tableShowAdvancedSearch = false;
-
   public tableShowForm = false;
+
+  @Input()
+  public tableShowOrderButton = false;
+
+  @Input()
+  public tableShowAdvancedSearchButton = true;
 
   @Input()
   public tableFilterInputTextPlaceholder = 'Informe o filtro';
@@ -56,6 +59,9 @@ export class TableComponent<T>
 
   @Output()
   public tableMenuActionsClicked = new EventEmitter<T>();
+
+  @Output()
+  public tableShowOrderButtonClicked = new EventEmitter<any>();
 
   @Output()
   public tableOnChangePaginator = new EventEmitter<Array<QueryFilterParam>>();
@@ -111,6 +117,10 @@ export class TableComponent<T>
     );
 
     this.tableOnChangePaginator.emit(queryFilters);
+  }
+
+  public tableShowOrderButtonClick(): void {
+    this.tableShowOrderButtonClicked.emit();
   }
 
 }

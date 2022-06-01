@@ -20,7 +20,7 @@ export class HttpPutService<PutIn, PutOut> implements HttpPut<PutIn, PutOut> {
   public put(type: PutIn): Observable<PutOut> {
     const id = type['id' as never];
     return this.httpClient
-      .put<PutOut>(`${this.endPoint}/${id}`, type)
+      .put<PutOut>(`${this.endPoint}/${id ? id : ''}`, type)
       .pipe(
         catchError((error) => {
           this.exceptionService.handleError(error);
