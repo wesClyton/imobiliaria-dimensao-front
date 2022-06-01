@@ -4,12 +4,12 @@ import { Subject } from 'rxjs';
 import { ExceptionService } from '../../../shared/services/exception/exception.service';
 import { HttpPutService } from '../../../shared/services/http/put/http-put.service';
 import { BANNER_CONFIG } from '../banner.config';
-import { BannerOrder } from '../interfaces/banner-order.interface';
+import { BannerOrders } from '../interfaces/banner-order.interface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class BannerOrderService extends HttpPutService<BannerOrder, void> {
+export class BannerOrderService extends HttpPutService<BannerOrders, void> {
 
   private readonly ordenationCompletedSubject = new Subject();
 

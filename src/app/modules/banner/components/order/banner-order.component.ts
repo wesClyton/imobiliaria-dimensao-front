@@ -3,7 +3,7 @@ import { Component, EventEmitter, Inject, OnInit, Output, ViewChild } from '@ang
 import { MatDialog, MatDialogActions, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { finalize, take } from 'rxjs/operators';
 import { LoadingService } from '../../../../core/loading/loading.service';
-import { BannerOrder } from '../../interfaces/banner-order.interface';
+import { BannerOrders } from '../../interfaces/banner-order.interface';
 import { Banner } from '../../interfaces/banner.interface';
 import { BannerOrderService } from '../../services/banner-order.service';
 
@@ -37,12 +37,12 @@ export class BannerOrderComponent implements OnInit {
   public submit(): void {
     this.loadingService.show();
 
-    const bannerOrder: BannerOrder = {
-      order: []
+    const bannerOrder: BannerOrders = {
+      orders: []
     };
 
     this.banners.forEach((banner, index) => {
-      bannerOrder.order.push({
+      bannerOrder.orders.push({
         id: banner.id + 1,
         order: index
       });
