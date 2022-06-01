@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 import { ExceptionService } from '../../../shared/services/exception/exception.service';
 import { HttpPutService } from '../../../shared/services/http/put/http-put.service';
 import { BANNER_CONFIG } from '../banner.config';
-import { BannerOrders } from '../interfaces/banner-order.interface';
+import { BannerOrders } from '../interfaces/banner-orders.interface';
 
 @Injectable({
   providedIn: 'root'

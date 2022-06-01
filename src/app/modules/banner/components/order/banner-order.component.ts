@@ -3,7 +3,7 @@ import { Component, EventEmitter, Inject, OnInit, Output, ViewChild } from '@ang
 import { MatDialog, MatDialogActions, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { finalize, take } from 'rxjs/operators';
 import { LoadingService } from '../../../../core/loading/loading.service';
-import { BannerOrders } from '../../interfaces/banner-order.interface';
+import { BannerOrders } from '../../interfaces/banner-orders.interface';
 import { Banner } from '../../interfaces/banner.interface';
 import { BannerOrderService } from '../../services/banner-order.service';
 
