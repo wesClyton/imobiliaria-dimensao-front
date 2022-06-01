@@ -19,9 +19,6 @@ export class BannerOrderComponent implements OnInit {
 
   public banners!: Array<Banner>;
 
-  @Output()
-  public ordinationCompleted = new EventEmitter<any>();
-
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public readonly data: { banners: Array<Banner> },
@@ -43,7 +40,7 @@ export class BannerOrderComponent implements OnInit {
 
     this.banners.forEach((banner, index) => {
       bannerOrder.orders.push({
-        id: banner.id + 1,
+        id: banner.id,
         order: index
       });
     });
