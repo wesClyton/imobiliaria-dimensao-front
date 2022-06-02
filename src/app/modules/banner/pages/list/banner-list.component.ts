@@ -139,6 +139,7 @@ export class BannerListComponent implements OnInit, OnDestroy, TableInputs<Banne
   }
 
   public getBanners(queryFilters: Array<QueryFilterParam> = new Array<QueryFilterParam>()): void {
+    this.bannerService.queryFilterRemove();
     this.bannerService.queryFilterAdd(queryFilters);
 
     this.loadingService.show();

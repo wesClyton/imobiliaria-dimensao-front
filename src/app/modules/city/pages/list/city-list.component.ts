@@ -102,6 +102,7 @@ export class CityListComponent implements OnInit, TableInputs<City>, CrudActionN
   }
 
   public getCities(queryFilters: Array<QueryFilterParam> = new Array<QueryFilterParam>()): void {
+    this.cityService.queryFilterRemove();
     this.cityService.queryFilterAdd(queryFilters);
 
     this.loadingService.show();

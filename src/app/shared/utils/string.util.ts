@@ -34,4 +34,12 @@ export class StringUtil {
     return value.toString().replace('R$', '').trim();
   }
 
+  public static isBoolean(value: any): boolean {
+    return typeof value === 'boolean'
+  }
+
+  public static isArray(value: any): boolean {
+    return Array.isArray(value);
+  }
+
 }

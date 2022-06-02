@@ -125,6 +125,7 @@ export class AnnouncementListComponent implements OnInit, TableInputs<Announceme
   }
 
   public getAnnouncements(queryFilters: Array<QueryFilterParam> = new Array<QueryFilterParam>()): void {
+    this.announcementService.queryFilterRemove();
     this.announcementService.queryFilterAdd(queryFilters);
 
     this.loadingService.show();
