@@ -101,7 +101,8 @@ export class BannerListComponent implements OnInit, OnDestroy, TableInputs<Banne
   }
 
   private tableLoadContent(banners: BannerGetAll): void {
-    this.tableDataSource = new MatTableDataSource(banners.data);
+    this.bannerGetAll = banners;
+    this.tableDataSource = new MatTableDataSource(this.bannerGetAll.data);
   }
 
   public navigateDetail(banner: Banner): void {

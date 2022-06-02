@@ -64,7 +64,8 @@ export class DistrictListComponent implements OnInit, TableInputs<District>, Cru
   }
 
   private tableLoadContent(districts: DistrictGetAll): void {
-    this.tableDataSource = new MatTableDataSource(districts.data);
+    this.districtGetAll = districts;
+    this.tableDataSource = new MatTableDataSource(this.districtGetAll.data);
   }
 
   public navigateDetail(district: District): void {

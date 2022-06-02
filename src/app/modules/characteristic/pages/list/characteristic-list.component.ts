@@ -62,7 +62,8 @@ export class CharacteristicListComponent implements OnInit, TableInputs<Characte
   }
 
   private tableLoadContent(characteristics: CharacteristicGetAll): void {
-    this.tableDataSource = new MatTableDataSource(characteristics.data);
+    this.characteristicGetAll = characteristics;
+    this.tableDataSource = new MatTableDataSource(this.characteristicGetAll.data);
   }
 
   public navigateDetail(characteristic: Characteristic): void {

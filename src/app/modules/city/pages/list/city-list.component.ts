@@ -64,7 +64,8 @@ export class CityListComponent implements OnInit, TableInputs<City>, CrudActionN
   }
 
   private tableLoadContent(cities: CityGetAll): void {
-    this.tableDataSource = new MatTableDataSource(cities.data);
+    this.cityGetAll = cities;
+    this.tableDataSource = new MatTableDataSource(this.cityGetAll.data);
   }
 
   public navigateDetail(city: City): void {

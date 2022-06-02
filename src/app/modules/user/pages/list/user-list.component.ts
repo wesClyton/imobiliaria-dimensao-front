@@ -80,7 +80,8 @@ export class UserListComponent implements OnInit, TableInputs<User>, CrudActionN
   }
 
   private tableLoadContent(users: UserGetAll): void {
-    this.tableDataSource = new MatTableDataSource(users.data);
+    this.userGetAll = users;
+    this.tableDataSource = new MatTableDataSource(this.userGetAll.data);
   }
 
   public navigateDetail(user: User): void {

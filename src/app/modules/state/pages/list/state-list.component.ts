@@ -64,7 +64,8 @@ export class StateListComponent implements OnInit, TableInputs<State>, CrudActio
   }
 
   private tableLoadContent(states: StateGetAll): void {
-    this.tableDataSource = new MatTableDataSource(states.data);
+    this.stateGetAll = states;
+    this.tableDataSource = new MatTableDataSource(this.stateGetAll.data);
   }
 
   public navigateDetail(state: State): void {
