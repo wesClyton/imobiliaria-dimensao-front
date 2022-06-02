@@ -1,0 +1,12 @@
+<h1>Detalhes Corretor</h1>
+
+<app-enterprise-form-detail [enterprise]="enterprise"></app-enterprise-form-detail>
+
+<app-crud-actions
+  [saveShow]="saveShow"
+  [backShow]="true"
+  [deleteShow]="deleteShow"
+  (backClicked)="crudActionBack()"
+  (saveClicked)="crudActionSave()"
+  (deleteClicked)="crudActionDelete()">
+</app-crud-actions>

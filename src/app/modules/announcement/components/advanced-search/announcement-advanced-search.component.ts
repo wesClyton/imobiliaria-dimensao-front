@@ -60,13 +60,17 @@ export class AnnouncementAdvancedSearchComponent extends AdvancedSearchBaseCompo
     this.subscription.add(this.form.get('cidadeId')?.valueChanges.subscribe(value => this.getDistricts(value)));
   }
 
-
   private getDistricts(cityId: string): void {
     this.districtService.queryFilterRemove();
-    this.districtService.queryFilterAdd({
-      field: 'cidadeId',
-      value: cityId
-    });
+    this.districtService.queryFilterAdd([
+      {
+        field: 'cidadeId',
+        value: cityId
+      }, {
+        field: 'take',
+        value: 999
+      }
+    ]);
     this.districtService
       .getAll()
       .pipe(take(1))

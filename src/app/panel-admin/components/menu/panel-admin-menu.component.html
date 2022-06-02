@@ -15,6 +15,11 @@
       Anúncios
     </button>
 
+    <button *ngIf="showDistricts" type="menu" mat-list-item (click)="navigateDistricts()">
+      <mat-icon matListIcon color="primary">location_on</mat-icon>
+      Bairros
+    </button>
+
     <button *ngIf="showBanners" type="menu" mat-list-item (click)="navigateBanners()">
       <mat-icon matListIcon color="primary">image</mat-icon>
       Banners
@@ -25,11 +30,6 @@
       Características
     </button>
 
-    <button *ngIf="showDistricts" type="menu" mat-list-item (click)="navigateDistricts()">
-      <mat-icon matListIcon color="primary">location_on</mat-icon>
-      Bairros
-    </button>
-
     <button *ngIf="showCities" type="menu" mat-list-item (click)="navigateCities()">
       <mat-icon matListIcon color="primary">location_on</mat-icon>
       Cidades
@@ -38,6 +38,11 @@
     <button *ngIf="showBrokers" type="menu" mat-list-item (click)="navigateBrokers()">
       <mat-icon matListIcon color="primary">groups</mat-icon>
       Corretores
+    </button>
+
+    <button *ngIf="showEnterprises" type="menu" mat-list-item (click)="navigateEnterprises()">
+      <mat-icon matListIcon color="primary">apartment</mat-icon>
+      Empreendimentos
     </button>
 
     <button *ngIf="showStates" type="menu" mat-list-item (click)="navigateStates()">

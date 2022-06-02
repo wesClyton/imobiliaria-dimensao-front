@@ -312,6 +312,11 @@ export class AnnouncementFormNewComponent implements OnInit, OnDestroy, AfterVie
       field: 'cidadeId',
       value: cityId
     });
+    this.districtService.queryFilterAdd({
+      field: 'take',
+      value: '100'
+    });
+
     this.districtService
       .getAll()
       .pipe(take(1))
@@ -436,7 +441,7 @@ export class AnnouncementFormNewComponent implements OnInit, OnDestroy, AfterVie
           () => this.loadingService.hide()
         );
       },
-      (error) => this.loadingService.hide());
+        (error) => this.loadingService.hide());
   }
 
   private messageSuccess(announcement: AnnouncementCreateResponse): void {

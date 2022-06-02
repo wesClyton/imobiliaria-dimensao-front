@@ -6,6 +6,7 @@ import { BROKER_CONFIG } from '../modules/broker/broker.config';
 import { CHARACTERISTIC_CONFIG } from '../modules/characteristic/characteristic.config';
 import { CITY_CONFIG } from '../modules/city/city.config';
 import { DISTRICT_CONFIG } from '../modules/district/district.config';
+import { ENTERPRISE_CONFIG } from '../modules/enterprise/enterprise.config';
 import { STATE_CONFIG } from '../modules/state/state.config';
 import { USER_CONFIG } from '../modules/user/user.config';
 import { PanelAdminHomeComponent } from './pages/home/panel-admin-home.component';
@@ -40,6 +41,10 @@ const routes: Routes = [
       {
         path: BROKER_CONFIG.path,
         loadChildren: () => import('../modules/broker/broker.module').then(m => m.BrokerModule)
+      },
+      {
+        path: ENTERPRISE_CONFIG.path,
+        loadChildren: () => import('../modules/enterprise/enterprise.module').then(m => m.EnterpriseModule)
       },
       {
         path: DISTRICT_CONFIG.path,

@@ -1,0 +1,50 @@
+<form [formGroup]="form">
+
+  <h3>Foto</h3>
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <div fxFlex="100">
+      <app-upload-image
+        [canCropp]="true"
+        [canSelectVariusFiles]="false">
+      </app-upload-image>
+    </div>
+  </div>
+
+  <br/>
+  <br/>
+
+  <h3>Informações</h3>
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Nome</mat-label>
+      <input matInput type="text" formControlName="nome" placeholder="Informe um Nome">
+      <mat-error *ngIf="controlNomeHasError">Informe o Nome</mat-error>
+    </mat-form-field>
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50" fxFlex.lg="25" fxFlex.xl="25">
+      <mat-label>Cidade</mat-label>
+      <mat-select formControlName="cidadeId">
+        <mat-option>Selecione</mat-option>
+        <ng-container appCityOptionSelect (dataFinded)="cities = $event">
+          <mat-option *ngFor="let city of cities?.data" [value]="city.id">
+            {{ city.nome }}
+          </mat-option>
+        </ng-container>
+      </mat-select>
+      <mat-error *ngIf="controlCidadeIdHasError">Informe a Cidade</mat-error>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Link</mat-label>
+      <input matInput type="text" formControlName="link" placeholder="Informe um Link">
+      <mat-error *ngIf="controlLinkHasError">Informe o Link</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Descricao</mat-label>
+      <textarea matInput type="text" formControlName="descricao" placeholder="Informe uma Descricao"></textarea>
+    </mat-form-field>
+  </div>
+
+</form>

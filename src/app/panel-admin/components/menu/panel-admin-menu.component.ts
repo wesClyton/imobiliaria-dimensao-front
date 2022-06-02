@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { DISTRICT_CONFIG } from 'src/app/modules/district/district.config';
+import { ENTERPRISE_CONFIG } from 'src/app/modules/enterprise/enterprise.config';
 import { ANNOUNCEMENT_CONFIG } from '../../../modules/announcement/announcement.config';
 import { Session } from '../../../modules/auth/interfaces/session.interface';
 import { AuthService } from '../../../modules/auth/services/auth.service';
@@ -35,6 +36,10 @@ export class PanelAdminMenuComponent {
   }
 
   public get showBrokers(): boolean {
+    return true;
+  }
+
+  public get showEnterprises(): boolean {
     return true;
   }
 
@@ -81,6 +86,10 @@ export class PanelAdminMenuComponent {
 
   public navigateBrokers(): void {
     this.router.navigateByUrl(PanelAdminComponent.pathConcat(BROKER_CONFIG.pathFront));
+  }
+
+  public navigateEnterprises(): void {
+    this.router.navigateByUrl(PanelAdminComponent.pathConcat(ENTERPRISE_CONFIG.pathFront));
   }
 
   public navigateDistricts(): void {
