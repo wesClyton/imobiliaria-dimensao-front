@@ -1,13 +1,16 @@
 <h1>Banners</h1>
 
+<!-- <app-banner-order #bannerOrder></app-banner-order> -->
+
 <app-table
+  [tableShowOrderButton]="true"
   [tableDataSource]="tableDataSource"
   [tableDisplayedColumns]="tableDisplayedColumns"
   [tableActions]="tableActions"
-  [tableShowAdvancedSearch]="true"
   [tableShowActions]="tableShowActions"
   (tableMenuActionsClicked)="createActions($event)"
   [tableDataSourceLength]="bannerGetAll.count"
+  (tableShowOrderButtonClicked)="orderBanners()"
   (tableOnChangePaginator)="getBanners($event)">
 
   <app-banner-advanced-search

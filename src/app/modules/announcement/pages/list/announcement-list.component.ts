@@ -87,7 +87,8 @@ export class AnnouncementListComponent implements OnInit, TableInputs<Announceme
   }
 
   private tableLoadContent(announcements: AnnouncementGetAll): void {
-    this.tableDataSource = new MatTableDataSource(announcements.data);
+    this.announcementGetAll = announcements;
+    this.tableDataSource = new MatTableDataSource(this.announcementGetAll.data);
   }
 
   public navigateDetail(announcement: Announcement): void {
@@ -125,6 +126,7 @@ export class AnnouncementListComponent implements OnInit, TableInputs<Announceme
   }
 
   public getAnnouncements(queryFilters: Array<QueryFilterParam> = new Array<QueryFilterParam>()): void {
+    this.announcementService.queryFilterRemove();
     this.announcementService.queryFilterAdd(queryFilters);
 
     this.loadingService.show();

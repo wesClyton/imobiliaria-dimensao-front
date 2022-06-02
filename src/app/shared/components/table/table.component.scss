@@ -19,13 +19,14 @@ td.mat-column-actions {
   padding-right: 8px !important;
 }
 
-.advanced-search {
+.box-buttons {
   margin-bottom: 2rem;
 
   .buttons {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 1rem;
+    gap: 1rem;
   }
 }
 

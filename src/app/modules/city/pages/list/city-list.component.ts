@@ -64,7 +64,8 @@ export class CityListComponent implements OnInit, TableInputs<City>, CrudActionN
   }
 
   private tableLoadContent(cities: CityGetAll): void {
-    this.tableDataSource = new MatTableDataSource(cities.data);
+    this.cityGetAll = cities;
+    this.tableDataSource = new MatTableDataSource(this.cityGetAll.data);
   }
 
   public navigateDetail(city: City): void {
@@ -102,6 +103,7 @@ export class CityListComponent implements OnInit, TableInputs<City>, CrudActionN
   }
 
   public getCities(queryFilters: Array<QueryFilterParam> = new Array<QueryFilterParam>()): void {
+    this.cityService.queryFilterRemove();
     this.cityService.queryFilterAdd(queryFilters);
 
     this.loadingService.show();

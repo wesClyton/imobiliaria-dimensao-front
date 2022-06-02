@@ -64,7 +64,8 @@ export class StateListComponent implements OnInit, TableInputs<State>, CrudActio
   }
 
   private tableLoadContent(states: StateGetAll): void {
-    this.tableDataSource = new MatTableDataSource(states.data);
+    this.stateGetAll = states;
+    this.tableDataSource = new MatTableDataSource(this.stateGetAll.data);
   }
 
   public navigateDetail(state: State): void {
@@ -102,6 +103,7 @@ export class StateListComponent implements OnInit, TableInputs<State>, CrudActio
   }
 
   public getStates(queryFilters: Array<QueryFilterParam> = new Array<QueryFilterParam>()): void {
+    this.stateService.queryFilterRemove();
     this.stateService.queryFilterAdd(queryFilters);
 
     this.loadingService.show();

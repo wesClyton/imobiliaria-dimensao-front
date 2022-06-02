@@ -1,6 +1,17 @@
-<div *ngIf="tableShowAdvancedSearch" class="advanced-search">
+<div class="box-buttons">
   <div class="buttons">
     <button
+      *ngIf="tableShowOrderButton"
+      mat-raised-button
+      type="button"
+      color="primary"
+      (click)="tableShowOrderButtonClick()">
+      <mat-icon>reorder</mat-icon>
+      Ordenar
+    </button>
+
+    <button
+      *ngIf="tableShowAdvancedSearchButton"
       mat-raised-button
       type="button"
       color="accent"

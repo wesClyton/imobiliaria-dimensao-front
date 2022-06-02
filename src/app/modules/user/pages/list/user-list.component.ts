@@ -80,7 +80,8 @@ export class UserListComponent implements OnInit, TableInputs<User>, CrudActionN
   }
 
   private tableLoadContent(users: UserGetAll): void {
-    this.tableDataSource = new MatTableDataSource(users.data);
+    this.userGetAll = users;
+    this.tableDataSource = new MatTableDataSource(this.userGetAll.data);
   }
 
   public navigateDetail(user: User): void {
@@ -122,6 +123,7 @@ export class UserListComponent implements OnInit, TableInputs<User>, CrudActionN
   }
 
   public getUsers(queryFilters: Array<QueryFilterParam> = new Array<QueryFilterParam>()): void {
+    this.userService.queryFilterRemove();
     this.userService.queryFilterAdd(queryFilters);
 
     this.loadingService.show();

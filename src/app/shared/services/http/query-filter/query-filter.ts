@@ -17,7 +17,12 @@ export class QueryFilter {
 
     Object.keys(object).forEach(key => {
       let value = object[key];
-      if (value && value?.startsWith('R$')) {
+
+      if (value instanceof Date) {
+        value = (value as Date).toString();
+      }
+
+      if (value && !StringUtil.isBoolean(value) && !StringUtil.isNumber(value) && value?.startsWith('R$')) {
         value = StringUtil.removeSymbolCurrencyBr(value);
         value = StringUtil.transformNumber(value);
       }
@@ -34,6 +39,8 @@ export class QueryFilter {
   }
 
   public static concat(queryFilter: QueryFilterParam | Array<QueryFilterParam>, currentQuery: string): string {
+    this.queryFilter = '';
+
     if (currentQuery) {
       this.queryFilter = currentQuery;
     }

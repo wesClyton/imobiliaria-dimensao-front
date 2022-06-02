@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { StringUtil } from '../../../utils/string.util';
 import { ExceptionService } from '../../exception/exception.service';
 import { HttpDelete } from '../delete/http-delete.interface';
 import { HttpGetAll } from '../get-all/http-get-all.interface';
@@ -40,7 +41,15 @@ export class HttpCrudService<PostIn, PostOut, GetAll, GetById, PutIn, PutOut>
   }
 
   public queryFilterAdd(query: QueryFilterParam | Array<QueryFilterParam>): void {
-    this.queryFilter = QueryFilter.concat(query, this.queryFilter);
+    if (StringUtil.isArray(query)) {
+      if ((query as Array<QueryFilterParam>).length) {
+        this.queryFilter = QueryFilter.concat(query, this.queryFilter);
+      }
+      return;
+    }
+    if (query) {
+      this.queryFilter = QueryFilter.concat(query, this.queryFilter);
+    }
   }
 
   public queryFilterRemove(): void {
