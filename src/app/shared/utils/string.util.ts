@@ -42,4 +42,8 @@ export class StringUtil {
     return Array.isArray(value);
   }
 
+  public static isNumber(value: any): boolean {
+    return typeof value === 'number';
+  }
+
 }
