@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Router } from '@angular/router';
@@ -31,7 +31,7 @@ import { AnnouncementService } from '../../services/announcement.service';
 })
 export class AnnouncementFormNewComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  public form!: FormGroup;
+  public form!: UntypedFormGroup;
 
   private get controlCodigoAnuncio(): AbstractControl | null {
     return this.form?.get('codigoAnuncio');
@@ -232,7 +232,7 @@ export class AnnouncementFormNewComponent implements OnInit, OnDestroy, AfterVie
   private readonly subscription = new Subscription();
 
   constructor(
-    private readonly formBuilder: FormBuilder,
+    private readonly formBuilder: UntypedFormBuilder,
     private readonly notificationService: NotificationService,
     private readonly loadingService: LoadingService,
     private readonly announcementService: AnnouncementService,
@@ -262,33 +262,33 @@ export class AnnouncementFormNewComponent implements OnInit, OnDestroy, AfterVie
 
   private createForm(): void {
     this.form = this.formBuilder.group({
-      cidadeId: new FormControl(null, [Validators.required]),
-      codigoAnuncio: new FormControl(null, [Validators.required]),
-      destaque: new FormControl(false),
-      titulo: new FormControl(null, [Validators.required]),
-      tipo: new FormControl(null, [Validators.required]),
-      expiracaoAnuncio: new FormControl(null, [Validators.required]),
-      valor: new FormControl(null, [Validators.required]),
-      valorCondominio: new FormControl(null),
-      areaTotal: new FormControl(null),
-      areaConstruida: new FormControl(null),
-      sobre: new FormControl(null),
-      dormitorios: new FormControl(null, [Validators.required]),
-      suites: new FormControl(null),
-      banheiros: new FormControl(null, [Validators.required]),
-      vagasGaragem: new FormControl(null),
-      empreendimento: new FormControl(null),
-      cep: new FormControl(null, [Validators.required]),
-      endereco: new FormControl(null, [Validators.required]),
-      bairroId: new FormControl(null, [Validators.required]),
-      longitude: new FormControl(null, [Validators.required]),
-      latitude: new FormControl(null, [Validators.required]),
-      urlVideo: new FormControl(null),
-      url360: new FormControl(null),
-      estadoImovel: new FormControl(null, [Validators.required]),
-      dataConclusao: new FormControl(null),
-      caracteristicasImovel: new FormControl(null),
-      caracteristicasInstalacoesCondominio: new FormControl(null)
+      cidadeId: new UntypedFormControl(null, [Validators.required]),
+      codigoAnuncio: new UntypedFormControl(null, [Validators.required]),
+      destaque: new UntypedFormControl(false),
+      titulo: new UntypedFormControl(null, [Validators.required]),
+      tipo: new UntypedFormControl(null, [Validators.required]),
+      expiracaoAnuncio: new UntypedFormControl(null, [Validators.required]),
+      valor: new UntypedFormControl(null, [Validators.required]),
+      valorCondominio: new UntypedFormControl(null),
+      areaTotal: new UntypedFormControl(null),
+      areaConstruida: new UntypedFormControl(null),
+      sobre: new UntypedFormControl(null),
+      dormitorios: new UntypedFormControl(null, [Validators.required]),
+      suites: new UntypedFormControl(null),
+      banheiros: new UntypedFormControl(null, [Validators.required]),
+      vagasGaragem: new UntypedFormControl(null),
+      empreendimento: new UntypedFormControl(null),
+      cep: new UntypedFormControl(null, [Validators.required]),
+      endereco: new UntypedFormControl(null, [Validators.required]),
+      bairroId: new UntypedFormControl(null, [Validators.required]),
+      longitude: new UntypedFormControl(null, [Validators.required]),
+      latitude: new UntypedFormControl(null, [Validators.required]),
+      urlVideo: new UntypedFormControl(null),
+      url360: new UntypedFormControl(null),
+      estadoImovel: new UntypedFormControl(null, [Validators.required]),
+      dataConclusao: new UntypedFormControl(null),
+      caracteristicasImovel: new UntypedFormControl(null),
+      caracteristicasInstalacoesCondominio: new UntypedFormControl(null)
     });
 
     this.subscription.add(

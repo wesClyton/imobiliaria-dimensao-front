@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { finalize, take } from 'rxjs/operators';
 import { CityGetAll } from 'src/app/modules/city/interfaces/city-get-all.interface';
@@ -18,7 +18,7 @@ import { DistrictService } from '../../services/district.service';
 })
 export class DistrictFormDetailComponent implements OnInit {
 
-  public form!: FormGroup;
+  public form!: UntypedFormGroup;
 
   private get controlNome(): AbstractControl | null {
     return this.form?.get('nome');
@@ -46,7 +46,7 @@ export class DistrictFormDetailComponent implements OnInit {
   }
 
   constructor(
-    private readonly formBuilder: FormBuilder,
+    private readonly formBuilder: UntypedFormBuilder,
     private readonly notificationService: NotificationService,
     private readonly loadinService: LoadingService,
     private readonly districtService: DistrictService,
@@ -61,8 +61,8 @@ export class DistrictFormDetailComponent implements OnInit {
 
   private createForm(): void {
     this.form = this.formBuilder.group({
-      nome: new FormControl(null, [Validators.required]),
-      cidadeId: new FormControl(null, [Validators.required])
+      nome: new UntypedFormControl(null, [Validators.required]),
+      cidadeId: new UntypedFormControl(null, [Validators.required])
     });
 
     if (this.district) {

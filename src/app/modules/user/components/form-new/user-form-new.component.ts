@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { finalize, take } from 'rxjs/operators';
 import { LoadingService } from '../../../../core/loading/loading.service';
@@ -16,7 +16,7 @@ import { UserService } from '../../services/user.service';
 })
 export class UserFormNewComponent implements OnInit {
 
-  public form!: FormGroup;
+  public form!: UntypedFormGroup;
 
   private get controlNome(): AbstractControl | null {
     return this.form?.get('nome');
@@ -53,7 +53,7 @@ export class UserFormNewComponent implements OnInit {
   public roles!: Array<Role>;
 
   constructor(
-    private readonly formBuilder: FormBuilder,
+    private readonly formBuilder: UntypedFormBuilder,
     private readonly notificationService: NotificationService,
     private readonly loadinService: LoadingService,
     private readonly userService: UserService,
@@ -67,10 +67,10 @@ export class UserFormNewComponent implements OnInit {
 
   private createForm(): void {
     this.form = this.formBuilder.group({
-      nome: new FormControl(null, [Validators.required]),
-      nivel: new FormControl(null, [Validators.required]),
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      password: new FormControl(null, [Validators.required])
+      nome: new UntypedFormControl(null, [Validators.required]),
+      nivel: new UntypedFormControl(null, [Validators.required]),
+      email: new UntypedFormControl(null, [Validators.required, Validators.email]),
+      password: new UntypedFormControl(null, [Validators.required])
     });
   }
 

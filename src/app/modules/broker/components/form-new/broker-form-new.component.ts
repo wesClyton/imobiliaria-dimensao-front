@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { LoadingService } from '../../../../core/loading/loading.service';
@@ -19,7 +19,7 @@ import { BrokerService } from '../../services/broker.service';
 })
 export class BrokerFormNewComponent implements OnInit {
 
-  public form!: FormGroup;
+  public form!: UntypedFormGroup;
 
   private get controlNome(): AbstractControl | null {
     return this.form?.get('nome');
@@ -89,7 +89,7 @@ export class BrokerFormNewComponent implements OnInit {
   private readonly updaloadPhotoComponent!: UploadImageComponent;
 
   constructor(
-    private readonly formBuilder: FormBuilder,
+    private readonly formBuilder: UntypedFormBuilder,
     private readonly notificationService: NotificationService,
     private readonly loadinService: LoadingService,
     private readonly brokerService: BrokerService,
@@ -104,17 +104,17 @@ export class BrokerFormNewComponent implements OnInit {
 
   private createForm(): void {
     this.form = this.formBuilder.group({
-      nome: new FormControl(null, [Validators.required]),
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      telefone: new FormControl(null, [Validators.required, phoneValidator()]),
-      whatsapp: new FormControl(null, [phoneValidator()]),
-      biografia: new FormControl(null),
-      creci: new FormControl(null),
-      funcao: new FormControl(null),
-      instagram: new FormControl(null),
-      facebook: new FormControl(null),
-      linkedin: new FormControl(null),
-      password: new FormControl(null, [Validators.required])
+      nome: new UntypedFormControl(null, [Validators.required]),
+      email: new UntypedFormControl(null, [Validators.required, Validators.email]),
+      telefone: new UntypedFormControl(null, [Validators.required, phoneValidator()]),
+      whatsapp: new UntypedFormControl(null, [phoneValidator()]),
+      biografia: new UntypedFormControl(null),
+      creci: new UntypedFormControl(null),
+      funcao: new UntypedFormControl(null),
+      instagram: new UntypedFormControl(null),
+      facebook: new UntypedFormControl(null),
+      linkedin: new UntypedFormControl(null),
+      password: new UntypedFormControl(null, [Validators.required])
     });
   }
 

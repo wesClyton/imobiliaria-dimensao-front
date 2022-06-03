@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { QueryFilter } from '../../services/http/query-filter/query-filter';
 import { QueryFilterParam } from '../../services/http/query-filter/query-filter.interface';
 
@@ -9,7 +9,7 @@ import { QueryFilterParam } from '../../services/http/query-filter/query-filter.
 })
 export class AdvancedSearchBaseComponent implements OnInit {
 
-  public readonly form = new FormGroup({});
+  public readonly form = new UntypedFormGroup({});
 
   public fields = new Array<string>();
 
@@ -23,7 +23,7 @@ export class AdvancedSearchBaseComponent implements OnInit {
   }
 
   private createForm(): void {
-    this.fields.forEach(field => this.form.addControl(field, new FormControl(null)));
+    this.fields.forEach(field => this.form.addControl(field, new UntypedFormControl(null)));
   }
 
   public submit(): void {

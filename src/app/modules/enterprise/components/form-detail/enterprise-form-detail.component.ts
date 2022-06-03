@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { CityGetAll } from 'src/app/modules/city/interfaces/city-get-all.interface';
@@ -24,7 +24,7 @@ import { EnterpriseService } from '../../services/enterprise.service';
 })
 export class EnterpriseFormDetailComponent implements OnInit {
 
-  public form!: FormGroup;
+  public form!: UntypedFormGroup;
   public cities!: CityGetAll;
 
   private get controlNome(): AbstractControl | null {
@@ -72,7 +72,7 @@ export class EnterpriseFormDetailComponent implements OnInit {
   }
 
   constructor(
-    private readonly formBuilder: FormBuilder,
+    private readonly formBuilder: UntypedFormBuilder,
     private readonly notificationService: NotificationService,
     private readonly loadinService: LoadingService,
     private readonly enterpriseService: EnterpriseService,
@@ -89,11 +89,11 @@ export class EnterpriseFormDetailComponent implements OnInit {
 
   private createForm(): void {
     this.form = this.formBuilder.group({
-      nome: new FormControl(null, [Validators.required]),
-      cidadeId: new FormControl(null, [Validators.required]),
-      descricao: new FormControl(null),
-      link: new FormControl(null, [Validators.required]),
-      ativo: new FormControl(false)
+      nome: new UntypedFormControl(null, [Validators.required]),
+      cidadeId: new UntypedFormControl(null, [Validators.required]),
+      descricao: new UntypedFormControl(null),
+      link: new UntypedFormControl(null, [Validators.required]),
+      ativo: new UntypedFormControl(false)
     });
 
     if (this.enterprise) {

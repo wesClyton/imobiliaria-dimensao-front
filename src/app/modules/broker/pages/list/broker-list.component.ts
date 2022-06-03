@@ -85,15 +85,6 @@ export class BrokerListComponent implements OnInit, TableInputs<Broker>, CrudAct
     this.brokerService.put(brokerUpdate).pipe(take(1)).subscribe(() => this.getBrokers());
   }
 
-  private inactivate(broker: Broker): void {
-    const brokerUpdate: BrokerUpdate = {
-      id: broker.id,
-      ativo: false
-    } as BrokerUpdate;
-
-    this.brokerService.put(brokerUpdate).pipe(take(1)).subscribe(() => this.getBrokers());
-  }
-
   private tableLoadContent(brokers: BrokerGetAll): void {
     this.tableDataSource = new MatTableDataSource(brokers.data);
   }

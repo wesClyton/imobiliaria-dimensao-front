@@ -18,7 +18,7 @@ export class StringUtil {
 
   public static transformNumber(value: string): number {
     value = this.removeSymbolCurrencyBr(value);
-    return parseFloat(value.replace(/\./g, '').replace(',', '.').trim());
+    return parseFloat(value?.replace(/\./g, '')?.replace(',', '.').trim());
   }
 
   public static transformCurrencyBR(value: string): string {
@@ -31,7 +31,7 @@ export class StringUtil {
   }
 
   public static removeSymbolCurrencyBr(value: string): string {
-    return value.toString().replace('R$', '').trim();
+    return value?.toString().replace('R$', '').trim();
   }
 
   public static isBoolean(value: any): boolean {
@@ -44,6 +44,26 @@ export class StringUtil {
 
   public static isNumber(value: any): boolean {
     return typeof value === 'number';
+  }
+
+  public static prepareSearchValue(object: any, key: string): any {
+    let value = object[key];
+
+    const keysTranformNumber = ['areaMinima', 'areaMaxima', 'banheiros', 'dormitorios', 'vagasGaragem'];
+    if (keysTranformNumber.some(item => item === key)) {
+      return this.transformNumber(value);
+    }
+
+    if (value instanceof Date) {
+      return (value as Date).toString();
+    }
+
+    if (value && !this.isBoolean(value) && !this.isNumber(value) && value?.startsWith('R$')) {
+      value = this.removeSymbolCurrencyBr(value);
+      return this.transformNumber(value);
+    }
+
+    return value;
   }
 
 }

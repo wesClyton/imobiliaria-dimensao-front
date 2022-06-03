@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { finalize, take } from 'rxjs/operators';
 import { APP_CONFIG } from '../../../../app.config';
@@ -18,7 +18,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class AuthLoginComponent implements OnInit {
 
-  public form!: FormGroup;
+  public form!: UntypedFormGroup;
 
   private get controlEmail(): AbstractControl | null {
     return this.form?.get('email');
@@ -41,7 +41,7 @@ export class AuthLoginComponent implements OnInit {
   }
 
   constructor(
-    private readonly formBuilder: FormBuilder,
+    private readonly formBuilder: UntypedFormBuilder,
     private readonly authService: AuthService,
     private readonly router: Router,
     private readonly loadingSercice: LoadingService,
@@ -55,8 +55,8 @@ export class AuthLoginComponent implements OnInit {
 
   private createForm(): void {
     this.form = this.formBuilder.group({
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      password: new FormControl(null, [Validators.required])
+      email: new UntypedFormControl(null, [Validators.required, Validators.email]),
+      password: new UntypedFormControl(null, [Validators.required])
     });
   }
 
