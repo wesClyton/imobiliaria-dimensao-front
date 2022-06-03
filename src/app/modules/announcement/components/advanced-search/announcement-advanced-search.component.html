@@ -83,14 +83,14 @@
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-date-range-picker #picker></mat-date-range-picker>
     </mat-form-field>
+  </div>
 
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
     <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
       <mat-label>Empreendimento</mat-label>
       <input matInput type="text" formControlName="empreendimento" placeholder="Informe um Empreendimento">
     </mat-form-field>
-  </div>
 
-  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
     <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
       <mat-label>Valor mímino</mat-label>
       <input appCurrencyBr matInput type="text" formControlName="valorMinimo" placeholder="Informe um Valor mínimo">
@@ -100,15 +100,27 @@
       <mat-label>Valor máximo</mat-label>
       <input appCurrencyBr matInput type="text" formControlName="valorMaximo" placeholder="Informe um Valor máximo">
     </mat-form-field>
+  </div>
 
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
     <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
-      <mat-label>Área mínina m²</mat-label>
-      <input appM2 matInput type="text" formControlName="areaMinima" placeholder="Informe uma Área mínina">
+      <mat-label>Área Construida mínina m²</mat-label>
+      <input appM2 matInput type="text" formControlName="areaConstruidaMinima" placeholder="Informe uma Área Construida mínina">
     </mat-form-field>
 
     <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
-      <mat-label>Área máxima m²</mat-label>
-      <input appM2 matInput type="text" formControlName="areaMaxima" placeholder="Informe uma Área máxima">
+      <mat-label>Área Construida máxima m²</mat-label>
+      <input appM2 matInput type="text" formControlName="areaConstruidaMaxima" placeholder="Informe uma Área Construida máxima">
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Área Total mínina m²</mat-label>
+      <input appM2 matInput type="text" formControlName="areaTotalMinima" placeholder="Informe uma Área Total mínina">
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" fxFlex.sm="100" fxFlex.md="50">
+      <mat-label>Área Total máxima m²</mat-label>
+      <input appM2 matInput type="text" formControlName="areaTotalMaxima" placeholder="Informe uma Área Total máxima">
     </mat-form-field>
   </div>
 

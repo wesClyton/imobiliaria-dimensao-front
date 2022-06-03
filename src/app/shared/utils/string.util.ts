@@ -49,7 +49,7 @@ export class StringUtil {
   public static prepareSearchValue(object: any, key: string): any {
     let value = object[key];
 
-    const keysTranformNumber = ['areaMinima', 'areaMaxima', 'banheiros', 'dormitorios', 'vagasGaragem'];
+    const keysTranformNumber = ['areaTotalMinima', 'areaTotalMaxima', 'areaConstruidaMinima', 'areaConstruidaMaxima', 'banheiros', 'dormitorios', 'vagasGaragem'];
     if (keysTranformNumber.some(item => item === key)) {
       return this.transformNumber(value);
     }
