@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { finalize, take } from 'rxjs/operators';
 import { LoadingService } from '../../../../core/loading/loading.service';
@@ -17,7 +17,7 @@ import { StateService } from '../../services/state.service';
 })
 export class StateFormNewComponent implements OnInit {
 
-  public form!: FormGroup;
+  public form!: UntypedFormGroup;
 
   private get controlUf(): AbstractControl | null {
     return this.form?.get('uf');
@@ -30,7 +30,7 @@ export class StateFormNewComponent implements OnInit {
   public statesBr!: Array<StateBr>;
 
   constructor(
-    private readonly formBuilder: FormBuilder,
+    private readonly formBuilder: UntypedFormBuilder,
     private readonly notificationService: NotificationService,
     private readonly loadinService: LoadingService,
     private readonly stateService: StateService,
@@ -44,7 +44,7 @@ export class StateFormNewComponent implements OnInit {
 
   private createForm(): void {
     this.form = this.formBuilder.group({
-      uf: new FormControl(null, [Validators.required])
+      uf: new UntypedFormControl(null, [Validators.required])
     });
   }
 
