@@ -62,15 +62,22 @@ export class AnnouncementAdvancedSearchComponent extends AdvancedSearchBaseCompo
 
   private getDistricts(cityId: string): void {
     this.districtService.queryFilterRemove();
+
+    if (!cityId) {
+      return;
+    }
+
     this.districtService.queryFilterAdd([
       {
         field: 'cidadeId',
         value: cityId
-      }, {
+      },
+      {
         field: 'take',
         value: 999
       }
     ]);
+
     this.districtService
       .getAll()
       .pipe(take(1))

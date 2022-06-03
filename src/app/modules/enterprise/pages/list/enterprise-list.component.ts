@@ -85,15 +85,6 @@ export class EnterpriseListComponent implements OnInit, TableInputs<Enterprise>,
     this.enterpriseService.put(enterpriseUpdate).pipe(take(1)).subscribe(() => this.getEnterprises());
   }
 
-  private inactivate(enterprise: Enterprise): void {
-    const enterpriseUpdate: EnterpriseUpdate = {
-      id: enterprise.id,
-      ativo: false
-    } as EnterpriseUpdate;
-
-    this.enterpriseService.put(enterpriseUpdate).pipe(take(1)).subscribe(() => this.getEnterprises());
-  }
-
   private tableLoadContent(enterprises: EnterpriseGetAll): void {
     this.tableDataSource = new MatTableDataSource(enterprises.data);
   }
@@ -132,6 +123,7 @@ export class EnterpriseListComponent implements OnInit, TableInputs<Enterprise>,
   }
 
   public getEnterprises(queryFilters: Array<QueryFilterParam> = new Array<QueryFilterParam>()): void {
+    this.enterpriseService.queryFilterRemove();
     this.enterpriseService.queryFilterAdd(queryFilters);
 
     this.loadingService.show();
