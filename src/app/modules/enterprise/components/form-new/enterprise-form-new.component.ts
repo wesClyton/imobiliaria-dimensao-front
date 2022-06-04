@@ -120,7 +120,7 @@ export class EnterpriseFormNewComponent implements OnInit {
   private messageSuccess(enterprise: EnterpriseCreateResponse): void {
     this.form.markAsPristine();
     this.loadinService.hide()
-    this.notificationService.success(`Corretor ${enterprise.nome} cadastrado com sucesso!`);
+    this.notificationService.success(`Empreendimento ${enterprise.nome} cadastrado com sucesso!`);
     this.router.navigateByUrl(UrlUtil.previusUrlAcessed);
   }
 

@@ -131,7 +131,7 @@ export class EnterpriseListComponent implements OnInit, OnDestroy, TableInputs<E
         finalize(() => this.loadingService.hide())
       )
       .subscribe(() => {
-        this.notificationService.success(`Corretor ${enterprise.nome} excluído com sucesso!`);
+        this.notificationService.success(`Empreendimento ${enterprise.nome} excluído com sucesso!`);
         this.getEnterprises();
       });
   }

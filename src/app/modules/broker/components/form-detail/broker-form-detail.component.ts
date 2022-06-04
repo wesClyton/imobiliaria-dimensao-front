@@ -189,10 +189,10 @@ export class BrokerFormDetailComponent implements OnInit {
     this.brokerUploadService
       .update(brokerUpdateResponse.id, formData)
       .pipe(take(1))
-      .subscribe(() => {
-        this.messageSuccess(brokerUpdateResponse)
-      },
-      () => this.loadinService.hide());
+      .subscribe(
+        () => this.messageSuccess(brokerUpdateResponse),
+        () => this.loadinService.hide()
+      );
   }
 
   private messageSuccess(broker: BrokerUpdateResponse): void {

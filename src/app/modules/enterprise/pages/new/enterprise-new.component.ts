@@ -16,7 +16,7 @@ export class EnterpriseNewComponent implements CrudActionSave, CrudActionBack, C
   @ViewChild(EnterpriseFormNewComponent, { static: false })
   private readonly enterpriseFormNewComponent!: EnterpriseFormNewComponent;
 
-  public readonly canDeactivateMessage = 'Realmente deseja cancelar o cadastro do Corretor?';
+  public readonly canDeactivateMessage = 'Realmente deseja cancelar o cadastro do Empreendimento?';
 
   constructor(
     private readonly router: Router

@@ -25,7 +25,7 @@ export class EnterpriseDetailComponent implements OnInit, CrudActionSave, CrudAc
   @ViewChild(EnterpriseFormDetailComponent, { static: false })
   private readonly enterpriseFormDetailComponent!: EnterpriseFormDetailComponent;
 
-  public readonly canDeactivateMessage = 'Realmente deseja cancelar a edição do Corretor?';
+  public readonly canDeactivateMessage = 'Realmente deseja cancelar a edição do Empreendimento?';
 
   public enterprise!: Enterprise;
 
@@ -51,7 +51,7 @@ export class EnterpriseDetailComponent implements OnInit, CrudActionSave, CrudAc
     this.enterprise = this.activatedRoute.snapshot.data.enterprise;
     if (!this.enterprise) {
       this.router.navigateByUrl(UrlUtil.previusUrlAcessed);
-      this.notificationService.error('Corretor não encontrado!');
+      this.notificationService.error('Empreendimento não encontrado!');
     }
   }
 
@@ -69,7 +69,7 @@ export class EnterpriseDetailComponent implements OnInit, CrudActionSave, CrudAc
 
   public async crudActionDelete(): Promise<void> {
     const confirmation = await this.angularMaterialDialogConfirmationService?.confirm({
-      message: `Realmente deseja excluir o Corretor ${this.enterprise.nome}?`
+      message: `Realmente deseja excluir o Empreendimento ${this.enterprise.nome}?`
     });
     if (!confirmation) {
       return;
@@ -84,7 +84,7 @@ export class EnterpriseDetailComponent implements OnInit, CrudActionSave, CrudAc
         finalize(() => this.loadingService.hide())
       )
       .subscribe(() => {
-        this.notificationService.success(`Corretor ${this.enterprise.nome} excluído com sucesso!`);
+        this.notificationService.success(`Empreendimento ${this.enterprise.nome} excluído com sucesso!`);
         this.crudActionBack();
       });
   }

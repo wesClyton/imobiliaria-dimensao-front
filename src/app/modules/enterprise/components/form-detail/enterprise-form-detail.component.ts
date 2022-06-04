@@ -6,7 +6,6 @@ import { CityGetAll } from 'src/app/modules/city/interfaces/city-get-all.interfa
 import { LoadingService } from '../../../../core/loading/loading.service';
 import { NotificationService } from '../../../../core/notification/notification.service';
 import { UploadImageComponent } from '../../../../shared/components/upload-image/upload-image.component';
-import { phoneValidator } from '../../../../shared/form-validators/phone.validator';
 import { PathImagePipe } from '../../../../shared/pipes/path-image/path-image.pipe';
 import { FormService } from '../../../../shared/services/form/form.service';
 import { UrlUtil } from '../../../../shared/utils/url.util';
@@ -144,23 +143,23 @@ export class EnterpriseFormDetailComponent implements OnInit {
         }
         this.messageSuccess(enterprise);
       },
-        () => this.loadinService.hide());
+      () => this.loadinService.hide());
   }
 
   private uploadPhoto(formData: FormData, enterpriseUpdateResponse: EnterpriseUpdateResponse): void {
     this.enterpriseUploadService
       .update(enterpriseUpdateResponse.id, formData)
       .pipe(take(1))
-      .subscribe(() => {
-        this.messageSuccess(enterpriseUpdateResponse)
-      },
-        () => this.loadinService.hide());
+      .subscribe(
+        () => this.messageSuccess(enterpriseUpdateResponse),
+        () => this.loadinService.hide()
+      );
   }
 
   private messageSuccess(enterprise: EnterpriseUpdateResponse): void {
     this.form.markAsPristine();
     this.loadinService.hide();
-    this.notificationService.success(`Corretor ${enterprise.nome} alterado com sucesso!`);
+    this.notificationService.success(`Empreendimento ${enterprise.nome} alterado com sucesso!`);
     this.router.navigateByUrl(UrlUtil.previusUrlAcessed);
   }
 
