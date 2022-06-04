@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Ordenar Empreendimentos</h2>
+
+<mat-dialog-content *ngIf="enterprises" class="mat-typography">
+  <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+    <div cdkDrag class="example-box" *ngFor="let enterprise of enterprises">
+      <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+      <img [src]="enterprise.foto | pathImage: 'empreendimentos'" [alt]="enterprise.nome">
+      {{ enterprise.nome }}
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button cdkFocusInitial mat-raised-button mat-dialog-close color="warn">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="submit()">Salvar</button>
+</mat-dialog-actions>

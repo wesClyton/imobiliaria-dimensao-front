@@ -6,6 +6,8 @@
   [tableActions]="tableActions"
   (tableMenuActionsClicked)="createActions($event)"
   [tableDataSourceLength]="enterpriseGetAll.count"
+  [tableShowOrderButton]="true"
+  (tableShowOrderButtonClicked)="orderEnterprises()"
   (tableOnChangePaginator)="getEnterprises($event)">
 
   <app-enterprise-advanced-search

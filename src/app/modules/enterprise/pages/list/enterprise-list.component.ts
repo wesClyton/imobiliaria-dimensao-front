@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
 import { LoadingService } from '../../../../core/loading/loading.service';
 import { NotificationService } from '../../../../core/notification/notification.service';
@@ -13,9 +15,11 @@ import { TableActionsUtils } from '../../../../shared/components/table/utils/tab
 import { QueryFilterParam } from '../../../../shared/services/http/query-filter/query-filter.interface';
 import { UrlUtil } from '../../../../shared/utils/url.util';
 import { AuthService } from '../../../auth/services/auth.service';
+import { EnterpriseOrderComponent } from '../../components/order/enterprise-order.component';
 import { EnterpriseGetAll } from '../../interfaces/enterprise-get-all.interface';
 import { EnterpriseUpdate } from '../../interfaces/enterprise-update.interface';
 import { Enterprise } from '../../interfaces/enterprise.interface';
+import { EnterpriseOrderService } from '../../services/enterprise-order.service';
 import { EnterpriseService } from '../../services/enterprise.service';
 
 @Component({
@@ -23,7 +27,7 @@ import { EnterpriseService } from '../../services/enterprise.service';
   templateUrl: 'enterprise-list.component.html',
   styleUrls: ['./enterprise-list.component.scss']
 })
-export class EnterpriseListComponent implements OnInit, TableInputs<Enterprise>, CrudActionNew, CrudActionBack {
+export class EnterpriseListComponent implements OnInit, OnDestroy, TableInputs<Enterprise>, CrudActionNew, CrudActionBack {
 
   public enterpriseGetAll!: EnterpriseGetAll;
 
@@ -35,6 +39,8 @@ export class EnterpriseListComponent implements OnInit, TableInputs<Enterprise>,
 
   public readonly newShow = this.authService.isAdmin || this.authService.isAutor;
 
+  private subscription = new Subscription();
+
   constructor(
     private readonly router: Router,
     private readonly activatedRoute: ActivatedRoute,
@@ -42,12 +48,20 @@ export class EnterpriseListComponent implements OnInit, TableInputs<Enterprise>,
     private readonly notificationService: NotificationService,
     private readonly loadingService: LoadingService,
     private readonly angularMaterialDialogConfirmationService: DialogConfirmationService,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly matDialog: MatDialog,
+    private readonly enterpriseOrderService: EnterpriseOrderService
   ) { }
 
   ngOnInit(): void {
     this.enterpriseGetAll = this.activatedRoute.snapshot.data.enterpriseGetAll;
     this.tableLoadContent(this.enterpriseGetAll);
+
+    this.subscription.add(this.enterpriseOrderService.ordenationCompleted$.subscribe(() => this.getEnterprises()));
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   public createActions(enterprise: Enterprise): void {
@@ -134,6 +148,14 @@ export class EnterpriseListComponent implements OnInit, TableInputs<Enterprise>,
         finalize(() => this.loadingService.hide())
       )
       .subscribe(enterprises => this.tableLoadContent(enterprises));
+  }
+
+  public orderEnterprises(): void {
+    this.matDialog.open(EnterpriseOrderComponent, {
+      data: {
+        enterprises: this.enterpriseGetAll.data
+      }
+    });
   }
 
 }

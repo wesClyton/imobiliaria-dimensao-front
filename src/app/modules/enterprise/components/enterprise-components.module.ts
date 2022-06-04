@@ -1,8 +1,10 @@
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -14,12 +16,14 @@ import { CityDirectivesModule } from '../../city/directives/city-directives.modu
 import { EnterpriseAdvancedSearchComponent } from './advanced-search/enterprise-advanced-search.component';
 import { EnterpriseFormDetailComponent } from './form-detail/enterprise-form-detail.component';
 import { EnterpriseFormNewComponent } from './form-new/enterprise-form-new.component';
+import { EnterpriseOrderComponent } from './order/enterprise-order.component';
 
 @NgModule({
   declarations: [
     EnterpriseFormNewComponent,
     EnterpriseFormDetailComponent,
-    EnterpriseAdvancedSearchComponent
+    EnterpriseAdvancedSearchComponent,
+    EnterpriseOrderComponent
   ],
   imports: [
     CommonModule,
@@ -33,12 +37,15 @@ import { EnterpriseFormNewComponent } from './form-new/enterprise-form-new.compo
     MatSelectModule,
     DirectivesModule,
     CityComponentsModule,
-    CityDirectivesModule
+    CityDirectivesModule,
+    MatDialogModule,
+    DragDropModule
   ],
   exports: [
     EnterpriseFormNewComponent,
     EnterpriseFormDetailComponent,
-    EnterpriseAdvancedSearchComponent
+    EnterpriseAdvancedSearchComponent,
+    EnterpriseOrderComponent
   ]
 })
 export class EnterpriseComponentsModule { }
