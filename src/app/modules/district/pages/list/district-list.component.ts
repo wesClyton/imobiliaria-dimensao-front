@@ -103,7 +103,6 @@ export class DistrictListComponent implements OnInit, TableInputs<District>, Cru
   }
 
   public getDistricts(queryFilters: Array<QueryFilterParam> = new Array<QueryFilterParam>()): void {
-    this.districtService.queryFilterRemove();
     this.districtService.queryFilterAdd(queryFilters);
 
     this.loadingService.show();

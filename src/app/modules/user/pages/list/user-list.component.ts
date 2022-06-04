@@ -123,7 +123,6 @@ export class UserListComponent implements OnInit, TableInputs<User>, CrudActionN
   }
 
   public getUsers(queryFilters: Array<QueryFilterParam> = new Array<QueryFilterParam>()): void {
-    this.userService.queryFilterRemove();
     this.userService.queryFilterAdd(queryFilters);
 
     this.loadingService.show();

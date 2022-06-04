@@ -123,7 +123,6 @@ export class EnterpriseListComponent implements OnInit, TableInputs<Enterprise>,
   }
 
   public getEnterprises(queryFilters: Array<QueryFilterParam> = new Array<QueryFilterParam>()): void {
-    this.enterpriseService.queryFilterRemove();
     this.enterpriseService.queryFilterAdd(queryFilters);
 
     this.loadingService.show();

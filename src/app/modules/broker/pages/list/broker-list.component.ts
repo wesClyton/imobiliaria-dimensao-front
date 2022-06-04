@@ -123,7 +123,6 @@ export class BrokerListComponent implements OnInit, TableInputs<Broker>, CrudAct
   }
 
   public getBrokers(queryFilters: Array<QueryFilterParam> = new Array<QueryFilterParam>()): void {
-    this.brokerService.queryFilterRemove();
     this.brokerService.queryFilterAdd(queryFilters);
 
     this.loadingService.show();

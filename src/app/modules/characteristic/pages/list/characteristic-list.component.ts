@@ -101,7 +101,6 @@ export class CharacteristicListComponent implements OnInit, TableInputs<Characte
   }
 
   public getCharacteristics(queryFilters: Array<QueryFilterParam> = new Array<QueryFilterParam>()): void {
-    this.characteristicService.queryFilterRemove();
     this.characteristicService.queryFilterAdd(queryFilters);
 
     this.loadingService.show();

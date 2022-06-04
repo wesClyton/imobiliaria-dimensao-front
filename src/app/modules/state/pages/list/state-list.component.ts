@@ -103,7 +103,6 @@ export class StateListComponent implements OnInit, TableInputs<State>, CrudActio
   }
 
   public getStates(queryFilters: Array<QueryFilterParam> = new Array<QueryFilterParam>()): void {
-    this.stateService.queryFilterRemove();
     this.stateService.queryFilterAdd(queryFilters);
 
     this.loadingService.show();
