@@ -15,7 +15,7 @@
 
   <ng-container matColumnDef="codigoAnuncio">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Código do anúncio</th>
-    <td mat-cell *matCellDef="let row">{{ row.codigoAnuncio }}</td>
+    <td mat-cell *matCellDef="let row">{{ row.codigoAnuncio | uppercase }}</td>
   </ng-container>
 
   <ng-container matColumnDef="titulo">
