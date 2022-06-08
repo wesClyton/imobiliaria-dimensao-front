@@ -66,4 +66,31 @@ export class StringUtil {
     return value;
   }
 
+  public static formatMaskDecimalInValueLoaded(value: string): string {
+    let thousand!: string;
+    let decimal!: string;
+    let formated!: string;
+
+    if (!value.includes('.')) {
+      value = `${value}.00`;
+    }
+
+    if (value.includes('.')) {
+      decimal = value.substring(value.length - 2, value.length);
+      if (decimal.includes('.')) {
+        value = `${value}0`;
+      }
+    }
+
+    if (value.includes('.,')) {
+      return value;
+    }
+
+    thousand = value.substring(0, value.length - 2);
+    decimal = value.substring(value.length - 2, value.length);
+    formated = thousand ? `${thousand},${decimal}` : '0';
+
+    return formated;
+  }
+
 }

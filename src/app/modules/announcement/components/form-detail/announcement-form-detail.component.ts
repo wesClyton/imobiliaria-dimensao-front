@@ -41,7 +41,7 @@ import { AnnouncementImageOrderComponent } from '../order/announcement-image-ord
 export class AnnouncementFormDetailComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @Input()
-  public announcement!: Announcement;
+  public announcement!: Announcement | null;
 
   public form!: UntypedFormGroup;
 
@@ -443,36 +443,39 @@ export class AnnouncementFormDetailComponent implements OnInit, OnDestroy, After
     this.characteristicsImovel.forEach(characteristic => caracteristicas.push({ id: characteristic.id }));
     this.characteristicsInstalacoesCondominio.forEach(characteristic => caracteristicas.push({ id: characteristic.id }));
 
-    const announcement: AnnouncementUpdate = {
-      id: this.announcement.id,
-      ativo: this.controlAtivo?.value,
-      areaConstruida: StringUtil.transformNumber(this.controlAreaConstruida?.value),
-      areaTotal: StringUtil.transformNumber(this.controlAreaTotal?.value),
-      bairroId: this.controlBairro?.value,
-      banheiros: Number(this.controlBanheiros?.value),
-      caracteristicas,
-      cep: this.controlCep?.value,
-      codigoAnuncio: this.controlCodigoAnuncio?.value,
-      dataConclusao: this.controlDataConclusao?.value,
-      destaque: this.controlDestaque?.value,
-      dormitorios: Number(this.controlDormitorios?.value),
-      empreendimento: this.controlEmpreendimento?.value,
-      endereco: this.controlEndereco?.value,
-      estadoImovel: this.controlEstadoImovel?.value,
-      expiracaoAnuncio: this.controlDataExpiracao?.value,
-      latitude: this.controlLatitude?.value,
-      longitude: this.controlLongitude?.value,
-      sobre: this.controlSobre?.value,
-      suites: Number(this.controlSuites?.value),
-      tipo: this.controlTipo?.value,
-      titulo: this.controlTitulo?.value,
-      url360: this.controlUrl360?.value,
-      urlMapa: this.controlUrlMapa?.value,
-      urlVideo: this.controlUrlVideo?.value,
-      vagasGaragem: Number(this.controlVagasGaragem?.value),
-      valor: StringUtil.transformNumber(this.controlValor?.value),
-      valorCondominio: StringUtil.transformNumber(this.controlValorCondominio?.value)
-    };
+    let announcement!: AnnouncementUpdate;
+    if (this.announcement) {
+      announcement = {
+        id: this.announcement.id,
+        ativo: this.controlAtivo?.value,
+        areaConstruida: StringUtil.transformNumber(this.controlAreaConstruida?.value),
+        areaTotal: StringUtil.transformNumber(this.controlAreaTotal?.value),
+        bairroId: this.controlBairro?.value,
+        banheiros: Number(this.controlBanheiros?.value),
+        caracteristicas,
+        cep: this.controlCep?.value,
+        codigoAnuncio: this.controlCodigoAnuncio?.value,
+        dataConclusao: this.controlDataConclusao?.value,
+        destaque: this.controlDestaque?.value,
+        dormitorios: Number(this.controlDormitorios?.value),
+        empreendimento: this.controlEmpreendimento?.value,
+        endereco: this.controlEndereco?.value,
+        estadoImovel: this.controlEstadoImovel?.value,
+        expiracaoAnuncio: this.controlDataExpiracao?.value,
+        latitude: this.controlLatitude?.value,
+        longitude: this.controlLongitude?.value,
+        sobre: this.controlSobre?.value,
+        suites: Number(this.controlSuites?.value),
+        tipo: this.controlTipo?.value,
+        titulo: this.controlTitulo?.value,
+        url360: this.controlUrl360?.value,
+        urlMapa: this.controlUrlMapa?.value,
+        urlVideo: this.controlUrlVideo?.value,
+        vagasGaragem: Number(this.controlVagasGaragem?.value),
+        valor: StringUtil.transformNumber(this.controlValor?.value),
+        valorCondominio: StringUtil.transformNumber(this.controlValorCondominio?.value)
+      };
+    }
 
     this.announcementService
       .put(announcement)
@@ -514,7 +517,12 @@ export class AnnouncementFormDetailComponent implements OnInit, OnDestroy, After
   }
 
   public async deleteImage(indexImage: number): Promise<void> {
-    const photo = this.announcement.galeria.fotos[indexImage];
+    const photo = this.announcement?.galeria.fotos[indexImage];
+
+    if (!photo) {
+      this.notificationService.error('Não foi possível obter a foto.');
+      return;
+    }
 
     const confirmation = await this.angularMaterialDialogConfirmationService?.confirm({
       message: 'Realmente deseja excluir a foto?'
@@ -535,6 +543,10 @@ export class AnnouncementFormDetailComponent implements OnInit, OnDestroy, After
   }
 
   private getAnnouncement(): void {
+    if (!this.announcement) {
+      this.notificationService.error('Não foi carregar o anúncio.');
+      return;
+    }
     this.loadingService.show();
     this.announcementService
       .getById(this.announcement.id)
@@ -543,15 +555,18 @@ export class AnnouncementFormDetailComponent implements OnInit, OnDestroy, After
         finalize(() => this.loadingService.hide())
       )
       .subscribe(announcement => {
-        this.announcement = announcement;
-        this.setValueForm(this.announcement);
+        this.announcement = null;
+        setTimeout(() => {
+          this.announcement = announcement;
+          this.setValueForm(this.announcement);
+        });
       });
   }
 
   public order(): void {
     this.matDialog.open(AnnouncementImageOrderComponent, {
       data: {
-        photos: this.announcement.galeria.fotos
+        photos: this.announcement?.galeria.fotos
       }
     });
   }

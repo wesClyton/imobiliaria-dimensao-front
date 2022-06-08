@@ -24,7 +24,7 @@ export class UpperCaseDirective implements OnInit, OnDestroy {
   }
 
   private transformValue(value: string): void {
-    this.ngControl.control?.setValue(value.toUpperCase(), { emitEvent: false });
+    this.ngControl.control?.setValue(value?.toUpperCase(), { emitEvent: false });
   }
 
 }
