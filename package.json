@@ -7,7 +7,8 @@
     "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "start:server": "npx http-server dist/imobiliaria-dimensao-front/"
+    "start:server": "npx http-server dist/imobiliaria-dimensao-front/",
+    "start:dev": "http-server dist/imobiliaria-dimensao-front/"
   },
   "private": true,
   "dependencies": {
@@ -25,6 +26,7 @@
     "@angular/router": "^14.0.0",
     "encrypt-storage": "^2.2.6",
     "hammerjs": "^2.0.8",
+    "http-server": "^14.1.1",
     "ngx-image-cropper": "^6.1.0",
     "ngx-mask": "^13.1.9",
     "rxjs": "~6.6.0",
