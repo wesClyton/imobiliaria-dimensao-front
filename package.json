@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "start:server": "npx http-server dist/imobiliaria-dimensao-front/"
   },
   "private": true,
   "dependencies": {
