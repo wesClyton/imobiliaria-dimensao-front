@@ -288,6 +288,22 @@
   <h3>Fotos</h3>
   <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
     <div fxFlex="100">
+      <button
+        mat-raised-button
+        type="button"
+        color="primary"
+        (click)="order()">
+        <mat-icon>reorder</mat-icon>
+        Ordenar
+      </button>
+    </div>
+  </div>
+
+  <br/>
+  <br/>
+
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+    <div fxFlex="100">
       <app-upload-image
         [ratio]="16 / 9"
         [canFlipCropp]="true"

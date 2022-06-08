@@ -1,3 +1,4 @@
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -7,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -19,12 +21,14 @@ import { AnnouncementDirectivesModule } from '../directives/announcement-directi
 import { AnnouncementAdvancedSearchComponent } from './advanced-search/announcement-advanced-search.component';
 import { AnnouncementFormDetailComponent } from './form-detail/announcement-form-detail.component';
 import { AnnouncementFormNewComponent } from './form-new/announcement-form-new.component';
+import { AnnouncementImageOrderComponent } from './order/announcement-image-order.component';
 
 @NgModule({
   declarations: [
     AnnouncementFormNewComponent,
     AnnouncementFormDetailComponent,
-    AnnouncementAdvancedSearchComponent
+    AnnouncementAdvancedSearchComponent,
+    AnnouncementImageOrderComponent
   ],
   imports: [
     CommonModule,
@@ -43,12 +47,15 @@ import { AnnouncementFormNewComponent } from './form-new/announcement-form-new.c
     MatIconModule,
     AnnouncementDirectivesModule,
     CityDirectivesModule,
-    DirectivesModule
+    DirectivesModule,
+    MatDialogModule,
+    DragDropModule
   ],
   exports: [
     AnnouncementFormNewComponent,
     AnnouncementFormDetailComponent,
-    AnnouncementAdvancedSearchComponent
+    AnnouncementAdvancedSearchComponent,
+    AnnouncementImageOrderComponent
   ]
 })
 export class AnnouncementComponentsModule { }

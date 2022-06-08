@@ -421,27 +421,30 @@ export class AnnouncementFormNewComponent implements OnInit, OnDestroy, AfterVie
         take(1),
         map((announcement) => {
           let uploads = new Array<Observable<AnnouncementGalleryUploadResponse>>();
-          this.updaloadPhotoComponent.filesSelecteds.forEach(file => {
+          this.updaloadPhotoComponent.filesSelecteds.forEach((file, index) => {
             const formData = new FormData();
             formData.append('foto', file);
+            formData.append('ordem', index.toString());
             formData.append('galeriaId', announcement.galeriaId);
             uploads.push(this.announcementUploadService.post(formData));
           });
           return { uploads, announcement };
         })
       )
-      .subscribe(response => {
-        if (!response.uploads.length) {
-          this.messageSuccess(response.announcement);
-          return;
-        }
-        this.loadingService.show();
-        forkJoin(response.uploads).pipe(take(1)).subscribe(
-          () => this.messageSuccess(response.announcement),
-          () => this.loadingService.hide()
-        );
-      },
-        (error) => this.loadingService.hide());
+      .subscribe(
+        response => {
+          if (!response.uploads.length) {
+            this.messageSuccess(response.announcement);
+            return;
+          }
+          this.loadingService.show();
+          forkJoin(response.uploads).pipe(take(1)).subscribe(
+            () => this.messageSuccess(response.announcement),
+            () => this.loadingService.hide()
+          );
+        },
+        (error) => this.loadingService.hide()
+      );
   }
 
   private messageSuccess(announcement: AnnouncementCreateResponse): void {

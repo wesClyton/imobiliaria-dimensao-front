@@ -1,7 +1,8 @@
-import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { forkJoin, Observable, Subscription } from 'rxjs';
 import { debounceTime, finalize, map, take } from 'rxjs/operators';
@@ -28,7 +29,9 @@ import { AnnouncementUpdate } from '../../interfaces/announcement-update.interfa
 import { Announcement } from '../../interfaces/announcement.interface';
 import { AnnouncementUploadService } from '../../services/announcement-gallery-upload.service';
 import { AnnouncementImageDeleteService } from '../../services/announcement-image-delete.service';
+import { AnnouncementImageOrderService } from '../../services/announcement-image-order.service';
 import { AnnouncementService } from '../../services/announcement.service';
+import { AnnouncementImageOrderComponent } from '../order/announcement-image-order.component';
 
 @Component({
   selector: 'app-announcement-form-detail',
@@ -265,11 +268,15 @@ export class AnnouncementFormDetailComponent implements OnInit, OnDestroy, After
     private readonly announcementImageDeleteService: AnnouncementImageDeleteService,
     private readonly angularMaterialDialogConfirmationService: DialogConfirmationService,
     private readonly authService: AuthService,
-    private readonly districtService: DistrictService
+    private readonly districtService: DistrictService,
+    private readonly matDialog: MatDialog,
+    private readonly announcementImageOrderService: AnnouncementImageOrderService
   ) { }
 
   ngOnInit(): void {
     this.createForm();
+
+    this.subscription.add(this.announcementImageOrderService.ordenationCompleted$.subscribe(() => this.getAnnouncement()));
   }
 
   ngAfterViewInit(): void {
@@ -468,27 +475,30 @@ export class AnnouncementFormDetailComponent implements OnInit, OnDestroy, After
         take(1),
         map((announcement) => {
           let uploads = new Array<Observable<AnnouncementGalleryUploadResponse>>();
-          this.updaloadPhotoComponent.filesSelecteds.forEach(file => {
+          this.updaloadPhotoComponent.filesSelecteds.forEach((file, index) => {
             const formData = new FormData();
             formData.append('foto', file);
+            formData.append('ordem', index.toString());
             formData.append('galeriaId', announcement.galeria.id);
             uploads.push(this.announcementUploadService.post(formData));
           });
           return { uploads, announcement };
         })
       )
-      .subscribe(response => {
-        if (!response.uploads.length) {
-          this.messageSuccess(response.announcement);
-          return;
-        }
-        this.loadingService.show();
-        forkJoin(response.uploads).pipe(take(1)).subscribe(
-          () => this.messageSuccess(response.announcement),
-          () => this.loadingService.hide()
-        );
-      },
-        (error) => this.loadingService.hide());
+      .subscribe(
+        response => {
+          if (!response.uploads.length) {
+            this.messageSuccess(response.announcement);
+            return;
+          }
+          this.loadingService.show();
+          forkJoin(response.uploads).pipe(take(1)).subscribe(
+            () => this.messageSuccess(response.announcement),
+            () => this.loadingService.hide()
+          );
+        },
+        (error) => this.loadingService.hide()
+      );
   }
 
   private messageSuccess(announcement: AnnouncementUpdateResponse): void {
@@ -531,6 +541,14 @@ export class AnnouncementFormDetailComponent implements OnInit, OnDestroy, After
         this.announcement = announcement;
         this.setValueForm(this.announcement);
       });
+  }
+
+  public order(): void {
+    this.matDialog.open(AnnouncementImageOrderComponent, {
+      data: {
+        photos: this.announcement.galeria.fotos
+      }
+    });
   }
 
 }

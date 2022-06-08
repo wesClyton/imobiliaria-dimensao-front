@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Ordenar Fotos</h2>
+
+<mat-dialog-content *ngIf="photos" class="mat-typography">
+  <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+    <div cdkDrag class="example-box" *ngFor="let photo of photos">
+      <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+      <img [src]="photo.nome | pathImage: 'anuncios': photo.galeriaId" [alt]="photo.nome">
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button cdkFocusInitial mat-raised-button mat-dialog-close color="warn">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="submit()">Salvar</button>
+</mat-dialog-actions>
