@@ -381,6 +381,11 @@ export class AnnouncementFormNewComponent implements OnInit, OnDestroy, AfterVie
       return;
     }
 
+    if (!this.updaloadPhotoComponent.filesSelecteds.length && !this.imagesUrl.length) {
+      this.notificationService.error('Por favor, adicione uma foto para salvar o anúncio.');
+      return;
+    }
+
     this.loadingService.show();
 
     const caracteristicas = new Array<{ id: string }>();
