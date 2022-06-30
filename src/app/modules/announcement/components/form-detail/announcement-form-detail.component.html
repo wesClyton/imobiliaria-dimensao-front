@@ -286,7 +286,7 @@
   <br/>
 
   <h3>Fotos</h3>
-  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
+  <div *ngIf="showBtnOrdenar" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2rem">
     <div fxFlex="100">
       <button
         mat-raised-button

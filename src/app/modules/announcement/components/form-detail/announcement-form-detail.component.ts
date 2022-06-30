@@ -253,6 +253,10 @@ export class AnnouncementFormDetailComponent implements OnInit, OnDestroy, After
     return this.authService.isLeitor || this.authService.isCorretor;
   }
 
+  public get showBtnOrdenar(): boolean {
+    return this.authService.isAdmin || this.authService.isAutor;
+  }
+
   public districts!: DistrictGetAll;
 
   constructor(
