@@ -30,7 +30,7 @@ export class BrokerDetailComponent implements OnInit, CrudActionSave, CrudAction
   public broker!: Broker;
 
   public get saveShow(): boolean {
-    return this.authService.isAdmin || this.authService.isAutor;
+    return this.authService.isAdmin || this.authService.isAutor || this.authService.isCorretorOpenedIsCorretorLogged(this.broker.email);
   }
 
   public get deleteShow(): boolean {

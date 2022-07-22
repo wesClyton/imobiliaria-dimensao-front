@@ -90,4 +90,8 @@ export class AuthService extends HttpPostService<Login, Session> {
     return this.session.usuario.id === userId;
   }
 
+  public isCorretorOpenedIsCorretorLogged(email: string): boolean {
+    return this.isCorretor && (this.session.usuario.email === email);
+  }
+
 }

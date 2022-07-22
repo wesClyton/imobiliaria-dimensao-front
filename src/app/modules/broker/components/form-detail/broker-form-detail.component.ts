@@ -94,7 +94,9 @@ export class BrokerFormDetailComponent implements OnInit {
   private readonly updaloadPhotoComponent!: UploadImageComponent;
 
   public get disableFields(): boolean {
-    return this.authService.isLeitor || this.authService.isCorretor;
+    return (
+      this.authService.isLeitor || this.authService.isCorretor
+    ) && !this.authService.isCorretorOpenedIsCorretorLogged(this.broker.email);
   }
 
   constructor(
