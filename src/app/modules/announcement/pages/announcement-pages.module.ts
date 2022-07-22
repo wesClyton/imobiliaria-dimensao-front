@@ -10,6 +10,7 @@ import { AnnouncementPipesModule } from '../pipes/announcement-pipes.module';
 import { AnnouncementDetailComponent } from './detail/announcement-detail.component';
 import { AnnouncementListComponent } from './list/announcement-list.component';
 import { AnnouncementNewComponent } from './new/announcement-new.component';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [

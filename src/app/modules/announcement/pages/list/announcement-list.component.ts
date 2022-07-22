@@ -20,7 +20,8 @@ import { AnnouncementService } from '../../services/announcement.service';
 
 @Component({
   selector: 'app-announcement-list',
-  templateUrl: 'announcement-list.component.html'
+  templateUrl: 'announcement-list.component.html',
+  styleUrls: ['announcement-list.component.scss']
 })
 export class AnnouncementListComponent implements OnInit, TableInputs<Announcement>, CrudActionNew, CrudActionBack {
 
@@ -139,4 +140,9 @@ export class AnnouncementListComponent implements OnInit, TableInputs<Announceme
       .subscribe(announcements => this.tableLoadContent(announcements));
   }
 
+  expired(date: Date) {
+    const dateExpired = new Date(date);
+    const today = new Date();
+    return dateExpired <= today ? true : false;
+  }
 }

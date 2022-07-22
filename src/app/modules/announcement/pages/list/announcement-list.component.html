@@ -30,7 +30,7 @@
 
   <ng-container matColumnDef="expiracaoAnuncio">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Expiração</th>
-    <td mat-cell *matCellDef="let row">{{ row.expiracaoAnuncio | date }}</td>
+    <td mat-cell *matCellDef="let row" ><span [ngClass]="{'expired' : expired(row.expiracaoAnuncio)}">{{ row.expiracaoAnuncio | date }}</span></td>
   </ng-container>
 
   <ng-container matColumnDef="cidade">
