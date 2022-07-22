@@ -158,4 +158,8 @@ export class EnterpriseListComponent implements OnInit, OnDestroy, TableInputs<E
     });
   }
 
+  public get showBtnOrdenar(): boolean {
+    return this.authService.isAdmin || this.authService.isAutor;
+  }
+
 }

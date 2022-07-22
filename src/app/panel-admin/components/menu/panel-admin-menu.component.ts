@@ -32,7 +32,7 @@ export class PanelAdminMenuComponent {
   }
 
   public get showCharacteristics(): boolean {
-    return true;
+    return this.authService.isAdmin;
   }
 
   public get showBrokers(): boolean {

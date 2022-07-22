@@ -6,7 +6,7 @@
   [tableActions]="tableActions"
   (tableMenuActionsClicked)="createActions($event)"
   [tableDataSourceLength]="enterpriseGetAll.count"
-  [tableShowOrderButton]="true"
+  [tableShowOrderButton]="showBtnOrdenar"
   (tableShowOrderButtonClicked)="orderEnterprises()"
   (tableOnChangePaginator)="getEnterprises($event)">
 
