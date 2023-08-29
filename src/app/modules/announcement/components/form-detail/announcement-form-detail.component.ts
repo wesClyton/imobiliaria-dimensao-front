@@ -356,7 +356,7 @@ export class AnnouncementFormDetailComponent implements OnInit, OnDestroy, After
     });
     this.districtService.queryFilterAdd({
       field: 'take',
-      value: '100'
+      value: '999'
     });
     this.districtService
       .getAll()
