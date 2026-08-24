@@ -18,7 +18,7 @@ export interface AnnouncementCreate {
 	readonly banheiros: number;
 	readonly vagasGaragem: number;
 	readonly empreendimento: string;
-	readonly cep: string;
+	readonly cep?: string;
 	readonly endereco: string;
 	readonly longitude: string;
 	readonly latitude: string;
