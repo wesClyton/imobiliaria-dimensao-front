@@ -8,7 +8,7 @@ export interface AnnouncementUpdate {
 	readonly ativo: boolean;
 	readonly bairroId: string;
 	readonly banheiros: number;
-	readonly cep: string;
+	readonly cep?: string;
 	readonly codigoAnuncio: string;
 	readonly dataConclusao: Date;
 	readonly destaque: boolean;

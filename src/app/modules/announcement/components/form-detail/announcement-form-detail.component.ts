@@ -117,10 +117,6 @@ export class AnnouncementFormDetailComponent implements OnInit, OnDestroy, After
     return this.form?.get('cep');
   }
 
-  public get controlCepHasError(): boolean | undefined {
-    return this.controlCep?.dirty || this.controlCep?.hasError('required');
-  }
-
   public get controlCidade(): AbstractControl | null {
     return this.form?.get('cidadeId');
   }
@@ -315,7 +311,7 @@ export class AnnouncementFormDetailComponent implements OnInit, OnDestroy, After
       banheiros: new UntypedFormControl(null, [Validators.required]),
       vagasGaragem: new UntypedFormControl(null),
       empreendimento: new UntypedFormControl(null),
-      cep: new UntypedFormControl(null, [Validators.required]),
+      cep: new UntypedFormControl(null),
       endereco: new UntypedFormControl(null, [Validators.required]),
       bairroId: new UntypedFormControl(null, [Validators.required]),
       longitude: new UntypedFormControl(null, [Validators.required]),
